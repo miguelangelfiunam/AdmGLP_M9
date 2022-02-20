@@ -16,11 +16,52 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <!--<h2><h:outputText value="Decorate Doesn’t Trim the Surrounding Tags" /></h2>-->
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
-                <h:outputText value="Contenido de index"/>
-                <p>Parrafo</p>
-                <h:form>
-                    <h:commandButton id="login_index" value="Iniciar sesion" action="login" class="btn btn-primary" />
-                </h:form>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Objetivo del proyecto
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                               Administrar la compra y venta de gas L.P. 
+                               en el cual se pueda registrar 
+                               clientes y empleados para llevar un registro 
+                               de las ventas de gas y tener al tanto que personas 
+                               están involucradas cuando se realicé el pedido 
+                               para una venta, o préstamo de cilindros o líquidos de gas L.P. 
+                               mediante un sitio web que permita la interacción de los mismos.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Actores dentro del proyecto
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <p><strong><code>Administrador:</code></strong> Encargado del sistema.</p>
+                                <p><strong><code>Empleado: </code></strong> Encargado de la entrega de pedidos.</p>
+                                <p><strong><code>Cliente: </code></strong> Encargado de la solicitud del pedido.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Agradecimientos
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </ui:define>
             <h:outputText value="I will be inserted into insert that does not provide name"/>
         </ui:decorate>

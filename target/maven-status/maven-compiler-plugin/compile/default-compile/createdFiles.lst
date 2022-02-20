@@ -1,0 +1,4 @@
+mx\unam\dgtic\admglp\mensajes\MessageBean.class
+mx\unam\dgtic\admglp\ejb\ListaUsuariosBean.class
+mx\unam\dgtic\admglp\controller\AppController.class
+mx\unam\dgtic\admglp\ejb\UsuarioBean.class

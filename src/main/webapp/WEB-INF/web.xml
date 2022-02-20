@@ -7,6 +7,23 @@
         <param-name>jakarta.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    <context-param>
+        <param-name>version</param-name>
+        <param-value>20/02/2022 001</param-value>
+    </context-param>
+    <context-param>
+        <param-name>servidor</param-name>
+        <!--<param-value>produccion</param-value>-->
+        <param-value>desarrollo</param-value>
+    </context-param>
+    <context-param>
+        <param-name>proyecto</param-name>
+        <param-value>AdmGLP</param-value>
+    </context-param>
+    <context-param>
+        <param-name>autor</param-name>
+        <param-value>Martinez Rivera Miguel Angel</param-value>
+    </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>

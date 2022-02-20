@@ -68,9 +68,11 @@ public class UsuarioBean implements Serializable {
         }
         if (acceso) {
             messageBean.setMensajeRespuesta("");
+            System.out.println(this);
             return "index";
         } else {
             messageBean.setMensajeRespuesta("Usuario y contraseña incorrectos");
+            System.out.println(this);
             return "login";
         }
     }

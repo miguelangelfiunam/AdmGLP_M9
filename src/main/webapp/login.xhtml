@@ -28,16 +28,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                             <label for="apodo" class="form-label">Apodo:</label>
                                             <h:inputText id="apodo" title="Apodo: "
                                                          value="#{usuarioBean.apodo}" required="true"
-                                                         requiredMessage="Error: El apodo es obligatorio." maxlength="25" />
+                                                         requiredMessage="Error: El apodo es obligatorio." maxlength="25" class="form-control"/>
                                         </div>
                                         <div class="mb-3">
                                             <label for="apodo" class="form-label">Password:</label>
                                             <h:inputText id="contra" title="Password: "
                                                          value="#{usuarioBean.contra}" required="true"
-                                                         requiredMessage="Error: El password es obligatorio." maxlength="50" />
+                                                         requiredMessage="Error: El password es obligatorio." maxlength="50" class="form-control"/>
                                         </div>
-                                        <h:commandButton id="submit" value="Enviar" action="#{usuarioBean.login}" class="btn btn-success"/>
-                                        <h:commandButton id="reset" value="Limpiar" type="reset" class="btn btn-primary"/>
+                                        <div class="col-12 d-flex justify-content-between">
+                                            <h:commandButton id="reset" value="Limpiar" type="reset" class="btn btn-primary"/>
+                                            <div class="d-flex justify-content-around">
+                                                <h:commandButton id="cancel" value="Cancelar" action="/index.xhtml" class="btn btn-danger"/>
+                                                <h:commandButton id="submit" value="Enviar" action="#{usuarioBean.login}" class="btn btn-success"/>
+                                            </div>
+                                        </div>
                                     </h:form>
                                     <div class="messagecolor">
                                         <h:messages showSummary="true" showDetail="false" errorStyle="color: red" infoStyle="color: blue" />
