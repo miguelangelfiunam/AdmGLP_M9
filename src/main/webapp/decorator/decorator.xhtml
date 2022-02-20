@@ -76,14 +76,17 @@
                 </div>
                 <div class="col-xs-12 col-md-6">
                     <div>
-                        <p class="text-muted lead text-end">DATOS DE LA APLICACIÓN:<br/></p>
+                        <h6 class="text-muted lead text-end">DATOS DE LA APLICACIÓN:</h6>
                     </div>
                     <div>
-                        <p class="text-muted small text-end">
+                        <div class="text-muted small text-end">
                             Aplicación: #{appController.proyecto}<br/> 
                             Versión: #{appController.version}<br/> 
-                            Servidor: #{appController.servidor}
-                        </p>
+                            Servidor: #{appController.servidor}<br/>
+                            <h:form>
+                                <h:outputText value="Usuario: #{usuarioBean.apodo}" rendered="#{usuarioBean.acceso}"/>
+                            </h:form>
+                        </div>
                     </div>
                 </div>
             </div>
