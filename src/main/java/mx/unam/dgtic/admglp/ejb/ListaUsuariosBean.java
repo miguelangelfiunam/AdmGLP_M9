@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.ejb;
 
 import jakarta.enterprise.context.SessionScoped;
@@ -22,9 +18,9 @@ public class ListaUsuariosBean implements Serializable {
      */
     public ListaUsuariosBean() {
         this.usuarios = new ArrayList<>();
-        usuarios.add(new UsuarioBean("mike", "123"));
-        usuarios.add(new UsuarioBean("pepe", "456"));
-        usuarios.add(new UsuarioBean("dani", "789"));
+        usuarios.add(new UsuarioBean("mike", "123", 10));
+        usuarios.add(new UsuarioBean("pepe", "456", 10));
+        usuarios.add(new UsuarioBean("dani", "789", 20));
     }
 
     public List<UsuarioBean> getUsuarios() {
