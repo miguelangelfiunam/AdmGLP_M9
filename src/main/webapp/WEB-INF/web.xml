@@ -9,7 +9,7 @@
     </context-param>
     <context-param>
         <param-name>version</param-name>
-        <param-value>20/02/2022 001</param-value>
+        <param-value>21/02/2022 001</param-value>
     </context-param>
     <context-param>
         <param-name>servidor</param-name>
