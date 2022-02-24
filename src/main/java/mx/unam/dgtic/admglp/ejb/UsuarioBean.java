@@ -5,9 +5,10 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
+import mx.unam.dgtic.admglp.model.UsuarioModel;
 
 /**
- *
+ * Bean con la informacion del usuario a mostrar en la vista
  * @author unam
  */
 @Named
@@ -15,6 +16,7 @@ import mx.unam.dgtic.admglp.mensajes.MessageBean;
 public class UsuarioBean implements Serializable {
 
     private static final long serialVersionUID = -4146681491856848089L;
+    private Integer id;
     private String apodo;
     private String contra;
     private Integer estatus;
@@ -27,10 +29,19 @@ public class UsuarioBean implements Serializable {
     public UsuarioBean() {
     }
 
-    public UsuarioBean(String apodo, String contra, Integer estatus) {
+    public UsuarioBean(Integer id, String apodo, String contra, Integer estatus) {
+        this.id = id;
         this.apodo = apodo;
         this.contra = contra;
         this.estatus = estatus;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getApodo() {
@@ -66,8 +77,8 @@ public class UsuarioBean implements Serializable {
     }
 
     public String login() {
-        for (UsuarioBean usuario : listaUsuariosBean.getUsuarios()) {
-            if (usuario.getApodo().equals(apodo) && usuario.getContra().equals(contra)) {
+        for (UsuarioModel usuario : listaUsuariosBean.getUsuarioModels()) {
+            if (usuario.getApodo().equals(apodo) && usuario.getContra().getContra().equals(contra)) {
                 if (usuario.getEstatus() == 10) {
                     acceso = true;
                     messageBean.setMensajeRespuesta("");
@@ -84,7 +95,6 @@ public class UsuarioBean implements Serializable {
         messageBean.setMensajeRespuesta("Usuario y contraseña incorrectos");
         System.out.println(this);
         return "login";
-
     }
 
     public String logout() {
@@ -92,6 +102,18 @@ public class UsuarioBean implements Serializable {
         contra = null;
         acceso = false;
 
+        return "index";
+    }
+
+    public String agregaUsuario() {
+        return "index";
+    }
+
+    public String borraUsuario() {
+        return "index";
+    }
+
+    public String actualizaUsuario() {
         return "index";
     }
 

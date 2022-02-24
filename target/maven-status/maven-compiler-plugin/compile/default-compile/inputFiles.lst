@@ -1,4 +1,15 @@
-C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\ejb\ListaUsuariosBean.java
-C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\controller\AppController.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\model\UsuarioModel.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\ejb\EmpleadoBean.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\ejb\ListaContrasBean.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\ejb\ListaRolesBean.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\model\RolModel.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\ejb\UsuarioBean.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\mensajes\MessageBean.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\ejb\ListaUsuariosBean.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\model\ContraModel.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\controller\AppController.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\ejb\ClienteBean.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\ejb\RolBean.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\model\ClienteModel.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\model\Usuario_rolModel.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\model\EmpleadoModel.java
