@@ -9,7 +9,7 @@
     </context-param>
     <context-param>
         <param-name>version</param-name>
-        <param-value>21/02/2022</param-value>
+        <param-value>24/02/2022</param-value>
     </context-param>
     <context-param>
         <param-name>servidor</param-name>
@@ -22,7 +22,7 @@
     </context-param>
     <context-param>
         <param-name>autor</param-name>
-        <param-value>MartinezRiveraMiguelAngel</param-value>
+        <param-value>Martinez Rivera Miguel Angel</param-value>
     </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
