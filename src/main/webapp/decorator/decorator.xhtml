@@ -27,22 +27,22 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
                             <h:form>
-                                <h:commandLink id="inicio_decorator" value="Inicio" action="/index.xhtml" class="nav-link" />
+                                <h:commandLink id="inicio_decorator" value="Inicio" action="/index.xhtml?faces-redirect=true" class="nav-link" />
                             </h:form>
                         </li>
                         <li class="nav-item">
                             <h:form>
-                                <h:commandLink id="admin_decorator" value="Administrador" action="/admin/admin.xhtml?faces-redirect=true" class="nav-link" />
+                                <h:commandLink id="admin_decorator" value="Administrador" action="/admin/admin.xhtml?faces-redirect=true" class="nav-link" rendered="#{usuarioBean.acceso == true}"/>
                             </h:form>
                         </li>
                         <li class="nav-item">
                             <h:form>
-                                <h:commandLink id="cliente_decorator" value="Cliente" action="/cliente/cliente.xhtml?faces-redirect=true" class="nav-link" />
+                                <h:commandLink id="cliente_decorator" value="Cliente" action="/cliente/cliente.xhtml?faces-redirect=true" class="nav-link" rendered="#{usuarioBean.acceso == true}"/>
                             </h:form>
                         </li>
                         <li class="nav-item">
                             <h:form>
-                                <h:commandLink id="empleado_decorator" value="Empleado" action="/empleado/empleado.xhtml?faces-redirect=true" class="nav-link" />
+                                <h:commandLink id="empleado_decorator" value="Empleado" action="/empleado/empleado.xhtml?faces-redirect=true" class="nav-link" rendered="#{usuarioBean.acceso == true}"/>
                             </h:form>
                         </li>
                         <li class="nav-item">
@@ -54,12 +54,12 @@
                     <ul class="navbar-nav d-flex">
                         <li class="nav-item">
                             <h:form>
-                                <h:commandLink id="registro_decorator" value="Registrarse" action="login.xhtml" class="nav-link" rendered="#{usuarioBean.acceso == false}"/>
+                                <h:commandLink id="registro_decorator" value="Registrarse" action="registro.xhtml?faces-redirect=true" class="nav-link" rendered="#{usuarioBean.acceso == false}"/>
                             </h:form>
                         </li>
                         <li class="nav-item">
                             <h:form>
-                                <h:commandLink id="login_decorator" value="Inicia sesión" action="login.xhtml" class="nav-link" rendered="#{usuarioBean.acceso == false}"/>
+                                <h:commandLink id="login_decorator" value="Inicia sesión" action="login.xhtml?faces-redirect=true" class="nav-link" rendered="#{usuarioBean.acceso == false}"/>
                             </h:form>
                         </li>
                         <li class="nav-item">

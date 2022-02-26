@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title><h:outputText value="Administrador"/></title>
+    </h:head>
+    <h:body>
+        <ui:decorate template="/decorator/decorator.xhtml">
+            <ui:define name="contenido" rendered="#{usuarioBean.admin == true}">
+                <div class="container">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <h:form>
+                                <h:commandLink id="admin_usuario_lista_link" value="Tabla de usuarios" action="/usuario/lista.xhtml?faces-redirect=true" class="nav-link" />
+                            </h:form>
+                        </li>
+                        <li class="nav-item">
+                            <h:form>
+                                <h:commandLink id="admin_cliente_lista_link" value="Tabla de clientes" action="/cliente/lista.xhtml?faces-redirect=true" class="nav-link" />
+                            </h:form>
+                        </li>
+                        <li class="nav-item">
+                            <h:form>
+                                <h:commandLink id="admin_empleado_lista_link" value="Tabla de empleados" action="/empleado/lista.xhtml?faces-redirect=true" class="nav-link" />
+                            </h:form>
+                        </li>
+                        <li class="nav-item">
+                            <h:form>
+                                <h:commandLink id="admin_pedido_lista_link" value="Tabla de pedidos" action="/pedido/lista.xhtml?faces-redirect=true" class="nav-link" />
+                            </h:form>
+                        </li>
+                        <li class="nav-item">
+                            <h:form>
+                                <h:commandLink id="admin_turno_lista_link" value="Tabla de turnos" action="/turno/lista.xhtml?faces-redirect=true" class="nav-link" />
+                            </h:form>
+                        </li>
+                    </ul>
+                </div>
+            </ui:define>
+        </ui:decorate>
+    </h:body>
+</html>

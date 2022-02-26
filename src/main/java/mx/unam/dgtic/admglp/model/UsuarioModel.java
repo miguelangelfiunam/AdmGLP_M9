@@ -1,6 +1,7 @@
 package mx.unam.dgtic.admglp.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import mx.unam.dgtic.admglp.model.Usuario_rolModel;
 
@@ -29,7 +30,7 @@ public class UsuarioModel {
     private Date fecreg; // Fecha de Inicio de acceso a la aplicacion
     private Date fecact; // Fecha de fin de acceso a la aplicacion
     private Integer estatus; // Estado del usuario
-    private Set<Usuario_rolModel> usuario_rolModels;
+    private List<Usuario_rolModel> usuario_rolModels;
 
     public UsuarioModel(Integer idusuario, String apodo, String correo1, String correo2, String nombre, String apellido1, String apellido2, Integer edad, Date fnac, String telefono1, String telefono2, Date fecreg, Date fecact, Integer estatus) {
         this.idusuario = idusuario;
@@ -51,7 +52,7 @@ public class UsuarioModel {
     public UsuarioModel() {
     }
 
-    public UsuarioModel(Integer idusuario, ContraModel contra, String apodo, String correo1, String correo2, String nombre, String apellido1, String apellido2, Integer edad, Date fnac, String telefono1, String telefono2, Date fecreg, Date fecact, Integer estatus, Set<Usuario_rolModel> usuario_rolModels) {
+    public UsuarioModel(Integer idusuario, ContraModel contra, String apodo, String correo1, String correo2, String nombre, String apellido1, String apellido2, Integer edad, Date fnac, String telefono1, String telefono2, Date fecreg, Date fecact, Integer estatus, List<Usuario_rolModel> usuario_rolModels) {
         this.idusuario = idusuario;
         this.contra = contra;
         this.apodo = apodo;
@@ -130,7 +131,7 @@ public class UsuarioModel {
         return estatus;
     }
 
-    public Set<Usuario_rolModel> getUsuario_rolModels() {
+    public List<Usuario_rolModel> getUsuario_rolModels() {
         return usuario_rolModels;
     }
 
@@ -190,7 +191,7 @@ public class UsuarioModel {
         this.estatus = estatus;
     }
 
-    public void setUsuario_rolModels(Set<Usuario_rolModel> usuario_rolModels) {
+    public void setUsuario_rolModels(List<Usuario_rolModel> usuario_rolModels) {
         this.usuario_rolModels = usuario_rolModels;
     }
 

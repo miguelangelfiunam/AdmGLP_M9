@@ -4,11 +4,14 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import java.util.Map;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
 import mx.unam.dgtic.admglp.model.UsuarioModel;
+import mx.unam.dgtic.admglp.model.Usuario_rolModel;
 
 /**
  * Bean con la informacion del usuario a mostrar en la vista
+ *
  * @author unam
  */
 @Named
@@ -21,6 +24,7 @@ public class UsuarioBean implements Serializable {
     private String contra;
     private Integer estatus;
     private Boolean acceso = false;
+    private Boolean admin = false;
     @Inject
     private ListaUsuariosBean listaUsuariosBean;
     @Inject
@@ -76,10 +80,23 @@ public class UsuarioBean implements Serializable {
         this.acceso = acceso;
     }
 
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
+
     public String login() {
         for (UsuarioModel usuario : listaUsuariosBean.getUsuarioModels()) {
             if (usuario.getApodo().equals(apodo) && usuario.getContra().getContra().equals(contra)) {
                 if (usuario.getEstatus() == 10) {
+                    for (Usuario_rolModel usuario_rolModel : usuario.getUsuario_rolModels()) {
+                        if (usuario_rolModel.getRol().getNombre().equals("Administrador")) {
+                            admin = true;
+                        }
+                    }
                     acceso = true;
                     messageBean.setMensajeRespuesta("");
                     System.out.println(this);
@@ -102,18 +119,6 @@ public class UsuarioBean implements Serializable {
         contra = null;
         acceso = false;
 
-        return "index";
-    }
-
-    public String agregaUsuario() {
-        return "index";
-    }
-
-    public String borraUsuario() {
-        return "index";
-    }
-
-    public String actualizaUsuario() {
         return "index";
     }
 

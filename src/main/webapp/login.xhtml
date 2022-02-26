@@ -39,11 +39,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         <div class="col-12 d-flex justify-content-between">
                                             <h:commandButton id="reset" value="Limpiar" type="reset" class="btn btn-primary"/>
                                             <div class="d-flex justify-content-around">
-                                                <h:commandButton id="cancel" value="Cancelar" action="/index.xhtml" class="btn btn-danger"/>
+
                                                 <h:commandButton id="submit" value="Enviar" action="#{usuarioBean.login}" class="btn btn-success"/>
                                             </div>
                                         </div>
                                     </h:form>
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <h:form>
+                                            <h:outputText value="&lt;br/&gt;" escape="false" />
+                                            <h:commandLink id="cancel" type="button" value="Regresar" action="/index.xhtml?faces-redirect=true" class="btn btn-danger"/>
+                                        </h:form>
+                                    </div>
                                     <div class="messagecolor">
                                         <h:messages showSummary="true" showDetail="false" errorStyle="color: red" infoStyle="color: blue" />
                                     </div>

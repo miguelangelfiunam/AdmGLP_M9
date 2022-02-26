@@ -33,7 +33,7 @@ public class ListaUsuariosBean implements Serializable {
     public ListaUsuariosBean() {
         this.usuarioModels = new ArrayList<>();
 
-        Set<Usuario_rolModel> lista_1 = new HashSet<>();
+        List<Usuario_rolModel> lista_1 = new ArrayList<>();
         ContraModel contraModel_1 = new ContraModel(1, "123", new Date(), null, 10);
         UsuarioModel usuario_1 = new UsuarioModel(1, "mike", "miguelangel@dgp.unam.mx", null, "Miguel", "Martinez",
                 "Rivera", 28, new Date(), "5534385266", null, new Date(), null, 10);
@@ -43,7 +43,7 @@ public class ListaUsuariosBean implements Serializable {
         usuario_1.setUsuario_rolModels(lista_1);
         usuarioModels.add(usuario_1);
 
-        Set<Usuario_rolModel> lista_2 = new HashSet<>();
+        List<Usuario_rolModel> lista_2 = new ArrayList<>();
         ContraModel contraModel_2 = new ContraModel(2, "456", new Date(), null, 10);
         RolModel rolModel_2 = new RolModel(2, "Empleado", "E", new Date(), null, 10);
         UsuarioModel usuario_2 = new UsuarioModel(2, "ingrid", "ingrid@dgp.unam.mx", null, "Ingrid", "Garrido",
@@ -53,7 +53,7 @@ public class ListaUsuariosBean implements Serializable {
         usuario_2.setUsuario_rolModels(lista_2);
         usuarioModels.add(usuario_2);
 
-        Set<Usuario_rolModel> lista_3 = new HashSet<>();
+        List<Usuario_rolModel> lista_3 = new ArrayList<>();
         ContraModel contraModel_3 = new ContraModel(3, "789", new Date(), null, 10);
         RolModel rolModel_3 = new RolModel(3, "Cliente", "C", new Date(), null, 10);
         UsuarioModel usuario_3 = new UsuarioModel(3, "pascual", "pascual@dgp.unam.mx", null, "Pascual", "Martinez",
