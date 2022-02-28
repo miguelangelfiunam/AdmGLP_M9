@@ -22,10 +22,64 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                     <h:form>
                                         <div class="mb-3">
                                             <h:inputHidden value="#{usuarioFormBean.idusuario}"/>
-                                            <label for="apodo" class="form-label">Nombre:</label>
-                                            <h:inputText id="apodo" title="Nombre: "
+
+                                            <label for="contra" class="form-label">Contraseña: </label>
+                                            <h:inputSecret id="contra" title="Contraseña: "
+                                                           value="#{usuarioFormBean.contra}" required="true"
+                                                           requiredMessage="Error: la contraseña es obligatoria." maxlength="500" class="form-control"/>
+
+                                            <label for="apodo" class="form-label">Apodo: </label>
+                                            <h:inputText id="apodo" title="Apodo: "
+                                                         value="#{usuarioFormBean.apodo}" required="true"
+                                                         requiredMessage="Error: El apodo es obligatorio." maxlength="40" class="form-control"/>
+
+                                            <label for="correo1" class="form-label">Correo: </label>
+                                            <h:inputText id="correo1" title="Correo: "
+                                                         validatorMessage="Email incorrecto"
+                                                         value="#{usuarioFormBean.correo1}" required="true"
+                                                         requiredMessage="Error: El correo es obligatorio." maxlength="80" class="form-control">
+                                                <f:validateRegex
+                                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                            </h:inputText>
+
+                                            <label for="correo2" class="form-label">Correo: </label>
+                                            <h:inputText id="correo2" title="Correo 2: "
+                                                         value="#{usuarioFormBean.correo2}" maxlength="80" class="form-control"/>
+
+                                            <label for="nombre" class="form-label">Nombre:</label>
+                                            <h:inputText id="nombre" title="Nombre: "
                                                          value="#{usuarioFormBean.nombre}" required="true"
                                                          requiredMessage="Error: El nombre es obligatorio." maxlength="50" class="form-control"/>
+
+                                            <label for="apellido1" class="form-label">Primer apellido:</label>  
+                                            <h:inputText id="apellido1" title="Primer Apellido: "
+                                                         value="#{usuarioFormBean.apellido1}" required="true"
+                                                         requiredMessage="Error: El primer apellido es obligatorio." maxlength="50" class="form-control"/>
+
+                                            <label for="apellido2" class="form-label">Segundo apellido:</label>
+                                            <h:inputText id="apellido2" title="Segundo apellido: "
+                                                         value="#{usuarioFormBean.apellido2}" required="true"
+                                                         requiredMessage="Error: El segundo apellido es obligatorio." maxlength="50" class="form-control"/>
+
+                                            <label for="edad" class="form-label">Edad:</label>
+                                            <h:inputText id="edad" title="Edad: " converterMessage="Solo se aceptan digitos 0-9"
+                                                         value="#{usuarioFormBean.edad}" required="true"
+                                                         requiredMessage="Error: La edad es obligatoria." maxlength="50" class="form-control"/>
+
+                                            <label for="fnac" class="form-label">Fecha de nacimiento:</label>
+                                            <h:inputText id="fnac" title="Fecha de nacimiento: "
+                                                         value="#{usuarioFormBean.fnac}" required="true"
+                                                         requiredMessage="Error: La fecha de nacimiento es obligatoria." class="form-control datepicker"/>
+
+                                            <label for="telefono1" class="form-label">Telefono:</label>
+                                            <h:inputText id="telefono1" title="Telefono: " converterMessage="Solo se aceptan digitos 0-9"
+                                                         value="#{usuarioFormBean.telefono1}" required="true"
+                                                         requiredMessage="Error: El telefono es obligatorio." maxlength="10" class="form-control"/>
+
+                                            <label for="telefono2" class="form-label">Telefono:</label>
+                                            <h:inputText id="telefono2" title="Telefono: " converterMessage="Solo se aceptan digitos 0-9"
+                                                         value="#{usuarioFormBean.telefono2}" maxlength="10" class="form-control"/>
+
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <h:commandButton value="Limpiar" type="reset" class="btn btn-primary"/>
@@ -36,6 +90,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                                               action="#{usuarioFormBean.actualizar}" rendered="#{not empty usuarioFormBean.idusuario}" class="btn btn-primary"/>
                                         </div>
                                     </h:form>
+                                    <div class="messagecolor">
+                                        <h:messages showSummary="true" showDetail="false"
+                                                    errorStyle="color: red" infoStyle="color: blue" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
