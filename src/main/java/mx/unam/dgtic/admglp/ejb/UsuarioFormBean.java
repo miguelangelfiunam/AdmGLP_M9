@@ -4,6 +4,10 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
 import mx.unam.dgtic.admglp.model.UsuarioModel;
 
@@ -149,11 +153,11 @@ public class UsuarioFormBean implements Serializable {
         UsuarioModel usuarioModel_aux = null;
         for (UsuarioModel usuarioModel : listaUsuariosBean.getUsuarioModels()) {
             if (usuarioModel.getIdusuario() == id) {
-               usuarioModel_aux = usuarioModel;
-               break;
+                usuarioModel_aux = usuarioModel;
+                break;
             }
         }
-        if(usuarioModel_aux != null){
+        if (usuarioModel_aux != null) {
             listaUsuariosBean.getUsuarioModels().remove(usuarioModel_aux);
         }
         return "/usuario/lista?faces-redirect=true";
@@ -161,21 +165,36 @@ public class UsuarioFormBean implements Serializable {
 
     public String actualizaUsuario(Integer idUsu) {
         for (UsuarioModel usuarioModel : listaUsuariosBean.getUsuarioModels()) {
-            if (usuarioModel.getIdusuario() == idUsu) {
+            if (usuarioModel.getIdusuario().equals(idUsu)) {
                 this.idusuario = idUsu;
+                this.contra = usuarioModel.getContra().getContra();
+                this.apodo = usuarioModel.getApodo();
+                this.correo1 = usuarioModel.getCorreo1();
+                this.correo2 = usuarioModel.getCorreo2();
                 this.nombre = usuarioModel.getNombre();
+                this.apellido1 = usuarioModel.getApellido1();
+                this.apellido2 = usuarioModel.getApellido2();
+                this.edad = usuarioModel.getEdad();
+
+                String pattern = "dd/MM/yyyy";
+                DateFormat df = new SimpleDateFormat(pattern);
+                this.fnac = df.format(usuarioModel.getFnac());
+
+                this.telefono1 = usuarioModel.getTelefono1();
+                this.telefono2 = usuarioModel.getTelefono2();
+
             }
         }
         return "/usuario/usuarioForm?faces-redirect=true";
     }
-    
+
     public String actualizar() {
-        
+
         return "/usuario/lista?faces-redirect=true";
     }
-    
+
     public String agregar() {
-        
+
         return "/usuario/lista?faces-redirect=true";
     }
 

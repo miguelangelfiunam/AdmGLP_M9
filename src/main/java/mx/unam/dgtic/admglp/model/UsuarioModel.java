@@ -2,8 +2,6 @@ package mx.unam.dgtic.admglp.model;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import mx.unam.dgtic.admglp.model.Usuario_rolModel;
 
 /**
  * Clase Usuario
