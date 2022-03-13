@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
-import mx.unam.dgtic.admglp.model.UsuarioModel;
+import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
 
 /**
  * Bean con la informacion del usuario a mostrar en la vista

@@ -1,13 +1,15 @@
 package mx.unam.dgtic.admglp.ejb;
 
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.Map;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
-import mx.unam.dgtic.admglp.model.UsuarioModel;
-import mx.unam.dgtic.admglp.model.Usuario_rolModel;
+import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
+import mx.unam.dgtic.admglp.bd.model.Usuario_rolModel;
 
 /**
  * Bean con la informacion del usuario a mostrar en la vista
@@ -114,12 +116,19 @@ public class UsuarioBean implements Serializable {
         return "login";
     }
 
-    public String logout() {
-        apodo = null;
-        contra = null;
-        acceso = false;
+    public void logout() {
+        try {
+            apodo = null;
+            contra = null;
+            acceso = false;
+            admin = false;
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            String url = ec.getRequestContextPath() + "/index.xhtml?faces-redirect=true";
+            ec.redirect(url);
+        } catch (Exception e) {
+        }
 
-        return "index";
+//        return url;
     }
 
     @Override
