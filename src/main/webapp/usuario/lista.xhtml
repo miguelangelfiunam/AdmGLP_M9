@@ -9,7 +9,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui"
       >
     <h:head>
         <title><h:outputText value="Lista de usuarios"/></title>
@@ -39,57 +38,51 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                 <h:commandButton type="submit" value="Agregar" action="#{usuarioFormBean.agregaUsuario}" class="btn btn-success"/>
                             </h:form>
                         </div>
-                        <p:dataTable value="#{listaUsuariosBean.usuarioModels}" var="usuario" paginator="true" rows="3"  reflow="true">
-                            <p:column class="noPaddingBottomTop">    				
-                                <f:facet name = "header">#</f:facet>    				
+                        <h:dataTable value="#{listaUsuariosBean.usuarioModels}" var="usuario" border="3" class="table table-bordered border-primary">
+                            <h:column>
+                                <f:facet name="header">id</f:facet>
                                     #{usuario.idusuario}
-                            </p:column>
-
-                            <p:column>    				
-                                <f:facet name = "header">Apodo</f:facet>    				
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">apodo</f:facet>
                                     #{usuario.apodo}
-                            </p:column>
-
-                            <p:column>    				
-                                <f:facet name = "header">Correo</f:facet>    				
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">correo</f:facet>
                                     #{usuario.correo1}
-                            </p:column>
-
-                            <p:column>    				
-                                <f:facet name = "header">Correo</f:facet>    				
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">correo</f:facet>
                                     #{usuario.correo2}
-                            </p:column>
-
-                            <p:column>    				
-                                <f:facet name = "header">Nombre</f:facet>    				
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">nombre</f:facet>
                                     #{usuario.nombre}
-                            </p:column>
-
-                            <p:column>    				
-                                <f:facet name = "header">Apellido</f:facet>    				
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">apellido1</f:facet>
                                     #{usuario.apellido1}
-                            </p:column>
-
-                            <p:column>    				
-                                <f:facet name = "header">Apellido</f:facet>    				
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">apellido2</f:facet>
                                     #{usuario.apellido2}
-                            </p:column>
-
-                            <p:column>    				
-                                <f:facet name = "header">Roles</f:facet>    				
-                                <p:repeat  value="#{usuario.usuario_rolModels}" var="usuario_rol"  class="noBorders">
-                                    #{usuario_rol.rol.nombre}
-                                </p:repeat >
-                            </p:column>
-
-                            <p:column>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">Roles</f:facet>
+                                <h:dataTable value="#{usuario.usuario_rolModels}" var="usuario_rol">
+                                    <h:column>
+                                        #{usuario_rol.rol.nombre}
+                                    </h:column>
+                                </h:dataTable>
+                            </h:column>
+                            <h:column>
                                 <f:facet name="header">Acciones</f:facet>
                                 <h:form>
-                                    <h:commandButton type="submit" value="Editar" action="#{usuarioFormBean.actualizaUsuario(usuario.idusuario)}" class="btn btn-sm btn-primary"/>
-                                    <h:commandLink type="button" value="Eliminar" action="#{usuarioFormBean.borraUsuario(usuario.idusuario)}" class="btn btn-sm btn-danger"/>
+                                    <h:commandButton type="submit" value="Editar" action="#{usuarioFormBean.actualizaUsuario(usuario.idusuario)}" class="btn btn-primary"/>
+                                    <h:commandLink type="button" value="Eliminar" action="#{usuarioFormBean.borraUsuario(usuario.idusuario)}" class="btn btn-danger"/>
                                 </h:form>
-                            </p:column>
-                        </p:dataTable>
+                            </h:column>
+                        </h:dataTable>
                     </div>
                 </h:panelGroup>
                 <h:panelGroup rendered="#{usuarioBean.acceso == false}">

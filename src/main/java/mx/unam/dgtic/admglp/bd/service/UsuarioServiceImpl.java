@@ -16,10 +16,10 @@ import java.util.logging.Logger;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
 import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
 import mx.unam.dgtic.admglp.bd.model.Usuario_rolModel;
-import mx.unam.dgtic.admglp.bd.repository.ContraRepositoryImpl;
-import mx.unam.dgtic.admglp.bd.repository.RolRepositoryImpl;
-import mx.unam.dgtic.admglp.bd.repository.UsuarioRepositoryImpl;
-import mx.unam.dgtic.admglp.bd.repository.Usuario_rolRepositoryImpl;
+import mx.unam.dgtic.admglp.bd.repository.ContraDAOJDBCImpl;
+import mx.unam.dgtic.admglp.bd.repository.RolDAOJDBCImpl;
+import mx.unam.dgtic.admglp.bd.repository.UsuarioDAOJDBCImpl;
+import mx.unam.dgtic.admglp.bd.repository.Usuario_rolDAOJDBCImpl;
 
 /**
  *
@@ -27,29 +27,19 @@ import mx.unam.dgtic.admglp.bd.repository.Usuario_rolRepositoryImpl;
  */
 public class UsuarioServiceImpl implements UsuarioService {
 
-    UsuarioRepositoryImpl usuarioRepositoryImpl;
-    ContraRepositoryImpl contraRepositoryImpl;
-    RolRepositoryImpl rolRepositoryImpl;
-    Usuario_rolRepositoryImpl usuario_rolRepositoryImpl;
+    UsuarioDAOJDBCImpl usuarioRepositoryImpl;
+    ContraDAOJDBCImpl contraRepositoryImpl;
+    RolDAOJDBCImpl rolRepositoryImpl;
+    Usuario_rolDAOJDBCImpl usuario_rolRepositoryImpl;
 
     @Override
     public List<UsuarioModel> getUsuarios() {
-        Connection cnn = null;
         List<UsuarioModel> usuarios = new ArrayList<>();
         try {
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            InputStream input = classLoader.getResourceAsStream("db.properties");;
-            Properties properties = new Properties();
-            properties.load(input);
-            String db = properties.getProperty("db.url");
-            String db_user = properties.getProperty("db.user");
-            String db_user_pass = properties.getProperty("db.password");
-            cnn = DriverManager.getConnection(db, db_user, db_user_pass);
-
-            usuarioRepositoryImpl = new UsuarioRepositoryImpl(cnn);
-            contraRepositoryImpl = new ContraRepositoryImpl(cnn);
-            rolRepositoryImpl = new RolRepositoryImpl(cnn);
-            usuario_rolRepositoryImpl = new Usuario_rolRepositoryImpl(cnn);
+            usuarioRepositoryImpl = new UsuarioDAOJDBCImpl();
+            contraRepositoryImpl = new ContraDAOJDBCImpl();
+            rolRepositoryImpl = new RolDAOJDBCImpl();
+            usuario_rolRepositoryImpl = new Usuario_rolDAOJDBCImpl();
             usuarios = usuarioRepositoryImpl.getUsuarios();
             for (UsuarioModel usuario : usuarios) {
                 usuario.setContra(contraRepositoryImpl.getContra(usuario.getContra().getId()));
@@ -71,16 +61,7 @@ public class UsuarioServiceImpl implements UsuarioService {
                 Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");
             } catch (Exception eCorreo) {
             }
-
-        } finally {
-            if (cnn != null) {
-                try {
-                    cnn.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(UsuarioServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
+        } 
         return usuarios;
     }
 
