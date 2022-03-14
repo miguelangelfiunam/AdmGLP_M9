@@ -2,50 +2,43 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package mx.unam.dgtic.admglp.bd.service;
+package mx.unam.dgtic.admglp.ejb;
 
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
 import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
 import mx.unam.dgtic.admglp.bd.model.Usuario_rolModel;
-import mx.unam.dgtic.admglp.bd.repository.ContraDAOJDBCImpl;
-import mx.unam.dgtic.admglp.bd.repository.RolDAOJDBCImpl;
-import mx.unam.dgtic.admglp.bd.repository.UsuarioDAOJDBCImpl;
-import mx.unam.dgtic.admglp.bd.repository.Usuario_rolDAOJDBCImpl;
+import mx.unam.dgtic.admglp.bd.repository.ContraDAOJDBC;
+import mx.unam.dgtic.admglp.bd.repository.RolDAOJDBC;
+import mx.unam.dgtic.admglp.bd.repository.UsuarioDAOJDBC;
+import mx.unam.dgtic.admglp.bd.repository.Usuario_rolDAOJDBC;
 
 /**
  *
  * @author unam
  */
-public class UsuarioServiceImpl implements UsuarioService {
+public class UsuarioEJBLocal implements UsuarioEJB {
 
-    UsuarioDAOJDBCImpl usuarioRepositoryImpl;
-    ContraDAOJDBCImpl contraRepositoryImpl;
-    RolDAOJDBCImpl rolRepositoryImpl;
-    Usuario_rolDAOJDBCImpl usuario_rolRepositoryImpl;
+    UsuarioDAOJDBC usuarioDAOJDBC;
+    ContraDAOJDBC contraDAOJDBC;
+    RolDAOJDBC rolDAOJDBC;
+    Usuario_rolDAOJDBC usuario_rolDAOJDBC;
 
     @Override
     public List<UsuarioModel> getUsuarios() {
         List<UsuarioModel> usuarios = new ArrayList<>();
         try {
-            usuarioRepositoryImpl = new UsuarioDAOJDBCImpl();
-            contraRepositoryImpl = new ContraDAOJDBCImpl();
-            rolRepositoryImpl = new RolDAOJDBCImpl();
-            usuario_rolRepositoryImpl = new Usuario_rolDAOJDBCImpl();
-            usuarios = usuarioRepositoryImpl.getUsuarios();
+            usuarioDAOJDBC = UsuarioDAOJDBC.getInstance();
+            contraDAOJDBC = ContraDAOJDBC.getInstance();
+            rolDAOJDBC = RolDAOJDBC.getInstance();
+            usuario_rolDAOJDBC = Usuario_rolDAOJDBC.getInstance();
+            usuarios = usuarioDAOJDBC.getUsuarios();
             for (UsuarioModel usuario : usuarios) {
-                usuario.setContra(contraRepositoryImpl.getContra(usuario.getContra().getId()));
-                List<Usuario_rolModel> usuario_rolModels = usuario_rolRepositoryImpl.getRolesUsu(usuario.getIdusuario());
+                usuario.setContra(contraDAOJDBC.getContra(usuario.getContra().getId()));
+                List<Usuario_rolModel> usuario_rolModels = usuario_rolDAOJDBC.getRolesUsu(usuario.getIdusuario());
                 for (Usuario_rolModel usuario_rolModel : usuario_rolModels) {
-                    usuario_rolModel.setRol(rolRepositoryImpl.getRol(usuario_rolModel.getRol().getIdrol()));
+                    usuario_rolModel.setRol(rolDAOJDBC.getRol(usuario_rolModel.getRol().getIdrol()));
                     usuario_rolModel.setUsuarioModel(usuario);
                 }
                 usuario.setUsuario_rolModels(usuario_rolModels);
@@ -54,8 +47,8 @@ public class UsuarioServiceImpl implements UsuarioService {
             String mensaje = "";
             mensaje += "<p>Error en UsuarioServiceImpl: " + e.getMessage() + "</p>";
 
-            if (usuarioRepositoryImpl.getError() != null) {
-                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuarios() -> usuarioRepositoryImpl -> getUsuarios() " + usuarioRepositoryImpl.getError().getMessage() + "</p>";
+            if (usuarioDAOJDBC.getError() != null) {
+                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuarios() -> usuarioDAOJDBC -> getUsuarios() " + usuarioDAOJDBC.getError().getMessage() + "</p>";
             }
             try {
                 Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");

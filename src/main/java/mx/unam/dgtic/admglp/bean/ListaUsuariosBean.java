@@ -11,7 +11,7 @@ import mx.unam.dgtic.admglp.bd.model.ContraModel;
 import mx.unam.dgtic.admglp.bd.model.RolModel;
 import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
 import mx.unam.dgtic.admglp.bd.model.Usuario_rolModel;
-import mx.unam.dgtic.admglp.bd.service.UsuarioServiceImpl;
+import mx.unam.dgtic.admglp.ejb.UsuarioEJBLocal;
 
 @Named
 @SessionScoped
@@ -61,7 +61,7 @@ public class ListaUsuariosBean implements Serializable {
 //        usuario_3.setContra(contraModel_3);
 //        usuario_3.setUsuario_rolModels(lista_3);
 //        usuarioModels.add(usuario_3);
-        UsuarioServiceImpl usuarioServiceImpl = new UsuarioServiceImpl();
+        UsuarioEJBLocal usuarioServiceImpl = new UsuarioEJBLocal();
         this.usuarioModels = usuarioServiceImpl.getUsuarios();
 
     }
