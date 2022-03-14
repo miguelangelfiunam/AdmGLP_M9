@@ -5,7 +5,8 @@
 package mx.unam.dgtic.admglp.bd.repository;
 
 import java.util.List;
-import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
+
+import mx.unam.dgtic.admglp.vo.UsuarioModel;
 
 /**
  *

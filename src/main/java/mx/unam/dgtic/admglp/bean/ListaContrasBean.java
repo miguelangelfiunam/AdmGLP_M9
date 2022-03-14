@@ -6,12 +6,12 @@ package mx.unam.dgtic.admglp.bean;
 
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import mx.unam.dgtic.admglp.vo.ContraModel;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import mx.unam.dgtic.admglp.bd.model.ContraModel;
-import mx.unam.dgtic.admglp.bd.model.RolModel;
 
 /**
  *

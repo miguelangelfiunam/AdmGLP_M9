@@ -12,6 +12,10 @@
         <param-value>12/03/2022</param-value>
     </context-param>
     <context-param>
+        <param-name>modulo</param-name>
+        <param-value>Modulo 10</param-value>
+    </context-param>
+    <context-param>
         <param-name>servidor</param-name>
         <!--<param-value>produccion</param-value>-->
         <param-value>desarrollo</param-value>
@@ -38,6 +42,11 @@
             30
         </session-timeout>
     </session-config>
+    <env-entry>
+        <env-entry-name>fileName</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>theValue</env-entry-value>
+    </env-entry>
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>

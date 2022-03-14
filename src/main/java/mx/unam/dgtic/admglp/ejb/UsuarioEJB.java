@@ -5,9 +5,10 @@
 package mx.unam.dgtic.admglp.ejb;
 
 import jakarta.ejb.Local;
+import mx.unam.dgtic.admglp.vo.RolModel;
+import mx.unam.dgtic.admglp.vo.UsuarioModel;
+
 import java.util.List;
-import mx.unam.dgtic.admglp.bd.model.RolModel;
-import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
 
 /**
  *

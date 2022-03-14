@@ -7,9 +7,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.InitialContext;
-import mx.unam.dgtic.admglp.bd.model.RolModel;
-import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
+
 import mx.unam.dgtic.admglp.ejb.UsuarioEJBLocal;
+import mx.unam.dgtic.admglp.vo.RolModel;
+import mx.unam.dgtic.admglp.vo.UsuarioModel;
 
 @Model
 public class ListasBean implements Serializable {
@@ -30,7 +31,7 @@ public class ListasBean implements Serializable {
             if (service != null) {
                 usuarios = service.getUsuarios();
             } else {
-                usuarios = new ArrayList();
+                usuarios = new ArrayList<UsuarioModel>();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -49,7 +50,7 @@ public class ListasBean implements Serializable {
             if (service != null) {
                 roles = service.getRoles();
             } else {
-                roles = new ArrayList();
+                roles = new ArrayList<RolModel>();
             }
         } catch (Exception ex) {
             ex.printStackTrace();

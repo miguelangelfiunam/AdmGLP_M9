@@ -9,10 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import mx.unam.dgtic.admglp.bd.model.ContraModel;
-import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
-import mx.unam.dgtic.admglp.db.DBConnection;
-import mx.unam.dgtic.admglp.db.JDBCUtil;
+
+import mx.unam.dgtic.admglp.bd.DBConnection;
+import mx.unam.dgtic.admglp.bd.JDBCUtil;
+import mx.unam.dgtic.admglp.vo.ContraModel;
+import mx.unam.dgtic.admglp.vo.UsuarioModel;
 
 /**
  *

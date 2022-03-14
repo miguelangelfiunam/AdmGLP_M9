@@ -17,6 +17,7 @@ public class AppController {
     private String servidor;
     private String proyecto;
     private String autor;
+    private String modulo;
     
     @PostConstruct
     public void init(){
@@ -24,6 +25,7 @@ public class AppController {
         servidor = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("servidor");
         proyecto = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("proyecto");
         autor = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("autor");
+        modulo = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("modulo");
         System.out.println(this);
     }
 
@@ -43,9 +45,12 @@ public class AppController {
         return autor;
     }
 
-    @Override
-    public String toString() {
-        return "AppController{" + "version=" + version + ", servidor=" + servidor + ", proyecto=" + proyecto + ", autor=" + autor + '}';
-    }
+    public String getModulo() {
+		return modulo;
+	}
+
+	public void setModulo(String modulo) {
+		this.modulo = modulo;
+	}
 
 }

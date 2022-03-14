@@ -1,4 +1,4 @@
-package mx.unam.dgtic.admglp.db;
+package mx.unam.dgtic.admglp.bd;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

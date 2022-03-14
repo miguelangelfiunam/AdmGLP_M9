@@ -8,13 +8,13 @@ import jakarta.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.List;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
-import mx.unam.dgtic.admglp.bd.model.RolModel;
-import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
-import mx.unam.dgtic.admglp.bd.model.Usuario_rolModel;
 import mx.unam.dgtic.admglp.bd.repository.ContraDAOJDBC;
 import mx.unam.dgtic.admglp.bd.repository.RolDAOJDBC;
 import mx.unam.dgtic.admglp.bd.repository.UsuarioDAOJDBC;
 import mx.unam.dgtic.admglp.bd.repository.Usuario_rolDAOJDBC;
+import mx.unam.dgtic.admglp.vo.RolModel;
+import mx.unam.dgtic.admglp.vo.UsuarioModel;
+import mx.unam.dgtic.admglp.vo.Usuario_rolModel;
 
 /**
  *

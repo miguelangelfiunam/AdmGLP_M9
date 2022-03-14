@@ -1,15 +1,14 @@
 package mx.unam.dgtic.admglp.bean;
 
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.enterprise.inject.Model;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
-import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
-import mx.unam.dgtic.admglp.bd.model.Usuario_rolModel;
+import mx.unam.dgtic.admglp.vo.UsuarioModel;
+import mx.unam.dgtic.admglp.vo.Usuario_rolModel;
 
 /**
  * Bean con la informacion del usuario a mostrar en la vista

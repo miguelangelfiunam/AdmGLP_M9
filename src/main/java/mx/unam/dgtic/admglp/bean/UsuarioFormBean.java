@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
-import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
+import mx.unam.dgtic.admglp.vo.UsuarioModel;
 
 /**
  * Bean con la informacion del usuario a mostrar en la vista
