@@ -4,9 +4,11 @@
  */
 package mx.unam.dgtic.admglp.ejb;
 
+import jakarta.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.List;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
+import mx.unam.dgtic.admglp.bd.model.RolModel;
 import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
 import mx.unam.dgtic.admglp.bd.model.Usuario_rolModel;
 import mx.unam.dgtic.admglp.bd.repository.ContraDAOJDBC;
@@ -18,6 +20,7 @@ import mx.unam.dgtic.admglp.bd.repository.Usuario_rolDAOJDBC;
  *
  * @author unam
  */
+@Stateless
 public class UsuarioEJBLocal implements UsuarioEJB {
 
     UsuarioDAOJDBC usuarioDAOJDBC;
@@ -54,7 +57,7 @@ public class UsuarioEJBLocal implements UsuarioEJB {
                 Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");
             } catch (Exception eCorreo) {
             }
-        } 
+        }
         return usuarios;
     }
 
@@ -88,12 +91,10 @@ public class UsuarioEJBLocal implements UsuarioEJB {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    static {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+    @Override
+    public List<RolModel> getRoles() {
+        rolDAOJDBC = RolDAOJDBC.getInstance();
+        return rolDAOJDBC.getRoles();
     }
 
 }

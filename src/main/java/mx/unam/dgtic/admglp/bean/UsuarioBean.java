@@ -1,12 +1,12 @@
 package mx.unam.dgtic.admglp.bean;
 
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.inject.Model;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
-import java.util.Map;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
 import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
 import mx.unam.dgtic.admglp.bd.model.Usuario_rolModel;
@@ -28,7 +28,7 @@ public class UsuarioBean implements Serializable {
     private Boolean acceso = false;
     private Boolean admin = false;
     @Inject
-    private ListaUsuariosBean listaUsuariosBean;
+    private ListasBean listaUsuariosBean;
     @Inject
     private MessageBean messageBean;
 
@@ -91,7 +91,7 @@ public class UsuarioBean implements Serializable {
     }
 
     public String login() {
-        for (UsuarioModel usuario : listaUsuariosBean.getUsuarioModels()) {
+        for (UsuarioModel usuario : listaUsuariosBean.cargaUsuarios()) {
             if (usuario.getApodo().equals(apodo) && usuario.getContra().getContra().equals(contra)) {
                 if (usuario.getEstatus() == 10) {
                     for (Usuario_rolModel usuario_rolModel : usuario.getUsuario_rolModels()) {

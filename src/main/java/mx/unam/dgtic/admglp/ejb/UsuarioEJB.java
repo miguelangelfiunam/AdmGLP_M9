@@ -4,16 +4,21 @@
  */
 package mx.unam.dgtic.admglp.ejb;
 
+import jakarta.ejb.Local;
 import java.util.List;
+import mx.unam.dgtic.admglp.bd.model.RolModel;
 import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
 
 /**
  *
  * @author unam
  */
+@Local
 public interface UsuarioEJB {
 
     List<UsuarioModel> getUsuarios();
+    
+    List<RolModel> getRoles();
 
     List<UsuarioModel> getUsuariosPorEstatus(Integer estatus);
 

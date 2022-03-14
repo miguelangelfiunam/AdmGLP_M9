@@ -30,7 +30,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
                 <h:panelGroup rendered="#{usuarioBean.admin == true}">
-                    <h2 class="text-center">Lista de usuarios</h2>
+                    <h2 class="text-center">Lista de roles</h2>
                     <hr></hr>
                     <div class="container">
                         <div class="d-flex justify-content-end">
@@ -38,49 +38,22 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                 <h:commandButton type="submit" value="Agregar" action="#{usuarioFormBean.agregaUsuario}" class="btn btn-success"/>
                             </h:form>
                         </div>
-                        <h:dataTable value="#{listaUsuariosBean.usuarioModels}" var="usuario" border="3" class="table table-bordered border-primary">
+                        <h:dataTable value="#{cargaRoles}" var="rol" border="3" class="table table-bordered table-hover">
                             <h:column>
                                 <f:facet name="header">id</f:facet>
-                                    #{usuario.idusuario}
+                                    #{rol.idrol}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">apodo</f:facet>
-                                    #{usuario.apodo}
+                                    #{rol.nombre}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">correo</f:facet>
-                                    #{usuario.correo1}
+                                    #{rol.tipo}
                             </h:column>
                             <h:column>
                                 <f:facet name="header">correo</f:facet>
-                                    #{usuario.correo2}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">nombre</f:facet>
-                                    #{usuario.nombre}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">apellido1</f:facet>
-                                    #{usuario.apellido1}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">apellido2</f:facet>
-                                    #{usuario.apellido2}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Roles</f:facet>
-                                <h:dataTable value="#{usuario.usuario_rolModels}" var="usuario_rol">
-                                    <h:column>
-                                        #{usuario_rol.rol.nombre}
-                                    </h:column>
-                                </h:dataTable>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">Acciones</f:facet>
-                                <h:form>
-                                    <h:commandButton type="submit" value="Editar" action="#{usuarioFormBean.actualizaUsuario(usuario.idusuario)}" class="btn btn-primary"/>
-                                    <h:commandLink type="button" value="Eliminar" action="#{usuarioFormBean.borraUsuario(usuario.idusuario)}" class="btn btn-danger"/>
-                                </h:form>
+                                    #{rol.estatus}
                             </h:column>
                         </h:dataTable>
                     </div>

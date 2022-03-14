@@ -1,6 +1,5 @@
 mx\unam\dgtic\admglp\bd\model\ClienteModel.class
 mx\unam\dgtic\admglp\db\JDBCUtil.class
-mx\unam\dgtic\admglp\bean\ListaRolesBean.class
 mx\unam\dgtic\admglp\bean\EmpleadoBean.class
 mx\unam\dgtic\admglp\bd\repository\RolDAOJDBC.class
 mx\unam\dgtic\admglp\bd\model\RolModel.class
@@ -11,6 +10,7 @@ mx\unam\dgtic\admglp\bean\ClienteBean.class
 mx\unam\dgtic\admglp\bd\repository\RolDAO.class
 mx\unam\dgtic\admglp\bd\repository\ContraDAOJDBC.class
 mx\unam\dgtic\admglp\bd\repository\UsuarioDAO.class
+mx\unam\dgtic\admglp\bean\ListasBean.class
 mx\unam\dgtic\admglp\bd\repository\Usuario_rolDAOJDBC.class
 mx\unam\dgtic\admglp\controller\AppController.class
 mx\unam\dgtic\admglp\db\DBConnection.class
@@ -19,7 +19,6 @@ mx\unam\dgtic\admglp\bean\UsuarioFormBean.class
 mx\unam\dgtic\admglp\ejb\UsuarioEJBLocal.class
 mx\unam\dgtic\admglp\mensajes\MessageBean.class
 mx\unam\dgtic\admglp\bd\repository\UsuarioDAOJDBC.class
-mx\unam\dgtic\admglp\bean\ListaUsuariosBean.class
 mx\unam\dgtic\admglp\bean\RolBean.class
 mx\unam\dgtic\admglp\bd\repository\Usuario_rolDAO.class
 mx\unam\dgtic\admglp\bd\repository\ContraDAO.class

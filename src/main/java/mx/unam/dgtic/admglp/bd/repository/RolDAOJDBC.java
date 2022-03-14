@@ -50,9 +50,9 @@ public class RolDAOJDBC implements RolDAO {
                     + "	cr.rol_dt_fecha_actualizacion, "
                     + "	cr.rol_si_estatus "
                     + "FROM "
-                    + "	c_rol AS cr"
+                    + "	c_rol AS cr "
                     + "WHERE "
-                    + "	cr.rol_si_estatus = 10;";
+                    + "	cr.rol_si_estatus = 10";
             try ( Connection conn = db.getConnection();  PreparedStatement st = conn.prepareStatement(sqlSelect)) {
                 try ( ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {

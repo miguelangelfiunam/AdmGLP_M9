@@ -6,8 +6,6 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
 import mx.unam.dgtic.admglp.bd.model.UsuarioModel;
 
@@ -35,9 +33,7 @@ public class UsuarioFormBean implements Serializable {
     private String telefono2; // Segundo telefono de contacto
     private String roles;
     @Inject
-    private ListaUsuariosBean listaUsuariosBean;
-    @Inject
-    private ListaRolesBean listaRolesBean;
+    private ListasBean listaUsuariosBean;
     @Inject
     private MessageBean messageBean;
 
@@ -151,20 +147,20 @@ public class UsuarioFormBean implements Serializable {
 
     public String borraUsuario(Integer id) {
         UsuarioModel usuarioModel_aux = null;
-        for (UsuarioModel usuarioModel : listaUsuariosBean.getUsuarioModels()) {
+        for (UsuarioModel usuarioModel : listaUsuariosBean.cargaUsuarios()) {
             if (usuarioModel.getIdusuario() == id) {
                 usuarioModel_aux = usuarioModel;
                 break;
             }
         }
         if (usuarioModel_aux != null) {
-            listaUsuariosBean.getUsuarioModels().remove(usuarioModel_aux);
+            listaUsuariosBean.cargaUsuarios().remove(usuarioModel_aux);
         }
         return "/usuario/lista?faces-redirect=true";
     }
 
     public String actualizaUsuario(Integer idUsu) {
-        for (UsuarioModel usuarioModel : listaUsuariosBean.getUsuarioModels()) {
+        for (UsuarioModel usuarioModel : listaUsuariosBean.cargaUsuarios()) {
             if (usuarioModel.getIdusuario().equals(idUsu)) {
                 this.idusuario = idUsu;
                 this.contra = usuarioModel.getContra().getContra();
@@ -194,8 +190,24 @@ public class UsuarioFormBean implements Serializable {
     }
 
     public String registrar() {
-        
+
         return "/usuario/lista?faces-redirect=true";
+    }
+
+    public void limpiaCampos() {
+        idusuario = null;
+        contra = null;
+        apodo = null;
+        correo1 = null;
+        correo2 = null;
+        nombre = null;
+        apellido1 = null;
+        apellido2 = null;
+        edad = null;
+        fnac = null;
+        telefono1 = null;
+        telefono2 = null;
+        roles = null;
     }
 
 }

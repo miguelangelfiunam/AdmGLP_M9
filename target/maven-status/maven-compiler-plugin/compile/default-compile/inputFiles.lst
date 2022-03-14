@@ -1,5 +1,6 @@
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bean\ListaContrasBean.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bean\UsuarioBean.java
+C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bean\ListasBean.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\ejb\UsuarioEJB.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bean\UsuarioFormBean.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bd\repository\ContraDAOJDBC.java
@@ -7,7 +8,6 @@ C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bd\J
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bd\model\EmpleadoModel.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bd\repository\UsuarioDAOJDBC.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bd\repository\UsuarioDAO.java
-C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bean\ListaUsuariosBean.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\controller\AppController.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bd\model\RolModel.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bd\repository\ContraDAO.java
@@ -24,6 +24,5 @@ C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bean
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\mensajes\MessageBean.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bean\EmpleadoBean.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bd\model\UsuarioModel.java
-C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bean\ListaRolesBean.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bd\DBConnection.java
 C:\Users\unam\Documents\GitHub\AdmGLP_M9\src\main\java\mx\unam\dgtic\admglp\bd\model\Usuario_rolModel.java
