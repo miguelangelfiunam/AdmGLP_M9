@@ -61,7 +61,7 @@ public class ContraDAOJDBC implements ContraDAO {
                     + "FROM "
                     + "	t_contra AS tc "
                     + "WHERE "
-                    + "	tc.id_contra = ?;";
+                    + "	tc.id_contra = ?";
             try ( Connection conn = db.getConnection(); PreparedStatement st = conn.prepareStatement(sqlSelect)) {
                 st.setInt(1, idcontra);
                 try ( ResultSet rs = st.executeQuery()) {

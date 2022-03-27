@@ -17,7 +17,7 @@ public interface UsuarioDAO {
 
     List<UsuarioModel> getUsuariosPorEstatus(Integer estatus);
 
-    UsuarioModel getUsuario(String apodo, String contra);
+    UsuarioModel getUsuario(Integer idUsuario);
     
     Boolean existeUsuario(String apodo, String contra);
     

@@ -53,6 +53,15 @@ public class UsuarioEJBLocal implements UsuarioEJB {
             if (usuarioDAOJDBC.getError() != null) {
                 mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuarios() -> usuarioDAOJDBC -> getUsuarios() " + usuarioDAOJDBC.getError().getMessage() + "</p>";
             }
+            if (contraDAOJDBC.getError() != null) {
+                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuarios() -> contraDAOJDBC -> getUsuarios() " + contraDAOJDBC.getError().getMessage() + "</p>";
+            }
+            if (rolDAOJDBC.getError() != null) {
+                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuarios() -> rolDAOJDBC -> getUsuarios() " + rolDAOJDBC.getError().getMessage() + "</p>";
+            }
+            if (usuario_rolDAOJDBC.getError() != null) {
+                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuarios() -> usuario_rolDAOJDBC -> getUsuarios() " + usuario_rolDAOJDBC.getError().getMessage() + "</p>";
+            }
             try {
                 Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");
             } catch (Exception eCorreo) {
@@ -67,8 +76,44 @@ public class UsuarioEJBLocal implements UsuarioEJB {
     }
 
     @Override
-    public UsuarioModel getUsuario(String apodo, String contra) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public UsuarioModel getUsuario(Integer idUsuario) {
+        UsuarioModel usuario = null;
+        try {
+            usuarioDAOJDBC = UsuarioDAOJDBC.getInstance();
+            contraDAOJDBC = ContraDAOJDBC.getInstance();
+            rolDAOJDBC = RolDAOJDBC.getInstance();
+            usuario_rolDAOJDBC = Usuario_rolDAOJDBC.getInstance();
+            usuario = usuarioDAOJDBC.getUsuario(idUsuario);
+            usuario.setContra(contraDAOJDBC.getContra(usuario.getContra().getId()));
+            List<Usuario_rolModel> usuario_rolModels = usuario_rolDAOJDBC.getRolesUsu(usuario.getIdusuario());
+            for (Usuario_rolModel usuario_rolModel : usuario_rolModels) {
+                usuario_rolModel.setRol(rolDAOJDBC.getRol(usuario_rolModel.getRol().getIdrol()));
+                usuario_rolModel.setUsuarioModel(usuario);
+            }
+            usuario.setUsuario_rolModels(usuario_rolModels);
+
+        } catch (Exception e) {
+            String mensaje = "";
+            mensaje += "<p>Error en UsuarioServiceImpl: " + e.getMessage() + "</p>";
+
+            if (usuarioDAOJDBC.getError() != null) {
+                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuario() -> usuarioDAOJDBC -> getUsuarios() " + usuarioDAOJDBC.getError().getMessage() + "</p>";
+            }
+            if (contraDAOJDBC.getError() != null) {
+                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuario() -> contraDAOJDBC -> getUsuarios() " + contraDAOJDBC.getError().getMessage() + "</p>";
+            }
+            if (rolDAOJDBC.getError() != null) {
+                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuario() -> rolDAOJDBC -> getUsuarios() " + rolDAOJDBC.getError().getMessage() + "</p>";
+            }
+            if (usuario_rolDAOJDBC.getError() != null) {
+                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuario() -> usuario_rolDAOJDBC -> getUsuarios() " + usuario_rolDAOJDBC.getError().getMessage() + "</p>";
+            }
+            try {
+                Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");
+            } catch (Exception eCorreo) {
+            }
+        }
+        return usuario;
     }
 
     @Override

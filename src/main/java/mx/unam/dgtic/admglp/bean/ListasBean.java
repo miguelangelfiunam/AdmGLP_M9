@@ -38,7 +38,26 @@ public class ListasBean implements Serializable {
         }
         return usuarios;
     }
-    
+
+    @Produces
+    @Model
+    public UsuarioModel cargaUsuario(Integer idUsuario) {
+        UsuarioModel usuario = null;
+        UsuarioEJBLocal service = null;
+        try {
+            InitialContext ctx = new InitialContext();
+            service = (UsuarioEJBLocal) ctx.lookup("java:global/admglp/UsuarioEJBLocal!mx.unam.dgtic.admglp.ejb.UsuarioEJB");
+            if (service != null) {
+                usuario = service.getUsuario(idUsuario);
+            } else {
+                usuario = null;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return usuario;
+    }
+
     @Produces
     @Model
     public List<RolModel> cargaRoles() {

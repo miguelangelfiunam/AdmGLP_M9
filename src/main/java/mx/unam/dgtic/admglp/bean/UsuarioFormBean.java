@@ -160,31 +160,31 @@ public class UsuarioFormBean implements Serializable {
     }
 
     public String actualizaUsuario(Integer idUsu) {
-        for (UsuarioModel usuarioModel : listaUsuariosBean.cargaUsuarios()) {
-            if (usuarioModel.getIdusuario().equals(idUsu)) {
-                this.idusuario = idUsu;
-                this.contra = usuarioModel.getContra().getContra();
-                this.apodo = usuarioModel.getApodo();
-                this.correo1 = usuarioModel.getCorreo1();
-                this.correo2 = usuarioModel.getCorreo2();
-                this.nombre = usuarioModel.getNombre();
-                this.apellido1 = usuarioModel.getApellido1();
-                this.apellido2 = usuarioModel.getApellido2();
-                this.edad = usuarioModel.getEdad();
+        UsuarioModel usuarioModel = listaUsuariosBean.cargaUsuario(idUsu);
+        if (usuarioModel != null) {
+            this.idusuario = idUsu;
+            this.contra = usuarioModel.getContra().getContra();
+            this.apodo = usuarioModel.getApodo();
+            this.correo1 = usuarioModel.getCorreo1();
+            this.correo2 = usuarioModel.getCorreo2();
+            this.nombre = usuarioModel.getNombre();
+            this.apellido1 = usuarioModel.getApellido1();
+            this.apellido2 = usuarioModel.getApellido2();
+            this.edad = usuarioModel.getEdad();
 
-                String pattern = "dd/MM/yyyy";
-                DateFormat df = new SimpleDateFormat(pattern);
-                this.fnac = df.format(usuarioModel.getFnac());
+            String pattern = "dd/MM/yyyy";
+            DateFormat df = new SimpleDateFormat(pattern);
+            this.fnac = df.format(usuarioModel.getFnac());
 
-                this.telefono1 = usuarioModel.getTelefono1();
-                this.telefono2 = usuarioModel.getTelefono2();
-
-            }
+            this.telefono1 = usuarioModel.getTelefono1();
+            this.telefono2 = usuarioModel.getTelefono2();
         }
         return "/usuario/usuarioForm?faces-redirect=true";
     }
 
     public String actualizar() {
+        int i = 0;
+        int j = 0;
 
         return "/usuario/lista?faces-redirect=true";
     }
