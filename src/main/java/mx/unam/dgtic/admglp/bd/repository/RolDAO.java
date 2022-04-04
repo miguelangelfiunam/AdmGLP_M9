@@ -6,7 +6,7 @@ package mx.unam.dgtic.admglp.bd.repository;
 
 import java.util.List;
 
-import mx.unam.dgtic.admglp.vo.RolModel;
+import mx.unam.dgtic.admglp.vo.Rol;
 
 /**
  *
@@ -14,17 +14,17 @@ import mx.unam.dgtic.admglp.vo.RolModel;
  */
 public interface RolDAO {
 
-    List< RolModel> getRoles();
+    List< Rol> getRoles();
 
-    List< RolModel> getRolesPorEstatus(Integer estatus);
+    List< Rol> getRolesPorEstatus(Integer estatus);
 
-    RolModel getRol(Integer id);
+    Rol getRol(Integer id);
 
     Boolean existeRol(Integer id);
 
-    Integer insertaRol(RolModel contraModel);
+    Integer insertaRol(Rol contraModel);
 
-    void actualizaRol(RolModel contraModel);
+    void actualizaRol(Rol contraModel);
 
     void eliminaRol(Integer id);
 }

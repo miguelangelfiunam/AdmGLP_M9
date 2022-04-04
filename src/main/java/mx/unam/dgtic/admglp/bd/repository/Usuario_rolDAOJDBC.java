@@ -12,8 +12,8 @@ import java.util.List;
 
 import mx.unam.dgtic.admglp.bd.DBConnection;
 import mx.unam.dgtic.admglp.bd.JDBCUtil;
-import mx.unam.dgtic.admglp.vo.RolModel;
-import mx.unam.dgtic.admglp.vo.Usuario_rolModel;
+import mx.unam.dgtic.admglp.vo.Rol;
+import mx.unam.dgtic.admglp.vo.Usuario_rol;
 
 /**
  *
@@ -40,9 +40,9 @@ public class Usuario_rolDAOJDBC implements Usuario_rolDAO {
     }
 
     @Override
-    public List<Usuario_rolModel> getRolesUsu(Integer idUsuario) {
+    public List<Usuario_rol> getRolesUsu(Integer idUsuario) {
         DBConnection db = JDBCUtil.getInstance();
-        List<Usuario_rolModel> usuario_rolModels = new ArrayList<>();
+        List<Usuario_rol> usuario_rolModels = new ArrayList<>();
         try {
             String sqlSelect = "SELECT "
                     + "	id_usuario_rol, "
@@ -59,9 +59,9 @@ public class Usuario_rolDAOJDBC implements Usuario_rolDAO {
                 st.setInt(1, idUsuario);
                 try ( ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
-                        Usuario_rolModel usuario_rolModel = new Usuario_rolModel();
+                        Usuario_rol usuario_rolModel = new Usuario_rol();
                         usuario_rolModel.setIdusuariorol(rs.getInt("id_usuario_rol"));
-                        usuario_rolModel.setRol(new RolModel(rs.getInt("id_rol")));
+                        usuario_rolModel.setRol(new Rol(rs.getInt("id_rol")));
                         usuario_rolModel.setFecreg(rs.getDate("usu_rol_dt_fecha_registro"));
                         usuario_rolModel.setFecact(rs.getDate("usu_rol_dt_fecha_actualizacion"));
                         usuario_rolModel.setEstatus(rs.getInt("usu_rol_si_estatus"));
@@ -77,17 +77,17 @@ public class Usuario_rolDAOJDBC implements Usuario_rolDAO {
     }
 
     @Override
-    public Usuario_rolModel getRol(Integer id) {
+    public Usuario_rol getRol(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Integer insertaRol(Usuario_rolModel usuario_rolModel) {
+    public Integer insertaRol(Usuario_rol usuario_rolModel) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void actualizaRol(Usuario_rolModel usuario_rolModel) {
+    public void actualizaRol(Usuario_rol usuario_rolModel) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -5,16 +5,16 @@
 package mx.unam.dgtic.admglp.ejb;
 
 import jakarta.ejb.Stateless;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
-import mx.unam.dgtic.admglp.bd.repository.ContraDAOJDBC;
-import mx.unam.dgtic.admglp.bd.repository.RolDAOJDBC;
-import mx.unam.dgtic.admglp.bd.repository.UsuarioDAOJDBC;
-import mx.unam.dgtic.admglp.bd.repository.Usuario_rolDAOJDBC;
-import mx.unam.dgtic.admglp.vo.RolModel;
-import mx.unam.dgtic.admglp.vo.UsuarioModel;
-import mx.unam.dgtic.admglp.vo.Usuario_rolModel;
+import mx.unam.dgtic.admglp.modelo.RolService;
+import mx.unam.dgtic.admglp.modelo.UsuarioService;
+import mx.unam.dgtic.admglp.vo.Rol;
+import mx.unam.dgtic.admglp.vo.Usuario;
 
 /**
  *
@@ -23,44 +23,22 @@ import mx.unam.dgtic.admglp.vo.Usuario_rolModel;
 @Stateless
 public class UsuarioEJBLocal implements UsuarioEJB {
 
-    UsuarioDAOJDBC usuarioDAOJDBC;
-    ContraDAOJDBC contraDAOJDBC;
-    RolDAOJDBC rolDAOJDBC;
-    Usuario_rolDAOJDBC usuario_rolDAOJDBC;
+    UsuarioService us;
+    RolService rs;
 
     @Override
-    public List<UsuarioModel> getUsuarios() {
-        List<UsuarioModel> usuarios = new ArrayList<>();
+    public List<Usuario> getUsuarios() {
+        List<Usuario> usuarios = new ArrayList<>();
         try {
-            usuarioDAOJDBC = UsuarioDAOJDBC.getInstance();
-            contraDAOJDBC = ContraDAOJDBC.getInstance();
-            rolDAOJDBC = RolDAOJDBC.getInstance();
-            usuario_rolDAOJDBC = Usuario_rolDAOJDBC.getInstance();
-            usuarios = usuarioDAOJDBC.getUsuarios();
-            for (UsuarioModel usuario : usuarios) {
-                usuario.setContra(contraDAOJDBC.getContra(usuario.getContra().getId()));
-                List<Usuario_rolModel> usuario_rolModels = usuario_rolDAOJDBC.getRolesUsu(usuario.getIdusuario());
-                for (Usuario_rolModel usuario_rolModel : usuario_rolModels) {
-                    usuario_rolModel.setRol(rolDAOJDBC.getRol(usuario_rolModel.getRol().getIdrol()));
-                    usuario_rolModel.setUsuarioModel(usuario);
-                }
-                usuario.setUsuario_rolModels(usuario_rolModels);
-            }
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
+            EntityManager em = emf.createEntityManager();
+            us = new UsuarioService(em);
+            usuarios = us.getUsuarios();
         } catch (Exception e) {
             String mensaje = "";
-            mensaje += "<p>Error en UsuarioServiceImpl: " + e.getMessage() + "</p>";
-
-            if (usuarioDAOJDBC.getError() != null) {
-                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuarios() -> usuarioDAOJDBC -> getUsuarios() " + usuarioDAOJDBC.getError().getMessage() + "</p>";
-            }
-            if (contraDAOJDBC.getError() != null) {
-                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuarios() -> contraDAOJDBC -> getUsuarios() " + contraDAOJDBC.getError().getMessage() + "</p>";
-            }
-            if (rolDAOJDBC.getError() != null) {
-                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuarios() -> rolDAOJDBC -> getUsuarios() " + rolDAOJDBC.getError().getMessage() + "</p>";
-            }
-            if (usuario_rolDAOJDBC.getError() != null) {
-                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuarios() -> usuario_rolDAOJDBC -> getUsuarios() " + usuario_rolDAOJDBC.getError().getMessage() + "</p>";
+            mensaje += "<p>Error en UsuarioService: " + e.getMessage() + "</p>";
+            if (us.getError() != null) {
+                mensaje += "<p>" + "Error en UsuarioEJBLocal -> getUsuarios() -> UsuarioService -> getUsuarios() " + us.getError().getMessage() + "</p>";
             }
             try {
                 Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");
@@ -71,42 +49,25 @@ public class UsuarioEJBLocal implements UsuarioEJB {
     }
 
     @Override
-    public List<UsuarioModel> getUsuariosPorEstatus(Integer estatus) {
+    public List<Usuario> getUsuariosPorEstatus(Integer estatus) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public UsuarioModel getUsuario(Integer idUsuario) {
-        UsuarioModel usuario = null;
+    public Usuario getUsuario(Integer idUsuario) {
+        Usuario usuario = new Usuario();
         try {
-            usuarioDAOJDBC = UsuarioDAOJDBC.getInstance();
-            contraDAOJDBC = ContraDAOJDBC.getInstance();
-            rolDAOJDBC = RolDAOJDBC.getInstance();
-            usuario_rolDAOJDBC = Usuario_rolDAOJDBC.getInstance();
-            usuario = usuarioDAOJDBC.getUsuario(idUsuario);
-            usuario.setContra(contraDAOJDBC.getContra(usuario.getContra().getId()));
-            List<Usuario_rolModel> usuario_rolModels = usuario_rolDAOJDBC.getRolesUsu(usuario.getIdusuario());
-            for (Usuario_rolModel usuario_rolModel : usuario_rolModels) {
-                usuario_rolModel.setRol(rolDAOJDBC.getRol(usuario_rolModel.getRol().getIdrol()));
-                usuario_rolModel.setUsuarioModel(usuario);
-            }
-            usuario.setUsuario_rolModels(usuario_rolModels);
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
+            EntityManager em = emf.createEntityManager();
+            us = new UsuarioService(em);
+            usuario = us.getUsuario(idUsuario);
 
         } catch (Exception e) {
             String mensaje = "";
             mensaje += "<p>Error en UsuarioServiceImpl: " + e.getMessage() + "</p>";
 
-            if (usuarioDAOJDBC.getError() != null) {
-                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuario() -> usuarioDAOJDBC -> getUsuarios() " + usuarioDAOJDBC.getError().getMessage() + "</p>";
-            }
-            if (contraDAOJDBC.getError() != null) {
-                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuario() -> contraDAOJDBC -> getUsuarios() " + contraDAOJDBC.getError().getMessage() + "</p>";
-            }
-            if (rolDAOJDBC.getError() != null) {
-                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuario() -> rolDAOJDBC -> getUsuarios() " + rolDAOJDBC.getError().getMessage() + "</p>";
-            }
-            if (usuario_rolDAOJDBC.getError() != null) {
-                mensaje += "<p>" + "Error en UsuarioServiceImpl -> getUsuario() -> usuario_rolDAOJDBC -> getUsuarios() " + usuario_rolDAOJDBC.getError().getMessage() + "</p>";
+            if (us.getError() != null) {
+                mensaje += "<p>" + "Error en UsuarioEJBLocal -> getUsuario() -> UsuarioService -> getUsuario() " + us.getError().getMessage() + "</p>";
             }
             try {
                 Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");
@@ -122,12 +83,12 @@ public class UsuarioEJBLocal implements UsuarioEJB {
     }
 
     @Override
-    public Integer insertaUsuario(UsuarioModel usuarioModel) {
+    public Integer insertaUsuario(Usuario usuarioModel) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void actualizaUsuario(UsuarioModel usuarioModel) {
+    public void actualizaUsuario(Usuario usuarioModel) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -137,9 +98,16 @@ public class UsuarioEJBLocal implements UsuarioEJB {
     }
 
     @Override
-    public List<RolModel> getRoles() {
-        rolDAOJDBC = RolDAOJDBC.getInstance();
-        return rolDAOJDBC.getRoles();
+    public List<Rol> getRoles() {
+        List<Rol> roles = new ArrayList<>();
+        try {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
+            EntityManager em = emf.createEntityManager();
+            rs = new RolService(em);
+            roles = rs.getRoles();
+        } catch (Exception e) {
+        }
+        return roles;
     }
 
 }

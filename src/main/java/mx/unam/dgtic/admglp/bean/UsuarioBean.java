@@ -7,8 +7,8 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
-import mx.unam.dgtic.admglp.vo.UsuarioModel;
-import mx.unam.dgtic.admglp.vo.Usuario_rolModel;
+import mx.unam.dgtic.admglp.vo.Rol;
+import mx.unam.dgtic.admglp.vo.Usuario;
 
 /**
  * Bean con la informacion del usuario a mostrar en la vista
@@ -90,11 +90,11 @@ public class UsuarioBean implements Serializable {
     }
 
     public String login() {
-        for (UsuarioModel usuario : listaUsuariosBean.cargaUsuarios()) {
+        for (Usuario usuario : listaUsuariosBean.cargaUsuarios()) {
             if (usuario.getApodo().equals(apodo) && usuario.getContra().getContra().equals(contra)) {
                 if (usuario.getEstatus() == 10) {
-                    for (Usuario_rolModel usuario_rolModel : usuario.getUsuario_rolModels()) {
-                        if (usuario_rolModel.getRol().getNombre().equals("Administrador")) {
+                    for (Rol rol : usuario.getRoles()) {
+                        if (rol.getNombre().equals("Administrador")) {
                             admin = true;
                         }
                     }

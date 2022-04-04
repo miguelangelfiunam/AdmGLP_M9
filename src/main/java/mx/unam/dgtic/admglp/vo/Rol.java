@@ -1,5 +1,11 @@
 package mx.unam.dgtic.admglp.vo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
@@ -10,23 +16,37 @@ import java.util.Date;
  * @since 20/11/2021 - 20/11/2021
  *
  */
-public class RolModel {
-
+@Entity
+@Table(name = "c_rol")
+public class Rol {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_rol")
     private Integer idrol; // Identificador del rol
+    
+    @Column(name = "rol_vc_nombre")
     private String nombre; // Nombre del rol
+    
+    @Column(name = "rol_c_tipo_rol")
     private String tipo; // Tipo del rol
+    
+    @Column(name = "rol_dt_fecha_registro")
     private Date fecreg; // Fecha de registro
+    
+    @Column(name = "rol_dt_fecha_actualizacion")
     private Date fecact; // Fecha de actualizacion
+    
+    @Column(name = "rol_si_estatus")
     private Integer estatus; // Estatus del registro en la base
 
-    public RolModel() {
+    public Rol() {
     }
 
-    public RolModel(Integer idrol) {
+    public Rol(Integer idrol) {
         this.idrol = idrol;
     }
 
-    public RolModel(Integer idrol, String nombre, String tipo, Date fecreg, Date fecact, Integer estatus) {
+    public Rol(Integer idrol, String nombre, String tipo, Date fecreg, Date fecact, Integer estatus) {
         this.idrol = idrol;
         this.nombre = nombre;
         this.tipo = tipo;

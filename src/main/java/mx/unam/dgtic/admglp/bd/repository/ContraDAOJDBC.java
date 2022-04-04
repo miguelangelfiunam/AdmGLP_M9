@@ -11,7 +11,7 @@ import java.util.List;
 
 import mx.unam.dgtic.admglp.bd.DBConnection;
 import mx.unam.dgtic.admglp.bd.JDBCUtil;
-import mx.unam.dgtic.admglp.vo.ContraModel;
+import mx.unam.dgtic.admglp.vo.Contra;
 
 /**
  *
@@ -38,19 +38,19 @@ public class ContraDAOJDBC implements ContraDAO {
     }
 
     @Override
-    public List<ContraModel> getContras() {
+    public List<Contra> getContras() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<ContraModel> getContrasPorEstatus(Integer estatus) {
+    public List<Contra> getContrasPorEstatus(Integer estatus) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ContraModel getContra(Integer idcontra) {
+    public Contra getContra(Integer idcontra) {
         DBConnection db = JDBCUtil.getInstance();
-        ContraModel contraModel = null;
+        Contra contraModel = null;
         try {
             String sqlSelect = "SELECT "
                     + "	tc.id_contra, "
@@ -66,7 +66,7 @@ public class ContraDAOJDBC implements ContraDAO {
                 st.setInt(1, idcontra);
                 try ( ResultSet rs = st.executeQuery()) {
                     if (rs.next()) {
-                        contraModel = new ContraModel();
+                        contraModel = new Contra();
                         contraModel.setId(rs.getInt("id_contra"));
                         contraModel.setContra(rs.getString("contra_vc_contra_cifrado"));
                         contraModel.setFecreg(rs.getDate("contra_dt_fecha_registro"));
@@ -88,12 +88,12 @@ public class ContraDAOJDBC implements ContraDAO {
     }
 
     @Override
-    public Integer insertaContra(ContraModel contraModel) {
+    public Integer insertaContra(Contra contraModel) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void actualizaContra(ContraModel contraModel) {
+    public void actualizaContra(Contra contraModel) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

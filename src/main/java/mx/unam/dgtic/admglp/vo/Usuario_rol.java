@@ -10,19 +10,19 @@ import java.util.Date;
  * @since 20/11/2021 - 20/11/2021
  *
  */
-public class Usuario_rolModel {
+public class Usuario_rol {
 
     private Integer idusuariorol;
-    private RolModel rol;
-    private UsuarioModel usuarioModel;
+    private Rol rol;
+    private Usuario usuarioModel;
     private Date fecreg; // Fecha de registro
     private Date fecact; // Fecha de actualizacion
     private Integer estatus;
 
-    public Usuario_rolModel() {
+    public Usuario_rol() {
     }
 
-    public Usuario_rolModel(Integer idusuariorol, RolModel rol, UsuarioModel usuarioModel, Date fecreg, Date fecact, Integer estatus) {
+    public Usuario_rol(Integer idusuariorol, Rol rol, Usuario usuarioModel, Date fecreg, Date fecact, Integer estatus) {
         this.idusuariorol = idusuariorol;
         this.rol = rol;
         this.usuarioModel = usuarioModel;
@@ -31,7 +31,7 @@ public class Usuario_rolModel {
         this.estatus = estatus;
     }
 
-    public Usuario_rolModel(RolModel rol, UsuarioModel usuarioModel, Date fecreg, Date fecact, Integer estatus) {
+    public Usuario_rol(Rol rol, Usuario usuarioModel, Date fecreg, Date fecact, Integer estatus) {
         this.rol = rol;
         this.usuarioModel = usuarioModel;
         this.fecreg = fecreg;
@@ -43,15 +43,15 @@ public class Usuario_rolModel {
         return idusuariorol;
     }
 
-    public RolModel getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public UsuarioModel getUsuarioModel() {
+    public Usuario getUsuarioModel() {
         return usuarioModel;
     }
 
-    public void setUsuarioModel(UsuarioModel usuarioModel) {
+    public void setUsuarioModel(Usuario usuarioModel) {
         this.usuarioModel = usuarioModel;
     }
 
@@ -71,7 +71,7 @@ public class Usuario_rolModel {
         this.idusuariorol = idusuariorol;
     }
 
-    public void setRol(RolModel rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 

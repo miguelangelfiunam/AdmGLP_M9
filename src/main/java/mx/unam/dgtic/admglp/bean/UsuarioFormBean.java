@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
-import mx.unam.dgtic.admglp.vo.UsuarioModel;
+import mx.unam.dgtic.admglp.vo.Usuario;
 
 /**
  * Bean con la informacion del usuario a mostrar en la vista
@@ -146,8 +146,8 @@ public class UsuarioFormBean implements Serializable {
     }
 
     public String borraUsuario(Integer id) {
-        UsuarioModel usuarioModel_aux = null;
-        for (UsuarioModel usuarioModel : listaUsuariosBean.cargaUsuarios()) {
+        Usuario usuarioModel_aux = null;
+        for (Usuario usuarioModel : listaUsuariosBean.cargaUsuarios()) {
             if (usuarioModel.getIdusuario() == id) {
                 usuarioModel_aux = usuarioModel;
                 break;
@@ -160,7 +160,7 @@ public class UsuarioFormBean implements Serializable {
     }
 
     public String actualizaUsuario(Integer idUsu) {
-        UsuarioModel usuarioModel = listaUsuariosBean.cargaUsuario(idUsu);
+        Usuario usuarioModel = listaUsuariosBean.cargaUsuario(idUsu);
         if (usuarioModel != null) {
             this.idusuario = idUsu;
             this.contra = usuarioModel.getContra().getContra();

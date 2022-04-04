@@ -13,8 +13,8 @@ import java.util.List;
 
 import mx.unam.dgtic.admglp.bd.DBConnection;
 import mx.unam.dgtic.admglp.bd.JDBCUtil;
-import mx.unam.dgtic.admglp.vo.ContraModel;
-import mx.unam.dgtic.admglp.vo.UsuarioModel;
+import mx.unam.dgtic.admglp.vo.Contra;
+import mx.unam.dgtic.admglp.vo.Usuario;
 
 /**
  *
@@ -41,8 +41,8 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
     }
 
     @Override
-    public List<UsuarioModel> getUsuarios() {
-        List<UsuarioModel> usuarioModels = new ArrayList<>();
+    public List<Usuario> getUsuarios() {
+        List<Usuario> usuarioModels = new ArrayList<>();
         try {
             DBConnection db = JDBCUtil.getInstance();
             String sqlSelect = "SELECT "
@@ -66,9 +66,9 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
             try ( Connection conn = db.getConnection();  PreparedStatement st = conn.prepareStatement(sqlSelect)) {
                 try ( ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
-                        UsuarioModel usuarioModel = new UsuarioModel();
+                        Usuario usuarioModel = new Usuario();
                         usuarioModel.setIdusuario(rs.getInt("id_usuario"));
-                        usuarioModel.setContra(new ContraModel(rs.getInt("id_contra")));
+                        usuarioModel.setContra(new Contra(rs.getInt("id_contra")));
                         usuarioModel.setApodo(rs.getString("usuario_vc_apodo"));
                         usuarioModel.setCorreo1(rs.getString("usuario_vc_correo1"));
                         usuarioModel.setCorreo2(rs.getString("usuario_vc_correo2"));
@@ -94,13 +94,13 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
     }
 
     @Override
-    public List<UsuarioModel> getUsuariosPorEstatus(Integer estatus) {
+    public List<Usuario> getUsuariosPorEstatus(Integer estatus) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public UsuarioModel getUsuario(Integer idUsuario) {
-        UsuarioModel usuarioModel = null;
+    public Usuario getUsuario(Integer idUsuario) {
+        Usuario usuarioModel = null;
         try {
             DBConnection db = JDBCUtil.getInstance();
             String sqlSelect = "SELECT "
@@ -127,9 +127,9 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
                 st.setInt(1, idUsuario);
                 try ( ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
-                        usuarioModel = new UsuarioModel();
+                        usuarioModel = new Usuario();
                         usuarioModel.setIdusuario(rs.getInt("id_usuario"));
-                        usuarioModel.setContra(new ContraModel(rs.getInt("id_contra")));
+                        usuarioModel.setContra(new Contra(rs.getInt("id_contra")));
                         usuarioModel.setApodo(rs.getString("usuario_vc_apodo"));
                         usuarioModel.setCorreo1(rs.getString("usuario_vc_correo1"));
                         usuarioModel.setCorreo2(rs.getString("usuario_vc_correo2"));
@@ -159,12 +159,12 @@ public class UsuarioDAOJDBC implements UsuarioDAO {
     }
 
     @Override
-    public Integer insertaUsuario(UsuarioModel usuarioModel) {
+    public Integer insertaUsuario(Usuario usuarioModel) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void actualizaUsuario(UsuarioModel usuarioModel) {
+    public void actualizaUsuario(Usuario usuarioModel) {
         try {
             DBConnection db = JDBCUtil.getInstance();
 

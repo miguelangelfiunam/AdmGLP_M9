@@ -1,5 +1,11 @@
 package mx.unam.dgtic.admglp.vo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
@@ -10,19 +16,35 @@ import java.util.Date;
  * @since 21/11/2021 - 21/11/2021
  *
  */
-public class ContraModel {
+@Entity
+@Table(name = "t_contra")
+public class Contra {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_contra")
     private Integer id;
+
+    @Column(name = "contra_vc_contra_cifrado")
     private String contra;
+
+    @Column(name = "contra_dt_fecha_registro")
     private Date fecreg; // Fecha de registro
+
+    @Column(name = "contra_dt_fecha_actualizacion")
     private Date fecact; // Fecha de actualizacion
+
+    @Column(name = "contra_si_estatus")
     private Integer estatus; // Estatus del registro en la base
 
-    public ContraModel(Integer id) {
+    public Contra(Integer id) {
         this.id = id;
     }
 
-    public ContraModel(Integer id, String contra, Date fecreg, Date fecact, Integer estatus) {
+    public Contra() {
+    }
+
+    public Contra(Integer id, String contra, Date fecreg, Date fecact, Integer estatus) {
         this.id = id;
         this.contra = contra;
         this.fecreg = fecreg;
@@ -30,16 +52,13 @@ public class ContraModel {
         this.estatus = estatus;
     }
 
-    public ContraModel(String contra, Date fecreg, Date fecact, Integer estatus) {
+    public Contra(String contra, Date fecreg, Date fecact, Integer estatus) {
         this.contra = contra;
         this.fecreg = fecreg;
         this.fecact = fecact;
         this.estatus = estatus;
     }
 
-    public ContraModel() {
-    }
-    
     public Integer getId() {
         return id;
     }

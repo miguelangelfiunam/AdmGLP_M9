@@ -69,9 +69,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             </h:column>
                             <h:column>
                                 <f:facet name="header">Roles</f:facet>
-                                <h:dataTable value="#{usuario.usuario_rolModels}" var="usuario_rol">
+                                <h:dataTable value="#{usuario.roles}" var="usu_rol">
                                     <h:column>
-                                        #{usuario_rol.rol.nombre}
+                                        #{usu_rol.nombre}
                                     </h:column>
                                 </h:dataTable>
                             </h:column>

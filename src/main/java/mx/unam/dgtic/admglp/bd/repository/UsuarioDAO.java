@@ -6,24 +6,24 @@ package mx.unam.dgtic.admglp.bd.repository;
 
 import java.util.List;
 
-import mx.unam.dgtic.admglp.vo.UsuarioModel;
+import mx.unam.dgtic.admglp.vo.Usuario;
 
 /**
  *
  * @author unam
  */
 public interface UsuarioDAO {
-    List<UsuarioModel> getUsuarios();
+    List<Usuario> getUsuarios();
 
-    List<UsuarioModel> getUsuariosPorEstatus(Integer estatus);
+    List<Usuario> getUsuariosPorEstatus(Integer estatus);
 
-    UsuarioModel getUsuario(Integer idUsuario);
+    Usuario getUsuario(Integer idUsuario);
     
     Boolean existeUsuario(String apodo, String contra);
     
-    Integer insertaUsuario(UsuarioModel usuarioModel);
+    Integer insertaUsuario(Usuario usuarioModel);
     
-    void actualizaUsuario(UsuarioModel usuarioModel);
+    void actualizaUsuario(Usuario usuarioModel);
     
     void eliminaUsuario(Integer id);
 }

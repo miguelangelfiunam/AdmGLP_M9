@@ -5,8 +5,8 @@
 package mx.unam.dgtic.admglp.ejb;
 
 import jakarta.ejb.Local;
-import mx.unam.dgtic.admglp.vo.RolModel;
-import mx.unam.dgtic.admglp.vo.UsuarioModel;
+import mx.unam.dgtic.admglp.vo.Rol;
+import mx.unam.dgtic.admglp.vo.Usuario;
 
 import java.util.List;
 
@@ -17,19 +17,19 @@ import java.util.List;
 @Local
 public interface UsuarioEJB {
 
-    List<UsuarioModel> getUsuarios();
+    List<Usuario> getUsuarios();
     
-    List<RolModel> getRoles();
+    List<Rol> getRoles();
 
-    List<UsuarioModel> getUsuariosPorEstatus(Integer estatus);
+    List<Usuario> getUsuariosPorEstatus(Integer estatus);
 
-    UsuarioModel getUsuario(Integer idUsuario);
+    Usuario getUsuario(Integer idUsuario);
     
     Boolean existeUsuario(String apodo, String contra);
     
-    Integer insertaUsuario(UsuarioModel usuarioModel);
+    Integer insertaUsuario(Usuario usuarioModel);
     
-    void actualizaUsuario(UsuarioModel usuarioModel);
+    void actualizaUsuario(Usuario usuarioModel);
     
     void eliminaUsuario(Integer id);
 }

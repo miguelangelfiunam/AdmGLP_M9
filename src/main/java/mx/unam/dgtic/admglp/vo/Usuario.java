@@ -1,5 +1,15 @@
 package mx.unam.dgtic.admglp.vo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
@@ -11,26 +21,70 @@ import java.util.List;
  * @since 07/10/2021 - 20/11/2021
  *
  */
-public class UsuarioModel {
+@Entity
+@Table(name = "t_usuario")
+public class Usuario {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_usuario")
     private Integer idusuario; // Identificador de usuario
-    private ContraModel contra;
-    private String apodo; // Seudonimo del usuario en la aplicacion
-    private String correo1; // Correo electronico
-    private String correo2; // Correo electronico
-    private String nombre; // Nombre de la persona 100
-    private String apellido1; // Primer apellido 100
-    private String apellido2; // Segundo apellido 100
-    private Integer edad;// Edad de la persona
-    private Date fnac; // Fecha de nacimiento
-    private String telefono1; // Telefono del usuario
-    private String telefono2; // Segundo telefono de contacto
-    private Date fecreg; // Fecha de Inicio de acceso a la aplicacion
-    private Date fecact; // Fecha de fin de acceso a la aplicacion
-    private Integer estatus; // Estado del usuario
-    private List<Usuario_rolModel> usuario_rolModels;
 
-    public UsuarioModel(Integer idusuario, String apodo, String correo1, String correo2, String nombre, String apellido1, String apellido2, Integer edad, Date fnac, String telefono1, String telefono2, Date fecreg, Date fecact, Integer estatus) {
+    @OneToOne
+    @JoinColumn(name="id_contra", referencedColumnName="id_contra")
+    private Contra contra;
+
+    @Column(name = "usuario_vc_apodo")
+    private String apodo; // Seudonimo del usuario en la aplicacion
+
+    @Column(name = "usuario_vc_correo1")
+    private String correo1; // Correo electronico
+
+    @Column(name = "usuario_vc_correo2")
+    private String correo2; // Correo electronico
+
+    @Column(name = "usuario_vc_nombre")
+    private String nombre; // Nombre de la persona 100
+
+    @Column(name = "usuario_vc_apellido1")
+    private String apellido1; // Primer apellido 100
+
+    @Column(name = "usuario_vc_apellido2")
+    private String apellido2; // Segundo apellido 100
+
+    @Column(name = "usuario_ti_edad")
+    private Integer edad;// Edad de la persona
+
+    @Column(name = "usuario_d_fec_nacimiento")
+    private Date fnac; // Fecha de nacimiento
+
+    @Column(name = "usuario_vc_telefono1")
+    private String telefono1; // Telefono del usuario
+
+    @Column(name = "usuario_vc_telefono2")
+    private String telefono2; // Segundo telefono de contacto
+
+    @Column(name = "usuario_dt_fecha_registro")
+    private Date fecreg; // Fecha de Inicio de acceso a la aplicacion
+
+    @Column(name = "usuario_dt_fecha_actualizacion")
+    private Date fecact; // Fecha de fin de acceso a la aplicacion
+
+    @Column(name = "usuario_si_estatus")
+    private Integer estatus; // Estado del usuario
+    
+    @JoinTable(
+        name = "tr_usuario_rol",
+        joinColumns = @JoinColumn(name = "id_usuario", nullable = false),
+        inverseJoinColumns = @JoinColumn(name="id_rol", nullable = false)
+    )
+    @ManyToMany
+    private List<Rol> roles;
+
+    public Usuario() {
+    }
+
+    public Usuario(Integer idusuario, String apodo, String correo1, String correo2, String nombre, String apellido1, String apellido2, Integer edad, Date fnac, String telefono1, String telefono2, Date fecreg, Date fecact, Integer estatus) {
         this.idusuario = idusuario;
         this.apodo = apodo;
         this.correo1 = correo1;
@@ -47,10 +101,7 @@ public class UsuarioModel {
         this.estatus = estatus;
     }
 
-    public UsuarioModel() {
-    }
-
-    public UsuarioModel(Integer idusuario, ContraModel contra, String apodo, String correo1, String correo2, String nombre, String apellido1, String apellido2, Integer edad, Date fnac, String telefono1, String telefono2, Date fecreg, Date fecact, Integer estatus, List<Usuario_rolModel> usuario_rolModels) {
+    public Usuario(Integer idusuario, Contra contra, String apodo, String correo1, String correo2, String nombre, String apellido1, String apellido2, Integer edad, Date fnac, String telefono1, String telefono2, Date fecreg, Date fecact, Integer estatus, List<Rol> roles) {
         this.idusuario = idusuario;
         this.contra = contra;
         this.apodo = apodo;
@@ -66,14 +117,14 @@ public class UsuarioModel {
         this.fecreg = fecreg;
         this.fecact = fecact;
         this.estatus = estatus;
-        this.usuario_rolModels = usuario_rolModels;
+        this.roles = roles;
     }
 
     public Integer getIdusuario() {
         return idusuario;
     }
 
-    public ContraModel getContra() {
+    public Contra getContra() {
         return contra;
     }
 
@@ -129,8 +180,8 @@ public class UsuarioModel {
         return estatus;
     }
 
-    public List<Usuario_rolModel> getUsuario_rolModels() {
-        return usuario_rolModels;
+    public List<Rol> getRoles() {
+        return roles;
     }
 
     public void setIdusuario(Integer idusuario) {
@@ -189,14 +240,17 @@ public class UsuarioModel {
         this.estatus = estatus;
     }
 
-    public void setUsuario_rolModels(List<Usuario_rolModel> usuario_rolModels) {
-        this.usuario_rolModels = usuario_rolModels;
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
     }
 
-    public void setContra(ContraModel contra) {
+    public void setContra(Contra contra) {
         this.contra = contra;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Usuario{" + "idusuario=" + idusuario + ", apodo=" + apodo + ", correo1=" + correo1 + ", correo2=" + correo2 + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", edad=" + edad + ", fnac=" + fnac + ", telefono1=" + telefono1 + ", telefono2=" + telefono2 + ", fecreg=" + fecreg + ", fecact=" + fecact + ", estatus=" + estatus + ", contra=" + contra + '}';
+    }
 
 }

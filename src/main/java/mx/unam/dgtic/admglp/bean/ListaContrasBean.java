@@ -6,7 +6,7 @@ package mx.unam.dgtic.admglp.bean;
 
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
-import mx.unam.dgtic.admglp.vo.ContraModel;
+import mx.unam.dgtic.admglp.vo.Contra;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,20 +22,20 @@ import java.util.List;
 public class ListaContrasBean implements Serializable {
 
     private static final long serialVersionUID = -4146681491856848089L;
-    List<ContraModel> contraModels;
+    List<Contra> contraModels;
 
     public ListaContrasBean() {
         this.contraModels = new ArrayList<>();
-        contraModels.add(new ContraModel(1, "123", new Date(), null, 10));
-        contraModels.add(new ContraModel(2, "456", new Date(), null, 10));
-        contraModels.add(new ContraModel(3, "789", new Date(), null, 10));
+        contraModels.add(new Contra(1, "123", new Date(), null, 10));
+        contraModels.add(new Contra(2, "456", new Date(), null, 10));
+        contraModels.add(new Contra(3, "789", new Date(), null, 10));
     }
 
-    public List<ContraModel> getContraModels() {
+    public List<Contra> getContraModels() {
         return contraModels;
     }
 
-    public void setContraModels(List<ContraModel> contraModels) {
+    public void setContraModels(List<Contra> contraModels) {
         this.contraModels = contraModels;
     }
 

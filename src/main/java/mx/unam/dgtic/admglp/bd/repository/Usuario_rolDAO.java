@@ -6,7 +6,7 @@ package mx.unam.dgtic.admglp.bd.repository;
 
 import java.util.List;
 
-import mx.unam.dgtic.admglp.vo.Usuario_rolModel;
+import mx.unam.dgtic.admglp.vo.Usuario_rol;
 
 /**
  *
@@ -14,13 +14,13 @@ import mx.unam.dgtic.admglp.vo.Usuario_rolModel;
  */
 public interface Usuario_rolDAO {
 
-    List<Usuario_rolModel> getRolesUsu(Integer idUsuario);
+    List<Usuario_rol> getRolesUsu(Integer idUsuario);
 
-    Usuario_rolModel getRol(Integer id);
+    Usuario_rol getRol(Integer id);
 
-    Integer insertaRol(Usuario_rolModel usuario_rolModel);
+    Integer insertaRol(Usuario_rol usuario_rolModel);
 
-    void actualizaRol(Usuario_rolModel usuario_rolModel);
+    void actualizaRol(Usuario_rol usuario_rolModel);
 
     void eliminaRol(Integer id);
 }

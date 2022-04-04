@@ -12,7 +12,7 @@ import java.util.List;
 
 import mx.unam.dgtic.admglp.bd.DBConnection;
 import mx.unam.dgtic.admglp.bd.JDBCUtil;
-import mx.unam.dgtic.admglp.vo.RolModel;
+import mx.unam.dgtic.admglp.vo.Rol;
 
 /**
  *
@@ -39,9 +39,9 @@ public class RolDAOJDBC implements RolDAO {
     }
 
     @Override
-    public List<RolModel> getRoles() {
+    public List<Rol> getRoles() {
         DBConnection db = JDBCUtil.getInstance();
-        List<RolModel> rolModels = new ArrayList<>();
+        List<Rol> rolModels = new ArrayList<>();
         try {
             String sqlSelect = "SELECT "
                     + "	cr.id_rol, "
@@ -57,7 +57,7 @@ public class RolDAOJDBC implements RolDAO {
             try ( Connection conn = db.getConnection();  PreparedStatement st = conn.prepareStatement(sqlSelect)) {
                 try ( ResultSet rs = st.executeQuery()) {
                     while (rs.next()) {
-                        RolModel rolModel = new RolModel();
+                        Rol rolModel = new Rol();
                         rolModel.setIdrol(rs.getInt("id_rol"));
                         rolModel.setNombre(rs.getString("rol_vc_nombre"));
                         rolModel.setTipo(rs.getString("rol_c_tipo_rol"));
@@ -76,14 +76,14 @@ public class RolDAOJDBC implements RolDAO {
     }
 
     @Override
-    public List<RolModel> getRolesPorEstatus(Integer estatus) {
+    public List<Rol> getRolesPorEstatus(Integer estatus) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public RolModel getRol(Integer id) {
+    public Rol getRol(Integer id) {
         DBConnection db = JDBCUtil.getInstance();
-        RolModel rolModel = null;
+        Rol rolModel = null;
         try {
             String sqlSelect = "SELECT "
                     + "	cr.id_rol, "
@@ -100,7 +100,7 @@ public class RolDAOJDBC implements RolDAO {
                 st.setInt(1, id);
                 try ( ResultSet rs = st.executeQuery()) {
                     if (rs.next()) {
-                        rolModel = new RolModel();
+                        rolModel = new Rol();
                         rolModel.setIdrol(rs.getInt("id_rol"));
                         rolModel.setNombre(rs.getString("rol_vc_nombre"));
                         rolModel.setTipo(rs.getString("rol_c_tipo_rol"));
@@ -123,12 +123,12 @@ public class RolDAOJDBC implements RolDAO {
     }
 
     @Override
-    public Integer insertaRol(RolModel contraModel) {
+    public Integer insertaRol(Rol contraModel) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void actualizaRol(RolModel contraModel) {
+    public void actualizaRol(Rol contraModel) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

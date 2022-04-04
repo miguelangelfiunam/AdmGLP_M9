@@ -6,7 +6,7 @@ package mx.unam.dgtic.admglp.bd.repository;
 
 import java.util.List;
 
-import mx.unam.dgtic.admglp.vo.ContraModel;
+import mx.unam.dgtic.admglp.vo.Contra;
 
 /**
  *
@@ -14,17 +14,17 @@ import mx.unam.dgtic.admglp.vo.ContraModel;
  */
 public interface ContraDAO {
 
-    List<ContraModel> getContras();
+    List<Contra> getContras();
 
-    List<ContraModel> getContrasPorEstatus(Integer estatus);
+    List<Contra> getContrasPorEstatus(Integer estatus);
 
-    ContraModel getContra(Integer id);
+    Contra getContra(Integer id);
 
     Boolean existeContra(String apodo, String contra);
 
-    Integer insertaContra(ContraModel contraModel);
+    Integer insertaContra(Contra contraModel);
 
-    void actualizaContra(ContraModel contraModel);
+    void actualizaContra(Contra contraModel);
 
     void eliminaContra(Integer id);
 }
