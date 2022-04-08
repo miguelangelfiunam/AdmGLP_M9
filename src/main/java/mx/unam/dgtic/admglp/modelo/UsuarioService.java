@@ -4,9 +4,6 @@
  */
 package mx.unam.dgtic.admglp.modelo;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 import mx.unam.dgtic.admglp.vo.Usuario;
 
@@ -18,34 +15,18 @@ import mx.unam.dgtic.admglp.vo.Usuario;
  * @since 26/03/2022 - 26/03/2022
  *
  */
-public class UsuarioService {
+public interface UsuarioService {
 
-    private Exception error;
+    public Exception getError();
 
-    public Exception getError() {
-        return error;
-    }
+    public List<Usuario> getUsuarios();
 
-    protected EntityManager em;
-
-    public UsuarioService(EntityManager em) {
-        this.em = em;
-    }
-
-    public List<Usuario> getUsuarios() {
-        List<Usuario> usuarios = new ArrayList<>();
-        try {
-            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
-            usuarios = query.getResultList();
-        } catch (Exception e) {
-            this.error = e;
-            throw new RuntimeException("Error al obtener usuarios");
-        }
-        return usuarios;
-    }
-
-    public Usuario getUsuario(int id) {
-        return em.find(Usuario.class, id);
-    }
-
+    public Usuario getUsuario(int idusuario);
+    
+    public void deleteUsuario(int idusuario);
+    
+    public Usuario updateUsuario(Usuario usuario);
+    
+    public Usuario insertUsuario(Usuario usuario);
+    
 }

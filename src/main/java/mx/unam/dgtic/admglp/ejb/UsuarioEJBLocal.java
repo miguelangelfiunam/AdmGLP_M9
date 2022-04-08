@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
 import mx.unam.dgtic.admglp.modelo.RolService;
-import mx.unam.dgtic.admglp.modelo.UsuarioService;
+import mx.unam.dgtic.admglp.modelo.UsuarioServiceImpl;
 import mx.unam.dgtic.admglp.vo.Rol;
 import mx.unam.dgtic.admglp.vo.Usuario;
 
@@ -23,7 +23,7 @@ import mx.unam.dgtic.admglp.vo.Usuario;
 @Stateless
 public class UsuarioEJBLocal implements UsuarioEJB {
 
-    UsuarioService us;
+    UsuarioServiceImpl us;
     RolService rs;
 
     @Override
@@ -32,7 +32,7 @@ public class UsuarioEJBLocal implements UsuarioEJB {
         try {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
-            us = new UsuarioService(em);
+            us = new UsuarioServiceImpl(em);
             usuarios = us.getUsuarios();
         } catch (Exception e) {
             String mensaje = "";
@@ -59,7 +59,7 @@ public class UsuarioEJBLocal implements UsuarioEJB {
         try {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
-            us = new UsuarioService(em);
+            us = new UsuarioServiceImpl(em);
             usuario = us.getUsuario(idUsuario);
 
         } catch (Exception e) {

@@ -7,6 +7,11 @@
         <class>mx.unam.dgtic.admglp.vo.Usuario</class>
         <class>mx.unam.dgtic.admglp.vo.Contra</class>
         <class>mx.unam.dgtic.admglp.vo.Rol</class>
+        <class>mx.unam.dgtic.admglp.vo.Cliente</class>
+        <class>mx.unam.dgtic.admglp.vo.Empleado</class>
+        <class>mx.unam.dgtic.admglp.vo.Estado</class>
+        <class>mx.unam.dgtic.admglp.vo.Asentamiento</class>
+        <class>mx.unam.dgtic.admglp.vo.Municipio</class>
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/admglp" />

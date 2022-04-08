@@ -1,5 +1,15 @@
 package mx.unam.dgtic.admglp.vo;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
@@ -10,16 +20,37 @@ import java.util.Date;
  * @since 16/02/2022 - 16/02/2022
  *
  */
+@Entity
+@Table(name = "c_cliente")
+@Access(AccessType.FIELD)
 public class Cliente {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente")
     private Integer id;
+    
+    @OneToOne
+    @JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
+    private Usuario usuario;
+    
+    @Column(name = "cliente_i_numero")
     private Integer numerocliente;
+    
+    @Column(name = "cliente_dt_fecha_registro")
     private Date fecreg;
+    
+    @Column(name = "cliente_dt_fecha_actualizacion")
     private Date fecact;
+    
+    @Column(name = "cliente_si_estatus")
     private Integer estatus;
 
     public Integer getId() {
         return id;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
     }
 
     public Integer getNumerocliente() {
@@ -42,6 +73,10 @@ public class Cliente {
         this.id = id;
     }
 
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public void setNumerocliente(Integer numerocliente) {
         this.numerocliente = numerocliente;
     }
@@ -60,6 +95,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + id + ", numerocliente=" + numerocliente + ", fecreg=" + fecreg + ", fecact=" + fecact + ", estatus=" + estatus + '}';
+        return "Cliente{" + "id=" + id + ", usuario=" + usuario + ", numerocliente=" + numerocliente + ", fecreg=" + fecreg + ", fecact=" + fecact + ", estatus=" + estatus + '}';
     }
+
 }

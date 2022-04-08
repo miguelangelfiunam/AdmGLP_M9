@@ -3,10 +3,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
-import mx.unam.dgtic.admglp.modelo.UsuarioService;
-import mx.unam.dgtic.admglp.modelo.UsuarioServiceImpl;
-import mx.unam.dgtic.admglp.vo.Rol;
-import mx.unam.dgtic.admglp.vo.Usuario;
+import mx.unam.dgtic.admglp.modelo.EstadoService;
+import mx.unam.dgtic.admglp.vo.Estado;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -16,7 +14,7 @@ import mx.unam.dgtic.admglp.vo.Usuario;
  *
  * @author unam
  */
-public class UsuarioMain {
+public class EstadoMain {
 
     /**
      * @param args the command line arguments
@@ -27,21 +25,13 @@ public class UsuarioMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("USUARIO");
-            UsuarioService instance = new UsuarioServiceImpl(em);
+            System.out.println("Estado");
+            EstadoService instance = new EstadoService(em);
 
-            List<Usuario> result = instance.getUsuarios();
-            for (Usuario usuario : result) {
-                System.out.println(usuario);
-                for (Rol rol : usuario.getRoles()) {
-                    System.out.println(rol);
-                }
+            List<Estado> result = instance.getEstados();
+            for (Estado contra : result) {
+                System.out.println(contra);
             }
-            
-            Usuario u = instance.getUsuario(1);
-            System.out.println(u);
-            
-            
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
