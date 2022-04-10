@@ -26,7 +26,7 @@ public class EstadoMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("ESTADO");
+            System.out.println("CRUD ESTADO");
             EstadoService estadoService = new EstadoServiceImpl(em);
             System.out.println("----------------");
             muestraEstados(estadoService);

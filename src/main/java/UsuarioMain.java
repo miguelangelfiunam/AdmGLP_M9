@@ -27,7 +27,7 @@ public class UsuarioMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("USUARIO");
+            System.out.println("CRUD USUARIO");
             UsuarioService usuarioService = new UsuarioServiceImpl(em);
             System.out.println("----------------");
             muestraUsuarios(usuarioService);

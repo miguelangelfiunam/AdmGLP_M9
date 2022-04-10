@@ -26,7 +26,7 @@ public class RolMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("ROL");
+            System.out.println("CRUD ROL");
             RolService rolService = new RolServiceImpl(em);
             System.out.println("----------------");
             muestraRoles(rolService);
@@ -66,7 +66,7 @@ public class RolMain {
 
     public static void borraEInsertaRol(RolService rolService) {
         Rol r = rolService.deleteRol(1);
-        System.out.println("Borrado");
+        System.out.println("Insertado");
         System.out.println(r);
         if (r != null) {
             System.out.println("Borrado");

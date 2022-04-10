@@ -26,7 +26,7 @@ public class ContraMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("CONTRA");
+            System.out.println("CRUD CONTRA");
             ContraService contraService = new ContraServiceImpl(em);
             System.out.println("----------------");
             muestraContras(contraService);

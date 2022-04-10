@@ -26,7 +26,7 @@ public class AsentamientoMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("ASENTAMIENTO");
+            System.out.println("CRUD ASENTAMIENTO");
             AsentamientoService asentamientoService = new AsentamientoServiceImpl(em);
             System.out.println("----------------");
             muestraAsentamientos(asentamientoService);

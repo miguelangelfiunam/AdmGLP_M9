@@ -26,7 +26,7 @@ public class MunicipioMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("MUNICIPIO");
+            System.out.println("CRUD MUNICIPIO");
             MunicipioService municipioService = new MunicipioServiceImpl(em);
             System.out.println("----------------");
             muestraMunicipios(municipioService);

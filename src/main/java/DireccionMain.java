@@ -26,7 +26,7 @@ public class DireccionMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("USUARIO");
+            System.out.println("CRUD DIRECCION");
             DireccionService direccionService = new DireccionServiceImpl(em);
             System.out.println("----------------");
             muestraDireccions(direccionService);

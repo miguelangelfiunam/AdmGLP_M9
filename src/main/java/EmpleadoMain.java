@@ -26,7 +26,7 @@ public class EmpleadoMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("EMPLEADO");
+            System.out.println("CRUD EMPLEADO");
             EmpleadoService empleadoService = new EmpleadoServiceImpl(em);
             System.out.println("----------------");
             muestraEmpleados(empleadoService);

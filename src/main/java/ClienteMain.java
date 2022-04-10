@@ -27,7 +27,7 @@ public class ClienteMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("CLIENTE");
+            System.out.println("CRUD CLIENTE");
             ClienteService clienteService = new ClienteServiceImpl(em);
             System.out.println("----------------");
             muestraClientes(clienteService);

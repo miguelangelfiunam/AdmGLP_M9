@@ -1,14 +1,16 @@
--- Volcando estructura de base de datos para agenda
+-- Volcando estructura de base de datos para admglp
+
 /*
 DROP DATABASE IF EXISTS `admglp`;
 CREATE DATABASE IF NOT EXISTS `admglp`;
 USE `admglp`;
-*/
+ */
+
 CREATE TABLE c_articulo (
 id_articulo INT(11) NOT NULL AUTO_INCREMENT, 
 articulo_vc_nombre VARCHAR(70) NOT NULL, 
 articulo_d_precio_articulo DECIMAL(19, 0) NOT NULL, 
-articulo_dt_fecha_registro DATETIME NOT NULL, 
+articulo_dt_fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 articulo_dt_fecha_actualizacion DATETIME NULL, 
 articulo_si_estatus SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_articulo)
@@ -21,7 +23,7 @@ asenta_c_clave CHAR(4) NOT NULL,
 asenta_c_codigo_postal CHAR(5) NOT NULL,  
 asenta_vc_tipo VARCHAR(70) NOT NULL, 
 asenta_vc_nombre VARCHAR(150) NOT NULL, 
-asenta_dt_fecha_registro DATETIME NOT NULL, 
+asenta_dt_fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 asenta_dt_fecha_actualizacion DATETIME NULL, 
 asenta_si_estatus SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_asentamiento)
@@ -31,7 +33,7 @@ CREATE TABLE c_cliente (
 id_cliente INT(11) NOT NULL AUTO_INCREMENT, 
 id_usuario INT(11) NOT NULL UNIQUE, 
 cliente_i_numero INT(11) NOT NULL, 
-cliente_dt_fecha_registro DATETIME NULL, 
+cliente_dt_fecha_registro DATETIME NULL DEFAULT CURRENT_TIMESTAMP(), 
 cliente_dt_fecha_actualizacion DATETIME NULL, 
 cliente_si_estatus SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_cliente)
@@ -43,7 +45,7 @@ id_usuario INT(11) NOT NULL UNIQUE,
 empleado_i_num_trab INT(11) NOT NULL UNIQUE, 
 empleado_i_numero_ss CHAR(15) NOT NULL UNIQUE, 
 empleado_c_rfc_trab char(13) NOT NULL UNIQUE, 
-empleado_dt_fecha_registro DATETIME NOT NULL, 
+empleado_dt_fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 empleado_dt_fecha_actualizacion DATETIME NULL, 
 empleado_si_estatus SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_empleado)
@@ -53,7 +55,7 @@ CREATE TABLE c_estado (
 id_estado INT(11) NOT NULL AUTO_INCREMENT, 
 estado_c_clave char(2) NOT NULL UNIQUE,
 estado_vc_nombre VARCHAR(100) NOT NULL,
-estado_dt_fecha_registro DATETIME NOT NULL, 
+estado_dt_fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 estado_dt_fecha_actualizacion DATETIME NULL,  
 estado_si_estatus SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_estado)
@@ -65,7 +67,7 @@ estatus_si_num_estatus SMALLINT(6) NOT NULL,
 estatus_vc_nom_tabla VARCHAR(50) NOT NULL, 
 estatus_vc_nombre_estatus VARCHAR(50) NOT NULL, 
 estatus_vc_descripcion VARCHAR(200), 
-estatus_dt_fecha_registro DATETIME NOT NULL, 
+estatus_dt_fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 estatus_dt_fecha_actualizacion DATETIME NULL,  
 estatus_c_activo char(1) NOT NULL, 
 PRIMARY KEY (id_estatus)
@@ -76,7 +78,7 @@ id_municipio INT(11) NOT NULL AUTO_INCREMENT,
 id_estado INT(11) NOT NULL, 
 municipio_c_clave char(3) NOT NULL, 
 municipio_vc_nombre VARCHAR(100) NOT NULL, 
-municipio_dt_fecha_registro DATETIME NOT NULL, 
+municipio_dt_fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 municipio_dt_fecha_actualizacion DATETIME NULL, 
 municipio_si_estado SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_municipio)
@@ -86,7 +88,7 @@ CREATE TABLE c_rol (
 id_rol INT(11) NOT NULL AUTO_INCREMENT, 
 rol_vc_nombre VARCHAR(50) NOT NULL, 
 rol_c_tipo_rol char(1) NOT NULL, 
-rol_dt_fecha_registro DATETIME NOT NULL, 
+rol_dt_fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 rol_dt_fecha_actualizacion DATETIME NULL, 
 rol_si_estatus SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_rol))ENGINE=INNODB;
@@ -97,7 +99,7 @@ trans_i_numero_unidad INT(11) NOT NULL,
 trans_i_modelo INT(11) NOT NULL, 
 trans_vc_placas VARCHAR(20) NOT NULL, 
 trans_vc_marca VARCHAR(30) NOT NULL, 
-trans_dt_fecha_registro DATETIME NOT NULL, 
+trans_dt_fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 trans_dt_fecha_actualizacion DATETIME NULL, 
 trans_si_estatus SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_transporte)
@@ -109,7 +111,7 @@ id_usuario INT(11) NOT NULL,
 acceso_dt_fecha_Inicio_acceso DATETIME NULL, 
 acceso_dt_fecha_fin_acceso DATETIME NULL, 
 acceso_descripcion VARCHAR(150) NOT NULL, 
-acceso_dt_fecha_registro DATETIME NOT NULL, 
+acceso_dt_fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 acceso_dt_fecha_actualizacion DATETIME NULL, 
 acceso_si_estatus SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_acceso)
@@ -185,7 +187,7 @@ usuario_ti_edad TINYINT NOT NULL,
 usuario_d_fec_nacimiento DATE NOT NULL, 
 usuario_vc_telefono1 VARCHAR(10) NOT NULL, 
 usuario_vc_telefono2 VARCHAR(10), 
-usuario_dt_fecha_registro DATETIME NOT NULL, 
+usuario_dt_fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 usuario_dt_fecha_actualizacion DATETIME NULL, 
 usuario_si_estatus SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_usuario)
@@ -194,10 +196,7 @@ PRIMARY KEY (id_usuario)
 CREATE TABLE tr_cliente_direccion (
 id_cliente_direccion INT(11) NOT NULL AUTO_INCREMENT, 
 id_cliente INT(11) NOT NULL, 
-id_direccion INT(11) NOT NULL, 
-cli_dir_dt_fecha_registro DATETIME NOT NULL, 
-cli_dir_dt_fecha_actualizacion DATETIME NULL, 
-cli_dir_si_estatus SMALLINT(6) NOT NULL, 
+id_direccion INT(11) NOT NULL,
 PRIMARY KEY (id_cliente_direccion)
 )ENGINE=INNODB;
 
@@ -205,7 +204,7 @@ CREATE TABLE tr_empleado_pedido (
 id_empleado_pedido INT(11) NOT NULL AUTO_INCREMENT, 
 idEmpleado INT(11) NOT NULL, 
 iIdPedido INT(11) NOT NULL, 
-emp_ped_dt_fecha_registro DATETIME NOT NULL, 
+emp_ped_dt_fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP(), 
 emp_ped_dt_fecha_actualizacion DATETIME NULL, 
 emp_ped_si_estatus SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_empleado_pedido)
@@ -217,7 +216,7 @@ id_pedido INT(11) NOT NULL,
 id_articulo INT(11) NOT NULL, 
 ped_art_ti_cantidad tinyint NOT NULL, 
 ped_art_d_subtotal decimal(19, 0) NOT NULL,
-ped_art_dt_fecha_registro DATETIME NOT NULL, 
+ped_art_dt_fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP(), 
 ped_art_dt_fecha_actualizacion DATETIME NULL, 
 ped_art_si_estatus SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_ped_art)
@@ -237,10 +236,7 @@ PRIMARY KEY (id_turno_empleado_transporte)
 CREATE TABLE tr_usuario_rol (
 id_usuario_rol INT(11) NOT NULL AUTO_INCREMENT, 
 id_rol INT(11) NOT NULL, 
-id_usuario INT(11) NOT NULL, 
-usu_rol_dt_fecha_registro DATETIME NOT NULL, 
-usu_rol_dt_fecha_actualizacion DATETIME NULL, 
-usu_rol_si_estatus SMALLINT(6) NOT NULL, 
+id_usuario INT(11) NOT NULL,
 PRIMARY KEY (id_usuario_rol)
 )ENGINE=INNODB;
 
@@ -256,65 +252,65 @@ CREATE UNIQUE INDEX tr_turno_empleado_transporte ON tr_turno_empleado_transporte
 
 CREATE UNIQUE INDEX tr_usuario_rol ON tr_usuario_rol (id_rol, id_usuario);
 
-ALTER TABLE t_usuario ADD CONSTRAINT FKt_contra311966 
+ALTER TABLE t_usuario ADD CONSTRAINT FKt_usuario_contra 
 FOREIGN KEY (id_contra) REFERENCES t_contra (id_contra);
 
-ALTER TABLE tr_usuario_rol ADD CONSTRAINT FKtr_usuario338231 
+ALTER TABLE tr_usuario_rol ADD CONSTRAINT FKtr_usuario_rol 
 FOREIGN KEY (id_rol) REFERENCES c_rol (id_rol);
 
-ALTER TABLE tr_usuario_rol ADD CONSTRAINT FKtr_usuario699017 
+ALTER TABLE tr_usuario_rol ADD CONSTRAINT FKtr_usuario_usuario 
 FOREIGN KEY (id_usuario) REFERENCES t_usuario (id_usuario);
 
-ALTER TABLE t_acceso ADD CONSTRAINT FKt_acceso629272 
+ALTER TABLE t_acceso ADD CONSTRAINT FKt_acceso_usuario 
 FOREIGN KEY (id_usuario) REFERENCES t_usuario (id_usuario);
 
-ALTER TABLE c_empleado ADD CONSTRAINT FKc_empleado220638 
+ALTER TABLE c_empleado ADD CONSTRAINT FKc_empleado_usuario 
 FOREIGN KEY (id_usuario) REFERENCES t_usuario (id_usuario);
 
-ALTER TABLE c_cliente ADD CONSTRAINT FKc_cliente561454 
+ALTER TABLE c_cliente ADD CONSTRAINT FKc_cliente_usuario 
 FOREIGN KEY (id_usuario) REFERENCES t_usuario (id_usuario);
 
-ALTER TABLE tr_cliente_direccion ADD CONSTRAINT FKtr_cliente187311 
+ALTER TABLE tr_cliente_direccion ADD CONSTRAINT FKtr_cliente_cliente 
 FOREIGN KEY (id_cliente) REFERENCES c_cliente (id_cliente);
 
-ALTER TABLE tr_cliente_direccion ADD CONSTRAINT FKtr_cliente971187 
+ALTER TABLE tr_cliente_direccion ADD CONSTRAINT FKtr_cliente_direccion 
 FOREIGN KEY (id_direccion) REFERENCES t_direccion (id_direccion);
 
-ALTER TABLE tr_empleado_pedido ADD CONSTRAINT FKtr_emplead705164 
+ALTER TABLE tr_empleado_pedido ADD CONSTRAINT FKtr_empleado_pedido_empleado 
 FOREIGN KEY (idEmpleado) REFERENCES c_empleado (id_empleado);
 
-ALTER TABLE tr_empleado_pedido ADD CONSTRAINT FKtr_emplead954267 
+ALTER TABLE tr_empleado_pedido ADD CONSTRAINT FKtr_empleado_pedido_pedido 
 FOREIGN KEY (iIdPedido) REFERENCES t_pedido (id_pedido);
 
-ALTER TABLE t_pedido ADD CONSTRAINT FKt_pedido230835 
+ALTER TABLE t_pedido ADD CONSTRAINT FKt_pedido_cliente 
 FOREIGN KEY (id_cliente) REFERENCES c_cliente (id_cliente);
 
-ALTER TABLE t_pedido ADD CONSTRAINT FKt_pedido582256 
+ALTER TABLE t_pedido ADD CONSTRAINT FKt_pedido_direccion 
 FOREIGN KEY (id_direccion) REFERENCES t_direccion (id_direccion);
 
-ALTER TABLE tr_turno_empleado_transporte ADD CONSTRAINT FKtr_turno_e936515 
+ALTER TABLE tr_turno_empleado_transporte ADD CONSTRAINT FKtr_turno_turno 
 FOREIGN KEY (id_turno) REFERENCES t_turno (id_turno);
 
-ALTER TABLE tr_turno_empleado_transporte ADD CONSTRAINT FKtr_turno_e390466 
+ALTER TABLE tr_turno_empleado_transporte ADD CONSTRAINT FKtr_turno_transporte 
 FOREIGN KEY (id_transporte) REFERENCES c_transporte (id_transporte);
 
-ALTER TABLE tr_turno_empleado_transporte ADD CONSTRAINT FKtr_turno_e357918 
+ALTER TABLE tr_turno_empleado_transporte ADD CONSTRAINT FKtr_turno_empleado 
 FOREIGN KEY (id_empleado) REFERENCES c_empleado (id_empleado);
 
-ALTER TABLE tr_pedido_articulo ADD CONSTRAINT FKtr_pedido_549600 
+ALTER TABLE tr_pedido_articulo ADD CONSTRAINT FKtr_pedido_articulo_pedido 
 FOREIGN KEY (id_pedido) REFERENCES t_pedido (id_pedido);
 
-ALTER TABLE tr_pedido_articulo ADD CONSTRAINT FKtr_pedido_114924 
+ALTER TABLE tr_pedido_articulo ADD CONSTRAINT FKtr_pedido_articulo_articulo 
 FOREIGN KEY (id_articulo) REFERENCES c_articulo (id_articulo);
 
-ALTER TABLE c_municipio ADD CONSTRAINT FKc_municipi133071 
+ALTER TABLE c_municipio ADD CONSTRAINT FKc_municipio_estado 
 FOREIGN KEY (id_estado) REFERENCES c_estado (id_estado);
 
-ALTER TABLE c_asentamiento ADD CONSTRAINT FKc_asentami890224 
+ALTER TABLE c_asentamiento ADD CONSTRAINT FKc_asentamiento_municipio 
 FOREIGN KEY (id_municipio) REFERENCES c_municipio (id_municipio);
 
-ALTER TABLE t_direccion ADD CONSTRAINT FKt_direccio716926 
+ALTER TABLE t_direccion ADD CONSTRAINT FKt_direccion_asentamiento 
 FOREIGN KEY (id_asentamiento) REFERENCES c_asentamiento (id_asentamiento);
 
-ALTER TABLE t_comentario ADD CONSTRAINT FKt_comentar704229 
+ALTER TABLE t_comentario ADD CONSTRAINT FKt_comentario_pedido 
 FOREIGN KEY (id_pedido) REFERENCES t_pedido (id_pedido);
