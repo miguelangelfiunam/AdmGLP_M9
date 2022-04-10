@@ -84,6 +84,9 @@ public class Usuario {
     
     @OneToOne(mappedBy="usuario", cascade = CascadeType.ALL)
     private Empleado empleado;
+    
+    @OneToOne(mappedBy="usuario", cascade = CascadeType.ALL)
+    private Cliente cliente;
 
     public Usuario() {
     }

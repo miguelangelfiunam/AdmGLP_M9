@@ -8,9 +8,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Clase Cliente
@@ -44,6 +47,14 @@ public class Cliente {
     
     @Column(name = "cliente_si_estatus")
     private Integer estatus;
+    
+    @JoinTable(
+        name = "tr_cliente_direccion",
+        joinColumns = @JoinColumn(name = "id_cliente", nullable = false),
+        inverseJoinColumns = @JoinColumn(name="id_direccion", nullable = false)
+    )
+    @ManyToMany
+    private List<Direccion> direcciones;
 
     public Integer getId() {
         return id;
@@ -69,6 +80,10 @@ public class Cliente {
         return estatus;
     }
 
+    public List<Direccion> getDirecciones() {
+        return direcciones;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -91,6 +106,10 @@ public class Cliente {
 
     public void setEstatus(Integer estatus) {
         this.estatus = estatus;
+    }
+
+    public void setDirecciones(List<Direccion> direcciones) {
+        this.direcciones = direcciones;
     }
 
     @Override

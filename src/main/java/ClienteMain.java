@@ -6,6 +6,7 @@ import java.util.List;
 import mx.unam.dgtic.admglp.modelo.ClienteService;
 import mx.unam.dgtic.admglp.modelo.ClienteServiceImpl;
 import mx.unam.dgtic.admglp.vo.Cliente;
+import mx.unam.dgtic.admglp.vo.Direccion;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -46,6 +47,9 @@ public class ClienteMain {
         List<Cliente> result = clienteService.getClientesActivos();
         for (Cliente cliente : result) {
             System.out.println(cliente);
+            for (Direccion direccion : cliente.getDirecciones()) {
+                System.out.println(direccion);
+            }
         }
     }
 

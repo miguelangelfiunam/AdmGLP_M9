@@ -3,10 +3,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
-import mx.unam.dgtic.admglp.modelo.UsuarioService;
-import mx.unam.dgtic.admglp.modelo.UsuarioServiceImpl;
-import mx.unam.dgtic.admglp.vo.Rol;
-import mx.unam.dgtic.admglp.vo.Usuario;
+import mx.unam.dgtic.admglp.modelo.DireccionService;
+import mx.unam.dgtic.admglp.modelo.DireccionServiceImpl;
+import mx.unam.dgtic.admglp.vo.Direccion;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -16,7 +15,7 @@ import mx.unam.dgtic.admglp.vo.Usuario;
  *
  * @author unam
  */
-public class UsuarioMain {
+public class DireccionMain {
 
     /**
      * @param args the command line arguments
@@ -28,55 +27,52 @@ public class UsuarioMain {
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
             System.out.println("USUARIO");
-            UsuarioService usuarioService = new UsuarioServiceImpl(em);
+            DireccionService direccionService = new DireccionServiceImpl(em);
             System.out.println("----------------");
-            muestraUsuarios(usuarioService);
+            muestraDireccions(direccionService);
             System.out.println("----------------");
-            muestraUsuario(usuarioService);
+            muestraDireccion(direccionService);
             System.out.println("----------------");
-            actualizaUsuario(usuarioService);
+            actualizaDireccion(direccionService);
             System.out.println("----------------");
-            borraEInsertaUsuario(usuarioService);
+            borraEInsertaDireccion(direccionService);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
     }
 
-    public static void muestraUsuarios(UsuarioService usuarioService) {
-        List<Usuario> result = usuarioService.getUsuariosActivos();
-        for (Usuario usuario : result) {
-            System.out.println(usuario);
-            for (Rol rol : usuario.getRoles()) {
-                System.out.println(rol);
-            }
+    public static void muestraDireccions(DireccionService direccionService) {
+        List<Direccion> result = direccionService.getDireccionesActivas();
+        for (Direccion direccion : result) {
+            System.out.println(direccion);
         }
     }
 
-    public static void muestraUsuario(UsuarioService usuarioService) {
-        Usuario u = usuarioService.getUsuario(1);
+    public static void muestraDireccion(DireccionService direccionService) {
+        Direccion u = direccionService.getDireccion(1);
         System.out.println(u);
     }
 
-    public static void actualizaUsuario(UsuarioService usuarioService) {
-        Usuario u = usuarioService.getUsuario(1);
+    public static void actualizaDireccion(DireccionService direccionService) {
+        Direccion u = direccionService.getDireccion(1);
         if (u != null) {
             System.out.println(u);
-            u.setApodo("dani_glp_2");
-            usuarioService.updateUsuario(u);
-            System.out.println(usuarioService.getUsuario(u.getIdusuario()));
+            u.setEstatus(10);
+            direccionService.updateDireccion(u);
+            System.out.println(direccionService.getDireccion(u.getIddireccion()));
         }
     }
 
-    public static void borraEInsertaUsuario(UsuarioService usuarioService) {
-        Usuario u = usuarioService.deleteUsuario(1);
+    public static void borraEInsertaDireccion(DireccionService direccionService) {
+        Direccion u = direccionService.deleteDireccion(1);
         System.out.println("Borrado");
         System.out.println(u);
         if(u != null){
             System.out.println("Insertado");
-            System.out.println(usuarioService.insertUsuario(u));
+            System.out.println(direccionService.insertDireccion(u));
         }else{
-            System.out.println("No existe el usuario para insertar");
+            System.out.println("No existe el direccion para insertar");
         }
     }
 
