@@ -4,8 +4,6 @@
  */
 package mx.unam.dgtic.admglp.modelo;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import java.util.List;
 import mx.unam.dgtic.admglp.vo.Asentamiento;
 
@@ -17,22 +15,20 @@ import mx.unam.dgtic.admglp.vo.Asentamiento;
  * @since 26/03/2022 - 26/03/2022
  *
  */
-public class AsentamientoService {
+public interface AsentamientoService {
 
-    private Exception error;
+    public Exception getError();
 
-    public Exception getError() {
-        return error;
-    }
+    public List<Asentamiento> getAsentamientosActivos();
+    
+    public List<Asentamiento> getAsentamientos(Integer estatus);
 
-    protected EntityManager em;
-
-    public AsentamientoService(EntityManager em) {
-        this.em = em;
-    }
-
-    public List<Asentamiento> getAsentamientos() {
-        TypedQuery<Asentamiento> query = em.createQuery("SELECT a FROM Asentamiento a", Asentamiento.class);
-        return query.getResultList();
-    }
+    public Asentamiento getAsentamiento(int idusuario);
+    
+    public Asentamiento deleteAsentamiento(int idusuario);
+    
+    public Asentamiento updateAsentamiento(Asentamiento usuario);
+    
+    public Asentamiento insertAsentamiento(Asentamiento usuario);
+    
 }

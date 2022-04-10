@@ -4,7 +4,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
 import mx.unam.dgtic.admglp.modelo.MunicipioService;
-import mx.unam.dgtic.admglp.vo.Asentamiento;
+import mx.unam.dgtic.admglp.modelo.MunicipioServiceImpl;
 import mx.unam.dgtic.admglp.vo.Municipio;
 
 /*
@@ -26,20 +26,53 @@ public class MunicipioMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("Municipio");
-            MunicipioService instance = new MunicipioService(em);
-
-            List<Municipio> result = instance.getMunicipios();
-            for (Municipio municipio : result) {
-                System.out.println(municipio);
-                for (Asentamiento asentamiento : municipio.getAsentamientos()) {
-                    System.out.println("\t" + asentamiento);
-                }
-
-            }
+            System.out.println("MUNICIPIO");
+            MunicipioService municipioService = new MunicipioServiceImpl(em);
+            System.out.println("----------------");
+            muestraMunicipios(municipioService);
+            System.out.println("----------------");
+            muestraMunicipio(municipioService);
+            System.out.println("----------------");
+            actualizaMunicipio(municipioService);
+            System.out.println("----------------");
+            borraEInsertaMunicipio(municipioService);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static void muestraMunicipios(MunicipioService municipioService) {
+        List<Municipio> result = municipioService.getMunicipiosActivos();
+        for (Municipio municipio : result) {
+            System.out.println(municipio);
+        }
+    }
+
+    public static void muestraMunicipio(MunicipioService municipioService) {
+        Municipio u = municipioService.getMunicipio(1);
+        System.out.println(u);
+    }
+
+    public static void actualizaMunicipio(MunicipioService municipioService) {
+        Municipio m = municipioService.getMunicipio(1);
+        if (m != null) {
+            System.out.println(m);
+            m.setEstatus(20);
+            municipioService.updateMunicipio(m);
+            System.out.println(municipioService.getMunicipio(m.getId()));
+        }
+    }
+
+    public static void borraEInsertaMunicipio(MunicipioService municipioService) {
+        Municipio m = municipioService.deleteMunicipio(1);
+        System.out.println("Borrado");
+        System.out.println(m);
+        if (m != null) {
+            System.out.println("Insertado");
+            System.out.println(municipioService.insertMunicipio(m));
+        } else {
+            System.out.println("No existe el municipio para insertar");
         }
     }
 

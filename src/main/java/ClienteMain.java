@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
 import mx.unam.dgtic.admglp.modelo.ClienteService;
+import mx.unam.dgtic.admglp.modelo.ClienteServiceImpl;
 import mx.unam.dgtic.admglp.vo.Cliente;
 
 /*
@@ -25,16 +26,53 @@ public class ClienteMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("Cliente");
-            ClienteService instance = new ClienteService(em);
-
-            List<Cliente> result = instance.getClientes();
-            for (Cliente contra : result) {
-                System.out.println(contra);
-            }
+            System.out.println("CLIENTE");
+            ClienteService clienteService = new ClienteServiceImpl(em);
+            System.out.println("----------------");
+            muestraClientes(clienteService);
+            System.out.println("----------------");
+            muestraCliente(clienteService);
+            System.out.println("----------------");
+            actualizaCliente(clienteService);
+            System.out.println("----------------");
+            borraEInsertaCliente(clienteService);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static void muestraClientes(ClienteService clienteService) {
+        List<Cliente> result = clienteService.getClientesActivos();
+        for (Cliente cliente : result) {
+            System.out.println(cliente);
+        }
+    }
+
+    public static void muestraCliente(ClienteService clienteService) {
+        Cliente u = clienteService.getCliente(1);
+        System.out.println(u);
+    }
+
+    public static void actualizaCliente(ClienteService clienteService) {
+        Cliente c = clienteService.getCliente(1);
+        if (c != null) {
+            System.out.println(c);
+            c.setEstatus(10);
+            clienteService.updateCliente(c);
+            System.out.println(clienteService.getCliente(c.getId()));
+        }
+    }
+
+    public static void borraEInsertaCliente(ClienteService clienteService) {
+        Cliente c = clienteService.deleteCliente(1);
+        System.out.println("Borrado");
+        System.out.println(c);
+        if (c != null) {
+            System.out.println("Insertado");
+            System.out.println(clienteService.insertCliente(c));
+        } else {
+            System.out.println("No existe el cliente para insertar");
         }
     }
 

@@ -5,8 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Clase rol que hace match con el catalogo de roles
@@ -38,6 +40,9 @@ public class Rol {
     
     @Column(name = "rol_si_estatus")
     private Integer estatus; // Estatus del registro en la base
+    
+    @ManyToMany(mappedBy = "roles")
+    private List<Usuario> usuarios;
 
     public Rol() {
     }

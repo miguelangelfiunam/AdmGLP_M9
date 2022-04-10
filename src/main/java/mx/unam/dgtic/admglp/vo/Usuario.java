@@ -1,5 +1,6 @@
 package mx.unam.dgtic.admglp.vo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -80,8 +81,28 @@ public class Usuario {
     )
     @ManyToMany
     private List<Rol> roles;
+    
+    @OneToOne(mappedBy="usuario", cascade = CascadeType.ALL)
+    private Empleado empleado;
 
     public Usuario() {
+    }
+
+    public Usuario(Contra contra, String apodo, String correo1, String correo2, String nombre, String apellido1, String apellido2, Integer edad, Date fnac, String telefono1, String telefono2, Date fecreg, Date fecact, Integer estatus) {
+        this.contra = contra;
+        this.apodo = apodo;
+        this.correo1 = correo1;
+        this.correo2 = correo2;
+        this.nombre = nombre;
+        this.apellido1 = apellido1;
+        this.apellido2 = apellido2;
+        this.edad = edad;
+        this.fnac = fnac;
+        this.telefono1 = telefono1;
+        this.telefono2 = telefono2;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.estatus = estatus;
     }
 
     public Usuario(Integer idusuario, String apodo, String correo1, String correo2, String nombre, String apellido1, String apellido2, Integer edad, Date fnac, String telefono1, String telefono2, Date fecreg, Date fecact, Integer estatus) {

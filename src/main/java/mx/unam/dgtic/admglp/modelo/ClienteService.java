@@ -4,35 +4,31 @@
  */
 package mx.unam.dgtic.admglp.modelo;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import java.util.List;
 import mx.unam.dgtic.admglp.vo.Cliente;
 
 /**
- * Servicio para consulta de usuarios
+ * Interfaz para CRUD de clientes
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
  * @since 26/03/2022 - 26/03/2022
  *
  */
-public class ClienteService {
+public interface ClienteService {
 
-    private Exception error;
+    public Exception getError();
 
-    public Exception getError() {
-        return error;
-    }
+    public List<Cliente> getClientesActivos();
+    
+    public List<Cliente> getClientes(Integer estatus);
 
-    protected EntityManager em;
-
-    public ClienteService(EntityManager em) {
-        this.em = em;
-    }
-
-    public List<Cliente> getClientes() {
-        TypedQuery<Cliente> query = em.createQuery("SELECT c FROM Cliente c", Cliente.class);
-        return query.getResultList();
-    }
+    public Cliente getCliente(int idCliente);
+    
+    public Cliente deleteCliente(int idCliente);
+    
+    public Cliente updateCliente(Cliente cliente);
+    
+    public Cliente insertCliente(Cliente cliente);
+    
 }

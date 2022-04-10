@@ -19,11 +19,13 @@ public interface UsuarioService {
 
     public Exception getError();
 
-    public List<Usuario> getUsuarios();
+    public List<Usuario> getUsuariosActivos();
+    
+    public List<Usuario> getUsuarios(Integer estatus);
 
     public Usuario getUsuario(int idusuario);
     
-    public void deleteUsuario(int idusuario);
+    public Usuario deleteUsuario(int idusuario);
     
     public Usuario updateUsuario(Usuario usuario);
     

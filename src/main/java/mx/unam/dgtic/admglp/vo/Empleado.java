@@ -26,29 +26,29 @@ public class Empleado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_empleado")
     private Integer id;
-    
+
     @OneToOne
     @JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
     private Usuario usuario;
-    
+
     @Column(name = "empleado_i_num_trab")
     private Integer numtrab;
-    
+
     @Column(name = "empleado_i_numero_ss")
     private String numss;
-    
+
     @Column(name = "empleado_c_rfc_trab")
     private String rfc;
-    
+
     @Column(name = "empleado_dt_fecha_registro")
     private Date fecreg;
-    
+
     @Column(name = "empleado_dt_fecha_actualizacion")
     private Date fecact;
-    
+
     @Column(name = "empleado_si_estatus")
     private Integer estatus;
-    
+
     public Integer getId() {
         return id;
     }
@@ -84,7 +84,7 @@ public class Empleado {
     public void setId(Integer id) {
         this.id = id;
     }
-    
+
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }

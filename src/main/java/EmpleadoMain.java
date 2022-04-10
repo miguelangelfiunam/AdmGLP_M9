@@ -4,6 +4,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
 import mx.unam.dgtic.admglp.modelo.EmpleadoService;
+import mx.unam.dgtic.admglp.modelo.EmpleadoServiceImpl;
 import mx.unam.dgtic.admglp.vo.Empleado;
 
 /*
@@ -25,16 +26,53 @@ public class EmpleadoMain {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
-            System.out.println("Empleado");
-            EmpleadoService instance = new EmpleadoService(em);
-
-            List<Empleado> result = instance.getEmpleados();
-            for (Empleado contra : result) {
-                System.out.println(contra);
-            }
+            System.out.println("EMPLEADO");
+            EmpleadoService empleadoService = new EmpleadoServiceImpl(em);
+            System.out.println("----------------");
+            muestraEmpleados(empleadoService);
+            System.out.println("----------------");
+            muestraEmpleado(empleadoService);
+            System.out.println("----------------");
+            actualizaEmpleado(empleadoService);
+            System.out.println("----------------");
+            borraEInsertaEmpleado(empleadoService);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static void muestraEmpleados(EmpleadoService empleadoService) {
+        List<Empleado> result = empleadoService.getEmpleadosActivos();
+        for (Empleado empleado : result) {
+            System.out.println(empleado);
+        }
+    }
+
+    public static void muestraEmpleado(EmpleadoService empleadoService) {
+        Empleado u = empleadoService.getEmpleado(1);
+        System.out.println(u);
+    }
+
+    public static void actualizaEmpleado(EmpleadoService empleadoService) {
+        Empleado e = empleadoService.getEmpleado(1);
+        if (e != null) {
+            System.out.println(e);
+            e.setEstatus(20);
+            empleadoService.updateEmpleado(e);
+            System.out.println(empleadoService.getEmpleado(e.getId()));
+        }
+    }
+
+    public static void borraEInsertaEmpleado(EmpleadoService empleadoService) {
+        Empleado e = empleadoService.deleteEmpleado(1);
+        System.out.println("Borrado");
+        System.out.println(e);
+        if (e != null) {
+            System.out.println("Insertado");
+            System.out.println(empleadoService.insertEmpleado(e));
+        } else {
+            System.out.println("No existe el empleado para insertar");
         }
     }
 

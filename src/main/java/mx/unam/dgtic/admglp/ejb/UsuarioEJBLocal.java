@@ -11,7 +11,7 @@ import jakarta.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
-import mx.unam.dgtic.admglp.modelo.RolService;
+import mx.unam.dgtic.admglp.modelo.RolServiceImpl;
 import mx.unam.dgtic.admglp.modelo.UsuarioServiceImpl;
 import mx.unam.dgtic.admglp.vo.Rol;
 import mx.unam.dgtic.admglp.vo.Usuario;
@@ -24,7 +24,7 @@ import mx.unam.dgtic.admglp.vo.Usuario;
 public class UsuarioEJBLocal implements UsuarioEJB {
 
     UsuarioServiceImpl us;
-    RolService rs;
+    RolServiceImpl rs;
 
     @Override
     public List<Usuario> getUsuarios() {
@@ -33,7 +33,7 @@ public class UsuarioEJBLocal implements UsuarioEJB {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             us = new UsuarioServiceImpl(em);
-            usuarios = us.getUsuarios();
+            usuarios = us.getUsuariosActivos();
         } catch (Exception e) {
             String mensaje = "";
             mensaje += "<p>Error en UsuarioService: " + e.getMessage() + "</p>";
@@ -103,8 +103,8 @@ public class UsuarioEJBLocal implements UsuarioEJB {
         try {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
-            rs = new RolService(em);
-            roles = rs.getRoles();
+            rs = new RolServiceImpl(em);
+            roles = rs.getRolesActivos();
         } catch (Exception e) {
         }
         return roles;

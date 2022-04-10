@@ -3,6 +3,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.List;
+import mx.unam.dgtic.admglp.modelo.ContraServiceImpl;
 import mx.unam.dgtic.admglp.modelo.UsuarioService;
 import mx.unam.dgtic.admglp.modelo.UsuarioServiceImpl;
 import mx.unam.dgtic.admglp.vo.Rol;
@@ -28,23 +29,55 @@ public class UsuarioMain {
             EntityManager em = emf.createEntityManager();
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
             System.out.println("USUARIO");
-            UsuarioService instance = new UsuarioServiceImpl(em);
-
-            List<Usuario> result = instance.getUsuarios();
-            for (Usuario usuario : result) {
-                System.out.println(usuario);
-                for (Rol rol : usuario.getRoles()) {
-                    System.out.println(rol);
-                }
-            }
-            
-            Usuario u = instance.getUsuario(1);
-            System.out.println(u);
-            
-            
+            UsuarioService usuarioService = new UsuarioServiceImpl(em);
+            System.out.println("----------------");
+            muestraUsuarios(usuarioService);
+            System.out.println("----------------");
+            muestraUsuario(usuarioService);
+            System.out.println("----------------");
+            actualizaUsuario(usuarioService);
+            System.out.println("----------------");
+            borraEInsertaUsuario(usuarioService);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static void muestraUsuarios(UsuarioService usuarioService) {
+        List<Usuario> result = usuarioService.getUsuariosActivos();
+        for (Usuario usuario : result) {
+            System.out.println(usuario);
+            for (Rol rol : usuario.getRoles()) {
+                System.out.println(rol);
+            }
+        }
+    }
+
+    public static void muestraUsuario(UsuarioService usuarioService) {
+        Usuario u = usuarioService.getUsuario(1);
+        System.out.println(u);
+    }
+
+    public static void actualizaUsuario(UsuarioService usuarioService) {
+        Usuario u = usuarioService.getUsuario(1);
+        if (u != null) {
+            System.out.println(u);
+            u.setApodo("dani_glp_2");
+            usuarioService.updateUsuario(u);
+            System.out.println(usuarioService.getUsuario(u.getIdusuario()));
+        }
+    }
+
+    public static void borraEInsertaUsuario(UsuarioService usuarioService) {
+        Usuario u = usuarioService.deleteUsuario(1);
+        System.out.println("Borrado");
+        System.out.println(u);
+        if(u != null){
+            System.out.println("Insertado");
+            System.out.println(usuarioService.insertUsuario(u));
+        }else{
+            System.out.println("No existe el usuario para insertar");
         }
     }
 

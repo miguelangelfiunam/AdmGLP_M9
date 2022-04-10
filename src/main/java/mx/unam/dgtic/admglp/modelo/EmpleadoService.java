@@ -4,35 +4,31 @@
  */
 package mx.unam.dgtic.admglp.modelo;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.TypedQuery;
 import java.util.List;
 import mx.unam.dgtic.admglp.vo.Empleado;
 
 /**
- * Servicio para consulta de usuarios
+ * Interfaz para CRUD de empleados
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
  * @since 26/03/2022 - 26/03/2022
  *
  */
-public class EmpleadoService {
+public interface EmpleadoService {
 
-    private Exception error;
+    public Exception getError();
 
-    public Exception getError() {
-        return error;
-    }
+    public List<Empleado> getEmpleadosActivos();
+    
+    public List<Empleado> getEmpleados(Integer estatus);
 
-    protected EntityManager em;
-
-    public EmpleadoService(EntityManager em) {
-        this.em = em;
-    }
-
-    public List<Empleado> getEmpleados() {
-        TypedQuery<Empleado> query = em.createQuery("SELECT e FROM Empleado e", Empleado.class);
-        return query.getResultList();
-    }
+    public Empleado getEmpleado(int idEmpleado);
+    
+    public Empleado deleteEmpleado(int idEmpleado);
+    
+    public Empleado updateEmpleado(Empleado empleado);
+    
+    public Empleado insertEmpleado(Empleado empleado);
+    
 }
