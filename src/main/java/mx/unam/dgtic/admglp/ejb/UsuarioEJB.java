@@ -25,6 +25,8 @@ public interface UsuarioEJB {
 
     Usuario getUsuario(Integer idUsuario);
     
+    Usuario getUsuario(String apodo, String contra, Integer estatus);
+    
     Boolean existeUsuario(String apodo, String contra);
     
     Integer insertaUsuario(Usuario usuarioModel);

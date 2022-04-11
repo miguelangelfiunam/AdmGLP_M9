@@ -13,7 +13,7 @@
     </context-param>
     <context-param>
         <param-name>modulo</param-name>
-        <param-value>Modulo 11</param-value>
+        <param-value>Entrega</param-value>
     </context-param>
     <context-param>
         <param-name>servidor</param-name>

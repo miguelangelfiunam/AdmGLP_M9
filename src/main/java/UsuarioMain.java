@@ -32,6 +32,11 @@ public class UsuarioMain {
             System.out.println("----------------");
             muestraUsuarios(usuarioService);
             System.out.println("----------------");
+            String apodo = "mike";
+            String contra = "123";
+            Integer estatus = 10;
+            muestraUsuario(usuarioService, apodo, contra, estatus);
+            System.out.println("----------------");
             muestraUsuario(usuarioService);
             System.out.println("----------------");
             actualizaUsuario(usuarioService);
@@ -55,6 +60,11 @@ public class UsuarioMain {
 
     public static void muestraUsuario(UsuarioService usuarioService) {
         Usuario u = usuarioService.getUsuario(1);
+        System.out.println(u);
+    }
+    
+    public static void muestraUsuario(UsuarioService usuarioService, String apodo, String contra, Integer estatus) {
+        Usuario u = usuarioService.getUsuario(apodo, contra, estatus);
         System.out.println(u);
     }
 

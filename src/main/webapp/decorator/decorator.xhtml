@@ -82,9 +82,9 @@
                     </div>
                     <div>
                         <p class="text-muted small">
-                            #{appController.autor}<br/>
+                            #{globalesBean.cargaGlobal('autor')}<br/>
                             Desarrollo de sistemas con tecnología JAVA.<br/>
-                            #{appController.modulo}.<br/>
+                            #{globalesBean.cargaGlobal('modulo')}.<br/>
                             Todos los derechos reservados.<br/>
                         </p>
                     </div>
@@ -95,9 +95,9 @@
                     </div>
                     <div>
                         <div class="text-muted small text-end">
-                            Aplicación: #{appController.proyecto}<br/> 
-                            Versión: #{appController.version}<br/> 
-                            Servidor: #{appController.servidor}<br/>
+                            Aplicación: #{globalesBean.cargaGlobal('proyecto')}<br/> 
+                            Versión: #{globalesBean.cargaGlobal('version')}<br/> 
+                            Servidor: #{globalesBean.cargaGlobal('servidor')}<br/>
                             <h:form>
                                 <h:outputText value="Usuario: #{usuarioBean.apodo}" rendered="#{usuarioBean.acceso}"/>
                             </h:form>

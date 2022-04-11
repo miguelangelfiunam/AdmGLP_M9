@@ -90,7 +90,8 @@ public class UsuarioBean implements Serializable {
     }
 
     public String login() {
-        for (Usuario usuario : listaUsuariosBean.cargaUsuarios()) {
+        Usuario usuario = listaUsuariosBean.cargaUsuario(apodo, contra, 10);
+        if (usuario != null) {
             if (usuario.getApodo().equals(apodo) && usuario.getContra().getContra().equals(contra)) {
                 if (usuario.getEstatus() == 10) {
                     for (Rol rol : usuario.getRoles()) {

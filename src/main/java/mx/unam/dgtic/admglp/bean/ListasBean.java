@@ -43,8 +43,21 @@ public class ListasBean implements Serializable {
             service = (UsuarioEJBLocal) ctx.lookup("java:global/admglp/UsuarioEJBLocal!mx.unam.dgtic.admglp.ejb.UsuarioEJB");
             if (service != null) {
                 usuario = service.getUsuario(idUsuario);
-            } else {
-                usuario = new Usuario();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return usuario;
+    }
+    
+    public Usuario cargaUsuario(String apodo, String contra, Integer estatus) {
+        Usuario usuario = null;
+        UsuarioEJBLocal service = null;
+        try {
+            InitialContext ctx = new InitialContext();
+            service = (UsuarioEJBLocal) ctx.lookup("java:global/admglp/UsuarioEJBLocal!mx.unam.dgtic.admglp.ejb.UsuarioEJB");
+            if (service != null) {
+                usuario = service.getUsuario(apodo, contra, estatus);
             }
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -25,6 +25,8 @@ public interface UsuarioService {
 
     public Usuario getUsuario(int idusuario);
     
+    public Usuario getUsuario(String apodo, String contra, Integer estatus);
+    
     public Usuario deleteUsuario(int idusuario);
     
     public Usuario updateUsuario(Usuario usuario);
