@@ -25,7 +25,7 @@ public class UsuarioBean implements Serializable {
     private String contra;
     private Integer estatus;
     private Boolean acceso = false;
-    private Boolean admin = false;
+    private String rol;
     @Inject
     private ListasBean listaUsuariosBean;
     @Inject
@@ -81,12 +81,12 @@ public class UsuarioBean implements Serializable {
         this.acceso = acceso;
     }
 
-    public Boolean getAdmin() {
-        return admin;
+    public String getRol() {
+        return rol;
     }
 
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 
     public String login() {
@@ -96,13 +96,26 @@ public class UsuarioBean implements Serializable {
                 if (usuario.getEstatus() == 10) {
                     for (Rol rol : usuario.getRoles()) {
                         if (rol.getNombre().equals("Administrador")) {
-                            admin = true;
+                            this.rol = rol.getNombre();
+                            acceso = true;
+                            messageBean.setMensajeRespuesta("");
+                            System.out.println(this);
+                            return "/usuario/lista";
+                        } else if (rol.getNombre().equals("Empleado")) {
+                            this.rol = rol.getNombre();
+                            acceso = true;
+                            messageBean.setMensajeRespuesta("");
+                            System.out.println(this);
+                            return "/empleado/empleado";
+                        } else if (rol.getNombre().equals("Cliente")) {
+                            this.rol = rol.getNombre();
+                            acceso = true;
+                            messageBean.setMensajeRespuesta("");
+                            System.out.println(this);
+                            return "/cliente/cliente";
                         }
                     }
-                    acceso = true;
-                    messageBean.setMensajeRespuesta("");
-                    System.out.println(this);
-                    return "index";
+
                 } else {
                     messageBean.setMensajeRespuesta("El usuario no tiene acceso al sistema");
                     System.out.println(this);
@@ -121,7 +134,7 @@ public class UsuarioBean implements Serializable {
             apodo = null;
             contra = null;
             acceso = false;
-            admin = false;
+            rol = null;
             ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
             String url = ec.getRequestContextPath() + "/index.xhtml?faces-redirect=true";
             ec.redirect(url);

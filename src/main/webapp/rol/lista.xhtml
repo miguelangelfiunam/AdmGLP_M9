@@ -29,7 +29,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
-                <h:panelGroup rendered="#{usuarioBean.admin == true}">
+                <h:panelGroup rendered="#{usuarioBean.rol == 'Administrador'}">
                     <h2 class="text-center">Lista de roles</h2>
                     <hr></hr>
                     <div class="container">

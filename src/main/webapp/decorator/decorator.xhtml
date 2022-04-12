@@ -32,22 +32,22 @@
                         </li>
                         <li class="nav-item">
                             <h:form>
-                                <h:commandLink id="admin_decorator" value="Administrador" action="/admin/admin.xhtml?faces-redirect=true" class="nav-link" rendered="#{usuarioBean.acceso == true}"/>
+                                <h:commandLink id="admin_decorator" value="Administrador" action="/admin/admin.xhtml?faces-redirect=true" class="nav-link" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Administrador')}"/>
                             </h:form>
                         </li>
                         <li class="nav-item">
                             <h:form>
-                                <h:commandLink id="cliente_decorator" value="Cliente" action="/cliente/cliente.xhtml?faces-redirect=true" class="nav-link" rendered="#{usuarioBean.acceso == true}"/>
+                                <h:commandLink id="cliente_decorator" value="Cliente" action="/cliente/cliente.xhtml?faces-redirect=true" class="nav-link" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Administrador' or usuarioBean.rol == 'Cliente')}"/>
                             </h:form>
                         </li>
                         <li class="nav-item">
                             <h:form>
-                                <h:commandLink id="empleado_decorator" value="Empleado" action="/empleado/empleado.xhtml?faces-redirect=true" class="nav-link" rendered="#{usuarioBean.acceso == true}"/>
+                                <h:commandLink id="empleado_decorator" value="Empleado" action="/empleado/empleado.xhtml?faces-redirect=true" class="nav-link" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Administrador' or usuarioBean.rol == 'Empleado')}"/>
                             </h:form>
                         </li>
                         <li class="nav-item">
                             <h:form>
-                                <h:outputText value="Bienvenido, #{usuarioBean.apodo}" rendered="#{usuarioBean.acceso == true}" class="nav-link"/>
+                                <h:outputText value="Bienvenido, #{usuarioBean.apodo}" rendered="#{(usuarioBean.acceso == true)}" class="nav-link"/>
                             </h:form>
                         </li>
                     </ul>

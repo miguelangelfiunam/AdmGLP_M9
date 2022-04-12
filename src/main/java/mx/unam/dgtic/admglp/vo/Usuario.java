@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
@@ -87,6 +88,9 @@ public class Usuario {
     
     @OneToOne(mappedBy="usuario", cascade = CascadeType.ALL)
     private Cliente cliente;
+    
+    @OneToMany(mappedBy = "usuario")
+    private List<Acceso> accesos;
 
     public Usuario() {
     }
@@ -208,6 +212,10 @@ public class Usuario {
         return roles;
     }
 
+    public List<Acceso> getAccesos() {
+        return accesos;
+    }
+
     public void setIdusuario(Integer idusuario) {
         this.idusuario = idusuario;
     }
@@ -270,6 +278,10 @@ public class Usuario {
 
     public void setContra(Contra contra) {
         this.contra = contra;
+    }
+
+    public void setAccesos(List<Acceso> accesos) {
+        this.accesos = accesos;
     }
 
     @Override
