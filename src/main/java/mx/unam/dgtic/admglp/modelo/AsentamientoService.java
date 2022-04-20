@@ -8,7 +8,7 @@ import java.util.List;
 import mx.unam.dgtic.admglp.vo.Asentamiento;
 
 /**
- * Servicio para consulta de usuarios
+ * Servicio para consulta de asentamientos
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
@@ -23,12 +23,12 @@ public interface AsentamientoService {
     
     public List<Asentamiento> getAsentamientos(Integer estatus);
 
-    public Asentamiento getAsentamiento(int idusuario);
+    public Asentamiento getAsentamiento(int idasentamiento);
     
-    public Asentamiento deleteAsentamiento(int idusuario);
+    public Asentamiento deleteAsentamiento(int idasentamiento);
     
-    public Asentamiento updateAsentamiento(Asentamiento usuario);
+    public Asentamiento updateAsentamiento(Asentamiento asentamiento);
     
-    public Asentamiento insertAsentamiento(Asentamiento usuario);
+    public Asentamiento insertAsentamiento(Asentamiento asentamiento);
     
 }

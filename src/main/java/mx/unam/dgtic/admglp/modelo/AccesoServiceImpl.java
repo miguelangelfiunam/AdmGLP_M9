@@ -126,18 +126,18 @@ public class AccesoServiceImpl implements AccesoService {
                 q.setParameter("fini_1", r_ini_1);
                 q.setParameter("fini_2", r_ini_2);
             } else if (r_ini_1 != null) {
-                q.setParameter("fini_1", estatus);
+                q.setParameter("fini_1", r_ini_1);
             } else if (r_ini_2 != null) {
-                q.setParameter("fini_2", estatus);
+                q.setParameter("fini_2", r_ini_2);
             }
 
             if (r_fin_1 != null && r_fin_2 != null) {
                 q.setParameter("ffin_1", r_fin_1);
                 q.setParameter("ffin_2", r_fin_2);
             } else if (r_fin_1 != null) {
-                q.setParameter("ffin_1", estatus);
+                q.setParameter("ffin_1", r_fin_1);
             } else if (r_fin_2 != null) {
-                q.setParameter("ffin_2", estatus);
+                q.setParameter("ffin_2", r_fin_2);
             }
             accesos = q.getResultList();
         } catch (Exception e) {

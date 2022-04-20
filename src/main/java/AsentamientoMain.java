@@ -34,8 +34,8 @@ public class AsentamientoMain {
             muestraAsentamiento(asentamientoService);
             System.out.println("----------------");
             actualizaAsentamiento(asentamientoService);
-            System.out.println("----------------");
-            borraEInsertaAsentamiento(asentamientoService);
+//            System.out.println("----------------");
+//            borraEInsertaAsentamiento(asentamientoService);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());

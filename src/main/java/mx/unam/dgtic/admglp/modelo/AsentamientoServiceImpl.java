@@ -52,7 +52,7 @@ public class AsentamientoServiceImpl implements AsentamientoService {
     public List<Asentamiento> getAsentamientos(Integer estatus) {
         List<Asentamiento> asentamientos = new ArrayList<>();
         try {
-            TypedQuery<Asentamiento> query = em.createQuery("SELECT u FROM Asentamiento a WHERE a.estatus = :est", Asentamiento.class);
+            TypedQuery<Asentamiento> query = em.createQuery("SELECT a FROM Asentamiento a WHERE a.estatus = :est", Asentamiento.class);
             query.setParameter("est", estatus);
             asentamientos = query.getResultList();
         } catch (Exception e) {
