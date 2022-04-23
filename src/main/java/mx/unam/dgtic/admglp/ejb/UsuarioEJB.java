@@ -18,8 +18,6 @@ import java.util.List;
 public interface UsuarioEJB {
 
     List<Usuario> getUsuarios();
-    
-    List<Rol> getRoles();
 
     List<Usuario> getUsuariosPorEstatus(Integer estatus);
 

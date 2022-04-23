@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.naming.InitialContext;
+import mx.unam.dgtic.admglp.ejb.RolEJBLocal;
 
 import mx.unam.dgtic.admglp.ejb.UsuarioEJBLocal;
 import mx.unam.dgtic.admglp.vo.Rol;
@@ -69,10 +70,10 @@ public class ListasBean implements Serializable {
     @Model
     public List<Rol> cargaRoles() {
         List<Rol> roles = null;
-        UsuarioEJBLocal service = null;
+        RolEJBLocal service = null;
         try {
             InitialContext ctx = new InitialContext();
-            service = (UsuarioEJBLocal) ctx.lookup("java:global/admglp/UsuarioEJBLocal!mx.unam.dgtic.admglp.ejb.UsuarioEJB");
+            service = (RolEJBLocal) ctx.lookup("java:global/admglp/RolEJBLocal!mx.unam.dgtic.admglp.ejb.RolEJB");
             if (service != null) {
                 roles = service.getRoles();
             } else {

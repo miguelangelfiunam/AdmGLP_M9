@@ -121,17 +121,4 @@ public class UsuarioEJBLocal implements UsuarioEJB {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Rol> getRoles() {
-        List<Rol> roles = new ArrayList<>();
-        try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
-            rs = new RolServiceImpl(em);
-            roles = rs.getRoles();
-        } catch (Exception e) {
-        }
-        return roles;
-    }
-
 }
