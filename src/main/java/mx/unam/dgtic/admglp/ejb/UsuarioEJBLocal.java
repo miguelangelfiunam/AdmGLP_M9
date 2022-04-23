@@ -33,7 +33,7 @@ public class UsuarioEJBLocal implements UsuarioEJB {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             us = new UsuarioServiceImpl(em);
-            usuarios = us.getUsuariosActivos();
+            usuarios = us.getUsuarios();
         } catch (Exception e) {
             String mensaje = "";
             mensaje += "<p>Error en UsuarioService: " + e.getMessage() + "</p>";
@@ -128,7 +128,7 @@ public class UsuarioEJBLocal implements UsuarioEJB {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
             EntityManager em = emf.createEntityManager();
             rs = new RolServiceImpl(em);
-            roles = rs.getRolesActivos();
+            roles = rs.getRoles();
         } catch (Exception e) {
         }
         return roles;

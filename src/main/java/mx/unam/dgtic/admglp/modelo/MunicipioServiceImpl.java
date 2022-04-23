@@ -35,7 +35,7 @@ public class MunicipioServiceImpl implements MunicipioService{
     }
 
     @Override
-    public List<Municipio> getMunicipiosActivos() {
+    public List<Municipio> getMunicipios() {
         List<Municipio> municipios = new ArrayList<>();
         try {
             TypedQuery<Municipio> query = em.createQuery("SELECT m FROM Municipio m WHERE m.estatus = :est", Municipio.class);

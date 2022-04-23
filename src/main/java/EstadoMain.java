@@ -43,7 +43,7 @@ public class EstadoMain {
     }
 
     public static void muestraEstados(EstadoService estadoService) {
-        List<Estado> result = estadoService.getEstadosActivos();
+        List<Estado> result = estadoService.getEstados();
         for (Estado estado : result) {
             System.out.println(estado);
         }

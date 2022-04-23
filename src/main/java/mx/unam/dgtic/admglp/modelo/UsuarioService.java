@@ -19,7 +19,7 @@ public interface UsuarioService {
 
     public Exception getError();
 
-    public List<Usuario> getUsuariosActivos();
+    public List<Usuario> getUsuarios();
     
     public List<Usuario> getUsuarios(Integer estatus);
 

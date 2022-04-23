@@ -43,7 +43,7 @@ public class RolMain {
     }
 
     public static void muestraRoles(RolService rolService) {
-        List<Rol> result = rolService.getRolesActivos();
+        List<Rol> result = rolService.getRoles();
         for (Rol rol : result) {
             System.out.println(rol);
         }

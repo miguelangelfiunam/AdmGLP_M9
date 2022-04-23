@@ -19,7 +19,7 @@ public interface AsentamientoService {
 
     public Exception getError();
 
-    public List<Asentamiento> getAsentamientosActivos();
+    public List<Asentamiento> getAsentamientos();
     
     public List<Asentamiento> getAsentamientos(Integer estatus);
 

@@ -19,7 +19,7 @@ public interface EmpleadoService {
 
     public Exception getError();
 
-    public List<Empleado> getEmpleadosActivos();
+    public List<Empleado> getEmpleados();
     
     public List<Empleado> getEmpleados(Integer estatus);
 

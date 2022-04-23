@@ -43,7 +43,7 @@ public class EmpleadoMain {
     }
 
     public static void muestraEmpleados(EmpleadoService empleadoService) {
-        List<Empleado> result = empleadoService.getEmpleadosActivos();
+        List<Empleado> result = empleadoService.getEmpleados();
         for (Empleado empleado : result) {
             System.out.println(empleado);
         }

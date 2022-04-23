@@ -43,7 +43,7 @@ public class MunicipioMain {
     }
 
     public static void muestraMunicipios(MunicipioService municipioService) {
-        List<Municipio> result = municipioService.getMunicipiosActivos();
+        List<Municipio> result = municipioService.getMunicipios();
         for (Municipio municipio : result) {
             System.out.println(municipio);
         }

@@ -43,7 +43,7 @@ public class AsentamientoMain {
     }
 
     public static void muestraAsentamientos(AsentamientoService asentamientoService) {
-        List<Asentamiento> result = asentamientoService.getAsentamientosActivos();
+        List<Asentamiento> result = asentamientoService.getAsentamientos();
         for (Asentamiento asentamiento : result) {
             System.out.println(asentamiento);
         }

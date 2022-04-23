@@ -19,7 +19,7 @@ public interface RolService {
 
     public Exception getError();
 
-    public List<Rol> getRolesActivos();
+    public List<Rol> getRoles();
     
     public List<Rol> getRoles(Integer estatus);
 

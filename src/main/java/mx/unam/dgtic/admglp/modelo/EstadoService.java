@@ -19,7 +19,7 @@ public interface EstadoService {
 
     public Exception getError();
 
-    public List<Estado> getEstadosActivos();
+    public List<Estado> getEstados();
     
     public List<Estado> getEstados(Integer estatus);
 

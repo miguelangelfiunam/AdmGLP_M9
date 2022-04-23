@@ -19,7 +19,7 @@ public interface MunicipioService {
 
     public Exception getError();
 
-    public List<Municipio> getMunicipiosActivos();
+    public List<Municipio> getMunicipios();
     
     public List<Municipio> getMunicipios(Integer estatus);
 

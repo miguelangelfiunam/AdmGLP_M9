@@ -19,7 +19,7 @@ public interface ClienteService {
 
     public Exception getError();
 
-    public List<Cliente> getClientesActivos();
+    public List<Cliente> getClientes();
     
     public List<Cliente> getClientes(Integer estatus);
 

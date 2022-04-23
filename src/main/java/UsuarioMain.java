@@ -49,7 +49,7 @@ public class UsuarioMain {
     }
 
     public static void muestraUsuarios(UsuarioService usuarioService) {
-        List<Usuario> result = usuarioService.getUsuariosActivos();
+        List<Usuario> result = usuarioService.getUsuarios();
         for (Usuario usuario : result) {
             System.out.println(usuario);
             for (Rol rol : usuario.getRoles()) {

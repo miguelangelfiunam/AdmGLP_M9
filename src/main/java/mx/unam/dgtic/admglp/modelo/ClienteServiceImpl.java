@@ -35,11 +35,10 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public List<Cliente> getClientesActivos() {
+    public List<Cliente> getClientes() {
         List<Cliente> clientes = new ArrayList<>();
         try {
-            TypedQuery<Cliente> query = em.createQuery("SELECT c FROM Cliente c WHERE c.estatus = :est", Cliente.class);
-            query.setParameter("est", 10);
+            TypedQuery<Cliente> query = em.createQuery("SELECT c FROM Cliente c", Cliente.class);
             clientes = query.getResultList();
         } catch (Exception e) {
             this.error = e;

@@ -44,7 +44,7 @@ public class ClienteMain {
     }
 
     public static void muestraClientes(ClienteService clienteService) {
-        List<Cliente> result = clienteService.getClientesActivos();
+        List<Cliente> result = clienteService.getClientes();
         for (Cliente cliente : result) {
             System.out.println(cliente);
             for (Direccion direccion : cliente.getDirecciones()) {

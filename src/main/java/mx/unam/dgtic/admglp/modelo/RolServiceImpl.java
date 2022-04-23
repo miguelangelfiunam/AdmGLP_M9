@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import mx.unam.dgtic.admglp.vo.Rol;
-import mx.unam.dgtic.admglp.vo.Rol;
 
 /**
  * Servicio para consulta de rols
@@ -36,11 +35,10 @@ public class RolServiceImpl implements RolService {
     }
 
     @Override
-    public List<Rol> getRolesActivos() {
+    public List<Rol> getRoles() {
         List<Rol> roles = new ArrayList<>();
         try {
-            TypedQuery<Rol> query = em.createQuery("SELECT r FROM Rol r WHERE r.estatus = :est", Rol.class);
-            query.setParameter("est", 10);
+            TypedQuery<Rol> query = em.createQuery("SELECT r FROM Rol r", Rol.class);
             roles = query.getResultList();
         } catch (Exception e) {
             this.error = e;

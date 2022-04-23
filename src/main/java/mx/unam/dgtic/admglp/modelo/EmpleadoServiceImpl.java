@@ -35,11 +35,10 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     }
 
     @Override
-    public List<Empleado> getEmpleadosActivos() {
+    public List<Empleado> getEmpleados() {
         List<Empleado> empleados = new ArrayList<>();
         try {
-            TypedQuery<Empleado> query = em.createQuery("SELECT u FROM Empleado u WHERE u.estatus = :est", Empleado.class);
-            query.setParameter("est", 10);
+            TypedQuery<Empleado> query = em.createQuery("SELECT e FROM Empleado e", Empleado.class);
             empleados = query.getResultList();
         } catch (Exception e) {
             this.error = e;

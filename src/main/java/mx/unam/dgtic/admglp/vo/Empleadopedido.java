@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.Date;
@@ -27,11 +28,11 @@ public class Empleadopedido {
     @Column(name = "id_empleado_pedido")
     private Integer id; // Identificador de empleado relacionado al pedido
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")
     private Empleado empleado;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_pedido", referencedColumnName = "id_pedido")
     private Pedido pedido;
 

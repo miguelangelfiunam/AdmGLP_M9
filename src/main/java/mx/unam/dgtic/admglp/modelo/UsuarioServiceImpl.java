@@ -35,11 +35,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public List<Usuario> getUsuariosActivos() {
+    public List<Usuario> getUsuarios() {
         List<Usuario> usuarios = new ArrayList<>();
         try {
-            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u WHERE u.estatus = :est", Usuario.class);
-            query.setParameter("est", 10);
+            TypedQuery<Usuario> query = em.createQuery("SELECT u FROM Usuario u", Usuario.class);
             usuarios = query.getResultList();
         } catch (Exception e) {
             this.error = e;

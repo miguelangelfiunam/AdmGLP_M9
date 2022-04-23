@@ -35,11 +35,10 @@ public class EstadoServiceImpl implements EstadoService {
     }
 
     @Override
-    public List<Estado> getEstadosActivos() {
+    public List<Estado> getEstados() {
         List<Estado> estados = new ArrayList<>();
         try {
-            TypedQuery<Estado> query = em.createQuery("SELECT u FROM Estado u WHERE u.estatus = :est", Estado.class);
-            query.setParameter("est", 10);
+            TypedQuery<Estado> query = em.createQuery("SELECT e FROM Estado e", Estado.class);
             estados = query.getResultList();
         } catch (Exception e) {
             this.error = e;

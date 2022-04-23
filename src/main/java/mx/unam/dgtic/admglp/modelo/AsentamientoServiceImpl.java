@@ -35,11 +35,10 @@ public class AsentamientoServiceImpl implements AsentamientoService {
     }
 
     @Override
-    public List<Asentamiento> getAsentamientosActivos() {
+    public List<Asentamiento> getAsentamientos() {
         List<Asentamiento> asentamientos = new ArrayList<>();
         try {
-            TypedQuery<Asentamiento> query = em.createQuery("SELECT a FROM Asentamiento a WHERE a.estatus = :est", Asentamiento.class);
-            query.setParameter("est", 10);
+            TypedQuery<Asentamiento> query = em.createQuery("SELECT a FROM Asentamiento a", Asentamiento.class);
             asentamientos = query.getResultList();
         } catch (Exception e) {
             this.error = e;
