@@ -5,7 +5,6 @@
 package mx.unam.dgtic.admglp.ejb;
 
 import jakarta.ejb.Local;
-import mx.unam.dgtic.admglp.vo.Rol;
 import mx.unam.dgtic.admglp.vo.Usuario;
 
 import java.util.List;
@@ -30,6 +29,8 @@ public interface UsuarioEJB {
     Integer insertaUsuario(Usuario usuarioModel);
     
     void actualizaUsuario(Usuario usuarioModel);
+    
+    void actualizaEstatusUsuario(Integer id, Integer estatus);
     
     void eliminaUsuario(Integer id);
 }

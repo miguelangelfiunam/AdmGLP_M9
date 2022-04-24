@@ -38,16 +38,21 @@ public class Acceso {
     private Date fecfin; // Fecha fin de acceso a la aplicacion
 
     @Column(name = "acceso_descripcion")
-    private String telefono2; // Descripcion del inicio de sesion caso correcto o no
-
-    @Column(name = "acceso_dt_fecha_registro")
-    private Date fecreg; // Fecha de registro en la base
-
-    @Column(name = "acceso_dt_fecha_actualizacion")
-    private Date fecact; // Fecha de actualizacion en la base
+    private String descripcion; // Descripcion del inicio de sesion caso correcto o no
 
     @Column(name = "acceso_si_estatus")
     private Integer estatus; // Estado del acceso
+
+    public Acceso() {
+    }
+
+    public Acceso(Usuario usuario, Date fecinicio, Date fecfin, String descripcion, Date fecreg, Date fecact, Integer estatus) {
+        this.usuario = usuario;
+        this.fecinicio = fecinicio;
+        this.fecfin = fecfin;
+        this.descripcion = descripcion;
+        this.estatus = estatus;
+    }
 
     public Integer getId() {
         return id;
@@ -65,16 +70,8 @@ public class Acceso {
         return fecfin;
     }
 
-    public String getTelefono2() {
-        return telefono2;
-    }
-
-    public Date getFecreg() {
-        return fecreg;
-    }
-
-    public Date getFecact() {
-        return fecact;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     public Integer getEstatus() {
@@ -97,16 +94,8 @@ public class Acceso {
         this.fecfin = fecfin;
     }
 
-    public void setTelefono2(String telefono2) {
-        this.telefono2 = telefono2;
-    }
-
-    public void setFecreg(Date fecreg) {
-        this.fecreg = fecreg;
-    }
-
-    public void setFecact(Date fecact) {
-        this.fecact = fecact;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public void setEstatus(Integer estatus) {
@@ -115,6 +104,6 @@ public class Acceso {
 
     @Override
     public String toString() {
-        return "Acceso{" + "id=" + id + ", usuario=" + usuario + ", fecinicio=" + fecinicio + ", fecfin=" + fecfin + ", telefono2=" + telefono2 + ", fecreg=" + fecreg + ", fecact=" + fecact + ", estatus=" + estatus + '}';
+        return "Acceso{" + "id=" + id + ", usuario=" + usuario + ", fecinicio=" + fecinicio + ", fecfin=" + fecfin + ", descripcion=" + descripcion + ", estatus=" + estatus + '}';
     }
 }

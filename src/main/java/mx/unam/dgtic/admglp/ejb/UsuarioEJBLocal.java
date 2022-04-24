@@ -11,9 +11,7 @@ import jakarta.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
-import mx.unam.dgtic.admglp.modelo.RolServiceImpl;
 import mx.unam.dgtic.admglp.modelo.UsuarioServiceImpl;
-import mx.unam.dgtic.admglp.vo.Rol;
 import mx.unam.dgtic.admglp.vo.Usuario;
 
 /**
@@ -24,7 +22,6 @@ import mx.unam.dgtic.admglp.vo.Usuario;
 public class UsuarioEJBLocal implements UsuarioEJB {
 
     UsuarioServiceImpl us;
-    RolServiceImpl rs;
 
     @Override
     public List<Usuario> getUsuarios() {
@@ -107,18 +104,44 @@ public class UsuarioEJBLocal implements UsuarioEJB {
     }
 
     @Override
-    public Integer insertaUsuario(Usuario usuarioModel) {
+    public Integer insertaUsuario(Usuario usuario) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void actualizaUsuario(Usuario usuarioModel) {
+    public void actualizaUsuario(Usuario usuario) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void eliminaUsuario(Integer id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void actualizaEstatusUsuario(Integer id, Integer estatus) {
+        Usuario usuario = null;
+        try {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
+            EntityManager em = emf.createEntityManager();
+            us = new UsuarioServiceImpl(em);
+            usuario = us.getUsuario(id);
+            if(usuario != null){
+                usuario.setEstatus(estatus);
+                us.updateUsuario(usuario);
+            }
+        } catch (Exception e) {
+            String mensaje = "";
+            mensaje += "<p>Error en UsuarioServiceImpl: " + e.getMessage() + "</p>";
+
+            if (us.getError() != null) {
+                mensaje += "<p>" + "Error en UsuarioEJBLocal -> getUsuario() -> UsuarioService -> getUsuario() " + us.getError().getMessage() + "</p>";
+            }
+            try {
+                Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");
+            } catch (Exception eCorreo) {
+            }
+        }
     }
 
 }

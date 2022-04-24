@@ -11,7 +11,6 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.ParameterExpression;
-import jakarta.persistence.criteria.Path;
 import jakarta.persistence.criteria.Root;
 import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
@@ -171,7 +170,6 @@ public class AccesoServiceImpl implements AccesoService {
     @Override
     public Acceso updateAcceso(Acceso acceso) {
         em.getTransaction().begin();
-        acceso.setFecact(new Date());
         em.persist(acceso);
         em.getTransaction().commit();
         return acceso;

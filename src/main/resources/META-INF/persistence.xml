@@ -31,7 +31,7 @@
         </properties>
     </persistence-unit>
 
-    <persistence-unit name="admglpdocs">
+<!--    <persistence-unit name="admglpdocs">
         <properties>
             <property name="jakarta.persistence.jdbc.driver"
                       value="com.mysql.cj.jdbc.Driver" />
@@ -41,5 +41,5 @@
             <property name="jakarta.persistence.jdbc.password"
                       value="java" />
         </properties>
-    </persistence-unit>
+    </persistence-unit>-->
 </persistence>

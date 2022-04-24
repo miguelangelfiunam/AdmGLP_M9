@@ -6,7 +6,9 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
+import java.util.Date;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
+import mx.unam.dgtic.admglp.vo.Acceso;
 import mx.unam.dgtic.admglp.vo.Rol;
 import mx.unam.dgtic.admglp.vo.Usuario;
 
@@ -25,9 +27,12 @@ public class UsuarioBean implements Serializable {
     private String contra;
     private Integer estatus;
     private Boolean acceso = false;
+    private Integer idacceso;
     private String rol;
     @Inject
     private ListasBean listaUsuariosBean;
+    @Inject
+    private AccesoBean accesoBean;
     @Inject
     private MessageBean messageBean;
 
@@ -89,35 +94,59 @@ public class UsuarioBean implements Serializable {
         this.rol = rol;
     }
 
+    public Integer getIdacceso() {
+        return idacceso;
+    }
+
+    public void setIdacceso(Integer idacceso) {
+        this.idacceso = idacceso;
+    }
+
     public String login() {
         Usuario usuario = listaUsuariosBean.cargaUsuario(apodo, contra, 10);
         if (usuario != null) {
             if (usuario.getApodo().equals(apodo) && usuario.getContra().getContra().equals(contra)) {
                 if (usuario.getEstatus() == 10) {
-                    for (Rol rol : usuario.getRoles()) {
-                        if (rol.getNombre().equals("Administrador")) {
-                            this.rol = rol.getNombre();
-                            acceso = true;
-                            messageBean.setMensajeRespuesta("");
-                            System.out.println(this);
-                            return "/usuario/lista";
-                        } else if (rol.getNombre().equals("Empleado")) {
-                            this.rol = rol.getNombre();
-                            acceso = true;
-                            messageBean.setMensajeRespuesta("");
-                            System.out.println(this);
-                            return "/empleado/empleado";
-                        } else if (rol.getNombre().equals("Cliente")) {
-                            this.rol = rol.getNombre();
-                            acceso = true;
-                            messageBean.setMensajeRespuesta("");
-                            System.out.println(this);
-                            return "/cliente/cliente";
-                        }
+                    //Registro de acceso
+                    Acceso accesoBD = new Acceso(usuario, new Date(), null, "Inicio de sesion", new Date(), null, 10);
+                    accesoBD = accesoBean.insertaAcceso(accesoBD);
+                    if (accesoBD.getId() != null) {
+                        idacceso = accesoBD.getId();
                     }
 
+                    for (Rol rolBD : usuario.getRoles()) {
+                        switch (rolBD.getNombre()) {
+                            case "Administrador":
+                                this.rol = rolBD.getNombre();
+                                id = usuario.getIdusuario();
+                                acceso = true;
+                                messageBean.setMensajeRespuesta("");
+                                System.out.println(this);
+                                return "/usuario/lista";
+                            case "Empleado":
+                                this.rol = rolBD.getNombre();
+                                id = usuario.getIdusuario();
+                                acceso = true;
+                                messageBean.setMensajeRespuesta("");
+                                System.out.println(this);
+                                return "/empleado/empleado";
+                            case "Cliente":
+                                this.rol = rolBD.getNombre();
+                                id = usuario.getIdusuario();
+                                acceso = true;
+                                messageBean.setMensajeRespuesta("");
+                                System.out.println(this);
+                                return "/cliente/cliente";
+                            default:
+                                break;
+                        }
+                    }
                 } else {
-                    messageBean.setMensajeRespuesta("El usuario no tiene acceso al sistema");
+                    //Registro de acceso fallido
+                    Acceso accesoBD = new Acceso(usuario, new Date(), null, "Estatus del trabajador diferente de 10", new Date(), null, 20);
+                    accesoBean.insertaAcceso(accesoBD);
+
+                    messageBean.setMensajeRespuesta("El usuario no tiene acceso al sistema estatus inactivo");
                     System.out.println(this);
                     return "login";
                 }
@@ -131,17 +160,21 @@ public class UsuarioBean implements Serializable {
 
     public void logout() {
         try {
+            id = null;
             apodo = null;
             contra = null;
             acceso = false;
+            if(idacceso != null){
+                accesoBean.finalizaAcceso(idacceso);
+            }
+            idacceso = null;
             rol = null;
             ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
             String url = ec.getRequestContextPath() + "/index.xhtml?faces-redirect=true";
+            
             ec.redirect(url);
         } catch (Exception e) {
         }
-
-//        return url;
     }
 
     @Override

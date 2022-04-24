@@ -6,6 +6,8 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import javax.naming.InitialContext;
+import mx.unam.dgtic.admglp.ejb.UsuarioEJBLocal;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
 import mx.unam.dgtic.admglp.vo.Usuario;
 
@@ -145,16 +147,16 @@ public class UsuarioFormBean implements Serializable {
         return "/usuario/usuarioForm?faces-redirect=true";
     }
 
-    public String borraUsuario(Integer id) {
-        Usuario usuarioModel_aux = null;
-        for (Usuario usuarioModel : listaUsuariosBean.cargaUsuarios()) {
-            if (usuarioModel.getIdusuario() == id) {
-                usuarioModel_aux = usuarioModel;
-                break;
+    public String actualizaEstatusUsuario(Integer id, Integer estatus) {
+        UsuarioEJBLocal service = null;
+        try {
+            InitialContext ctx = new InitialContext();
+            service = (UsuarioEJBLocal) ctx.lookup("java:global/admglp/UsuarioEJBLocal!mx.unam.dgtic.admglp.ejb.UsuarioEJB");
+            if (service != null) {
+                service.actualizaEstatusUsuario(id, estatus);
             }
-        }
-        if (usuarioModel_aux != null) {
-            listaUsuariosBean.cargaUsuarios().remove(usuarioModel_aux);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return "/usuario/lista?faces-redirect=true";
     }
