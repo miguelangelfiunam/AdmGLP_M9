@@ -8,8 +8,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
+    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css" rel="stylesheet"/>-->
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>-->
+    <h:outputStylesheet name="css/bootstrap-datepicker.css" />
+    <h:outputStylesheet name="css/bootstrap.min.css" />
     <h:head>
         <title><h:outputText value="Formulario del usuario"/></title>
+
+        <!--<h:outputScript library="js" name="formatDatePicker.js" />-->
     </h:head>
     <h:body>
         <ui:decorate template="/decorator/decorator.xhtml">
@@ -17,86 +23,103 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 <h:panelGroup rendered="#{usuarioBean.acceso == true}">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-6 offset-md-3">
+                            <div class="col-md-12">
                                 <div>
                                     <h:form>
                                         <div class="mb-3">
                                             <h:inputHidden value="#{usuarioFormBean.idusuario}"/>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="contra" class="form-label">Contraseña: </label>
-                                            <h:inputSecret id="contra" title="Contraseña: "
-                                                           value="#{usuarioFormBean.contra}" required="true"
-                                                           requiredMessage="Error: la contraseña es obligatoria." maxlength="500" class="form-control"/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="apodo" class="form-label">Apodo: </label>
-                                            <h:inputText id="apodo" title="Apodo: "
-                                                         value="#{usuarioFormBean.apodo}" required="true"
-                                                         requiredMessage="Error: El apodo es obligatorio." maxlength="40" class="form-control"/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="correo1" class="form-label">Correo: </label>
-                                            <h:inputText id="correo1" title="Correo: "
-                                                         validatorMessage="Email incorrecto"
-                                                         value="#{usuarioFormBean.correo1}" required="true"
-                                                         requiredMessage="Error: El correo es obligatorio." maxlength="80" class="form-control">
-                                                <f:validateRegex
-                                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                                            </h:inputText>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="correo2" class="form-label">Correo: </label>
-                                            <h:inputText id="correo2" title="Correo 2: "
-                                                         value="#{usuarioFormBean.correo2}" maxlength="80" class="form-control"/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="nombre" class="form-label">Nombre:</label>
-                                            <h:inputText id="nombre" title="Nombre: "
-                                                         value="#{usuarioFormBean.nombre}" required="true"
-                                                         requiredMessage="Error: El nombre es obligatorio." maxlength="50" class="form-control"/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="apellido1" class="form-label">Primer apellido:</label>  
-                                            <h:inputText id="apellido1" title="Primer Apellido: "
-                                                         value="#{usuarioFormBean.apellido1}" required="true"
-                                                         requiredMessage="Error: El primer apellido es obligatorio." maxlength="50" class="form-control"/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="apellido2" class="form-label">Segundo apellido:</label>
-                                            <h:inputText id="apellido2" title="Segundo apellido: "
-                                                         value="#{usuarioFormBean.apellido2}" required="true"
-                                                         requiredMessage="Error: El segundo apellido es obligatorio." maxlength="50" class="form-control"/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="edad" class="form-label">Edad:</label>
-                                            <h:inputText id="edad" title="Edad: " converterMessage="Solo se aceptan digitos 0-9"
-                                                         value="#{usuarioFormBean.edad}" required="true"
-                                                         requiredMessage="Error: La edad es obligatoria." maxlength="50" class="form-control"/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="fnac" class="form-label">Fecha de nacimiento:</label>
-                                            <h:inputText id="fnac" title="Fecha de nacimiento: "
-                                                         value="#{usuarioFormBean.fnac}" required="true"
-                                                         requiredMessage="Error: La fecha de nacimiento es obligatoria." class="form-control datepicker"/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="telefono1" class="form-label">Telefono:</label>
-                                            <h:inputText id="telefono1" title="Telefono: " converterMessage="Solo se aceptan digitos 0-9"
-                                                         value="#{usuarioFormBean.telefono1}" required="true"
-                                                         requiredMessage="Error: El telefono es obligatorio." maxlength="10" class="form-control"/>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="telefono2" class="form-label">Telefono:</label>
-                                            <h:inputText id="telefono2" title="Telefono: " converterMessage="Solo se aceptan digitos 0-9"
-                                                         value="#{usuarioFormBean.telefono2}" maxlength="10" class="form-control"/>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="apodo" class="form-label">Apodo: </label>
+                                                <h:inputText id="apodo" title="Apodo: "
+                                                             value="#{usuarioFormBean.apodo}" required="true"
+                                                             requiredMessage="Error: El apodo es obligatorio." maxlength="40" class="form-control"/>
+                                            </div>
+                                            <div class="col">
+                                                <label for="contra" class="form-label">Contraseña: </label>
+                                                <h:inputSecret id="contra" title="Contraseña: "
+                                                               value="#{usuarioFormBean.contra}" required="true"
+                                                               requiredMessage="Error: la contraseña es obligatoria." maxlength="500" class="form-control" redisplay="true"/>
+                                            </div>
 
                                         </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="correo1" class="form-label">Correo: </label>
+                                                <h:inputText id="correo1" title="Correo: "
+                                                             validatorMessage="Email incorrecto"
+                                                             value="#{usuarioFormBean.correo1}" required="true"
+                                                             requiredMessage="Error: El correo es obligatorio." maxlength="80" class="form-control">
+                                                    <f:validateRegex
+                                                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                                </h:inputText>
+                                            </div>
+                                            <div class="col">
+                                                <label for="correo2" class="form-label">Correo: </label>
+                                                <h:inputText id="correo2" title="Correo 2: "
+                                                             value="#{usuarioFormBean.correo2}" maxlength="80" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="nombre" class="form-label">Nombre:</label>
+                                                <h:inputText id="nombre" title="Nombre: "
+                                                             value="#{usuarioFormBean.nombre}" required="true"
+                                                             requiredMessage="Error: El nombre es obligatorio." maxlength="50" class="form-control"/>
+                                            </div>
+                                            <div class="col">
+                                                <label for="apellido1" class="form-label">Primer apellido:</label>  
+                                                <h:inputText id="apellido1" title="Primer Apellido: "
+                                                             value="#{usuarioFormBean.apellido1}" required="true"
+                                                             requiredMessage="Error: El primer apellido es obligatorio." maxlength="50" class="form-control"/>
+                                            </div>
+                                            <div class="col">
+                                                <label for="apellido2" class="form-label">Segundo apellido:</label>
+                                                <h:inputText id="apellido2" title="Segundo apellido: "
+                                                             value="#{usuarioFormBean.apellido2}" required="true"
+                                                             requiredMessage="Error: El segundo apellido es obligatorio." maxlength="50" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="edad" class="form-label">Edad:</label>
+                                                <h:inputText id="edad" title="Edad: " converterMessage="Solo se aceptan digitos 0-9"
+                                                             value="#{usuarioFormBean.edad}" required="true"
+                                                             requiredMessage="Error: La edad es obligatoria." maxlength="50" class="form-control"/>
+                                            </div>
+                                            <div class="col">
+                                                <label for="fnac" class="form-label">Fecha de nacimiento:</label>
+                                                <h:inputText id="fnac" title="Fecha de nacimiento: "
+                                                             value="#{usuarioFormBean.fnac}" required="true"
+                                                             requiredMessage="Error: La fecha de nacimiento es obligatoria." styleClass="form-control datepicker"/>
+                                            </div>
+                                            <div class="col">
+                                                <label for="telefono1" class="form-label">Telefono:</label>
+                                                <h:inputText id="telefono1" title="Telefono: " converterMessage="Solo se aceptan digitos 0-9"
+                                                             value="#{usuarioFormBean.telefono1}" required="true"
+                                                             requiredMessage="Error: El telefono es obligatorio." maxlength="10" class="form-control"/>
+                                            </div>
+                                            <div class="col">
+                                                <label for="telefono2" class="form-label">Telefono:</label>
+                                                <h:inputText id="telefono2" title="Telefono: " converterMessage="Solo se aceptan digitos 0-9"
+                                                             value="#{usuarioFormBean.telefono2}" maxlength="10" class="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="roles" class="form-label">Roles:</label>
+                                                <h:selectManyListbox value="#{usuarioFormBean.roles}" class="form-select" id="roles">
+                                                    <f:selectItems value="#{cargaRoles}" var="rol" itemLabel="#{rol.nombre}" itemValue="#{rol.idrol}" />
+                                                </h:selectManyListbox>
+                                            </div>
+                                        </div>
+                                        <br/>
                                         <div class="d-flex justify-content-between">
-                                            <h:commandButton value="Limpiar" action="#{usuarioFormBean.limpiaCampos}" class="btn btn-primary"/>
+                                            <h:commandButton value="Limpiar" action="#{usuarioFormBean.limpiaCampos}" class="btn btn-secondary"/>
 
                                             <h:commandButton value="Enviar"
-                                                             action="#{usuarioFormBean.registrar}" rendered="#{empty usuarioFormBean.idusuario}" class="btn btn-success"/>
+                                                             action="#{usuarioFormBean.insertar}" rendered="#{empty usuarioFormBean.idusuario}" class="btn btn-success"/>
                                             <h:commandButton  value="Actualizar"
                                                               action="#{usuarioFormBean.actualizar}" rendered="#{not empty usuarioFormBean.idusuario}" class="btn btn-primary"/>
                                         </div>
@@ -106,6 +129,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                                     errorStyle="color: red" infoStyle="color: blue" />
                                     </div>
                                     <div>
+                                        <br/>
                                         <h:form>
                                             <h:commandLink value="Regresar" action="/index.html"  class="btn btn-danger"/>
                                         </h:form>
@@ -114,6 +138,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             </div>
                         </div>
                     </div>
+
+                    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>-->
+                    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+                    <h:outputScript name="js/bootstrap-datepicker.js"/>
+                    <h:outputScript name="js/bootstrap.bundle.min.js"/>
+                    <h:outputScript name="js/jquery-3.6.0.min.js"/>
+                    <script>
+                        $('.datepicker').datepicker({
+                            format: "dd/mm/yyyy",
+                            language: "es"
+                        });
+                    </script>
                 </h:panelGroup>
                 <h:panelGroup rendered="#{usuarioBean.acceso == false}">
                     <div class="container">

@@ -34,7 +34,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <div class="container">
                         <div class="d-flex justify-content-end">
                             <h:form>
-                                <h:commandButton type="submit" value="Agregar" action="#{usuarioFormBean.agregaUsuario}" class="btn btn-success"/>
+                                <h:commandButton type="submit" value="Agregar" action="#{usuarioFormBean.formularioUsuario}" class="btn btn-success"/>
                             </h:form>
                         </div>
 
@@ -65,12 +65,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         </td>
                                         <td>
                                             <h:form>
-                                                <h:commandButton type="submit" value="Editar" action="#{usuarioFormBean.actualizaUsuario(usuario.idusuario)}" class="btn btn-primary"/>
+                                                <h:commandButton type="submit" value="Editar" action="#{usuarioFormBean.formularioUsuarioID(usuario.idusuario)}" class="btn btn-primary"/>
                                                 <c:if test="#{usuario.estatus eq 10 and usuarioBean.id ne usuario.idusuario}">
-                                                    <h:commandLink type="button" value="Bloquear" action="#{usuarioFormBean.bloqueaUsuario(usuario.idusuario, 20)}" class="btn btn-danger"/>
+                                                    <h:commandLink type="button" value="Bloquear" action="#{usuarioFormBean.actualizarEstatusUsuario(usuario.idusuario, 20)}" class="btn btn-danger"/>
                                                 </c:if>
                                                 <c:if test="#{usuario.estatus eq 20}">
-                                                    <h:commandLink type="button" value="Activar" action="#{usuarioFormBean.actualizaEstatusUsuario(usuario.idusuario, 10)}" class="btn btn-success"/>
+                                                    <h:commandLink type="button" value="Activar" action="#{usuarioFormBean.actualizarEstatusUsuario(usuario.idusuario, 10)}" class="btn btn-success"/>
                                                 </c:if>
                                             </h:form>
                                         </td>

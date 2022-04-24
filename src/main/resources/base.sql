@@ -6,10 +6,17 @@ CREATE DATABASE IF NOT EXISTS `admglp`;
 USE `admglp`;
  */
 
+CREATE TABLE c_global (
+id_global  int(11) NOT NULL AUTO_INCREMENT ,
+global_vc_nombre  VARCHAR(50) NOT NULL,
+global_vc_valor  VARCHAR(200) NOT NULL,
+PRIMARY KEY (id_global)
+)ENGINE=InnoDB;
+
 CREATE TABLE c_articulo (
 id_articulo INT(11) NOT NULL AUTO_INCREMENT, 
 articulo_vc_nombre VARCHAR(70) NOT NULL, 
-articulo_d_precio_articulo DECIMAL(19, 0) NOT NULL, 
+articulo_d_precio_articulo DECIMAL(19, 2) NOT NULL, 
 articulo_dt_fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
 articulo_dt_fecha_actualizacion DATETIME NULL, 
 articulo_si_estatus SMALLINT(6) NOT NULL, 
@@ -108,11 +115,9 @@ PRIMARY KEY (id_transporte)
 CREATE TABLE t_acceso (
 id_acceso INT(11) NOT NULL AUTO_INCREMENT, 
 id_usuario INT(11) NOT NULL, 
-acceso_dt_fecha_Inicio_acceso DATETIME NULL, 
+acceso_dt_fecha_inicio_acceso DATETIME NULL, 
 acceso_dt_fecha_fin_acceso DATETIME NULL, 
-acceso_descripcion VARCHAR(150) NOT NULL, 
-acceso_dt_fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(), 
-acceso_dt_fecha_actualizacion DATETIME NULL, 
+acceso_descripcion VARCHAR(150) NOT NULL,
 acceso_si_estatus SMALLINT(6) NOT NULL, 
 PRIMARY KEY (id_acceso)
 )ENGINE=INNODB;
@@ -153,7 +158,7 @@ CREATE TABLE t_pedido (
 id_pedido INT(11) NOT NULL AUTO_INCREMENT, 
 id_cliente INT(11) NOT NULL, 
 id_direccion int(11) NOT NULL, 
-pedido_d_total DECIMAL(19, 0) NOT NULL, 
+pedido_d_total DECIMAL(19, 2) NOT NULL, 
 pedido_dt_fecha_pedido DATETIME NOT NULL, 
 pedido_dt_fecha_entrega DATETIME NULL, 
 pedido_i_tipo_pago INT(11), 
@@ -202,8 +207,8 @@ PRIMARY KEY (id_cliente_direccion)
 
 CREATE TABLE tr_empleado_pedido (
 id_empleado_pedido INT(11) NOT NULL AUTO_INCREMENT, 
-idEmpleado INT(11) NOT NULL, 
-iIdPedido INT(11) NOT NULL, 
+id_empleado INT(11) NOT NULL, 
+id_pedido INT(11) NOT NULL, 
 emp_ped_dt_fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP(), 
 emp_ped_dt_fecha_actualizacion DATETIME NULL, 
 emp_ped_si_estatus SMALLINT(6) NOT NULL, 
@@ -215,7 +220,7 @@ id_ped_art INT(11) NOT NULL AUTO_INCREMENT,
 id_pedido INT(11) NOT NULL, 
 id_articulo INT(11) NOT NULL, 
 ped_art_ti_cantidad tinyint NOT NULL, 
-ped_art_d_subtotal decimal(19, 0) NOT NULL,
+ped_art_d_subtotal decimal(19, 2) NOT NULL,
 ped_art_dt_fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP(), 
 ped_art_dt_fecha_actualizacion DATETIME NULL, 
 ped_art_si_estatus SMALLINT(6) NOT NULL, 
@@ -244,7 +249,7 @@ CREATE UNIQUE INDEX c_estatus ON c_estatus (estatus_si_num_estatus, estatus_vc_n
 
 CREATE UNIQUE INDEX tr_cliente_direccion ON tr_cliente_direccion (id_cliente, id_direccion);
 
-CREATE INDEX tr_empleado_pedido ON tr_empleado_pedido (idEmpleado, iIdPedido);
+CREATE INDEX tr_empleado_pedido ON tr_empleado_pedido (id_empleado, id_pedido);
 
 CREATE UNIQUE INDEX tr_pedido_articulo ON tr_pedido_articulo (id_pedido, id_articulo);
 
@@ -277,10 +282,10 @@ ALTER TABLE tr_cliente_direccion ADD CONSTRAINT FKtr_cliente_direccion
 FOREIGN KEY (id_direccion) REFERENCES t_direccion (id_direccion);
 
 ALTER TABLE tr_empleado_pedido ADD CONSTRAINT FKtr_empleado_pedido_empleado 
-FOREIGN KEY (idEmpleado) REFERENCES c_empleado (id_empleado);
+FOREIGN KEY (id_empleado) REFERENCES c_empleado (id_empleado);
 
 ALTER TABLE tr_empleado_pedido ADD CONSTRAINT FKtr_empleado_pedido_pedido 
-FOREIGN KEY (iIdPedido) REFERENCES t_pedido (id_pedido);
+FOREIGN KEY (id_pedido) REFERENCES t_pedido (id_pedido);
 
 ALTER TABLE t_pedido ADD CONSTRAINT FKt_pedido_cliente 
 FOREIGN KEY (id_cliente) REFERENCES c_cliente (id_cliente);

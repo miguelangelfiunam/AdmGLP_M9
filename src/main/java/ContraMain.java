@@ -43,7 +43,7 @@ public class ContraMain {
     }
 
     public static void muestraContras(ContraService contraService) {
-        List<Contra> result = contraService.getContrasActivas();
+        List<Contra> result = contraService.getContras();
         for (Contra contra : result) {
             System.out.println(contra);
         }

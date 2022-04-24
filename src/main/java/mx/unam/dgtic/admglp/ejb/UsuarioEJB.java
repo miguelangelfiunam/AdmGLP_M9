@@ -26,9 +26,9 @@ public interface UsuarioEJB {
     
     Boolean existeUsuario(String apodo, String contra);
     
-    Integer insertaUsuario(Usuario usuarioModel);
+    Usuario insertaUsuario(Usuario usuarioModel);
     
-    void actualizaUsuario(Usuario usuarioModel);
+    Usuario actualizaUsuario(Usuario usuarioModel);
     
     void actualizaEstatusUsuario(Integer id, Integer estatus);
     

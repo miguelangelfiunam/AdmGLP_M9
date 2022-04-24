@@ -19,7 +19,7 @@ public interface ContraService {
 
     public Exception getError();
 
-    public List<Contra> getContrasActivas();
+    public List<Contra> getContras();
     
     public List<Contra> getContras(Integer estatus);
 

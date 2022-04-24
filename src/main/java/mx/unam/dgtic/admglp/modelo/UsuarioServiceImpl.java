@@ -86,7 +86,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario updateUsuario(Usuario usuario) {
         em.getTransaction().begin();
         usuario.setFecact(new Date());
-        em.persist(usuario);
+        em.merge(usuario);
         em.getTransaction().commit();
         return usuario;
     }

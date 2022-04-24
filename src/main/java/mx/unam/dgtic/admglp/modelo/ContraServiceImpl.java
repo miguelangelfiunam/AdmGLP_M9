@@ -35,11 +35,10 @@ public class ContraServiceImpl implements ContraService {
     }
 
     @Override
-    public List<Contra> getContrasActivas() {
+    public List<Contra> getContras() {
         List<Contra> contras = new ArrayList<>();
         try {
-            TypedQuery<Contra> query = em.createQuery("SELECT c FROM Contra c WHERE c.estatus = :est", Contra.class);
-            query.setParameter("est", 10);
+            TypedQuery<Contra> query = em.createQuery("SELECT c FROM Contra c", Contra.class);
             contras = query.getResultList();
         } catch (Exception e) {
             this.error = e;
@@ -87,7 +86,7 @@ public class ContraServiceImpl implements ContraService {
     public Contra updateContra(Contra contra) {
         em.getTransaction().begin();
         contra.setFecact(new Date());
-        em.persist(contra);
+        em.merge(contra);
         em.getTransaction().commit();
         return contra;
     }

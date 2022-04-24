@@ -129,8 +129,7 @@ public class Usuario {
         this.estatus = estatus;
     }
 
-    public Usuario(Integer idusuario, Contra contra, String apodo, String correo1, String correo2, String nombre, String apellido1, String apellido2, Integer edad, Date fnac, String telefono1, String telefono2, Date fecreg, Date fecact, Integer estatus, List<Rol> roles) {
-        this.idusuario = idusuario;
+    public Usuario(Contra contra, String apodo, String correo1, String correo2, String nombre, String apellido1, String apellido2, Integer edad, Date fnac, String telefono1, String telefono2, Date fecreg, Date fecact, Integer estatus, List<Rol> roles) {
         this.contra = contra;
         this.apodo = apodo;
         this.correo1 = correo1;
