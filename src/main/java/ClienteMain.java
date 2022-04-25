@@ -37,6 +37,8 @@ public class ClienteMain {
             actualizaCliente(clienteService);
             System.out.println("----------------");
             borraEInsertaCliente(clienteService);
+            System.out.println("----------------");
+            sigNumCliente(clienteService);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -78,6 +80,12 @@ public class ClienteMain {
         } else {
             System.out.println("No existe el cliente para insertar");
         }
+    }
+    
+    public static void sigNumCliente(ClienteService clienteService) {
+        Integer numCliente = clienteService.getSigCliente();
+        System.out.println("Obtenido");
+        System.out.println(numCliente);
     }
 
 }

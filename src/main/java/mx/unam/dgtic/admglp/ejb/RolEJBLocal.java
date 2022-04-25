@@ -10,6 +10,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
+import mx.unam.dgtic.admglp.DB.Conexion;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
 import mx.unam.dgtic.admglp.modelo.RolServiceImpl;
 import mx.unam.dgtic.admglp.vo.Rol;
@@ -27,8 +28,7 @@ public class RolEJBLocal implements RolEJB {
     public List<Rol> getRoles() {
         List<Rol> roles = new ArrayList<>();
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             rs = new RolServiceImpl(em);
             roles = rs.getRoles();
         } catch (Exception e) {
@@ -54,8 +54,7 @@ public class RolEJBLocal implements RolEJB {
     public Rol getRol(Integer idRol) {
         Rol rol = null;
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             rs = new RolServiceImpl(em);
             rol = rs.getRol(idRol);
 

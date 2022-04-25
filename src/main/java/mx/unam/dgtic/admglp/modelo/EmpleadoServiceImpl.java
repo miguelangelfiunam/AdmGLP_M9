@@ -86,7 +86,7 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     public Empleado updateEmpleado(Empleado empleado) {
         em.getTransaction().begin();
         empleado.setFecact(new Date());
-        em.persist(empleado);
+        em.merge(empleado);
         em.getTransaction().commit();
         return empleado;
     }
@@ -96,6 +96,20 @@ public class EmpleadoServiceImpl implements EmpleadoService{
         em.getTransaction().begin();
         em.persist(empleado);
         em.getTransaction().commit();
+        return empleado;
+    }
+
+    @Override
+    public Empleado getEmpleadoPorIdUsuario(int idUsuario) {
+        Empleado empleado = null;
+        try {
+            TypedQuery<Empleado> query = em.createQuery("SELECT c FROM Empleado c WHERE c.usuario.idusuario = :idusu", Empleado.class);
+            query.setParameter("idusu", idUsuario);
+            empleado = query.getSingleResult();
+        } catch (Exception e) {
+            this.error = e;
+            throw new RuntimeException("Error al obtener empleado por id de usuario");
+        }
         return empleado;
     }
 }

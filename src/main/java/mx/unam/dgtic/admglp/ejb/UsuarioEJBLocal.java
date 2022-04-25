@@ -6,10 +6,9 @@ package mx.unam.dgtic.admglp.ejb;
 
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
+import mx.unam.dgtic.admglp.DB.Conexion;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
 import mx.unam.dgtic.admglp.modelo.UsuarioServiceImpl;
 import mx.unam.dgtic.admglp.vo.Usuario;
@@ -27,8 +26,7 @@ public class UsuarioEJBLocal implements UsuarioEJB {
     public List<Usuario> getUsuarios() {
         List<Usuario> usuarios = new ArrayList<>();
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             us = new UsuarioServiceImpl(em);
             usuarios = us.getUsuarios();
         } catch (Exception e) {
@@ -54,8 +52,7 @@ public class UsuarioEJBLocal implements UsuarioEJB {
     public Usuario getUsuario(Integer idUsuario) {
         Usuario usuario = null;
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             us = new UsuarioServiceImpl(em);
             usuario = us.getUsuario(idUsuario);
 
@@ -78,8 +75,7 @@ public class UsuarioEJBLocal implements UsuarioEJB {
     public Usuario getUsuario(String apodo, String contra, Integer estatus) {
         Usuario usuario = null;
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             us = new UsuarioServiceImpl(em);
             usuario = us.getUsuario(apodo, contra, estatus);
 
@@ -106,8 +102,7 @@ public class UsuarioEJBLocal implements UsuarioEJB {
     @Override
     public Usuario insertaUsuario(Usuario usuario) {
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             us = new UsuarioServiceImpl(em);
             usuario = us.insertUsuario(usuario);
         } catch (Exception e) {
@@ -128,8 +123,7 @@ public class UsuarioEJBLocal implements UsuarioEJB {
     @Override
     public Usuario actualizaUsuario(Usuario usuario) {
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             us = new UsuarioServiceImpl(em);
             usuario = us.updateUsuario(usuario);
         } catch (Exception e) {
@@ -156,8 +150,7 @@ public class UsuarioEJBLocal implements UsuarioEJB {
     public void actualizaEstatusUsuario(Integer id, Integer estatus) {
         Usuario usuario = null;
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             us = new UsuarioServiceImpl(em);
             usuario = us.getUsuario(id);
             if (usuario != null) {

@@ -56,6 +56,26 @@ public class Cliente {
     @ManyToMany
     private List<Direccion> direcciones;
 
+    public Cliente() {
+    }
+
+    public Cliente(Usuario usuario, Integer numerocliente, Date fecreg, Date fecact, Integer estatus) {
+        this.usuario = usuario;
+        this.numerocliente = numerocliente;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.estatus = estatus;
+    }
+
+    public Cliente(Usuario usuario, Integer numerocliente, Date fecreg, Date fecact, Integer estatus, List<Direccion> direcciones) {
+        this.usuario = usuario;
+        this.numerocliente = numerocliente;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.estatus = estatus;
+        this.direcciones = direcciones;
+    }
+
     public Integer getId() {
         return id;
     }

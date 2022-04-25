@@ -30,7 +30,7 @@ public class UsuarioBean implements Serializable {
     private Integer idacceso;
     private String rol;
     @Inject
-    private ListasBean listaUsuariosBean;
+    private UsuarioModel usuarioModel;
     @Inject
     private AccesoBean accesoBean;
     @Inject
@@ -103,7 +103,7 @@ public class UsuarioBean implements Serializable {
     }
 
     public String login() {
-        Usuario usuario = listaUsuariosBean.cargaUsuario(apodo, contra, 10);
+        Usuario usuario = usuarioModel.cargaUsuario(apodo, contra, 10);
         if (usuario != null) {
             if (usuario.getApodo().equals(apodo) && usuario.getContra().getContra().equals(contra)) {
                 if (usuario.getEstatus() == 10) {

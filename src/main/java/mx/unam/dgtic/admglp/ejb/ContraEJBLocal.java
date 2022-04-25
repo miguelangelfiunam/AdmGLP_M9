@@ -10,6 +10,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
+import mx.unam.dgtic.admglp.DB.Conexion;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
 import mx.unam.dgtic.admglp.modelo.ContraServiceImpl;
 import mx.unam.dgtic.admglp.vo.Contra;
@@ -27,8 +28,7 @@ public class ContraEJBLocal implements ContraEJB {
     public List<Contra> getContras() {
         List<Contra> contras = new ArrayList<>();
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             cs = new ContraServiceImpl(em);
             contras = cs.getContras();
         } catch (Exception e) {
@@ -49,8 +49,7 @@ public class ContraEJBLocal implements ContraEJB {
     public List<Contra> getContrasPorEstatus(Integer estatus) {
        List<Contra> contras = new ArrayList<>();
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             cs = new ContraServiceImpl(em);
             contras = cs.getContras(estatus);
         } catch (Exception e) {
@@ -71,8 +70,7 @@ public class ContraEJBLocal implements ContraEJB {
     public Contra getContra(Integer idContra) {
         Contra contra = null;
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             cs = new ContraServiceImpl(em);
             contra = cs.getContra(idContra);
 
@@ -94,8 +92,7 @@ public class ContraEJBLocal implements ContraEJB {
     @Override
     public Contra insertaContra(Contra contra) {
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             cs = new ContraServiceImpl(em);
             contra = cs.insertContra(contra);
 
@@ -117,8 +114,7 @@ public class ContraEJBLocal implements ContraEJB {
     @Override
     public Contra actualizaContra(Contra contra) {
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             cs = new ContraServiceImpl(em);
             contra = cs.updateContra(contra);
 

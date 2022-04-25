@@ -54,6 +54,19 @@ public class Empleado {
     @OneToMany(mappedBy = "empleado")
     List<Empleadopedido> pedidosEmpleado;
 
+    public Empleado() {
+    }
+
+    public Empleado(Usuario usuario, Integer numtrab, String numss, String rfc, Date fecreg, Date fecact, Integer estatus) {
+        this.usuario = usuario;
+        this.numtrab = numtrab;
+        this.numss = numss;
+        this.rfc = rfc;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.estatus = estatus;
+    }
+
     public Integer getId() {
         return id;
     }

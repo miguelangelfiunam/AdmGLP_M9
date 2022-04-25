@@ -283,6 +283,14 @@ public class Usuario {
         this.accesos = accesos;
     }
 
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" + "idusuario=" + idusuario + ", apodo=" + apodo + ", correo1=" + correo1 + ", correo2=" + correo2 + ", nombre=" + nombre + ", apellido1=" + apellido1 + ", apellido2=" + apellido2 + ", edad=" + edad + ", fnac=" + fnac + ", telefono1=" + telefono1 + ", telefono2=" + telefono2 + ", fecreg=" + fecreg + ", fecact=" + fecact + ", estatus=" + estatus + ", contra=" + contra + '}';

@@ -16,39 +16,50 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <ui:decorate template="/decorator/decorator.xhtml" >
             <ui:define name="contenido" >
                 <h:panelGroup rendered="#{usuarioBean.acceso == true}">
-                    <div class="container">
-                        <ul class="nav">
-                            <li class="nav-item">
-                                <h:form>
-                                    <h:commandLink id="admin_usuario_lista_link" value="Tabla de usuarios" action="/usuario/lista.xhtml?faces-redirect=true" class="nav-link" />
-                                </h:form>
-                            </li>
-                            <li class="nav-item">
-                                <h:form>
-                                    <h:commandLink id="admin_usuario_lista_link" value="Tabla de roles" action="/rol/lista.xhtml?faces-redirect=true" class="nav-link" />
-                                </h:form>
-                            </li>
-                            <li class="nav-item">
-                                <h:form>
-                                    <h:commandLink id="admin_cliente_lista_link" value="Tabla de clientes" action="/cliente/lista.xhtml?faces-redirect=true" class="nav-link" />
-                                </h:form>
-                            </li>
-                            <li class="nav-item">
-                                <h:form>
-                                    <h:commandLink id="admin_empleado_lista_link" value="Tabla de empleados" action="/empleado/lista.xhtml?faces-redirect=true" class="nav-link" />
-                                </h:form>
-                            </li>
-                            <li class="nav-item">
-                                <h:form>
-                                    <h:commandLink id="admin_pedido_lista_link" value="Tabla de pedidos" action="/pedido/lista.xhtml?faces-redirect=true" class="nav-link" />
-                                </h:form>
-                            </li>
-                            <li class="nav-item">
-                                <h:form>
-                                    <h:commandLink id="admin_turno_lista_link" value="Tabla de turnos" action="/turno/lista.xhtml?faces-redirect=true" class="nav-link" />
-                                </h:form>
-                            </li>
-                        </ul>
+                    <div class="container d-flex justify-content-center">
+
+                        <div class="card">
+                            <div class="card-header text-center">
+                                Opciones
+                            </div>
+                            <ul class="list-group list-group-horizontal">
+                                <li class="list-group-item">
+                                    <h:form>
+                                        <h:commandLink id="admin_usuario_lista_link" value="Usuarios" action="/usuario/lista.xhtml?faces-redirect=true" class="nav-link" />
+                                    </h:form>
+                                </li>
+                                <li class="list-group-item">
+                                    <h:form>
+                                        <h:commandLink id="admin_usuario_lista_link" value="Roles" action="/rol/lista.xhtml?faces-redirect=true" class="nav-link" />
+                                    </h:form>
+                                </li>
+                                <li class="list-group-item">
+                                    <h:form>
+                                        <h:commandLink id="admin_cliente_lista_link" value="Clientes" action="/cliente/lista.xhtml?faces-redirect=true" class="nav-link" />
+                                    </h:form>
+                                </li>
+                                <li class="list-group-item">
+                                    <h:form>
+                                        <h:commandLink id="admin_empleado_lista_link" value="Empleados" action="/empleado/lista.xhtml?faces-redirect=true" class="nav-link" />
+                                    </h:form>
+                                </li>
+                                <li class="list-group-item">
+                                    <h:form>
+                                        <h:commandLink id="admin_pedido_lista_link" value="Pedidos" action="/pedido/lista.xhtml?faces-redirect=true" class="nav-link" />
+                                    </h:form>
+                                </li>
+                                <li class="list-group-item">
+                                    <h:form>
+                                        <h:commandLink id="admin_turno_lista_link" value="Turnos" action="/turno/lista.xhtml?faces-redirect=true" class="nav-link" />
+                                    </h:form>
+                                </li>
+                                <li class="list-group-item">
+                                    <h:form>
+                                        <h:commandLink id="admin_articulo_lista_link" value="Articulos" action="/articulo/lista.xhtml?faces-redirect=true" class="nav-link" />
+                                    </h:form>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </h:panelGroup>
                 <h:panelGroup rendered="#{usuarioBean.acceso == false}">

@@ -9,17 +9,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-        <title><h:outputText value="Empleado"/></title>
+        <title><h:outputText value="Cliente"/></title>
     </h:head>
-    <h:body>
+    <h:body rendered="#{usuarioBean.acceso == true}">
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
                 <h:panelGroup rendered="#{usuarioBean.rol == 'Empleado'}">
-                    <h2 class="text-center">Pedidos que se pueden tomar</h2>
+                    <h2 class="text-center">Historial de pedidos</h2>
                     <hr></hr>
                     
-                    <h2 class="text-center">Pedidos tomados</h2>
-                    <hr></hr>
+                    
                 </h:panelGroup>
                 <h:panelGroup rendered="#{usuarioBean.acceso == false}">
                     <div class="container">

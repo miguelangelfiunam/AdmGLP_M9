@@ -15,39 +15,9 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
                 <h:panelGroup rendered="#{usuarioBean.rol == 'Cliente'}">
-                    <h2 class="text-center">Mis pedidos</h2>
+                    <h2 class="text-center">Pedidos</h2>
                     <hr></hr>
-                    <div class="d-flex justify-content-center" >
-                        <div class="spinner-border text-info loader_cliente" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                    <div style="margin:3em;">
-                        <!--<h:form>-->
-                        <!--<input type="text" id="inputTopic" name="topic" class="form-control mb-2 mr-sm-2" placeholder="Topic of interest" required="true"/>-->
-                        <!--<h:commandButton type="submit" value="Agregar" action="{clienteBean.ejemplo}" class="btn btn-success carga" onclick="checkPasswords();"/>-->
-                        <!--<h:commandButton type="submit" value="Agregar" action="{clienteBean.ejemplo}" class="btn btn-success carga"/>-->
-                        <!--</h:form>-->
-                        <h:form>
-                            <h:commandButton type="button" value="Agregar" class="btn btn-success carga">
-                                <f:ajax execute="#{clienteBean.ejemplo()}" render="" />
-                            </h:commandButton>
-                        </h:form>
-                    </div>
-
-                    <script type="text/javascript">
-                        function checkPasswords() {
-                            $(".carga").prop("disabled", true);
-                            $(".loader_cliente").show();
-                            return false;
-                        }
-                    </script>
-                    <script type="text/javascript">
-                        $(document).ready(function () {
-                            $(".carga").prop("disabled", false);
-                            $(".loader_cliente").hide();
-                        });
-                    </script>
+                    
                 </h:panelGroup>
                 <h:panelGroup rendered="#{usuarioBean.acceso == false}">
                     <div class="container">

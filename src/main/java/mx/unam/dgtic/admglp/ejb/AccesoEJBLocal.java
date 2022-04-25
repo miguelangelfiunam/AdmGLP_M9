@@ -11,6 +11,7 @@ import jakarta.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import mx.unam.dgtic.admglp.DB.Conexion;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
 import mx.unam.dgtic.admglp.modelo.AccesoServiceImpl;
 import mx.unam.dgtic.admglp.vo.Acceso;
@@ -28,8 +29,7 @@ public class AccesoEJBLocal implements AccesoEJB {
     public List<Acceso> getAccesos() {
         List<Acceso> accesos = new ArrayList<>();
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             as = new AccesoServiceImpl(em);
             accesos = as.getAccesos();
         } catch (Exception e) {
@@ -55,8 +55,7 @@ public class AccesoEJBLocal implements AccesoEJB {
     public Acceso getAcceso(Integer idAcceso) {
         Acceso acceso = null;
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             as = new AccesoServiceImpl(em);
             acceso = as.getAcceso(idAcceso);
 
@@ -78,8 +77,7 @@ public class AccesoEJBLocal implements AccesoEJB {
     @Override
     public Acceso insertaAcceso(Acceso acceso) {
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             as = new AccesoServiceImpl(em);
             acceso = as.insertAcceso(acceso);
 
@@ -101,8 +99,7 @@ public class AccesoEJBLocal implements AccesoEJB {
     @Override
     public Acceso actualizaAcceso(Acceso acceso) {
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             as = new AccesoServiceImpl(em);
             acceso = as.updateAcceso(acceso);
 
@@ -130,8 +127,7 @@ public class AccesoEJBLocal implements AccesoEJB {
     public Acceso finalizaAcceso(Integer id) {
         Acceso acceso = null;
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             as = new AccesoServiceImpl(em);
             acceso = as.getAcceso(id);
             if(acceso != null){

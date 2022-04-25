@@ -6,10 +6,10 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:outputStylesheet name="css/decorator.css" />
     <h:outputStylesheet name="css/bootstrap.min.css" />
-    
+
     <h:outputScript name="js/bootstrap.bundle.min.js"/>
     <h:outputScript name="js/jquery-3.6.0.min.js"/>
-    
+
     <h:head>
         <title>Decorator</title>
     </h:head>
@@ -26,21 +26,106 @@
                                 <h:commandLink id="inicio_decorator" value="Inicio" action="/index.xhtml?faces-redirect=true" class="nav-link" />
                             </h:form>
                         </li>
-                        <li class="nav-item">
-                            <h:form>
-                                <h:commandLink id="admin_decorator" value="Administrador" action="/admin/admin.xhtml?faces-redirect=true" class="nav-link" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Administrador')}"/>
-                            </h:form>
-                        </li>
-                        <li class="nav-item">
-                            <h:form>
-                                <h:commandLink id="cliente_decorator" value="Cliente" action="/cliente/cliente.xhtml?faces-redirect=true" class="nav-link" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Administrador' or usuarioBean.rol == 'Cliente')}"/>
-                            </h:form>
-                        </li>
-                        <li class="nav-item">
-                            <h:form>
-                                <h:commandLink id="empleado_decorator" value="Empleado" action="/empleado/empleado.xhtml?faces-redirect=true" class="nav-link" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Administrador' or usuarioBean.rol == 'Empleado')}"/>
-                            </h:form>
-                        </li>
+                        <h:panelGroup id="panelDecoratorAdministrador" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Administrador')}">
+                            <li class="nav-item">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Administrador
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="decorator_usuario_lista_link" value="Usuarios" action="/usuario/lista.xhtml?faces-redirect=true" class="dropdown-item" />
+                                            </h:form>
+                                        </li>
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="decorator_cliente_lista_link" value="Clientes" action="/cliente/lista.xhtml?faces-redirect=true" class="dropdown-item" />
+                                            </h:form>
+                                        </li>
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="decorator_empleado_lista_link" value="Empleados" action="/empleado/lista.xhtml?faces-redirect=true" class="dropdown-item" />
+                                            </h:form>
+                                        </li>
+                                        <li><hr class="dropdown-divider"/></li>
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="decorator_usuario_lista_link" value="Roles" action="/rol/lista.xhtml?faces-redirect=true" class="dropdown-item" />
+                                            </h:form>
+                                        </li>
+                                        <li><hr class="dropdown-divider"/></li>
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="decorator_pedido_lista_link" value="Pedidos" action="/pedido/lista.xhtml?faces-redirect=true" class="dropdown-item" />
+                                            </h:form>
+                                        </li>
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="decorator_turno_lista_link" value="Turnos" action="/turno/lista.xhtml?faces-redirect=true" class="dropdown-item" />
+                                            </h:form>
+                                        </li>
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="decorator_articulo_lista_link" value="Articulos" action="/articulo/lista.xhtml?faces-redirect=true" class="dropdown-item" />
+                                            </h:form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                        </h:panelGroup>
+                        <h:panelGroup id="panelDecoratorCliente" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Cliente')}">
+                            <li class="nav-item">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Cliente
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="cliente_decorator_1" value="Cliente" action="/cliente/cliente.xhtml?faces-redirect=true" class="dropdown-item" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Cliente')}"/>
+                                            </h:form>
+                                        </li>
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="cliente_decorator_2" value="Realiza tu pedido" action="/cliente/pedido.xhtml?faces-redirect=true" class="dropdown-item" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Cliente')}"/>
+                                            </h:form> 
+                                        </li>
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="cliente_decorator_3" value="Mis pedidos" action="/cliente/historial.xhtml?faces-redirect=true" class="dropdown-item" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Cliente')}"/>
+                                            </h:form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                        </h:panelGroup>
+                        <h:panelGroup id="panelDecoratorEmpleado" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Empleado')}">
+                            <li class="nav-item">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Empleado
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="empleado_decorator_1" value="Empleado" action="/empleado/empleado.xhtml?faces-redirect=true" class="dropdown-item" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Empleado')}"/>
+                                            </h:form>
+                                        </li>
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="empleado_decorator_2" value="Historial" action="/empleado/historial.xhtml?faces-redirect=true" class="dropdown-item" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Empleado')}"/>
+                                            </h:form>
+                                        </li>
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="empleado_decorator_3" value="Mis datos" action="/empleado/empleadoForm.xhtml?faces-redirect=true" class="dropdown-item" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Cliente')}"/>
+                                            </h:form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                        </h:panelGroup>
                         <li class="nav-item">
                             <h:form>
                                 <h:outputText value="Bienvenido, #{usuarioBean.apodo}" rendered="#{(usuarioBean.acceso == true)}" class="nav-link"/>

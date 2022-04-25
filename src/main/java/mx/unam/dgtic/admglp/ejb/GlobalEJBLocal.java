@@ -10,6 +10,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.List;
+import mx.unam.dgtic.admglp.DB.Conexion;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
 import mx.unam.dgtic.admglp.modelo.GlobalServiceImpl;
 import mx.unam.dgtic.admglp.vo.Global;
@@ -27,8 +28,7 @@ public class GlobalEJBLocal implements GlobalEJB {
     public List<Global> getGlobales() {
         List<Global> globales = new ArrayList<>();
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             gs = new GlobalServiceImpl(em);
             globales = gs.getGlobales();
         } catch (Exception e) {
@@ -49,8 +49,7 @@ public class GlobalEJBLocal implements GlobalEJB {
     public Global getGlobal(String nomGlobal) {
         Global global = null;
         try {
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("admglp");
-            EntityManager em = emf.createEntityManager();
+            EntityManager em = Conexion.createEntityManager();
             gs = new GlobalServiceImpl(em);
             global = gs.getGlobal(nomGlobal);
         } catch (Exception e) {

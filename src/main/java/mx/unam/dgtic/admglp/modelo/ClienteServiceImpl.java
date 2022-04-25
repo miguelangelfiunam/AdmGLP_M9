@@ -86,7 +86,7 @@ public class ClienteServiceImpl implements ClienteService {
     public Cliente updateCliente(Cliente cliente) {
         em.getTransaction().begin();
         cliente.setFecact(new Date());
-        em.persist(cliente);
+        em.merge(cliente);
         em.getTransaction().commit();
         return cliente;
     }
@@ -96,6 +96,33 @@ public class ClienteServiceImpl implements ClienteService {
         em.getTransaction().begin();
         em.persist(cliente);
         em.getTransaction().commit();
+        return cliente;
+    }
+
+    @Override
+    public Integer getSigCliente() {
+        Integer numCliente;
+        try {
+            numCliente = em.createQuery("SELECT MAX(c.numerocliente) FROM Cliente c", Integer.class).getSingleResult();
+            numCliente++;
+        } catch (Exception e) {
+            this.error = e;
+            throw new RuntimeException("Error al obtener clientes");
+        }
+        return numCliente;
+    }
+
+    @Override
+    public Cliente getClientePorIdUsuario(int idUsuario) {
+        Cliente cliente = null;
+        try {
+            TypedQuery<Cliente> query = em.createQuery("SELECT c FROM Cliente c WHERE c.usuario.idusuario = :idusu", Cliente.class);
+            query.setParameter("idusu", idUsuario);
+            cliente = query.getSingleResult();
+        } catch (Exception e) {
+            this.error = e;
+            throw new RuntimeException("Error al obtener cliente por id de usuario");
+        }
         return cliente;
     }
 

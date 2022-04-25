@@ -11,7 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       >
     <h:head>
-        <title><h:outputText value="Lista de usuarios"/></title>
+        <title><h:outputText value="Lista de empleados"/></title>
         <style>
             .noBorders *{
                 border: none !important;
@@ -29,48 +29,42 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
                 <h:panelGroup rendered="#{usuarioBean.rol == 'Administrador'}">
-                    <h2 class="text-center">Lista de usuarios</h2>
+                    <h2 class="text-center">Lista de empleados</h2>
                     <hr></hr>
                     <div class="container">
                         <div class="d-flex justify-content-end">
                             <h:form>
-                                <h:commandButton type="submit" value="Agregar" action="#{usuarioFormBean.formularioUsuario}" class="btn btn-success"/>
+                                <h:commandButton type="submit" value="Agregar" action="#{empleadoFormBean.formularioEmpleado}" class="btn btn-success"/>
                             </h:form>
                         </div>
 
                         <table border="3" class="table table-bordered table-hover">
                             <thead>
                                 <tr class="table-secondary">
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Apodo</th>
-                                    <th scope="col">Correos</th>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Roles</th>
+                                    <th scope="col">#Empleado</th>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">#Trabajador</th>
+                                    <th scope="col">#Seguro Social</th>
+                                    <th scope="col">RFC</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="#{usuarioModel.cargaUsuarios()}" var="usuario">
-                                    <tr class="#{usuario.estatus eq 10 ? 'table-success': 'table-danger'}">
-                                        <th scope="row"> #{usuario.idusuario}</th>
-                                        <td scope="row"> #{usuario.apodo}</td>
-                                        <td scope="row"> #{usuario.correo1} <br/> #{usuario.correo2}</td>
-                                        <td scope="row"> #{usuario.nombre} #{usuario.apellido1} #{usuario.apellido2}</td>
-                                        <td scope="row"> 
-                                            <h:dataTable value="#{usuario.roles}" var="usu_rol">
-                                                <h:column>
-                                                    #{usu_rol.nombre}
-                                                </h:column>
-                                            </h:dataTable>
-                                        </td>
+                                <c:forEach items="#{empleadoModel.cargaEmpleados()}" var="empleado">
+                                    <tr class="#{empleado.estatus eq 10 ? 'table-success': 'table-danger'}">
+                                        <th scope="row"> #{empleado.id}</th>
+                                        <td scope="row"> #{empleado.usuario.idusuario}</td>
+                                        <td scope="row"> #{empleado.numtrab}</td>
+                                        <td scope="row"> #{empleado.numss}</td>
+                                        <td scope="row"> #{empleado.rfc}</td>
                                         <td>
                                             <h:form>
-                                                <h:commandButton type="submit" value="Editar" action="#{usuarioFormBean.formularioUsuarioID(usuario.idusuario)}" class="btn btn-primary"/>
-                                                <c:if test="#{usuario.estatus eq 10 and usuarioBean.id ne usuario.idusuario}">
-                                                    <h:commandLink type="button" value="Bloquear" action="#{usuarioFormBean.actualizarEstatusUsuario(usuario.idusuario, 20)}" class="btn btn-danger"/>
+                                                <h:commandButton type="submit" value="Editar" action="#{empleadoFormBean.formularioEmpleadoID(empleado.usuario.idusuario, empleado.id)}" class="btn btn-primary"/>
+                                                <c:if test="#{empleado.estatus eq 10}">
+                                                    <h:commandLink type="button" value="Bloquear" action="#{empleadoFormBean.actualizarEstatusEmpleado(empleado.id, 20)}" class="btn btn-danger"/>
                                                 </c:if>
-                                                <c:if test="#{usuario.estatus eq 20}">
-                                                    <h:commandLink type="button" value="Activar" action="#{usuarioFormBean.actualizarEstatusUsuario(usuario.idusuario, 10)}" class="btn btn-success"/>
+                                                <c:if test="#{empleado.estatus eq 20}">
+                                                    <h:commandLink type="button" value="Activar" action="#{empleadoFormBean.actualizarEstatusEmpleado(empleado.id, 10)}" class="btn btn-success"/>
                                                 </c:if>
                                             </h:form>
                                         </td>

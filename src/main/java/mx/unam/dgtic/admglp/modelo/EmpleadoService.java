@@ -25,6 +25,8 @@ public interface EmpleadoService {
 
     public Empleado getEmpleado(int idEmpleado);
     
+    public Empleado getEmpleadoPorIdUsuario(int idUsuario);
+    
     public Empleado deleteEmpleado(int idEmpleado);
     
     public Empleado updateEmpleado(Empleado empleado);

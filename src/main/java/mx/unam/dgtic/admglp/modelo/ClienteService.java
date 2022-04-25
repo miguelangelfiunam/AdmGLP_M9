@@ -25,10 +25,14 @@ public interface ClienteService {
 
     public Cliente getCliente(int idCliente);
     
+    public Cliente getClientePorIdUsuario(int idUsuario);
+    
     public Cliente deleteCliente(int idCliente);
     
     public Cliente updateCliente(Cliente cliente);
     
     public Cliente insertCliente(Cliente cliente);
+    
+    public Integer getSigCliente();
     
 }
