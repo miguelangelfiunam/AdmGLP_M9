@@ -86,7 +86,7 @@ public class TransporteServiceImpl implements TransporteService {
     public Transporte updateTransporte(Transporte transporte) {
         em.getTransaction().begin();
         transporte.setFecact(new Date());
-        em.persist(transporte);
+        em.merge(transporte);
         em.getTransaction().commit();
         return transporte;
     }

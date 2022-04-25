@@ -19,7 +19,7 @@ import mx.unam.dgtic.admglp.vo.Empleado;
  * @since 26/03/2022 - 26/03/2022
  *
  */
-public class EmpleadoServiceImpl implements EmpleadoService{
+public class EmpleadoServiceImpl implements EmpleadoService {
 
     private Exception error;
 
@@ -46,7 +46,7 @@ public class EmpleadoServiceImpl implements EmpleadoService{
         }
         return empleados;
     }
-    
+
     @Override
     public List<Empleado> getEmpleados(Integer estatus) {
         List<Empleado> empleados = new ArrayList<>();
@@ -103,9 +103,13 @@ public class EmpleadoServiceImpl implements EmpleadoService{
     public Empleado getEmpleadoPorIdUsuario(int idUsuario) {
         Empleado empleado = null;
         try {
-            TypedQuery<Empleado> query = em.createQuery("SELECT c FROM Empleado c WHERE c.usuario.idusuario = :idusu", Empleado.class);
-            query.setParameter("idusu", idUsuario);
-            empleado = query.getSingleResult();
+            try {
+                TypedQuery<Empleado> query = em.createQuery("SELECT c FROM Empleado c WHERE c.usuario.idusuario = :idusu", Empleado.class);
+                query.setParameter("idusu", idUsuario);
+                empleado = query.getSingleResult();
+            } catch (jakarta.persistence.NoResultException e) {
+                //Error en caso de no encontrar registro, regreso null el objeto
+            }
         } catch (Exception e) {
             this.error = e;
             throw new RuntimeException("Error al obtener empleado por id de usuario");

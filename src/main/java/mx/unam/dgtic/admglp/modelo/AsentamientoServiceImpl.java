@@ -86,7 +86,7 @@ public class AsentamientoServiceImpl implements AsentamientoService {
     public Asentamiento updateAsentamiento(Asentamiento asentamiento) {
         em.getTransaction().begin();
         asentamiento.setFecact(new Date());
-        em.persist(asentamiento);
+        em.merge(asentamiento);
         em.getTransaction().commit();
         return asentamiento;
     }

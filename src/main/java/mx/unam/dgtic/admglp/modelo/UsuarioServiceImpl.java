@@ -46,7 +46,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
         return usuarios;
     }
-    
+
     @Override
     public List<Usuario> getUsuarios(Integer estatus) {
         List<Usuario> usuarios = new ArrayList<>();
@@ -101,20 +101,24 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Usuario getUsuario(String apodo, String contra, Integer estatus) {
-         Usuario usuario =null;
+        Usuario usuario = null;
         try {
-            String sqlSelect = "SELECT u "
-                    + "FROM Usuario u, Contra c "
-                    + "WHERE "
-                    + "u.contra.id = c.id "
-                    + "AND u.apodo = :nick "
-                    + "AND c.contra = :pass "
-                    + "AND u.estatus = :est";
-            TypedQuery<Usuario> query = em.createQuery(sqlSelect, Usuario.class);
-            query.setParameter("nick", apodo);
-            query.setParameter("pass", contra);
-            query.setParameter("est", estatus);
-            usuario = query.getSingleResult();
+            try {
+                String sqlSelect = "SELECT u "
+                        + "FROM Usuario u, Contra c "
+                        + "WHERE "
+                        + "u.contra.id = c.id "
+                        + "AND u.apodo = :nick "
+                        + "AND c.contra = :pass "
+                        + "AND u.estatus = :est";
+                TypedQuery<Usuario> query = em.createQuery(sqlSelect, Usuario.class);
+                query.setParameter("nick", apodo);
+                query.setParameter("pass", contra);
+                query.setParameter("est", estatus);
+                usuario = query.getSingleResult();
+            } catch (jakarta.persistence.NoResultException e) {
+                //Error en caso de no encontrar registro, regreso null el objeto
+            }
         } catch (Exception e) {
             this.error = e;
             throw new RuntimeException("Error al obtener usuarios");

@@ -87,7 +87,7 @@ public class DireccionServiceImpl implements DireccionService {
     public Direccion updateDireccion(Direccion direccion) {
         em.getTransaction().begin();
         direccion.setFecact(new Date());
-        em.persist(direccion);
+        em.merge(direccion);
         em.getTransaction().commit();
         return direccion;
     }

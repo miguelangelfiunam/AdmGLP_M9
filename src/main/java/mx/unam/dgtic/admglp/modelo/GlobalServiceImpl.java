@@ -52,14 +52,18 @@ public class GlobalServiceImpl implements GlobalService {
     public Global getGlobal(int idGlobal) {
         return em.find(Global.class, idGlobal);
     }
-    
+
     @Override
     public Global getGlobal(String nomGlobal) {
         Global global = null;
         try {
-            TypedQuery<Global> query = em.createQuery("SELECT g FROM Global g WHERE g.nombre = :name", Global.class);
-            query.setParameter("name", nomGlobal);
-            global = query.getSingleResult();
+            try {
+                TypedQuery<Global> query = em.createQuery("SELECT g FROM Global g WHERE g.nombre = :name", Global.class);
+                query.setParameter("name", nomGlobal);
+                global = query.getSingleResult();
+            } catch (jakarta.persistence.NoResultException e) {
+                //Error en caso de no encontrar registro, regreso null el objeto
+            }
         } catch (Exception e) {
             this.error = e;
             throw new RuntimeException("Error al obtener globals");
@@ -86,7 +90,7 @@ public class GlobalServiceImpl implements GlobalService {
     @Override
     public Global updateGlobal(Global global) {
         em.getTransaction().begin();
-        em.persist(global);
+        em.merge(global);
         em.getTransaction().commit();
         return global;
     }

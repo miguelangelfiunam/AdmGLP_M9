@@ -86,7 +86,7 @@ public class EstadoServiceImpl implements EstadoService {
     public Estado updateEstado(Estado estado) {
         em.getTransaction().begin();
         estado.setFecact(new Date());
-        em.persist(estado);
+        em.merge(estado);
         em.getTransaction().commit();
         return estado;
     }

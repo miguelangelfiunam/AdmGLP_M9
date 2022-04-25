@@ -103,8 +103,13 @@ public class ClienteServiceImpl implements ClienteService {
     public Integer getSigCliente() {
         Integer numCliente;
         try {
-            numCliente = em.createQuery("SELECT MAX(c.numerocliente) FROM Cliente c", Integer.class).getSingleResult();
-            numCliente++;
+            try {
+                numCliente = em.createQuery("SELECT MAX(c.numerocliente) FROM Cliente c", Integer.class).getSingleResult();
+                numCliente++;
+            } catch (jakarta.persistence.NoResultException e) {
+                //Error en caso de no encontrar registro, regreso null el objeto
+                numCliente = 1;
+            }
         } catch (Exception e) {
             this.error = e;
             throw new RuntimeException("Error al obtener clientes");
@@ -116,9 +121,13 @@ public class ClienteServiceImpl implements ClienteService {
     public Cliente getClientePorIdUsuario(int idUsuario) {
         Cliente cliente = null;
         try {
-            TypedQuery<Cliente> query = em.createQuery("SELECT c FROM Cliente c WHERE c.usuario.idusuario = :idusu", Cliente.class);
-            query.setParameter("idusu", idUsuario);
-            cliente = query.getSingleResult();
+            try {
+                TypedQuery<Cliente> query = em.createQuery("SELECT c FROM Cliente c WHERE c.usuario.idusuario = :idusu", Cliente.class);
+                query.setParameter("idusu", idUsuario);
+                cliente = query.getSingleResult();
+            } catch (jakarta.persistence.NoResultException e) {
+                //Error en caso de no encontrar registro, regreso null el objeto
+            }
         } catch (Exception e) {
             this.error = e;
             throw new RuntimeException("Error al obtener cliente por id de usuario");

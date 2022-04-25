@@ -4,6 +4,7 @@
  */
 package mx.unam.dgtic.admglp.modelo;
 
+import java.util.Date;
 import java.util.List;
 import mx.unam.dgtic.admglp.vo.Turno;
 
@@ -20,6 +21,8 @@ public interface TurnoService {
     public Exception getError();
 
     public List<Turno> getTurnos();
+    
+    public Turno getTurnoActual(Date inicio_turno);
     
     public List<Turno> getTurnos(Integer estatus);
 

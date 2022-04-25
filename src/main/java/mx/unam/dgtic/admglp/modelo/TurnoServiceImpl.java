@@ -56,7 +56,7 @@ public class TurnoServiceImpl implements TurnoService {
             turnos = query.getResultList();
         } catch (Exception e) {
             this.error = e;
-            throw new RuntimeException("Error al obtener turnos");
+            throw new RuntimeException("Error al obtener turnos por estatus");
         }
         return turnos;
     }
@@ -86,7 +86,7 @@ public class TurnoServiceImpl implements TurnoService {
     public Turno updateTurno(Turno turno) {
         em.getTransaction().begin();
         turno.setFecact(new Date());
-        em.persist(turno);
+        em.merge(turno);
         em.getTransaction().commit();
         return turno;
     }
@@ -96,6 +96,30 @@ public class TurnoServiceImpl implements TurnoService {
         em.getTransaction().begin();
         em.persist(turno);
         em.getTransaction().commit();
+        return turno;
+    }
+
+    /**
+     * Obtiene el turno del dia actual por fecha y hora en el date
+     *
+     * @param inicio_turno
+     * @return
+     */
+    @Override
+    public Turno getTurnoActual(Date inicio_turno) {
+        Turno turno = null;
+        try {
+            TypedQuery<Turno> query = em.createQuery("SELECT t FROM Turno t WHERE t.fecinicio = :fecIni", Turno.class);
+            query.setParameter("fecIni", inicio_turno);
+            try {
+                turno = query.getSingleResult();
+            } catch (jakarta.persistence.NoResultException e) {
+                //Error en caso de no encontrar registro, regreso null el objeto
+            }
+        } catch (Exception e) {
+            this.error = e;
+            throw new RuntimeException("Error al obtener turno por fecha de inicio");
+        }
         return turno;
     }
 

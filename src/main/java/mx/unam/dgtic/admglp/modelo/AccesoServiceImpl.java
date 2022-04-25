@@ -170,7 +170,7 @@ public class AccesoServiceImpl implements AccesoService {
     @Override
     public Acceso updateAcceso(Acceso acceso) {
         em.getTransaction().begin();
-        em.persist(acceso);
+        em.merge(acceso);
         em.getTransaction().commit();
         return acceso;
     }

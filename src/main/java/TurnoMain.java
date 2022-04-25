@@ -2,6 +2,11 @@
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import mx.unam.dgtic.admglp.modelo.TurnoService;
 import mx.unam.dgtic.admglp.modelo.TurnoServiceImpl;
@@ -28,14 +33,31 @@ public class TurnoMain {
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
             System.out.println("CRUD TURNO");
             TurnoService turnoService = new TurnoServiceImpl(em);
+//            System.out.println("----------------");
+//            muestraTurnos(turnoService);
+//            System.out.println("----------------");
+//            muestraTurno(turnoService);
+
+            Calendar cal = Calendar.getInstance();
+
+            cal.set(Calendar.HOUR_OF_DAY, 7);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+
+            Date date = new Date();
+            date = cal.getTime();
+            System.out.println(date.toString());
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            System.out.println(sdf.format(date));
+
             System.out.println("----------------");
-            muestraTurnos(turnoService);
-            System.out.println("----------------");
-            muestraTurno(turnoService);
-            System.out.println("----------------");
-            actualizaTurno(turnoService);
-            System.out.println("----------------");
-            borraEInsertaTurno(turnoService);
+            muestraTurnoActual(turnoService, date);
+
+//            System.out.println("----------------");
+//            actualizaTurno(turnoService);
+//            System.out.println("----------------");
+//            borraEInsertaTurno(turnoService);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
@@ -52,6 +74,16 @@ public class TurnoMain {
     public static void muestraTurno(TurnoService turnoService) {
         Turno u = turnoService.getTurno(1);
         System.out.println(u);
+    }
+
+    public static void muestraTurnoActual(TurnoService turnoService, Date fecha) {
+        Turno u = turnoService.getTurnoActual(fecha);
+        if (u != null) {
+            System.out.println(u);
+        } else {
+            System.out.println("Sin turno");
+        }
+
     }
 
     public static void actualizaTurno(TurnoService turnoService) {

@@ -86,7 +86,7 @@ public class RolServiceImpl implements RolService {
     public Rol updateRol(Rol rol) {
         em.getTransaction().begin();
         rol.setFecact(new Date());
-        em.persist(rol);
+        em.merge(rol);
         em.getTransaction().commit();
         return rol;
     }

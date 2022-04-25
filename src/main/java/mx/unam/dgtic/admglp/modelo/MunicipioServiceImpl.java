@@ -87,7 +87,7 @@ public class MunicipioServiceImpl implements MunicipioService{
     public Municipio updateMunicipio(Municipio municipio) {
         em.getTransaction().begin();
         municipio.setFecact(new Date());
-        em.persist(municipio);
+        em.merge(municipio);
         em.getTransaction().commit();
         return municipio;
     }

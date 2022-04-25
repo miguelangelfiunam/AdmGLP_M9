@@ -95,7 +95,7 @@ public class PedidoServiceImpl implements PedidoService {
     public Pedido updatePedido(Pedido pedido) {
         em.getTransaction().begin();
         pedido.setFecact(new Date());
-        em.persist(pedido);
+        em.merge(pedido);
         em.getTransaction().commit();
         return pedido;
     }

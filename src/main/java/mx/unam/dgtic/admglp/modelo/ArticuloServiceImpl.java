@@ -86,7 +86,7 @@ public class ArticuloServiceImpl implements ArticuloService {
     public Articulo updateArticulo(Articulo articulo) {
         em.getTransaction().begin();
         articulo.setFecact(new Date());
-        em.persist(articulo);
+        em.merge(articulo);
         em.getTransaction().commit();
         return articulo;
     }
