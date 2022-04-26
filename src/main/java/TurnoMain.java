@@ -33,13 +33,12 @@ public class TurnoMain {
             System.out.println("MIGUEL ANGEL MARTINEZ RIVERA");
             System.out.println("CRUD TURNO");
             TurnoService turnoService = new TurnoServiceImpl(em);
-//            System.out.println("----------------");
-//            muestraTurnos(turnoService);
-//            System.out.println("----------------");
-//            muestraTurno(turnoService);
+            System.out.println("----------------");
+            muestraTurnos(turnoService);
+            System.out.println("----------------");
+            muestraTurno(turnoService);
 
             Calendar cal = Calendar.getInstance();
-
             cal.set(Calendar.HOUR_OF_DAY, 7);
             cal.set(Calendar.MINUTE, 0);
             cal.set(Calendar.SECOND, 0);
@@ -54,10 +53,10 @@ public class TurnoMain {
             System.out.println("----------------");
             muestraTurnoActual(turnoService, date);
 
-//            System.out.println("----------------");
-//            actualizaTurno(turnoService);
-//            System.out.println("----------------");
-//            borraEInsertaTurno(turnoService);
+            System.out.println("----------------");
+            actualizaTurno(turnoService);
+            System.out.println("----------------");
+            borraEInsertaTurno(turnoService);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());

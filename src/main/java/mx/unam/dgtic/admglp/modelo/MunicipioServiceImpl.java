@@ -99,4 +99,19 @@ public class MunicipioServiceImpl implements MunicipioService{
         em.getTransaction().commit();
         return municipio;
     }
+
+    @Override
+    public List<Municipio> getMunicipiosPorIdEstado(Integer idEstado, Integer estatus_municipio) {
+        List<Municipio> municipios = new ArrayList<>();
+        try {
+            TypedQuery<Municipio> query = em.createQuery("SELECT m FROM Municipio m WHERE m.estado.id = :idEst AND m.estatus = :est", Municipio.class);
+            query.setParameter("idEst", idEstado);
+            query.setParameter("est", estatus_municipio);
+            municipios = query.getResultList();
+        } catch (Exception e) {
+            this.error = e;
+            throw new RuntimeException("Error al obtener municipios");
+        }
+        return municipios;
+    }
 }

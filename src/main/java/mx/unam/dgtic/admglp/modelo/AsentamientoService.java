@@ -20,15 +20,17 @@ public interface AsentamientoService {
     public Exception getError();
 
     public List<Asentamiento> getAsentamientos();
-    
+
     public List<Asentamiento> getAsentamientos(Integer estatus);
 
+    public List<Asentamiento> getAsentamientosPorIdMunicipio(Integer idMunicipio, Integer estatus_asentamiento);
+
     public Asentamiento getAsentamiento(int idasentamiento);
-    
+
     public Asentamiento deleteAsentamiento(int idasentamiento);
-    
+
     public Asentamiento updateAsentamiento(Asentamiento asentamiento);
-    
+
     public Asentamiento insertAsentamiento(Asentamiento asentamiento);
-    
+
 }

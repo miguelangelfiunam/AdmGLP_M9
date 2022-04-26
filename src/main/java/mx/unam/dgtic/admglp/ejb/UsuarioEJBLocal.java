@@ -45,7 +45,23 @@ public class UsuarioEJBLocal implements UsuarioEJB {
 
     @Override
     public List<Usuario> getUsuariosPorEstatus(Integer estatus) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Usuario> usuarios = new ArrayList<>();
+        try {
+            EntityManager em = Conexion.createEntityManager();
+            us = new UsuarioServiceImpl(em);
+            usuarios = us.getUsuarios(estatus);
+        } catch (Exception e) {
+            String mensaje = "";
+            mensaje += "<p>Error en UsuarioService: " + e.getMessage() + "</p>";
+            if (us.getError() != null) {
+                mensaje += "<p>" + "Error en UsuarioEJBLocal -> getUsuarios() -> UsuarioService -> getUsuarios() " + us.getError().getMessage() + "</p>";
+            }
+            try {
+                Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");
+            } catch (Exception eCorreo) {
+            }
+        }
+        return usuarios;
     }
 
     @Override

@@ -35,11 +35,10 @@ public class DireccionServiceImpl implements DireccionService {
     }
 
     @Override
-    public List<Direccion> getDireccionesActivas() {
+    public List<Direccion> getDirecciones() {
         List<Direccion> direccions = new ArrayList<>();
         try {
-            TypedQuery<Direccion> query = em.createQuery("SELECT d FROM Direccion d WHERE d.estatus = :est", Direccion.class);
-            query.setParameter("est", 10);
+            TypedQuery<Direccion> query = em.createQuery("SELECT d FROM Direccion d", Direccion.class);
             direccions = query.getResultList();
         } catch (Exception e) {
             this.error = e;
@@ -98,5 +97,20 @@ public class DireccionServiceImpl implements DireccionService {
         em.persist(direccion);
         em.getTransaction().commit();
         return direccion;
+    }
+
+    @Override
+    public List<Direccion> getDireccionesPorIdAsentamiento(Integer idAsentamiento, Integer estatus_direccion) {
+        List<Direccion> direccions = new ArrayList<>();
+        try {
+            TypedQuery<Direccion> query = em.createQuery("SELECT d FROM Direccion d WHERE d.asentamiento.id = :idAsen AND d.estatus = :est", Direccion.class);
+            query.setParameter("idAsen", idAsentamiento);
+            query.setParameter("est", estatus_direccion);
+            direccions = query.getResultList();
+        } catch (Exception e) {
+            this.error = e;
+            throw new RuntimeException("Error al obtener direcciones por id de asentamiento y estatus");
+        }
+        return direccions;
     }
 }

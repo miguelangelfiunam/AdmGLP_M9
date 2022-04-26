@@ -43,7 +43,7 @@ public class DireccionMain {
     }
 
     public static void muestraDireccions(DireccionService direccionService) {
-        List<Direccion> result = direccionService.getDireccionesActivas();
+        List<Direccion> result = direccionService.getDirecciones();
         for (Direccion direccion : result) {
             System.out.println(direccion);
         }

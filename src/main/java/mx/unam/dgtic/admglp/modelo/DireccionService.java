@@ -19,9 +19,11 @@ public interface DireccionService {
 
     public Exception getError();
 
-    public List<Direccion> getDireccionesActivas();
+    public List<Direccion> getDirecciones();
     
     public List<Direccion> getDirecciones(Integer estatus);
+    
+    public List<Direccion> getDireccionesPorIdAsentamiento(Integer idAsentamiento, Integer estatus_direccion);
 
     public Direccion getDireccion(int idDireccion);
     

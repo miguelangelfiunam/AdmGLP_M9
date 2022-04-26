@@ -123,4 +123,9 @@ public class TurnoServiceImpl implements TurnoService {
         return turno;
     }
 
+    @Override
+    public void updateTurnoEstatus(Integer idTurno, Integer estatus) {
+        
+    }
+
 }

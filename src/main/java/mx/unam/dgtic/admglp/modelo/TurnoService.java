@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import java.util.Date;
@@ -18,20 +14,22 @@ import mx.unam.dgtic.admglp.vo.Turno;
  */
 public interface TurnoService {
 
-    public Exception getError();
+    Exception getError();
 
-    public List<Turno> getTurnos();
-    
-    public Turno getTurnoActual(Date inicio_turno);
-    
-    public List<Turno> getTurnos(Integer estatus);
+    List<Turno> getTurnos();
 
-    public Turno getTurno(int idturno);
-    
-    public Turno deleteTurno(int idturno);
-    
-    public Turno updateTurno(Turno turno);
-    
-    public Turno insertTurno(Turno turno);
-    
+    Turno getTurnoActual(Date inicio_turno);
+
+    List<Turno> getTurnos(Integer estatus);
+
+    Turno getTurno(int idturno);
+
+    Turno deleteTurno(int idturno);
+
+    Turno updateTurno(Turno turno);
+
+    void updateTurnoEstatus(Integer idTurno, Integer estatus);
+
+    Turno insertTurno(Turno turno);
+
 }

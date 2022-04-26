@@ -6,8 +6,6 @@ package mx.unam.dgtic.admglp.ejb;
 
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

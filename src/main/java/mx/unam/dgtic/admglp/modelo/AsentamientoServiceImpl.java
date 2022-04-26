@@ -99,4 +99,19 @@ public class AsentamientoServiceImpl implements AsentamientoService {
         return asentamiento;
     }
 
+    @Override
+    public List<Asentamiento> getAsentamientosPorIdMunicipio(Integer idMunicipio, Integer estatus_asentamiento) {
+         List<Asentamiento> asentamientos = new ArrayList<>();
+        try {
+            TypedQuery<Asentamiento> query = em.createQuery("SELECT a FROM Asentamiento a WHERE a.municipio.id = :idMun AND a.estatus = :est", Asentamiento.class);
+            query.setParameter("idMun", idMunicipio);
+            query.setParameter("est", estatus_asentamiento);
+            asentamientos = query.getResultList();
+        } catch (Exception e) {
+            this.error = e;
+            throw new RuntimeException("Error al obtener asentamientos");
+        }
+        return asentamientos;
+    }
+
 }

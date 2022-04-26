@@ -20,15 +20,17 @@ public interface MunicipioService {
     public Exception getError();
 
     public List<Municipio> getMunicipios();
-    
+
     public List<Municipio> getMunicipios(Integer estatus);
 
+    public List<Municipio> getMunicipiosPorIdEstado(Integer idEstado, Integer estatus_municipio);
+
     public Municipio getMunicipio(int idMunicipio);
-    
+
     public Municipio deleteMunicipio(int idMunicipio);
-    
+
     public Municipio updateMunicipio(Municipio municipio);
-    
+
     public Municipio insertMunicipio(Municipio municipio);
-    
+
 }
