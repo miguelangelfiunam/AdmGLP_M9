@@ -13,11 +13,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Clase Pedido
+ * Entidad Pedido donde se realiza la creación y entrega de pedidos
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 11/04/2022 - 11/04/2022
+ * @since 11/04/2022 - 26/04/2022
  *
  */
 @Entity
@@ -60,7 +60,7 @@ public class Pedido {
 
     @Column(name = "pedido_si_estatus")
     private Integer estatus; // Estado del pedido
-    
+
     @OneToMany(mappedBy = "pedido")
     List<Empleadopedido> pedidosEmpleado;
 

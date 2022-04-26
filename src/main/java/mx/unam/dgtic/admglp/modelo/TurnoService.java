@@ -5,11 +5,11 @@ import java.util.List;
 import mx.unam.dgtic.admglp.vo.Turno;
 
 /**
- * Servicio para consulta de turnos
+ * Interfaz de servicio para consulta de turnos
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 17/04/2022 - 17/04/2022
+ * @since 17/04/2022 - 26/04/2022
  *
  */
 public interface TurnoService {
@@ -27,8 +27,6 @@ public interface TurnoService {
     Turno deleteTurno(int idturno);
 
     Turno updateTurno(Turno turno);
-
-    void updateTurnoEstatus(Integer idTurno, Integer estatus);
 
     Turno insertTurno(Turno turno);
 

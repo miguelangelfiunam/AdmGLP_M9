@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      >
+    <h:head>
+        <title><h:outputText value="Lista de Direcciones"/></title>
+        <style>
+            .noBorders *{
+                border: none !important;
+            }
+            .noPaddingBottomTop{
+                padding-bottom: 0 !important;
+                padding-top: 0 !important;
+            }
+            .ui-datatable thead th,.ui-datatable tbody td,.ui-datatable tfoot td,.ui-datatable tfoot th{
+                padding: 0.3rem 0.3rem 0.3rem 0.3rem !important;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <ui:decorate template="/decorator/decorator.xhtml">
+            <ui:define name="contenido">
+                <h:panelGroup rendered="#{usuarioBean.rol == 'Administrador'}">
+                    <h2 class="text-center">Lista de Direcciones</h2>
+                    <hr></hr>
+                    <div class="container">
+                        <div class="d-flex justify-content-end">
+                            <h:form>
+                                <h:commandButton type="submit" value="Agregar" action="#{direccionFormBean.formularioUsuario}" class="btn btn-success"/>
+                            </h:form>
+                        </div>
+
+                        <table border="3" class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="table-secondary">
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Asentamiento</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Referencias</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="#{direccionModel.cargaDirecciones()}" var="direccion">
+                                    <tr class="#{direccion.estatus eq 10 ? 'table-success': 'table-danger'}">
+                                        <th scope="row"> #{direccion.idusuario}</th>
+                                        <td scope="row"> #{direccion.apodo}</td>
+                                        <td scope="row"> #{direccion.correo1} <br/> #{direccion.correo2}</td>
+                                        <td scope="row"> #{direccion.nombre} #{direccion.apellido1} #{direccion.apellido2}</td>
+                                        <td scope="row"> 
+                                            <h:dataTable value="#{direccion.roles}" var="usu_rol">
+                                                <h:column>
+                                                    #{usu_rol.nombre}
+                                                </h:column>
+                                            </h:dataTable>
+                                        </td>
+                                        <td>
+                                            <h:form>
+                                                <h:commandButton type="submit" value="Editar" action="#{direccionFormBean.formularioUsuarioID(direccion.id)}" class="btn btn-primary"/>
+                                                <c:if test="#{direccion.estatus eq 10 and usuarioBean.id ne direccion.idusuario}">
+                                                    <h:commandLink type="button" value="Bloquear" action="#{direccionFormBean.actualizarEstatusUsuario(direccion.id, 20)}" class="btn btn-danger"/>
+                                                </c:if>
+                                                <c:if test="#{direccion.estatus eq 20}">
+                                                    <h:commandLink type="button" value="Activar" action="#{direccionFormBean.actualizarEstatusUsuario(direccion.id, 10)}" class="btn btn-success"/>
+                                                </c:if>
+                                            </h:form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{usuarioBean.acceso == false}">
+                    <div class="container">
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <svg width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg>
+                            <div>
+                                <h4 class="alert-heading">No tienes acceso a esta vista</h4>
+                            </div>
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </ui:define>
+        </ui:decorate>
+    </h:body>
+</html>

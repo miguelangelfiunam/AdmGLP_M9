@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.vo;
 
 import jakarta.persistence.Column;
@@ -17,11 +13,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Clase Direccion
+ * Entidad Direccion donde se agrega informacion de entrega del pedido
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 07/10/2021 - 20/11/2021
+ * @since 07/10/2021 - 26/04/2022
  *
  */
 @Entity
@@ -32,16 +28,16 @@ public class Direccion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_direccion")
     private Integer iddireccion; // Identificador de direccion
-    
+
     @OneToOne
     @JoinColumn(name = "id_asentamiento", referencedColumnName = "id_asentamiento")
-    private Asentamiento asentamiento;
-    
+    private Asentamiento asentamiento; // Asentamiento relacionado a la direccion
+
     @Column(name = "direccion_vc_nombre")
-    private String nombre;
-    
+    private String nombre; // Direccion agregada
+
     @Column(name = "direccion_vc_referencias")
-    private String referencias;
+    private String referencias; //Referencias de la direccion
 
     @Column(name = "direccion_dt_fecha_registro")
     private Date fecreg; // Fecha de registro
@@ -51,9 +47,9 @@ public class Direccion {
 
     @Column(name = "direccion_si_estatus")
     private Integer estatus; // Estado de la direccion
-    
+
     @ManyToMany(mappedBy = "direcciones")
-    private List<Cliente> clientes;
+    private List<Cliente> clientes; // Clientes relacionados a la direccion
 
     public Integer getIddireccion() {
         return iddireccion;
@@ -83,6 +79,10 @@ public class Direccion {
         return estatus;
     }
 
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
     public void setIddireccion(Integer iddireccion) {
         this.iddireccion = iddireccion;
     }
@@ -109,6 +109,10 @@ public class Direccion {
 
     public void setEstatus(Integer estatus) {
         this.estatus = estatus;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
     }
 
     @Override

@@ -155,16 +155,21 @@ public class TurnoEJBLocal implements TurnoEJB {
 
     @Override
     public void actualizaEstatusTurno(Integer id, Integer estatus) {
+        Turno usuario = null;
         try {
             EntityManager em = Conexion.createEntityManager();
             ts = new TurnoServiceImpl(em);
-            ts.updateTurnoEstatus(id, estatus);
+            usuario = ts.getTurno(id);
+            if (usuario != null) {
+                usuario.setEstatus(estatus);
+                ts.updateTurno(usuario);
+            }
         } catch (Exception e) {
             String mensaje = "";
             mensaje += "<p>Error en TurnoServiceImpl: " + e.getMessage() + "</p>";
 
             if (ts.getError() != null) {
-                mensaje += "<p>" + "Error en TurnoEJBLocal -> actualizaEstatusTurno() -> TurnoService -> updateTurnoEstatus() " + ts.getError().getMessage() + "</p>";
+                mensaje += "<p>" + "Error en TurnoEJBLocal -> getTurno() -> TurnoService -> getTurno() " + ts.getError().getMessage() + "</p>";
             }
             try {
                 Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");

@@ -11,11 +11,11 @@ import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
- * Clase Transporte
+ * Entidad Transporte para mostrar las unidades disponibles para entrega de pedidos
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 11/04/2022 - 11/04/2022
+ * @since 11/04/2022 - 26/04/2022
  *
  */
 @Entity
@@ -25,20 +25,20 @@ public class Transporte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_transporte")
-    private Integer id; // Identificador de usuario
+    private Integer id; // Identificador de transporte
 
     @Column(name = "trans_i_numero_unidad")
-    private Integer numeroUnidad;
+    private Integer numeroUnidad; // Numero de la unidad
 
     @Column(name = "trans_i_modelo")
-    private Integer modelo;
+    private Integer modelo; // Modelo de la unidad
 
     @Column(name = "trans_vc_placas")
-    private String placas;
+    private String placas; // Placas de la unidad
 
     @Column(name = "trans_vc_marca")
     @Enumerated(EnumType.STRING)
-    private TransporteMarca marca;
+    private TransporteMarca marca; //Marca del transporte
 
     @Column(name = "trans_dt_fecha_registro")
     private Date fecreg; // Fecha de registro

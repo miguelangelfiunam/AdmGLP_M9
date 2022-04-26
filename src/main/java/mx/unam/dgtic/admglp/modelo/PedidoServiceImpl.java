@@ -8,16 +8,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.ParameterExpression;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import mx.unam.dgtic.admglp.vo.Cliente;
-import mx.unam.dgtic.admglp.vo.Empleado;
 import mx.unam.dgtic.admglp.vo.Pedido;
 
 /**
@@ -25,7 +21,7 @@ import mx.unam.dgtic.admglp.vo.Pedido;
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 17/04/2022 - 17/04/2022
+ * @since 17/04/2022 - 26/04/2022
  *
  */
 public class PedidoServiceImpl implements PedidoService {
@@ -43,6 +39,11 @@ public class PedidoServiceImpl implements PedidoService {
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener pedidos
+     *
+     * @return Lista de pedidos encontrada
+     */
     @Override
     public List<Pedido> getPedidos() {
         List<Pedido> pedidos = new ArrayList<>();
@@ -56,6 +57,12 @@ public class PedidoServiceImpl implements PedidoService {
         return pedidos;
     }
 
+    /**
+     * Metodo para obtener pedidos por identificador de estatus
+     *
+     * @param estatus Estatus del pedido
+     * @return Lista de pedidos encontrados
+     */
     @Override
     public List<Pedido> getPedidos(Integer estatus) {
         List<Pedido> pedidos = new ArrayList<>();
@@ -70,11 +77,23 @@ public class PedidoServiceImpl implements PedidoService {
         return pedidos;
     }
 
+    /**
+     * Metodo para obtener un pedido
+     *
+     * @param idPedido Identificador de pedido
+     * @return Bean obtenido
+     */
     @Override
     public Pedido getPedido(int idPedido) {
         return em.find(Pedido.class, idPedido);
     }
 
+    /**
+     * Metodo para borrar un pedido
+     *
+     * @param idPedido Identificador de pedido
+     * @return Bean borrado
+     */
     @Override
     public Pedido deletePedido(int idPedido) {
         Pedido pedido = null;
@@ -91,6 +110,12 @@ public class PedidoServiceImpl implements PedidoService {
         return pedido;
     }
 
+    /**
+     * Metodo para actualizar un pedido
+     *
+     * @param pedido Identificador de pedido
+     * @return Bean actualizado
+     */
     @Override
     public Pedido updatePedido(Pedido pedido) {
         em.getTransaction().begin();
@@ -100,6 +125,12 @@ public class PedidoServiceImpl implements PedidoService {
         return pedido;
     }
 
+    /**
+     * Metodo para insertar un pedido
+     *
+     * @param pedido Identificador de pedido
+     * @return Bean insertado
+     */
     @Override
     public Pedido insertPedido(Pedido pedido) {
         em.getTransaction().begin();
@@ -108,6 +139,18 @@ public class PedidoServiceImpl implements PedidoService {
         return pedido;
     }
 
+    /**
+     * Metodo para obtener pedidos dependiendo a los parametros de entrada
+     *
+     * @param estatus Estatus del pedido
+     * @param idCliente Identificador de cliente
+     * @param idEmpleado Identificador de empleado
+     * @param idDireccion Identificador de direccion
+     * @param f_reg_ini Intervalo inicial de fecha de registro
+     * @param f_reg_fin Intervalo final de fecha de registro
+     * @param total Total del pedido
+     * @return Lista de pedidos encontrados
+     */
     @Override
     public List<Pedido> getPedidosCriteria(Integer estatus, Integer idCliente, Integer idEmpleado, Integer idDireccion, Date f_reg_ini, Date f_reg_fin, Double total) {
         List<Pedido> pedidos = new ArrayList<>();

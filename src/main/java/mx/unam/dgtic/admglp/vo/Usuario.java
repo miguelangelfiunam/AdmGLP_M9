@@ -34,7 +34,7 @@ public class Usuario {
 
     @OneToOne
     @JoinColumn(name="id_contra", referencedColumnName="id_contra")
-    private Contra contra;
+    private Contra contra; // Contra relacionada al usuario
 
     @Column(name = "usuario_vc_apodo")
     private String apodo; // Seudonimo del usuario en la aplicacion
@@ -81,16 +81,16 @@ public class Usuario {
         inverseJoinColumns = @JoinColumn(name="id_rol", nullable = false)
     )
     @ManyToMany
-    private List<Rol> roles;
+    private List<Rol> roles; // Roles relacionados al usuario
     
     @OneToOne(mappedBy="usuario", cascade = CascadeType.ALL)
-    private Empleado empleado;
+    private Empleado empleado; //Empleado relacionado al usuario
     
     @OneToOne(mappedBy="usuario", cascade = CascadeType.ALL)
-    private Cliente cliente;
+    private Cliente cliente; // Cliente relacionado al usuario
     
     @OneToMany(mappedBy = "usuario")
-    private List<Acceso> accesos;
+    private List<Acceso> accesos; // Accesos relacionados al usuario
 
     public Usuario() {
     }
@@ -214,6 +214,14 @@ public class Usuario {
     public List<Acceso> getAccesos() {
         return accesos;
     }
+    
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
 
     public void setIdusuario(Integer idusuario) {
         this.idusuario = idusuario;
@@ -283,12 +291,12 @@ public class Usuario {
         this.accesos = accesos;
     }
 
-    public Empleado getEmpleado() {
-        return empleado;
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override

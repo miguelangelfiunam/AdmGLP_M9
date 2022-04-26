@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
- * Clase Orden
+ * Entidad Orden Mapeada en la base de datos
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
@@ -29,11 +29,11 @@ public class Orden {
 
     @OneToOne
     @JoinColumn(name = "id_pedido", referencedColumnName = "id_pedido")
-    private Pedido pedido;
+    private Pedido pedido; // Pedido relacionado a esa orden
 
     @OneToOne
     @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo")
-    private Articulo articulo;
+    private Articulo articulo; // Articulo relacionado a la orden
 
     @Column(name = "ped_art_ti_cantidad")
     private Integer cantidad; // Cantidad de los articulos

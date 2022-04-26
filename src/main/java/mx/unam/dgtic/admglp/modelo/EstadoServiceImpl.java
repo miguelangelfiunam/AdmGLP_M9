@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
@@ -16,7 +12,7 @@ import mx.unam.dgtic.admglp.vo.Estado;
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 26/03/2022 - 26/03/2022
+ * @since 26/03/2022 - 26/04/2022
  *
  */
 public class EstadoServiceImpl implements EstadoService {
@@ -34,6 +30,11 @@ public class EstadoServiceImpl implements EstadoService {
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener estados
+     *
+     * @return Lista de estados encontrada
+     */
     @Override
     public List<Estado> getEstados() {
         List<Estado> estados = new ArrayList<>();
@@ -47,6 +48,12 @@ public class EstadoServiceImpl implements EstadoService {
         return estados;
     }
 
+    /**
+     * Metodo para obtener estados por identificador de estatus
+     *
+     * @param estatus Estatus del estado
+     * @return Lista de estados encontrados
+     */
     @Override
     public List<Estado> getEstados(Integer estatus) {
         List<Estado> estados = new ArrayList<>();
@@ -61,11 +68,23 @@ public class EstadoServiceImpl implements EstadoService {
         return estados;
     }
 
+    /**
+     * Metodo para obtener un estado
+     *
+     * @param idTurno Identificador de estado
+     * @return Bean obtenido
+     */
     @Override
     public Estado getEstado(int idEstado) {
         return em.find(Estado.class, idEstado);
     }
 
+    /**
+     * Metodo para borrar un estado
+     *
+     * @param idTurno Identificador de estado
+     * @return Bean borrado
+     */
     @Override
     public Estado deleteEstado(int idEstado) {
         Estado estado = null;
@@ -82,6 +101,12 @@ public class EstadoServiceImpl implements EstadoService {
         return estado;
     }
 
+    /**
+     * Metodo para actualizar un estado
+     *
+     * @param estado Identificador de estado
+     * @return Bean actualizado
+     */
     @Override
     public Estado updateEstado(Estado estado) {
         em.getTransaction().begin();
@@ -91,6 +116,12 @@ public class EstadoServiceImpl implements EstadoService {
         return estado;
     }
 
+    /**
+     * Metodo para insertar un estado
+     *
+     * @param estado Identificador de estado
+     * @return Bean insertado
+     */
     @Override
     public Estado insertEstado(Estado estado) {
         em.getTransaction().begin();

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.vo;
 
 import jakarta.persistence.Column;
@@ -12,22 +8,28 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 /**
+ * Entidad Global mapeada con la base de datos, que relaciona datos de la
+ * aplicacion desplegada
  *
- * @author unam
+ * @author Miguel Angel Martinez Rivera
+ * @version 1.0.1
+ * @since 26/04/2022 - 26/04/2022
+ *
  */
 @Entity
 @Table(name = "c_global")
 public class Global {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_global")
-    private Integer id;
-    
+    private Integer id; //Identificador de dato unico
+
     @Column(name = "global_vc_nombre")
-    private String nombre;
-    
+    private String nombre; //Nombre del campo 
+
     @Column(name = "global_vc_valor")
-    private String valor;
+    private String valor; //Valor del campo
 
     public Integer getId() {
         return id;

@@ -11,8 +11,13 @@ import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
+ * Entidad Asentamiento donde se obtienen los asentamientos realcionados a las
+ * direcciones
  *
- * @author unam
+ * @author Miguel Angel Martinez Rivera
+ * @version 1.0.0
+ * @since 26/04/2022 - 26/04/2022
+ *
  */
 @Entity
 @Table(name = "c_asentamiento")
@@ -21,24 +26,24 @@ public class Asentamiento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_asentamiento")
-    private Integer id;
-    
+    private Integer id; // Identificador unico de asentamiento
+
     @OneToOne
-    @JoinColumn(name="id_municipio", referencedColumnName="id_municipio")
-    private Municipio municipio;
-    
+    @JoinColumn(name = "id_municipio", referencedColumnName = "id_municipio")
+    private Municipio municipio; // Municipio relacionado al asentamiento
+
     @Column(name = "asenta_c_clave")
-    private String clave;
-    
+    private String clave; // Clave de asentamiento
+
     @Column(name = "asenta_c_codigo_postal")
-    private String codigoPostal;
-    
+    private String codigoPostal; // Codigo postal del asentamiento
+
     @Column(name = "asenta_vc_tipo")
-    private String tipo;
-    
+    private String tipo; //Tipo de asentamiento
+
     @Column(name = "asenta_vc_nombre")
-    private String nombre;
-    
+    private String nombre; //Nombre del asentamiento
+
     @Column(name = "asenta_dt_fecha_registro")
     private Date fecreg; // Fecha de registro
 

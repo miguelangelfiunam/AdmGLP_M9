@@ -11,7 +11,7 @@ import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
- * Clase Acceso para registrar los inicios y fines de sesion de los usuarios
+ * Entidad Acceso para registrar los inicios y fines de sesion de los usuarios
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.0
@@ -25,7 +25,7 @@ public class Acceso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_acceso")
-    private Integer id;
+    private Integer id; // Identificador unico de acceso
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")

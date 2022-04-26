@@ -1,23 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import mx.unam.dgtic.admglp.vo.Global;
 import mx.unam.dgtic.admglp.vo.Global;
 
 /**
- * Servicio para consulta de globals
+ * Servicio para consulta de globales
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 26/03/2022 - 26/03/2022
+ * @since 26/03/2022 - 26/04/2022
  *
  */
 public class GlobalServiceImpl implements GlobalService {
@@ -35,6 +29,11 @@ public class GlobalServiceImpl implements GlobalService {
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener globales
+     *
+     * @return Lista de globales encontrada
+     */
     @Override
     public List<Global> getGlobales() {
         List<Global> globales = new ArrayList<>();
@@ -48,11 +47,23 @@ public class GlobalServiceImpl implements GlobalService {
         return globales;
     }
 
+    /**
+     * Metodo para obtener un global
+     *
+     * @param idGlobal Identificador de global
+     * @return Bean obtenido
+     */
     @Override
     public Global getGlobal(int idGlobal) {
         return em.find(Global.class, idGlobal);
     }
 
+    /**
+     * Metodo para obtener un global
+     *
+     * @param nomGlobal Nombre de la global
+     * @return Bean obtenido
+     */
     @Override
     public Global getGlobal(String nomGlobal) {
         Global global = null;
@@ -71,6 +82,12 @@ public class GlobalServiceImpl implements GlobalService {
         return global;
     }
 
+    /**
+     * Metodo para borrar un global
+     *
+     * @param idGlobal Identificador del global
+     * @return Bean borrado
+     */
     @Override
     public Global deleteGlobal(int idGlobal) {
         Global global = null;
@@ -87,6 +104,12 @@ public class GlobalServiceImpl implements GlobalService {
         return global;
     }
 
+    /**
+     * Metodo para actualizar un global
+     *
+     * @param global Identificador del global
+     * @return Bean actualizado
+     */
     @Override
     public Global updateGlobal(Global global) {
         em.getTransaction().begin();
@@ -95,6 +118,12 @@ public class GlobalServiceImpl implements GlobalService {
         return global;
     }
 
+    /**
+     * Metodo para insertar un global
+     *
+     * @param global Identificador de global
+     * @return Bean insertado
+     */
     @Override
     public Global insertGlobal(Global global) {
         em.getTransaction().begin();

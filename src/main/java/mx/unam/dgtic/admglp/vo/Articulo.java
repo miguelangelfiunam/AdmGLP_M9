@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
- * Clase Articulo donde se agregan los articulos a vender
+ * Entidad Articulo donde se agregan los articulos a vender
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.0
@@ -23,13 +23,13 @@ public class Articulo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_articulo")
-    private Integer id;
+    private Integer id; // Identificador unico de articulo
 
     @Column(name = "articulo_vc_nombre")
-    private String nombre;
+    private String nombre; // Nombre del articulo
 
     @Column(name = "articulo_d_precio_articulo")
-    private Double precio;
+    private Double precio; // Precio del articulo
 
     @Column(name = "articulo_dt_fecha_registro")
     private Date fecreg; // Fecha de registro

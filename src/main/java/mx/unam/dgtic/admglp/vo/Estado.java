@@ -9,23 +9,28 @@ import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
+ * Entidad Estado mapeada con la base de datos
  *
- * @author unam
+ * @author Miguel Angel Martinez Rivera
+ * @version 1.0.1
+ * @since 26/04/2022 - 26/04/2022
+ *
  */
 @Entity
 @Table(name = "c_estado")
 public class Estado {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_estado")
-    private Integer id;
-    
+    private Integer id; // Identificador de estado
+
     @Column(name = "estado_c_clave")
-    private String clave;
-    
+    private String clave; // Clave de estado
+
     @Column(name = "estado_vc_nombre")
-    private String nombre;
-    
+    private String nombre; // Nombre del estado
+
     @Column(name = "estado_dt_fecha_registro")
     private Date fecreg; // Fecha de registro
 
@@ -34,6 +39,17 @@ public class Estado {
 
     @Column(name = "estado_si_estatus")
     private Integer estatus; // Estatus del registro en la base
+
+    public Estado() {
+    }
+
+    public Estado(String clave, String nombre, Date fecreg, Date fecact, Integer estatus) {
+        this.clave = clave;
+        this.nombre = nombre;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.estatus = estatus;
+    }
 
     public int getId() {
         return id;

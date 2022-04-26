@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
@@ -16,7 +12,7 @@ import mx.unam.dgtic.admglp.vo.Rol;
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 26/03/2022 - 26/03/2022
+ * @since 26/03/2022 - 26/04/2022
  *
  */
 public class RolServiceImpl implements RolService {
@@ -34,6 +30,11 @@ public class RolServiceImpl implements RolService {
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener roles
+     *
+     * @return Lista de roles encontrada
+     */
     @Override
     public List<Rol> getRoles() {
         List<Rol> roles = new ArrayList<>();
@@ -47,6 +48,12 @@ public class RolServiceImpl implements RolService {
         return roles;
     }
 
+    /**
+     * Metodo para obtener roles por identificador de estatus
+     *
+     * @param estatus Estatus del rol
+     * @return
+     */
     @Override
     public List<Rol> getRoles(Integer estatus) {
         List<Rol> rols = new ArrayList<>();
@@ -61,11 +68,23 @@ public class RolServiceImpl implements RolService {
         return rols;
     }
 
+    /**
+     * Metodo para obtener un rol
+     *
+     * @param idRol Identificador de rol
+     * @return Bean obtenido
+     */
     @Override
     public Rol getRol(int idRol) {
         return em.find(Rol.class, idRol);
     }
 
+    /**
+     * Metodo para borrar un rol
+     *
+     * @param idRol Identificador de rol
+     * @return Bean borrado
+     */
     @Override
     public Rol deleteRol(int idRol) {
         Rol rol = null;
@@ -82,6 +101,12 @@ public class RolServiceImpl implements RolService {
         return rol;
     }
 
+    /**
+     * Metodo para actualizar un rol
+     *
+     * @param rol Identificador de rol
+     * @return Bean actualizado
+     */
     @Override
     public Rol updateRol(Rol rol) {
         em.getTransaction().begin();
@@ -91,6 +116,12 @@ public class RolServiceImpl implements RolService {
         return rol;
     }
 
+    /**
+     * Metodo para insertar un rol
+     *
+     * @param rol Identificador de rol
+     * @return Bean insertado
+     */
     @Override
     public Rol insertRol(Rol rol) {
         em.getTransaction().begin();

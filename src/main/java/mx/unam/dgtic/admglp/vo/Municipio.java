@@ -14,8 +14,12 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
+ * Entidad Municipio mapeada para mostrar los municipios
  *
- * @author unam
+ * @author Miguel Angel Martinez Rivera
+ * @version 1.0.1
+ * @since 26/04/2022 - 26/04/2022
+ *
  */
 @Entity
 @Table(name = "c_municipio")
@@ -24,20 +28,20 @@ public class Municipio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_municipio")
-    private Integer id;
+    private Integer id; // Identificador de municipio
 
     @OneToOne
     @JoinColumn(name = "id_estado", referencedColumnName = "id_estado")
-    private Estado estado;
+    private Estado estado; // Estado relacionado al municipio
 
     @OneToMany(mappedBy = "municipio")
-    private Collection<Asentamiento> asentamientos = new ArrayList<Asentamiento>();
+    private Collection<Asentamiento> asentamientos = new ArrayList<Asentamiento>(); // Lista de asentamientos relacionados al estado
 
     @Column(name = "municipio_c_clave")
-    private String clave;
+    private String clave; // Clave del municipio
 
     @Column(name = "municipio_vc_nombre")
-    private String nombre;
+    private String nombre; // Nombre del municipio
 
     @Column(name = "municipio_dt_fecha_registro")
     private Date fecreg; // Fecha de registro
@@ -127,7 +131,6 @@ public class Municipio {
     public Collection<Asentamiento> getAsentamientos() {
         return asentamientos;
     }
-    
 
     @Override
     public String toString() {

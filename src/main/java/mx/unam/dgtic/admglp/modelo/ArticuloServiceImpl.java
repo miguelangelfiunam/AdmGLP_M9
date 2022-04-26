@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
@@ -16,7 +12,7 @@ import mx.unam.dgtic.admglp.vo.Articulo;
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 26/03/2022 - 26/03/2022
+ * @since 26/03/2022 - 26/04/2022
  *
  */
 public class ArticuloServiceImpl implements ArticuloService {
@@ -34,6 +30,11 @@ public class ArticuloServiceImpl implements ArticuloService {
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener todos los articulos
+     *
+     * @return Lista de articulos encontrados
+     */
     @Override
     public List<Articulo> getArticulos() {
         List<Articulo> articulos = new ArrayList<>();
@@ -47,6 +48,12 @@ public class ArticuloServiceImpl implements ArticuloService {
         return articulos;
     }
 
+    /**
+     * Metodo para obtener articulos por estatus
+     *
+     * @param estatus Estatus a buscar
+     * @return Lista de articulos encontrados por estatus
+     */
     @Override
     public List<Articulo> getArticulos(Integer estatus) {
         List<Articulo> articulos = new ArrayList<>();
@@ -61,11 +68,23 @@ public class ArticuloServiceImpl implements ArticuloService {
         return articulos;
     }
 
+    /**
+     * Metodo para obtener un articulo por su identificador
+     *
+     * @param idArticulo Identificador de articulo
+     * @return Bean con la informacion encontrada
+     */
     @Override
     public Articulo getArticulo(int idArticulo) {
         return em.find(Articulo.class, idArticulo);
     }
 
+    /**
+     * Metodo para borrar un articulo por su identificador
+     *
+     * @param idArticulo Identificador de articulo
+     * @return Bean con la informacion borrada
+     */
     @Override
     public Articulo deleteArticulo(int idArticulo) {
         Articulo articulo = null;
@@ -82,6 +101,12 @@ public class ArticuloServiceImpl implements ArticuloService {
         return articulo;
     }
 
+    /**
+     * Metodo para actualizar un articulo
+     *
+     * @param articulo Bean con la informacion a actualizar
+     * @return Bean con la informacion actualizada
+     */
     @Override
     public Articulo updateArticulo(Articulo articulo) {
         em.getTransaction().begin();
@@ -91,6 +116,12 @@ public class ArticuloServiceImpl implements ArticuloService {
         return articulo;
     }
 
+    /**
+     * Metodo para insertar un articulo
+     *
+     * @param articulo Bean con la informacion a actualizar
+     * @return Bean con la informacion insertada
+     */
     @Override
     public Articulo insertArticulo(Articulo articulo) {
         em.getTransaction().begin();

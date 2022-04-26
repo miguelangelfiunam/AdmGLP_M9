@@ -11,11 +11,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Clase rol que hace match con el catalogo de roles
+ * Entidad rol que hace match con el catalogo de roles
  *
  * @author Miguel Angel Martinez Rivera
- * @version 1.0.0
- * @since 20/11/2021 - 20/11/2021
+ * @version 1.0.1
+ * @since 20/11/2021 - 26/14/2022
  *
  */
 @Entity
@@ -42,7 +42,7 @@ public class Rol {
     private Integer estatus; // Estatus del registro en la base
     
     @ManyToMany(mappedBy = "roles")
-    private List<Usuario> usuarios;
+    private List<Usuario> usuarios; // Lista de usuarios relacionados al rol
 
     public Rol() {
     }
@@ -84,6 +84,10 @@ public class Rol {
         return estatus;
     }
 
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
     public void setIdrol(Integer idrol) {
         this.idrol = idrol;
     }
@@ -106,6 +110,10 @@ public class Rol {
 
     public void setEstatus(Integer estatus) {
         this.estatus = estatus;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     @Override

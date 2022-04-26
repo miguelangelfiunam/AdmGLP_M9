@@ -7,16 +7,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
- * Clase Empleado relacionado a un Pedido
+ * Entidad EmpleadoPedido con relacion a esa dos entidades
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 11/04/2022 - 11/04/2022
+ * @since 11/04/2022 - 26/04/2022
  *
  */
 @Entity
@@ -30,11 +29,11 @@ public class Empleadopedido {
 
     @ManyToOne
     @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")
-    private Empleado empleado;
+    private Empleado empleado; // Empleado relacionado al pedido
 
     @ManyToOne
     @JoinColumn(name = "id_pedido", referencedColumnName = "id_pedido")
-    private Pedido pedido;
+    private Pedido pedido; // Pedido relacionado al empleado
 
     @Column(name = "emp_ped_dt_fecha_registro")
     private Date fecreg; // Fecha de registro

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
@@ -16,7 +12,7 @@ import mx.unam.dgtic.admglp.vo.Transporte;
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 26/03/2022 - 26/03/2022
+ * @since 26/03/2022 - 26/04/2022
  *
  */
 public class TransporteServiceImpl implements TransporteService {
@@ -34,6 +30,11 @@ public class TransporteServiceImpl implements TransporteService {
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener transportes
+     *
+     * @return Lista de transportes encontrados
+     */
     @Override
     public List<Transporte> getTransportes() {
         List<Transporte> transportes = new ArrayList<>();
@@ -47,6 +48,12 @@ public class TransporteServiceImpl implements TransporteService {
         return transportes;
     }
 
+    /**
+     * Metodo para obtener trasnportes por estatus
+     *
+     * @param estatus Estatus a buscar
+     * @return Lista de transportes encontrados
+     */
     @Override
     public List<Transporte> getTransportes(Integer estatus) {
         List<Transporte> transportes = new ArrayList<>();
@@ -61,11 +68,23 @@ public class TransporteServiceImpl implements TransporteService {
         return transportes;
     }
 
+    /**
+     * Metodo para obtener un trasnporte
+     *
+     * @param idTransporte Identificador de transporte
+     * @return Bean encontrado
+     */
     @Override
     public Transporte getTransporte(int idTransporte) {
         return em.find(Transporte.class, idTransporte);
     }
 
+    /**
+     * Metodo para eliminar un trasnporte
+     *
+     * @param idTransporte Identificador de transporte
+     * @return Bean eliminado
+     */
     @Override
     public Transporte deleteTransporte(int idTransporte) {
         Transporte transporte = null;
@@ -82,6 +101,12 @@ public class TransporteServiceImpl implements TransporteService {
         return transporte;
     }
 
+    /**
+     * Metodo para actualizar un trasnporte
+     *
+     * @param idTransporte Identificador de transporte
+     * @return Bean actualizado
+     */
     @Override
     public Transporte updateTransporte(Transporte transporte) {
         em.getTransaction().begin();
@@ -91,6 +116,12 @@ public class TransporteServiceImpl implements TransporteService {
         return transporte;
     }
 
+    /**
+     * Metodo para insertar un trasnporte
+     *
+     * @param idTransporte Identificador de transporte
+     * @return Bean insertado
+     */
     @Override
     public Transporte insertTransporte(Transporte transporte) {
         em.getTransaction().begin();

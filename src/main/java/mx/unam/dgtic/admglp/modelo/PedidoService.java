@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import java.util.Date;
@@ -9,7 +5,7 @@ import java.util.List;
 import mx.unam.dgtic.admglp.vo.Pedido;
 
 /**
- * Servicio para consulta de pedidos
+ * Interfaz de servicio para consulta de pedidos
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1

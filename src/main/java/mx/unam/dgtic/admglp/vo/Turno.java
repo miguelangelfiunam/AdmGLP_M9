@@ -9,11 +9,11 @@ import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
- * Clase Turno
+ * Entidad Turno que registra las entradas y salidas del usuario
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 11/04/2022 - 11/04/2022
+ * @since 11/04/2022 - 26/04/2022
  *
  */
 @Entity

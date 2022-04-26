@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/TaccesoRootlates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/TaccesoRootlates/Classes/Class.java to edit this taccesoRootlate
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
@@ -24,7 +20,7 @@ import mx.unam.dgtic.admglp.vo.Usuario;
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 26/03/2022 - 26/03/2022
+ * @since 26/03/2022 - 26/04/2022
  *
  */
 public class AccesoServiceImpl implements AccesoService {
@@ -42,6 +38,11 @@ public class AccesoServiceImpl implements AccesoService {
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener los acceso del sistema completamente
+     *
+     * @return Lista de accesos completa
+     */
     @Override
     public List<Acceso> getAccesos() {
         List<Acceso> accesos = new ArrayList<>();
@@ -55,6 +56,17 @@ public class AccesoServiceImpl implements AccesoService {
         return accesos;
     }
 
+    /**
+     * Metodo para obtener accesos dependiendo de los parametros de entrada
+     *
+     * @param estatus Estado del acceso
+     * @param r_ini_1 Intervalo inicial de la fecha de inicio del acceso
+     * @param r_ini_2 Intervalo final de la fecha de inicio del acceso
+     * @param r_fin_1 Intervalo inicial de la fecha de fin del acceso
+     * @param r_fin_2 Intervalo final de la fecha de fin del acceso
+     * @param idUsu Identificador de usuario relacionado al acceso
+     * @return Lista de accesos que coincidan
+     */
     @Override
     public List<Acceso> getAccesosCriteria(Integer estatus, Date r_ini_1, Date r_ini_2, Date r_fin_1, Date r_fin_2, Integer idUsu) {
         List<Acceso> accesos = new ArrayList<>();
@@ -146,11 +158,23 @@ public class AccesoServiceImpl implements AccesoService {
         return accesos;
     }
 
+    /**
+     * Obtener un acceso por su identificador
+     *
+     * @param idAcceso Identificador de acceso
+     * @return Bean encontrado
+     */
     @Override
     public Acceso getAcceso(int idAcceso) {
         return em.find(Acceso.class, idAcceso);
     }
 
+    /**
+     * Borrar un acceso por su identificador
+     *
+     * @param idAcceso Identificador de acceso
+     * @return Bean borrado
+     */
     @Override
     public Acceso deleteAcceso(int idAcceso) {
         Acceso acceso = null;
@@ -167,6 +191,12 @@ public class AccesoServiceImpl implements AccesoService {
         return acceso;
     }
 
+    /**
+     * Metodo para actualizar el acceso indicado
+     *
+     * @param acceso Bean con la informacion que se va actualizar
+     * @return Bean actualizado
+     */
     @Override
     public Acceso updateAcceso(Acceso acceso) {
         em.getTransaction().begin();
@@ -175,6 +205,12 @@ public class AccesoServiceImpl implements AccesoService {
         return acceso;
     }
 
+    /**
+     * Insercion de un acceso
+     *
+     * @param acceso Bean con la informacion que se va insertar
+     * @return Bean insertado
+     */
     @Override
     public Acceso insertAcceso(Acceso acceso) {
         em.getTransaction().begin();

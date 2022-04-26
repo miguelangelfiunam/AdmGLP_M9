@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
@@ -16,10 +12,10 @@ import mx.unam.dgtic.admglp.vo.Municipio;
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 26/03/2022 - 26/03/2022
+ * @since 26/03/2022 - 26/04/2022
  *
  */
-public class MunicipioServiceImpl implements MunicipioService{
+public class MunicipioServiceImpl implements MunicipioService {
 
     private Exception error;
 
@@ -34,6 +30,11 @@ public class MunicipioServiceImpl implements MunicipioService{
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener municipios
+     *
+     * @return Lista de municipios encontrada
+     */
     @Override
     public List<Municipio> getMunicipios() {
         List<Municipio> municipios = new ArrayList<>();
@@ -47,7 +48,13 @@ public class MunicipioServiceImpl implements MunicipioService{
         }
         return municipios;
     }
-    
+
+    /**
+     * Metodo para obtener municipios por identificador de estatus
+     *
+     * @param estatus Estatus del municipio
+     * @return Lista de municipios encontrados
+     */
     @Override
     public List<Municipio> getMunicipios(Integer estatus) {
         List<Municipio> municipios = new ArrayList<>();
@@ -62,16 +69,28 @@ public class MunicipioServiceImpl implements MunicipioService{
         return municipios;
     }
 
+    /**
+     * Metodo para obtener un municipio
+     *
+     * @param idMunicipio Identificador de municipio
+     * @return Bean obtenido
+     */
     @Override
-    public Municipio getMunicipio(int idmunicipio) {
-        return em.find(Municipio.class, idmunicipio);
+    public Municipio getMunicipio(int idMunicipio) {
+        return em.find(Municipio.class, idMunicipio);
     }
 
+    /**
+     * Metodo para borrar un municipio
+     *
+     * @param idMunicipio Identificador de municipio
+     * @return Bean borrado
+     */
     @Override
-    public Municipio deleteMunicipio(int idmunicipio) {
+    public Municipio deleteMunicipio(int idMunicipio) {
         Municipio municipio = null;
         try {
-            municipio = getMunicipio(idmunicipio);
+            municipio = getMunicipio(idMunicipio);
             if (municipio != null) {
                 em.getTransaction().begin();
                 em.remove(municipio);
@@ -83,6 +102,12 @@ public class MunicipioServiceImpl implements MunicipioService{
         return municipio;
     }
 
+    /**
+     * Metodo para actualizar un municipio
+     *
+     * @param municipio Identificador de municipio
+     * @return Bean actualizado
+     */
     @Override
     public Municipio updateMunicipio(Municipio municipio) {
         em.getTransaction().begin();
@@ -92,6 +117,12 @@ public class MunicipioServiceImpl implements MunicipioService{
         return municipio;
     }
 
+    /**
+     * Metodo para insertar un municipio
+     *
+     * @param municipio Identificador de municipio
+     * @return Bean insertado
+     */
     @Override
     public Municipio insertMunicipio(Municipio municipio) {
         em.getTransaction().begin();
@@ -100,6 +131,13 @@ public class MunicipioServiceImpl implements MunicipioService{
         return municipio;
     }
 
+    /**
+     * Metodo para obtener los municipios por estado
+     *
+     * @param idEstado Identificador de estado
+     * @param estatus_municipio Estatus del municipio
+     * @return Lista de municipios encontrados
+     */
     @Override
     public List<Municipio> getMunicipiosPorIdEstado(Integer idEstado, Integer estatus_municipio) {
         List<Municipio> municipios = new ArrayList<>();

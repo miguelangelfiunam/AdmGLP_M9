@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
@@ -16,7 +12,7 @@ import mx.unam.dgtic.admglp.vo.Empleado;
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 26/03/2022 - 26/03/2022
+ * @since 26/03/2022 - 26/04/2022
  *
  */
 public class EmpleadoServiceImpl implements EmpleadoService {
@@ -34,6 +30,11 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener empleados
+     *
+     * @return Lista de empleados encontrada
+     */
     @Override
     public List<Empleado> getEmpleados() {
         List<Empleado> empleados = new ArrayList<>();
@@ -47,6 +48,12 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         return empleados;
     }
 
+    /**
+     * Metodo para obtener empleados por identificador de estatus
+     *
+     * @param estatus Estatus del empleado
+     * @return Lista de empleados encontrados
+     */
     @Override
     public List<Empleado> getEmpleados(Integer estatus) {
         List<Empleado> empleados = new ArrayList<>();
@@ -61,16 +68,28 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         return empleados;
     }
 
+    /**
+     * Metodo para obtener un empleado
+     *
+     * @param idEmpleado Identificador de empleado
+     * @return Bean obtenido
+     */
     @Override
-    public Empleado getEmpleado(int idempleado) {
-        return em.find(Empleado.class, idempleado);
+    public Empleado getEmpleado(int idEmpleado) {
+        return em.find(Empleado.class, idEmpleado);
     }
 
+    /**
+     * Metodo para borrar un empleado
+     *
+     * @param idEmpleado Identificador de empleado
+     * @return Bean borrado
+     */
     @Override
-    public Empleado deleteEmpleado(int idempleado) {
+    public Empleado deleteEmpleado(int idEmpleado) {
         Empleado empleado = null;
         try {
-            empleado = getEmpleado(idempleado);
+            empleado = getEmpleado(idEmpleado);
             if (empleado != null) {
                 em.getTransaction().begin();
                 em.remove(empleado);
@@ -82,6 +101,12 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         return empleado;
     }
 
+    /**
+     * Metodo para actualizar un empleado
+     *
+     * @param empleado Identificador de empleado
+     * @return Bean actualizado
+     */
     @Override
     public Empleado updateEmpleado(Empleado empleado) {
         em.getTransaction().begin();
@@ -91,6 +116,12 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         return empleado;
     }
 
+    /**
+     * Metodo para insertar un empleado
+     *
+     * @param empleado Identificador de empleado
+     * @return Bean insertado
+     */
     @Override
     public Empleado insertEmpleado(Empleado empleado) {
         em.getTransaction().begin();
@@ -99,6 +130,12 @@ public class EmpleadoServiceImpl implements EmpleadoService {
         return empleado;
     }
 
+    /**
+     * Metodo para obtener un empleado por identificador de usuario
+     *
+     * @param idUsuario Identificador de usuario
+     * @return Bean encontrado
+     */
     @Override
     public Empleado getEmpleadoPorIdUsuario(int idUsuario) {
         Empleado empleado = null;

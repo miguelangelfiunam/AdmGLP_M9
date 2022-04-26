@@ -1,8 +1,13 @@
 package mx.unam.dgtic.admglp.vo;
 
 /**
+ * Numeracion de tipo TransporteMarca donde se agregan las marcas disponibles de
+ * transportes
  *
- * @author unam
+ * @author Miguel Angel Martinez Rivera
+ * @version 1.0.1
+ * @since 26/04/2022 - 26/04/2022
+ *
  */
 public enum TransporteMarca {
     NISSAN,

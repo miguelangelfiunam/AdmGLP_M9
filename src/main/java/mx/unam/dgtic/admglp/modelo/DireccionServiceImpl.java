@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
@@ -16,7 +12,7 @@ import mx.unam.dgtic.admglp.vo.Direccion;
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 26/03/2022 - 26/03/2022
+ * @since 26/03/2022 - 26/04/2022
  *
  */
 public class DireccionServiceImpl implements DireccionService {
@@ -34,6 +30,11 @@ public class DireccionServiceImpl implements DireccionService {
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener direcciones
+     *
+     * @return Lista de direcciones encontradas
+     */
     @Override
     public List<Direccion> getDirecciones() {
         List<Direccion> direccions = new ArrayList<>();
@@ -47,6 +48,12 @@ public class DireccionServiceImpl implements DireccionService {
         return direccions;
     }
 
+    /**
+     * Metodo para obtener direcciones por identificador de estatus
+     *
+     * @param estatus Estatus de la direccion
+     * @return Lista de direcciones encontradas
+     */
     @Override
     public List<Direccion> getDirecciones(Integer estatus) {
         List<Direccion> direccions = new ArrayList<>();
@@ -61,11 +68,23 @@ public class DireccionServiceImpl implements DireccionService {
         return direccions;
     }
 
+    /**
+     * Metodo para obtener un direccion
+     *
+     * @param idDireccion Identificador de direccion
+     * @return Bean obtenido
+     */
     @Override
     public Direccion getDireccion(int idDireccion) {
         return em.find(Direccion.class, idDireccion);
     }
 
+    /**
+     * Metodo para borrar un direccion
+     *
+     * @param idDireccion Identificador de direccion
+     * @return Bean borrado
+     */
     @Override
     public Direccion deleteDireccion(int idDireccion) {
         Direccion direccion = null;
@@ -82,6 +101,12 @@ public class DireccionServiceImpl implements DireccionService {
         return direccion;
     }
 
+    /**
+     * Metodo para actualizar un direccion
+     *
+     * @param direccion Identificador de direccion
+     * @return Bean actualizado
+     */
     @Override
     public Direccion updateDireccion(Direccion direccion) {
         em.getTransaction().begin();
@@ -91,6 +116,12 @@ public class DireccionServiceImpl implements DireccionService {
         return direccion;
     }
 
+    /**
+     * Metodo para insertar un direccion
+     *
+     * @param direccion Identificador de direccion
+     * @return Bean insertado
+     */
     @Override
     public Direccion insertDireccion(Direccion direccion) {
         em.getTransaction().begin();
@@ -99,6 +130,14 @@ public class DireccionServiceImpl implements DireccionService {
         return direccion;
     }
 
+    /**
+     * Metodo para obtener las direcciones por asentamiento y estatus de
+     * direccion
+     *
+     * @param idAsentamiento Identificador de asentamiento
+     * @param estatus_direccion Estatus de didreccion
+     * @return Lista de direcciones encontradas
+     */
     @Override
     public List<Direccion> getDireccionesPorIdAsentamiento(Integer idAsentamiento, Integer estatus_direccion) {
         List<Direccion> direccions = new ArrayList<>();

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
@@ -16,7 +12,7 @@ import mx.unam.dgtic.admglp.vo.Contra;
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 26/03/2022 - 26/03/2022
+ * @since 26/03/2022 - 26/04/2022
  *
  */
 public class ContraServiceImpl implements ContraService {
@@ -34,6 +30,11 @@ public class ContraServiceImpl implements ContraService {
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener contras
+     *
+     * @return Lista de contras encontrada
+     */
     @Override
     public List<Contra> getContras() {
         List<Contra> contras = new ArrayList<>();
@@ -47,6 +48,12 @@ public class ContraServiceImpl implements ContraService {
         return contras;
     }
 
+    /**
+     * Metodo para obtener contras por identificador de estatus
+     *
+     * @param estatus Estatus de la contra
+     * @return Lista de contras encontradas
+     */
     @Override
     public List<Contra> getContras(Integer estatus) {
         List<Contra> contras = new ArrayList<>();
@@ -61,11 +68,23 @@ public class ContraServiceImpl implements ContraService {
         return contras;
     }
 
+    /**
+     * Metodo para obtener una contra
+     *
+     * @param idContra Identificador de contra
+     * @return Bean obtenido
+     */
     @Override
-    public Contra getContra(int idcontra) {
-        return em.find(Contra.class, idcontra);
+    public Contra getContra(int idContra) {
+        return em.find(Contra.class, idContra);
     }
 
+    /**
+     * Metodo para obtener una contra
+     *
+     * @param idContra Identificador de contra
+     * @return Bean obtenido
+     */
     @Override
     public Contra deleteContra(int idContra) {
         Contra contra = null;
@@ -82,6 +101,12 @@ public class ContraServiceImpl implements ContraService {
         return contra;
     }
 
+    /**
+     * Metodo para insertar una contra
+     *
+     * @param contra Identificador de contra
+     * @return Bean insertado
+     */
     @Override
     public Contra updateContra(Contra contra) {
         em.getTransaction().begin();
@@ -91,6 +116,12 @@ public class ContraServiceImpl implements ContraService {
         return contra;
     }
 
+    /**
+     * Metodo para insertar una contra
+     *
+     * @param contra Identificador de contra
+     * @return Bean insertado
+     */
     @Override
     public Contra insertContra(Contra contra) {
         em.getTransaction().begin();

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
@@ -34,6 +30,11 @@ public class ClienteServiceImpl implements ClienteService {
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener clientes
+     *
+     * @return Lista de clientes obtenidos
+     */
     @Override
     public List<Cliente> getClientes() {
         List<Cliente> clientes = new ArrayList<>();
@@ -47,6 +48,12 @@ public class ClienteServiceImpl implements ClienteService {
         return clientes;
     }
 
+    /**
+     * Metodo para obtener clientes por estatus
+     *
+     * @param estatus Estatus a buscar
+     * @return Lista de clientes con ese estatus
+     */
     @Override
     public List<Cliente> getClientes(Integer estatus) {
         List<Cliente> clientes = new ArrayList<>();
@@ -61,11 +68,23 @@ public class ClienteServiceImpl implements ClienteService {
         return clientes;
     }
 
+    /**
+     * Metodo para obtener un cliente
+     *
+     * @param idCliente Identificador de cliente
+     * @return Bean obtenido
+     */
     @Override
     public Cliente getCliente(int idCliente) {
         return em.find(Cliente.class, idCliente);
     }
 
+    /**
+     * Metodo para borrar un cliente
+     *
+     * @param idCliente Identificador de cliente
+     * @return Bean borrado
+     */
     @Override
     public Cliente deleteCliente(int idCliente) {
         Cliente cliente = null;
@@ -82,6 +101,12 @@ public class ClienteServiceImpl implements ClienteService {
         return cliente;
     }
 
+    /**
+     * Metodo para actualizar un cliente
+     *
+     * @param idCliente Identificador de cliente
+     * @return Bean actualizado
+     */
     @Override
     public Cliente updateCliente(Cliente cliente) {
         em.getTransaction().begin();
@@ -91,6 +116,12 @@ public class ClienteServiceImpl implements ClienteService {
         return cliente;
     }
 
+    /**
+     * Metodo para insertar un cliente
+     *
+     * @param idCliente Identificador de cliente
+     * @return Bean insertado
+     */
     @Override
     public Cliente insertCliente(Cliente cliente) {
         em.getTransaction().begin();
@@ -99,6 +130,11 @@ public class ClienteServiceImpl implements ClienteService {
         return cliente;
     }
 
+    /**
+     * Metodo para obtener el numero de cliente siguiente
+     *
+     * @return Numero de cliente consecutivo
+     */
     @Override
     public Integer getSigCliente() {
         Integer numCliente;
@@ -117,6 +153,12 @@ public class ClienteServiceImpl implements ClienteService {
         return numCliente;
     }
 
+    /**
+     * Metodo para obtener un cliente por el identificador de usuario
+     *
+     * @param idUsuario Identificador de usuario
+     * @return Bean con la informacion obtenida
+     */
     @Override
     public Cliente getClientePorIdUsuario(int idUsuario) {
         Cliente cliente = null;

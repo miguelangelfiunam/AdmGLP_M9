@@ -11,11 +11,11 @@ import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
- * Clase Usuario
+ * Entidad Empleadoturno relacionado a un empleado y su turno en la base
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 07/10/2021 - 20/11/2021
+ * @since 07/10/2021 - 26/04/2022
  *
  */
 @Entity

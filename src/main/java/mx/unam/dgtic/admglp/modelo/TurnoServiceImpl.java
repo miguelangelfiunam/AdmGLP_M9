@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
@@ -16,7 +12,7 @@ import mx.unam.dgtic.admglp.vo.Turno;
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 17/04/2022 - 17/04/2022
+ * @since 17/04/2022 - 26/04/2022
  *
  */
 public class TurnoServiceImpl implements TurnoService {
@@ -34,6 +30,11 @@ public class TurnoServiceImpl implements TurnoService {
         this.em = em;
     }
 
+    /**
+     * Metodo para obtener turnos
+     *
+     * @return Lista de turnos encontrada
+     */
     @Override
     public List<Turno> getTurnos() {
         List<Turno> turnos = new ArrayList<>();
@@ -47,6 +48,12 @@ public class TurnoServiceImpl implements TurnoService {
         return turnos;
     }
 
+    /**
+     * Metodo para obtener turnos por identificador de estatus
+     *
+     * @param estatus Estatus del turno
+     * @return Lista de turnos encontrados
+     */
     @Override
     public List<Turno> getTurnos(Integer estatus) {
         List<Turno> turnos = new ArrayList<>();
@@ -61,11 +68,23 @@ public class TurnoServiceImpl implements TurnoService {
         return turnos;
     }
 
+    /**
+     * Metodo para obtener un turno
+     *
+     * @param idTurno Identificador de turno
+     * @return Bean obtenido
+     */
     @Override
     public Turno getTurno(int idTurno) {
         return em.find(Turno.class, idTurno);
     }
 
+    /**
+     * Metodo para borrar un turno
+     *
+     * @param idTurno Identificador de turno
+     * @return Bean borrado
+     */
     @Override
     public Turno deleteTurno(int idTurno) {
         Turno turno = null;
@@ -82,6 +101,12 @@ public class TurnoServiceImpl implements TurnoService {
         return turno;
     }
 
+    /**
+     * Metodo para actualizar un turno
+     *
+     * @param turno Identificador de turno
+     * @return Bean actualizado
+     */
     @Override
     public Turno updateTurno(Turno turno) {
         em.getTransaction().begin();
@@ -91,6 +116,12 @@ public class TurnoServiceImpl implements TurnoService {
         return turno;
     }
 
+    /**
+     * Metodo para insertar un turno
+     *
+     * @param turno Identificador de turno
+     * @return Bean insertado
+     */
     @Override
     public Turno insertTurno(Turno turno) {
         em.getTransaction().begin();
@@ -102,8 +133,8 @@ public class TurnoServiceImpl implements TurnoService {
     /**
      * Obtiene el turno del dia actual por fecha y hora en el date
      *
-     * @param inicio_turno
-     * @return
+     * @param inicio_turno Fecha de inicio a buscar
+     * @return Bean con la informacion del turno
      */
     @Override
     public Turno getTurnoActual(Date inicio_turno) {
@@ -121,11 +152,6 @@ public class TurnoServiceImpl implements TurnoService {
             throw new RuntimeException("Error al obtener turno por fecha de inicio");
         }
         return turno;
-    }
-
-    @Override
-    public void updateTurnoEstatus(Integer idTurno, Integer estatus) {
-        
     }
 
 }

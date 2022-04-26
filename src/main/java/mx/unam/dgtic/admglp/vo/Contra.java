@@ -11,11 +11,11 @@ import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
- * Clase Contra donde se guardaran la contrase�a del usuario cifrada
+ * Entidad Contra donde se guarda la contraseña del usuario
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.0
- * @since 21/11/2021 - 21/11/2021
+ * @since 21/11/2021 - 26/04/2022
  *
  */
 @Entity
@@ -25,10 +25,10 @@ public class Contra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_contra")
-    private Integer id;
+    private Integer id; // Identificador de contrasenia
 
     @Column(name = "contra_vc_contra_cifrado")
-    private String contra;
+    private String contra; // Clave asignada
 
     @Column(name = "contra_dt_fecha_registro")
     private Date fecreg; // Fecha de registro
@@ -37,7 +37,7 @@ public class Contra {
     private Date fecact; // Fecha de actualizacion
 
     @Column(name = "contra_si_estatus")
-    private Integer estatus; // Estatus del registro en la base
+    private Integer estatus; // Estatus de la contrasenia
     
     @OneToOne(mappedBy="contra", cascade = CascadeType.ALL)
     private Usuario usuario;

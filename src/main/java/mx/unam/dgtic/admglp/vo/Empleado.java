@@ -13,11 +13,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Clase Empleado
+ * Entidad Empleado de las personas que son empleados del sistema
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.0
- * @since 17/02/2022 - 17/02/2022
+ * @since 17/02/2022 - 26/04/2022
  *
  */
 @Entity
@@ -27,30 +27,30 @@ public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_empleado")
-    private Integer id;
+    private Integer id; // Identificador del empleado
 
     @OneToOne
-    @JoinColumn(name="id_usuario", referencedColumnName="id_usuario")
-    private Usuario usuario;
+    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
+    private Usuario usuario; // Usuario relacionado al empleado
 
     @Column(name = "empleado_i_num_trab")
-    private Integer numtrab;
+    private Integer numtrab; // Numero de trabajador
 
     @Column(name = "empleado_i_numero_ss")
-    private String numss;
+    private String numss; // Numero de seguro social
 
     @Column(name = "empleado_c_rfc_trab")
-    private String rfc;
+    private String rfc; // RFC del trabajador
 
     @Column(name = "empleado_dt_fecha_registro")
-    private Date fecreg;
+    private Date fecreg; // Fecha de registro
 
     @Column(name = "empleado_dt_fecha_actualizacion")
-    private Date fecact;
+    private Date fecact; // Fecha de actualizacion
 
     @Column(name = "empleado_si_estatus")
-    private Integer estatus;
-    
+    private Integer estatus; // Estado del empleado
+
     @OneToMany(mappedBy = "empleado")
     List<Empleadopedido> pedidosEmpleado;
 

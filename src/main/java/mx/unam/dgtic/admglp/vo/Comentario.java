@@ -11,11 +11,11 @@ import jakarta.persistence.Table;
 import java.util.Date;
 
 /**
- * Clase Comentario asociado a un pedido
+ * Entidad Comentario asociado a un pedido
  *
  * @author Miguel Angel Martinez Rivera
  * @version 1.0.1
- * @since 07/10/2021 - 20/11/2021
+ * @since 07/10/2021 - 26/04/2022
  *
  */
 @Entity
@@ -25,29 +25,29 @@ public class Comentario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_comentario")
-    private Integer id; // Identificador de usuario
+    private Integer id; // Identificador de comentario
 
     @OneToOne
     @JoinColumn(name = "id_pedido", referencedColumnName = "id_pedido")
-    private Pedido pedido;
+    private Pedido pedido; // Pedido relacionado al comentario
 
     @Column(name = "comentario_i_numero")
-    private Integer numero;
+    private Integer numero; // Numero consecutivo de comentario
 
     @Column(name = "comentario_vc_comentario")
-    private String comentario;
+    private String comentario; // Comentario agregado
 
     @Column(name = "comentario_c_tipo")
-    private String tipo;
+    private String tipo; // Tipo de comentario
 
     @Column(name = "comentario_dt_fecha_registro")
-    private Date fecreg; // Fecha de Inicio de acceso a la aplicacion
+    private Date fecreg; // Fecha de registro
 
     @Column(name = "comentario_dt_fecha_actualizacion")
-    private Date fecact; // Fecha de fin de acceso a la aplicacion
+    private Date fecact; // Fecha de actualizacion
 
     @Column(name = "comentario_si_estatus")
-    private Integer estatus; // Estado del usuario
+    private Integer estatus; // Estado del comentario
 
     public Integer getId() {
         return id;
