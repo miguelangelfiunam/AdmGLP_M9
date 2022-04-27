@@ -33,7 +33,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <hr></hr>
                     <div class="d-flex justify-content-end">
                         <h:form>
-                            <h:commandButton type="submit" value="Agregar" action="#{turnoFormBean.formularioTurno}" class="btn btn-success"/>
+                            <h:commandButton type="submit" value="Finalizar turno" action="#{turnoFormBean.finalizarTurno}" class="btn btn-danger"/>
+                        </h:form>
+                        <span> </span>
+                        <h:form>
+                            <h:commandButton type="submit" value="Iniciar turno" action="#{turnoFormBean.iniciarTurno}" class="btn btn-success"/>
                         </h:form>
                     </div>
                     <br/>
