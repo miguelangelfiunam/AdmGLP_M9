@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+    <h:outputStylesheet name="css/bootstrap-datepicker.css" />
+    <h:outputStylesheet name="css/bootstrap.min.css" />
+    <h:head>
+        <title><h:outputText value="Formulario del usuario"/></title>
+    </h:head>
+    <h:body>
+        <ui:decorate template="/decorator/decorator.xhtml">
+            <ui:define name="contenido">
+                <h:panelGroup rendered="#{usuarioBean.acceso == true}">
+                    <h:panelGroup rendered="#{turnoFormBean.idturno eq null}">
+                        <h2 class="text-center">Adición de turno</h2>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{turnoFormBean.idturno ne null}">
+                        <h2 class="text-center">Actualización de turno</h2>
+                    </h:panelGroup>
+                    <hr></hr>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div>
+                                    <h:form>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="idturno" class="form-label">ID: </label>
+                                                <h:inputText id="idturno" title="ID: "
+                                                             value="#{turnoFormBean.idturno}" disabled="true" class="form-control"/>
+                                            </div>
+                                            <div class="col">
+                                                <label for="inicio" class="form-label">Inicio: </label>
+                                                <h:inputText id="inicio" title="Inicio: "
+                                                             value="#{turnoFormBean.inicio}" required="true"
+                                                             requiredMessage="La fecha de inicio es obligatoria." maxlength="16" class="form-control">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/>  
+                                                </h:inputText>
+
+                                            </div>
+                                            <div class="col">
+                                                <label for="fin" class="form-label">Fin:</label>
+                                                <h:inputText id="fin" title="Fin: "
+                                                             value="#{turnoFormBean.fin}" required="true"
+                                                             requiredMessage="La fecha de fin es obligatoria." maxlength="16" class="form-control">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy HH:mm"/> 
+                                                </h:inputText>
+
+                                            </div>
+                                            <div class="col">
+                                                <label for="estatus" class="form-label">Estatus:</label>
+                                                <h:inputText id="estatus" title="Estatus: "
+                                                             value="#{turnoFormBean.estatus}" required="true"
+                                                             requiredMessage="El estatus es obligatorio." maxlength="3" class="form-control">
+
+                                                </h:inputText>
+                                                <h:selectOneMenu value="#{turnoFormBean.estatus}" disabled="false" required="true" 
+                                                                 class="form-control" title="Estatus: "  requiredMessage="El estatus es obligatorio.">
+                                                    <f:selectItem itemLabel="Selecciona..." />
+                                                    <f:selectItems value="#{estatusModel.cargaEstados("Turnos",10)}" var="estatus" itemLabel="#{estatus.nombre}" itemValue="#{estado.id}"/>
+                                                </h:selectOneMenu>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="d-flex justify-content-between">
+                                            <h:commandButton value="Limpiar" action="#{turnoFormBean.limpiaCampos}" class="btn btn-secondary"/>
+
+                                            <h:commandButton value="Enviar"
+                                                             action="#{turnoFormBean.insertar}" rendered="#{empty turnoFormBean.idturno}" class="btn btn-success"/>
+                                            <h:commandButton  value="Actualizar"
+                                                              action="#{turnoFormBean.actualizar}" rendered="#{not empty turnoFormBean.idturno}" class="btn btn-primary"/>
+                                        </div>
+                                    </h:form>
+                                    <div class="messagecolor">
+                                        <h:messages showSummary="true" showDetail="false" errorStyle="color: red" infoStyle="color: blue" />
+                                    </div>
+                                    <div>
+                                        <br/>
+                                        <h:form>
+                                            <h:commandLink value="Regresar" action="/turno/lista.xhtml"  class="btn btn-danger"/>
+                                        </h:form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h:outputScript name="js/bootstrap-datepicker.js"/>
+                    <h:outputScript name="js/bootstrap.bundle.min.js"/>
+                    <h:outputScript name="js/jquery-3.6.0.min.js"/>
+                    <script>
+                        $('.datepicker').datepicker({
+                            format: "dd/mm/yyyy",
+                            language: "es"
+                        });
+                    </script>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{usuarioBean.acceso == false}">
+                    <div class="container">
+                        <div class="alert alert-danger d-flex align-items-center" role="alert">
+                            <svg width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg>
+                            <div>
+                                <h4 class="alert-heading">No tienes acceso a esta vista</h4>
+                            </div>
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </ui:define>
+        </ui:decorate>
+    </h:body>
+</html>

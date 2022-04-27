@@ -19,7 +19,7 @@ public interface TurnoEJB {
 
     List<Turno> getTurnos();
 
-    Turno getTurnoActual(Date inicio_turno);
+    Turno getTurnoActual(Date inicio_turno, Integer estatus);
 
     List<Turno> getTurnosPorEstatus(Integer estatus);
 

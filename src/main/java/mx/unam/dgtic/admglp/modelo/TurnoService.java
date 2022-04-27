@@ -18,7 +18,7 @@ public interface TurnoService {
 
     List<Turno> getTurnos();
 
-    Turno getTurnoActual(Date inicio_turno);
+    Turno getTurnoActual(Date inicio_turno, Integer estatus);
 
     List<Turno> getTurnos(Integer estatus);
 

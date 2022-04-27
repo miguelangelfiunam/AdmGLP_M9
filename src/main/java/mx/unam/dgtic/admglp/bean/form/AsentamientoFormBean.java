@@ -1,5 +1,8 @@
-package mx.unam.dgtic.admglp.bean;
+package mx.unam.dgtic.admglp.bean.form;
 
+import mx.unam.dgtic.admglp.bean.model.MunicipioModel;
+import mx.unam.dgtic.admglp.bean.model.EstadoModel;
+import mx.unam.dgtic.admglp.bean.model.AsentamientoModel;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;

@@ -1,4 +1,4 @@
-package mx.unam.dgtic.admglp.bean;
+package mx.unam.dgtic.admglp.bean.model;
 
 import jakarta.enterprise.inject.Model;
 import java.io.Serializable;

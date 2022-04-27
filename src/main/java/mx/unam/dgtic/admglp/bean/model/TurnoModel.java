@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package mx.unam.dgtic.admglp.bean;
+package mx.unam.dgtic.admglp.bean.model;
 
 import jakarta.enterprise.inject.Model;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.naming.InitialContext;
 import mx.unam.dgtic.admglp.DB.Conexion;
@@ -38,7 +36,7 @@ public class TurnoModel implements Serializable {
         }
         return turnos;
     }
-    
+
     public List<Turno> cargaTurnos(Integer estatus) {
         List<Turno> turnos = null;
         TurnoEJBLocal service = null;
@@ -64,6 +62,29 @@ public class TurnoModel implements Serializable {
             service = (TurnoEJBLocal) ctx.lookup("java:global/admglp/TurnoEJBLocal!mx.unam.dgtic.admglp.ejb.TurnoEJB");
             if (service != null) {
                 turno = service.getTurno(idturno);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return turno;
+    }
+
+    public Turno cargaTurnoActual() {
+        Turno turno = null;
+        TurnoEJBLocal service = null;
+        try {
+            InitialContext ctx = Conexion.createInitialContext();
+            service = (TurnoEJBLocal) ctx.lookup("java:global/admglp/TurnoEJBLocal!mx.unam.dgtic.admglp.ejb.TurnoEJB");
+            if (service != null) {
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.HOUR_OF_DAY, 7);
+                cal.set(Calendar.MINUTE, 0);
+                cal.set(Calendar.SECOND, 0);
+                cal.set(Calendar.MILLISECOND, 0);
+
+                Date date = new Date();
+                date = cal.getTime();
+                turno = service.getTurnoActual(date, 10);
             }
         } catch (Exception ex) {
             ex.printStackTrace();

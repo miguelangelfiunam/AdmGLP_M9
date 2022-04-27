@@ -1,5 +1,9 @@
-package mx.unam.dgtic.admglp.bean;
+package mx.unam.dgtic.admglp.bean.form;
 
+import mx.unam.dgtic.admglp.bean.model.UsuarioModel;
+import mx.unam.dgtic.admglp.bean.model.ContraModel;
+import mx.unam.dgtic.admglp.bean.model.EmpleadoModel;
+import mx.unam.dgtic.admglp.bean.model.ClienteModel;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -9,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import mx.unam.dgtic.admglp.bean.RolModel;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
 import mx.unam.dgtic.admglp.vo.Cliente;
 import mx.unam.dgtic.admglp.vo.Contra;

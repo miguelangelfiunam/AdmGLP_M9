@@ -40,6 +40,18 @@ public class Turno {
     @Column(name = "turno_si_estatus")
     private Integer estatus; // Estado del transporte
 
+    public Turno() {
+        
+    }
+
+    public Turno(Date fecinicio, Date fecfin, Date fecreg, Date fecact, Integer estatus) {
+        this.fecinicio = fecinicio;
+        this.fecfin = fecfin;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.estatus = estatus;
+    }
+
     public Integer getId() {
         return id;
     }

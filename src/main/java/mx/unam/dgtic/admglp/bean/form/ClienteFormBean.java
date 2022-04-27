@@ -1,5 +1,7 @@
-package mx.unam.dgtic.admglp.bean;
+package mx.unam.dgtic.admglp.bean.form;
 
+import mx.unam.dgtic.admglp.bean.model.UsuarioModel;
+import mx.unam.dgtic.admglp.bean.model.ClienteModel;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;

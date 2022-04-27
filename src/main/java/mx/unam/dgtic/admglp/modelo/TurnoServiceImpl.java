@@ -137,11 +137,12 @@ public class TurnoServiceImpl implements TurnoService {
      * @return Bean con la informacion del turno
      */
     @Override
-    public Turno getTurnoActual(Date inicio_turno) {
+    public Turno getTurnoActual(Date inicio_turno, Integer estatus) {
         Turno turno = null;
         try {
-            TypedQuery<Turno> query = em.createQuery("SELECT t FROM Turno t WHERE t.fecinicio = :fecIni", Turno.class);
+            TypedQuery<Turno> query = em.createQuery("SELECT t FROM Turno t WHERE t.fecinicio = :fecIni AND t.estatus = :est", Turno.class);
             query.setParameter("fecIni", inicio_turno);
+            query.setParameter("est", estatus);
             try {
                 turno = query.getSingleResult();
             } catch (jakarta.persistence.NoResultException e) {

@@ -45,12 +45,12 @@ public class TurnoEJBLocal implements TurnoEJB {
     }
 
     @Override
-    public Turno getTurnoActual(Date inicio_turno) {
+    public Turno getTurnoActual(Date inicio_turno, Integer estatus) {
         Turno turno = null;
         try {
             EntityManager em = Conexion.createEntityManager();
             ts = new TurnoServiceImpl(em);
-            turno = ts.getTurnoActual(inicio_turno);
+            turno = ts.getTurnoActual(inicio_turno, estatus);
 
         } catch (Exception e) {
             String mensaje = "";

@@ -1,5 +1,7 @@
 package mx.unam.dgtic.admglp.bean;
 
+import mx.unam.dgtic.admglp.bean.model.UsuarioModel;
+import mx.unam.dgtic.admglp.bean.model.TurnoModel;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
@@ -10,6 +12,7 @@ import java.util.Date;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
 import mx.unam.dgtic.admglp.vo.Acceso;
 import mx.unam.dgtic.admglp.vo.Rol;
+import mx.unam.dgtic.admglp.vo.Turno;
 import mx.unam.dgtic.admglp.vo.Usuario;
 
 /**
@@ -29,10 +32,13 @@ public class UsuarioBean implements Serializable {
     private Boolean acceso = false;
     private Integer idacceso;
     private String rol;
+    private Turno turnoActual;
     @Inject
     private UsuarioModel usuarioModel;
     @Inject
     private AccesoBean accesoBean;
+    @Inject
+    private TurnoModel turnoModel;
     @Inject
     private MessageBean messageBean;
 
@@ -121,21 +127,21 @@ public class UsuarioBean implements Serializable {
                                 id = usuario.getIdusuario();
                                 acceso = true;
                                 messageBean.setMensajeRespuesta("");
-                                System.out.println(this);
+                                turnoActual = turnoModel.cargaTurnoActual();
                                 return "/usuario/lista";
                             case "Empleado":
                                 this.rol = rolBD.getNombre();
                                 id = usuario.getIdusuario();
                                 acceso = true;
                                 messageBean.setMensajeRespuesta("");
-                                System.out.println(this);
+                                turnoActual = turnoModel.cargaTurnoActual();
                                 return "/empleado/empleado";
                             case "Cliente":
                                 this.rol = rolBD.getNombre();
                                 id = usuario.getIdusuario();
                                 acceso = true;
                                 messageBean.setMensajeRespuesta("");
-                                System.out.println(this);
+                                turnoActual = turnoModel.cargaTurnoActual();
                                 return "/cliente/cliente";
                             default:
                                 break;
@@ -175,6 +181,14 @@ public class UsuarioBean implements Serializable {
             ec.redirect(url);
         } catch (Exception e) {
         }
+    }
+
+    public Turno getTurnoActual() {
+        return turnoActual;
+    }
+
+    public void setTurnoActual(Turno turnoActual) {
+        this.turnoActual = turnoActual;
     }
 
     @Override

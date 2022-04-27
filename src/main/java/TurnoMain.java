@@ -49,9 +49,9 @@ public class TurnoMain {
             System.out.println(date.toString());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             System.out.println(sdf.format(date));
-
+            Integer estatus = 10;
             System.out.println("----------------");
-            muestraTurnoActual(turnoService, date);
+            muestraTurnoActual(turnoService, date, estatus);
 
             System.out.println("----------------");
             actualizaTurno(turnoService);
@@ -75,8 +75,8 @@ public class TurnoMain {
         System.out.println(u);
     }
 
-    public static void muestraTurnoActual(TurnoService turnoService, Date fecha) {
-        Turno u = turnoService.getTurnoActual(fecha);
+    public static void muestraTurnoActual(TurnoService turnoService, Date fecha, Integer estatus) {
+        Turno u = turnoService.getTurnoActual(fecha, estatus);
         if (u != null) {
             System.out.println(u);
         } else {
