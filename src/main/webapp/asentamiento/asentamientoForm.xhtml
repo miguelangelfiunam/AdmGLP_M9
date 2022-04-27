@@ -19,11 +19,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
                 <h:panelGroup rendered="#{usuarioBean.acceso == true}">
-                    <h:panelGroup rendered="#{direccionFormBean.iddireccion eq null}">
-                        <h2 class="text-center">Adición de direccion</h2>
+                    <h:panelGroup rendered="#{asentamientoFormBean.idasentamiento eq null}">
+                        <h2 class="text-center">Adición de asentamiento</h2>
                     </h:panelGroup>
-                    <h:panelGroup rendered="#{direccionFormBean.iddireccion ne null}">
-                        <h2 class="text-center">Actualización de direccion</h2>
+                    <h:panelGroup rendered="#{asentamientoFormBean.idasentamiento ne null}">
+                        <h2 class="text-center">Actualización de asentamiento</h2>
                     </h:panelGroup>
                     <hr></hr>
                     <div class="container">
@@ -34,7 +34,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         <div class="row">
                                             <div class="col">
                                                 <label class="form-label">Estado: </label>
-                                                <h:selectOneMenu value="#{direccionFormBean.idestado}" disabled="false" required="true" 
+                                                <h:selectOneMenu value="#{asentamientoFormBean.idestado}" disabled="false" required="true" 
                                                                  class="form-control" title="Estado: " requiredMessage="El estado es obligatorio.">
                                                     <f:selectItem itemLabel="Selecciona..." />
                                                     <f:selectItems value="#{estadoModel.cargaEstados(10)}" var="estado" itemLabel="#{estado.nombre}" itemValue="#{estado.id}"/>
@@ -45,24 +45,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                             <div class="col">
                                                 <h:panelGroup id="panelMunicipio">
                                                     <label class="form-label">Municipio </label>
-                                                    <h:selectOneMenu value="#{direccionFormBean.idmunicipio}" disabled="false" required="true" 
+                                                    <h:selectOneMenu value="#{asentamientoFormBean.idmunicipio}" disabled="false" required="true" 
                                                                      class="form-control" title="Municipio: " requiredMessage="El municipio es obligatorio.">
                                                         <f:selectItem itemLabel="Selecciona..." />
-                                                        <f:selectItems value="#{municipioModel.cargaMunicipiosPorIdEstado(direccionFormBean.idestado, 10)}" 
+                                                        <f:selectItems value="#{municipioModel.cargaMunicipiosPorIdEstado(asentamientoFormBean.idestado, 10)}" 
                                                                        var="municipio" itemLabel="#{municipio.nombre}" itemValue="#{municipio.id}"/>
-                                                        <f:ajax render="panelAsentamiento"/>
-                                                    </h:selectOneMenu>
-                                                </h:panelGroup>
-                                            </div>
-                                            
-                                            <div class="col">
-                                                <h:panelGroup id="panelAsentamiento">
-                                                    <label class="form-label">Asentamiento </label>
-                                                    <h:selectOneMenu value="#{direccionFormBean.idasentamiento}" disabled="false" required="true" 
-                                                                     class="form-control" title="Asentamiento" requiredMessage="El asentamiento es obligatorio.">
-                                                        <f:selectItem itemLabel="Selecciona..." />
-                                                        <f:selectItems value="#{asentamientoModel.cargaAsentamientosPorIdMunicipio(direccionFormBean.idmunicipio, 10)}" 
-                                                                       var="asentamiento" itemLabel="#{asentamiento.nombre}" itemValue="#{asentamiento.id}"/>
                                                     </h:selectOneMenu>
                                                 </h:panelGroup>
                                             </div>
@@ -70,32 +57,49 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         </div>
                                         <div class="row">
                                             <div class="col">
-                                                <label for="iddireccion" class="form-label">ID: </label>
-                                                <h:inputText id="iddireccion" title="Clave: "
-                                                             value="#{direccionFormBean.iddireccion}" disabled="true"
-                                                             requiredMessage="La clave es obligatoria." class="form-control"/>
+                                                <label for="idasentamiento" class="form-label">ID: </label>
+                                                <h:inputText id="idasentamiento" title="Clave: "
+                                                             value="#{asentamientoFormBean.idasentamiento}" disabled="true"
+                                                             class="form-control"/>
+                                            </div>
+                                            <div class="col">
+                                                <label for="clave" class="form-label">Clave: </label>
+                                                <h:inputText id="clave" title="Clave: "
+                                                             value="#{asentamientoFormBean.clave}" required="true"
+                                                             requiredMessage="La clave es obligatoria." maxlength="4" class="form-control">
+                                                    <f:validateLongRange minimum="1" maximum="9999" />  
+                                                </h:inputText>
+                                            </div>
+                                            <div class="col">
+                                                <label for="postal" class="form-label">Codigo postal: </label>
+                                                <h:inputText id="postal" title="Clave: "
+                                                             value="#{asentamientoFormBean.codigopostal}" required="true"
+                                                             requiredMessage="El codigo postal es obligatorio." maxlength="5" class="form-control">
+                                                    <f:validateLongRange minimum="1" maximum="99999" />  
+                                                </h:inputText>
+                                            </div>
+                                            <div class="col">
+                                                <label for="tipo" class="form-label">Tipo: </label>
+                                                <h:inputText id="tipo" title="Tipo: "
+                                                             value="#{asentamientoFormBean.tipo}" required="true"
+                                                             requiredMessage="El tipo es obligatorio." maxlength="70" class="form-control"> 
+                                                </h:inputText>
                                             </div>
                                             <div class="col">
                                                 <label for="nombre" class="form-label">Nombre:</label>
                                                 <h:inputText id="nombre" title="Nombre: "
-                                                             value="#{direccionFormBean.nombre}" required="true"
-                                                             requiredMessage="El nombre es obligatorio." maxlength="300" class="form-control"/>
-                                            </div>
-                                            <div class="col">
-                                                <label for="referencias" class="form-label">Referencias:</label>
-                                                <h:inputText id="referencias" title="Referencias: "
-                                                             value="#{direccionFormBean.referencias}" required="true"
-                                                             requiredMessage="Las referencias son obligatorias." maxlength="300" class="form-control"/>
+                                                             value="#{asentamientoFormBean.nombre}" required="true"
+                                                             requiredMessage="El nombre es obligatorio." maxlength="150" class="form-control"/>
                                             </div>
                                         </div>
                                         <br/>
                                         <div class="d-flex justify-content-between">
-                                            <h:commandButton value="Limpiar" action="#{direccionFormBean.limpiaCampos}" class="btn btn-secondary"/>
+                                            <h:commandButton value="Limpiar" action="#{asentamientoFormBean.limpiaCampos}" class="btn btn-secondary"/>
 
                                             <h:commandButton value="Enviar"
-                                                             action="#{direccionFormBean.insertar}" rendered="#{empty direccionFormBean.iddireccion}" class="btn btn-success"/>
+                                                             action="#{asentamientoFormBean.insertar}" rendered="#{empty asentamientoFormBean.idasentamiento}" class="btn btn-success"/>
                                             <h:commandButton  value="Actualizar"
-                                                              action="#{direccionFormBean.actualizar}" rendered="#{not empty direccionFormBean.iddireccion}" class="btn btn-primary"/>
+                                                              action="#{asentamientoFormBean.actualizar}" rendered="#{not empty asentamientoFormBean.idasentamiento}" class="btn btn-primary"/>
                                         </div>
                                     </h:form>
                                     <div class="messagecolor">
@@ -104,7 +108,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                     <div>
                                         <br/>
                                         <h:form>
-                                            <h:commandLink value="Regresar" action="/direccion/lista.xhtml"  class="btn btn-danger"/>
+                                            <h:commandLink value="Regresar" action="/asentamiento/lista.xhtml"  class="btn btn-danger"/>
                                         </h:form>
                                     </div>
                                 </div>

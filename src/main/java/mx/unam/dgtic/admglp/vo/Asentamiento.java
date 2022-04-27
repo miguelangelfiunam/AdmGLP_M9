@@ -53,6 +53,19 @@ public class Asentamiento {
     @Column(name = "asenta_si_estatus")
     private Integer estatus; // Estatus del registro en la base
 
+    public Asentamiento(String clave, String codigoPostal, String tipo, String nombre, Date fecreg, Date fecact, Integer estatus) {
+        this.clave = clave;
+        this.codigoPostal = codigoPostal;
+        this.tipo = tipo;
+        this.nombre = nombre;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.estatus = estatus;
+    }
+
+    public Asentamiento() {
+    }
+
     public Integer getId() {
         return id;
     }

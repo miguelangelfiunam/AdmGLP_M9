@@ -3,9 +3,11 @@ package mx.unam.dgtic.admglp.modelo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import mx.unam.dgtic.admglp.vo.Transporte;
+import mx.unam.dgtic.admglp.vo.TransporteMarca;
 
 /**
  * Servicio para consulta de transportes
@@ -128,6 +130,18 @@ public class TransporteServiceImpl implements TransporteService {
         em.persist(transporte);
         em.getTransaction().commit();
         return transporte;
+    }
+
+    @Override
+    public List<TransporteMarca> getMarcasTransportes() {
+        List<TransporteMarca> marcas = new ArrayList<>();
+        try {
+            marcas = Arrays.asList(TransporteMarca.values());
+        } catch (Exception e) {
+            this.error = e;
+            throw new RuntimeException("Error al obtener marcas de transportes");
+        }
+        return marcas;
     }
 
 }

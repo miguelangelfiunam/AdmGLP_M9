@@ -40,6 +40,17 @@ public class Articulo {
     @Column(name = "articulo_si_estatus")
     private Integer estatus; // Estatus del registro en la base
 
+    public Articulo() {
+    }
+
+    public Articulo(String nombre, Double precio, Date fecreg, Date fecact, Integer estatus) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.estatus = estatus;
+    }
+
     public Integer getId() {
         return id;
     }

@@ -2,6 +2,7 @@ package mx.unam.dgtic.admglp.modelo;
 
 import java.util.List;
 import mx.unam.dgtic.admglp.vo.Transporte;
+import mx.unam.dgtic.admglp.vo.TransporteMarca;
 
 /**
  * Interfaz de servicio para consulta de transportes
@@ -18,6 +19,8 @@ public interface TransporteService {
     public List<Transporte> getTransportes();
     
     public List<Transporte> getTransportes(Integer estatus);
+    
+    public List<TransporteMarca> getMarcasTransportes();
 
     public Transporte getTransporte(int idtransporte);
     

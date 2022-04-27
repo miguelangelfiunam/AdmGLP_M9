@@ -38,6 +38,23 @@ public class MunicipioModel implements Serializable {
         }
         return municipios;
     }
+    
+    public List<Municipio> cargaMunicipiosPorIdEstado(Integer idEstado, Integer estatus_municipio) {
+        List<Municipio> municipios = null;
+        MunicipioEJBLocal service = null;
+        try {
+            InitialContext ctx = Conexion.createInitialContext();
+            service = (MunicipioEJBLocal) ctx.lookup("java:global/admglp/MunicipioEJBLocal!mx.unam.dgtic.admglp.ejb.MunicipioEJB");
+            if (service != null) {
+                municipios = service.getMunicipiosPorIdEstado(idEstado, estatus_municipio);
+            } else {
+                municipios = new ArrayList<Municipio>();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return municipios;
+    }
 
     public Municipio cargaMunicipio(Integer idmunicipio) {
         Municipio municipio = null;

@@ -51,6 +51,17 @@ public class Direccion {
     @ManyToMany(mappedBy = "direcciones")
     private List<Cliente> clientes; // Clientes relacionados a la direccion
 
+    public Direccion() {
+    }
+
+    public Direccion(String nombre, String referencias, Date fecreg, Date fecact, Integer estatus) {
+        this.nombre = nombre;
+        this.referencias = referencias;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.estatus = estatus;
+    }
+
     public Integer getIddireccion() {
         return iddireccion;
     }

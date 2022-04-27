@@ -33,7 +33,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <h2 class="text-center">Lista de roles</h2>
                     <hr></hr>
                     <div class="container">
-                        <h:dataTable value="#{cargaRoles}" var="rol" border="3" class="table table-bordered table-hover">
+                        <h:dataTable value="#{rolModel.cargaRoles()}" var="rol" border="3" class="table table-bordered table-hover">
                             <h:column>
                                 <f:facet name="header">id</f:facet>
                                     #{rol.idrol}

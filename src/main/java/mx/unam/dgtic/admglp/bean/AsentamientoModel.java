@@ -38,6 +38,23 @@ public class AsentamientoModel implements Serializable {
         }
         return asentamientos;
     }
+    
+    public List<Asentamiento> cargaAsentamientosPorIdMunicipio(Integer idMunicipio, Integer estatus_asentamiento) {
+        List<Asentamiento> asentamientos = null;
+        AsentamientoEJBLocal service = null;
+        try {
+            InitialContext ctx = Conexion.createInitialContext();
+            service = (AsentamientoEJBLocal) ctx.lookup("java:global/admglp/AsentamientoEJBLocal!mx.unam.dgtic.admglp.ejb.AsentamientoEJB");
+            if (service != null) {
+                asentamientos = service.getAsentamientosPorIdMunicipio(idMunicipio, estatus_asentamiento);
+            } else {
+                asentamientos = new ArrayList<Asentamiento>();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return asentamientos;
+    }
 
     public Asentamiento cargaAsentamiento(Integer idasentamiento) {
         Asentamiento asentamiento = null;

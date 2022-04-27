@@ -4,7 +4,6 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
 import mx.unam.dgtic.admglp.vo.Asentamiento;
@@ -20,31 +19,25 @@ import mx.unam.dgtic.admglp.vo.Direccion;
 public class DireccionFormBean implements Serializable {
 
     private static final long serialVersionUID = -4146681491856848089L;
-    private Integer iddireccion; // Identificador de direccion
-    private Integer idestado; // Identificador de direccion
-    private Integer idmunicipio; // Identificador de direccion
-    private Integer idasentamiento; // Identificador de direccion
-
+    private Integer idestado;
+    private Integer idmunicipio;
+    private Integer idasentamiento;
+    private Integer iddireccion;
     private String nombre;
     private String referencias;
-
-    @Inject
-    private DireccionModel direccionModel;
     @Inject
     private AsentamientoModel asentamientoModel;
     @Inject
-    private MunicipioModel municipioModel;
-    @Inject
-    private EstadoModel estadoModel;
+    private DireccionModel direccionModel;
 
     @Inject
     private MessageBean messageBean;
 
     public String formularioDireccion() {
-        iddireccion = null;
         idestado = null;
         idmunicipio = null;
         idasentamiento = null;
+        iddireccion = null;
         nombre = null;
         referencias = null;
         return "/direccion/direccionForm?faces-redirect=true";
@@ -53,12 +46,10 @@ public class DireccionFormBean implements Serializable {
     public String formularioDireccionID(Integer idDir) {
         Direccion direccion = direccionModel.cargaDireccion(idDir);
         if (direccion != null) {
+            this.idestado = direccion.getAsentamiento().getMunicipio().getEstado().getId();
+            this.idmunicipio = direccion.getAsentamiento().getMunicipio().getId();
+            this.idasentamiento = direccion.getAsentamiento().getId();
             this.iddireccion = idDir;
-            idasentamiento = direccion.getAsentamiento().getId();
-            idmunicipio = direccion.getAsentamiento().getMunicipio().getId();
-            idestado = direccion.getAsentamiento().getMunicipio().getEstado().getId();
-            
-            
             this.nombre = direccion.getNombre();
             this.referencias = direccion.getReferencias();
         }
@@ -72,70 +63,62 @@ public class DireccionFormBean implements Serializable {
 
     public String actualizar() {
         //Obtiene direccion y despues reemplaza
+        Asentamiento asentamientoBD = null;
         Direccion direccionBD = null;
         try {
-            if (direccionModel != null) {
+            if (direccionModel != null && asentamientoModel != null) {
                 direccionBD = direccionModel.cargaDireccion(this.iddireccion);
                 if (direccionBD != null) {
-                    //Buscar Asentamiento por id
-                    direccionBD.setNombre(nombre);
-                    direccionBD.setReferencias(referencias);
-                    direccionBD = direccionModel.actualizaDireccion(direccionBD);
+                    asentamientoBD = asentamientoModel.cargaAsentamiento(idasentamiento);
+                    if (asentamientoBD != null) {
+                        if (direccionBD.getAsentamiento().getId() != asentamientoBD.getId()) {
+                            direccionBD.setAsentamiento(asentamientoBD);
+                        }
+                        direccionBD.setNombre(nombre);
+                        direccionBD.setReferencias(referencias);
+                        direccionModel.actualizaDireccion(direccionBD);
+                    } else {
+                        throw new IllegalStateException("No existe el asentamiento para actualizar");
+                    }
                 }
+            } else {
+                throw new IllegalStateException("No existe la direccion para actualizar");
             }
+            messageBean.setMensajeRespuesta("Se actualiza direccion");
         } catch (Exception ex) {
-            ex.printStackTrace();
+            messageBean.setMensajeRespuesta(ex.getMessage());
         }
-        //Obtiene roles y despues reemplaza
         return "/direccion/direccionForm?faces-redirect=true";
     }
 
     public String insertar() {
-        
-
-        //Prepara contra
-        Asentamiento asentamientoBD = null;
+        //Preparar direccion
+        Asentamiento asentamiento = null;
+        Direccion direccion = null;
         try {
-            if (asentamientoModel != null) {
-                if(idasentamiento != null){
-                    asentamientoBD = asentamientoModel.cargaAsentamiento(idasentamiento);
+            if (direccionModel != null && asentamientoModel != null) {
+                direccion = new Direccion(nombre, referencias, new Date(), null, 10);
+                asentamiento = asentamientoModel.cargaAsentamiento(idasentamiento);
+                if (asentamiento != null) {
+                    direccion.setAsentamiento(asentamiento);
+                } else {
+                    throw new IllegalStateException("No existe el asentamiento para insertar");
                 }
+                direccion = direccionModel.insertaDireccion(direccion);
+                iddireccion = direccion.getIddireccion();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
-//        //Preparar direccion
-//        Direccion direccion = null;
-//        try {
-//            if (direccionModel != null) {
-//                Date date_fnac = new SimpleDateFormat("dd/MM/yyyy").parse(fnac);
-//                direccion = new Direccion(estadoBD, apodo, correo1, correo2, nombre, apellido1, apellido2, edad, date_fnac, telefono1, telefono2, new Date(), null, 10, rolesBD);
-//                direccion = direccionModel.insertaDireccion(direccion);
-//                iddireccion = direccion.getIddireccion();
-//            }
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-
         return "/direccion/direccionForm?faces-redirect=true";
     }
 
     public void limpiaCampos() {
-        iddireccion = null;
         idestado = null;
         idmunicipio = null;
-        idasentamiento = null;
+        iddireccion = null;
         nombre = null;
         referencias = null;
-    }
-
-    public Integer getIddireccion() {
-        return iddireccion;
-    }
-
-    public void setIddireccion(Integer iddireccion) {
-        this.iddireccion = iddireccion;
     }
 
     public Integer getIdestado() {
@@ -162,6 +145,14 @@ public class DireccionFormBean implements Serializable {
         this.idasentamiento = idasentamiento;
     }
 
+    public Integer getIddireccion() {
+        return iddireccion;
+    }
+
+    public void setIddireccion(Integer iddireccion) {
+        this.iddireccion = iddireccion;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -178,5 +169,4 @@ public class DireccionFormBean implements Serializable {
         this.referencias = referencias;
     }
 
-   
 }

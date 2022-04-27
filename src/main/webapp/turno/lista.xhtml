@@ -11,7 +11,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
       xmlns:c="http://java.sun.com/jsp/jstl/core"
       >
     <h:head>
-        <title><h:outputText value="Lista de Direcciones"/></title>
+        <title><h:outputText value="Lista de turnos"/></title>
         <style>
             .noBorders *{
                 border: none !important;
@@ -29,44 +29,49 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
                 <h:panelGroup rendered="#{usuarioBean.rol == 'Administrador'}">
-                    <h2 class="text-center">Lista de Direcciones</h2>
+                    <h2 class="text-center">Lista de turnos</h2>
                     <hr></hr>
+                    <div class="d-flex justify-content-end">
+                        <h:form>
+                            <h:commandButton type="submit" value="Agregar" action="#{turnoFormBean.formularioTurno}" class="btn btn-success"/>
+                        </h:form>
+                    </div>
+                    <br/>
                     <div class="container">
-                        <div class="d-flex justify-content-end">
-                            <h:form>
-                                <h:commandButton type="submit" value="Agregar" action="#{direccionFormBean.formularioDireccion}" class="btn btn-success"/>
-                            </h:form>
-                        </div>
-                        <br/>
                         <table border="3" class="table table-bordered table-hover">
                             <thead>
                                 <tr class="table-secondary">
                                     <th scope="col">ID</th>
-                                    <th scope="col">Direccion</th>
-                                    <th scope="col">Referencias</th>
-                                    <th scope="col">Asentamiento</th>
-                                    <th scope="col">Municipio</th>
-                                    <th scope="col">Estado</th>
+                                    <th scope="col">Inicio</th>
+                                    <th scope="col">Fin</th>
+                                    <th scope="col">Estatus</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="#{direccionModel.cargaDirecciones()}" var="direccion">
-                                    <tr class="#{direccion.estatus eq 10 ? 'table-success': 'table-danger'}">
-                                        <th scope="row"> #{direccion.iddireccion}</th>
-                                        <td scope="row"> #{direccion.nombre}</td>
-                                        <td scope="row"> #{direccion.referencias}</td>
-                                        <td scope="row"> #{direccion.asentamiento.nombre}</td>
-                                        <td scope="row"> #{direccion.asentamiento.municipio.nombre}</td>
-                                        <td scope="row"> #{direccion.asentamiento.municipio.estado.nombre}</td>
+                                <c:forEach items="#{turnoModel.cargaTurnos()}" var="turno">
+                                    <tr class="#{turno.estatus eq 10 ? 'table-success': 'table-danger'}">
+                                        <th scope="row"> #{turno.id}</th>
+                                        <td scope="row"> 
+                                            <h:outputText value="#{turno.fecinicio}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Mexico_City"/>
+                                            </h:outputText>
+                                        </td>
+                                        <td scope="row">
+                                            <h:outputText value="#{turno.fecfin}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Mexico_City"/>
+                                            </h:outputText>
+                                        </td>
+                                        <td scope="row"> #{turno.estatus}</td>
                                         <td>
                                             <h:form>
-                                                <h:commandButton type="submit" value="Editar" action="#{direccionFormBean.formularioDireccionID(direccion.iddireccion)}" class="btn btn-primary"/> <span> </span>
-                                                <c:if test="#{direccion.estatus eq 10}">
-                                                    <h:commandLink type="button" value="Bloquear" action="#{direccionFormBean.actualizarEstatusDireccion(direccion.iddireccion, 20)}" class="btn btn-danger"/>
+                                                <h:commandButton type="submit" value="Editar" action="#{turnoFormBean.formularioTurnoID(turno.id)}" class="btn btn-primary"/>
+                                                <span> </span>
+                                                <c:if test="#{turno.estatus eq 10}">
+                                                    <h:commandLink type="button" value="Bloquear" action="#{turnoFormBean.actualizarEstatusTurno(turno.id, 20)}" class="btn btn-danger"/>
                                                 </c:if>
-                                                <c:if test="#{direccion.estatus eq 20}">
-                                                    <h:commandLink type="button" value="Activar" action="#{direccionFormBean.actualizarEstatusDireccion(direccion.iddireccion, 10)}" class="btn btn-success"/>
+                                                <c:if test="#{turno.estatus eq 20}">
+                                                    <h:commandLink type="button" value="Activar" action="#{turnoFormBean.actualizarEstatusTurno(turno.id, 10)}" class="btn btn-success"/>
                                                 </c:if>
                                             </h:form>
                                         </td>

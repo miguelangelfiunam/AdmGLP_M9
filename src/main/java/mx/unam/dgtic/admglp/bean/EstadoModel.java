@@ -38,6 +38,23 @@ public class EstadoModel implements Serializable {
         }
         return estados;
     }
+    
+    public List<Estado> cargaEstados(Integer estatus) {
+        List<Estado> estados = null;
+        EstadoEJBLocal service = null;
+        try {
+            InitialContext ctx = Conexion.createInitialContext();
+            service = (EstadoEJBLocal) ctx.lookup("java:global/admglp/EstadoEJBLocal!mx.unam.dgtic.admglp.ejb.EstadoEJB");
+            if (service != null) {
+                estados = service.getEstadosPorEstatus(estatus);
+            } else {
+                estados = new ArrayList<Estado>();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return estados;
+    }
 
     public Estado cargaEstado(Integer idestado) {
         Estado estado = null;

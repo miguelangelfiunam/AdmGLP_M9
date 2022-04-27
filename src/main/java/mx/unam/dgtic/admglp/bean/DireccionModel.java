@@ -22,7 +22,7 @@ public class DireccionModel implements Serializable {
 
     private static final long serialVersionUID = -1000003;
 
-    public List<Direccion> cargaDireccions() {
+    public List<Direccion> cargaDirecciones() {
         List<Direccion> direccions = null;
         DireccionEJBLocal service = null;
         try {

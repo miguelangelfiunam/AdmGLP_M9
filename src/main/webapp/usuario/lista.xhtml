@@ -37,7 +37,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                 <h:commandButton type="submit" value="Agregar" action="#{usuarioFormBean.formularioUsuario}" class="btn btn-success"/>
                             </h:form>
                         </div>
-
+                        <br/>
                         <table border="3" class="table table-bordered table-hover">
                             <thead>
                                 <tr class="table-secondary">
@@ -65,7 +65,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         </td>
                                         <td>
                                             <h:form>
-                                                <h:commandButton type="submit" value="Editar" action="#{usuarioFormBean.formularioUsuarioID(usuario.idusuario)}" class="btn btn-primary"/>
+                                                <h:commandButton type="submit" value="Editar" action="#{usuarioFormBean.formularioUsuarioID(usuario.idusuario)}" class="btn btn-primary"/> <span> </span>
                                                 <c:if test="#{usuario.estatus eq 10 and usuarioBean.id ne usuario.idusuario}">
                                                     <h:commandLink type="button" value="Bloquear" action="#{usuarioFormBean.actualizarEstatusUsuario(usuario.idusuario, 20)}" class="btn btn-danger"/>
                                                 </c:if>

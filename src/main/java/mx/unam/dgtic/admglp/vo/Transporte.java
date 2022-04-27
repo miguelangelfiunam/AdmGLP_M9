@@ -49,6 +49,19 @@ public class Transporte {
     @Column(name = "trans_si_estatus")
     private Integer estatus; // Estado del transporte
 
+    public Transporte() {
+    }
+
+    public Transporte(Integer numeroUnidad, Integer modelo, String placas, TransporteMarca marca, Date fecreg, Date fecact, Integer estatus) {
+        this.numeroUnidad = numeroUnidad;
+        this.modelo = modelo;
+        this.placas = placas;
+        this.marca = marca;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.estatus = estatus;
+    }
+
     public Integer getId() {
         return id;
     }
