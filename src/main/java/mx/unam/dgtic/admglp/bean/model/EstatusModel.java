@@ -10,8 +10,12 @@ import mx.unam.dgtic.admglp.ejb.EstatusEJBLocal;
 import mx.unam.dgtic.admglp.vo.Estatus;
 
 /**
+ * Modelo para metodos de estatus
  *
- * @author unam
+ * @author Miguel Angel Martinez Rivera
+ * @version 1.0.1
+ * @since 26/04/2022 - 26/04/2022
+ *
  */
 @Model
 public class EstatusModel implements Serializable {

@@ -49,6 +49,19 @@ public class Comentario {
     @Column(name = "comentario_si_estatus")
     private Integer estatus; // Estado del comentario
 
+    public Comentario() {
+    }
+
+    public Comentario(Pedido pedido, Integer numero, String comentario, String tipo, Date fecreg, Date fecact, Integer estatus) {
+        this.pedido = pedido;
+        this.numero = numero;
+        this.comentario = comentario;
+        this.tipo = tipo;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.estatus = estatus;
+    }
+
     public Integer getId() {
         return id;
     }

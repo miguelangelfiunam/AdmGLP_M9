@@ -62,10 +62,29 @@ public class Pedido {
     private Integer estatus; // Estado del pedido
 
     @OneToMany(mappedBy = "pedido")
-    List<Empleadopedido> pedidosEmpleado;
+    List<Empleadopedido> pedidosEmpleado; // Empleados relacionados al pedido
 
     @OneToMany(mappedBy = "pedido")
-    private List<Orden> ordenesP; // Ordenes relacionadas al articulo
+    private List<Orden> ordenesP; // Ordenes relacionadas al pedido
+    
+    @OneToMany(mappedBy = "pedido")
+    private List<Comentario> comentarios; // Ordenes relacionadas al pedido
+
+    public Pedido() {
+    }
+
+    public Pedido(Cliente cliente, Direccion direccion, Double total, Date fecpedido, Date fecentrega, Integer pago, Date fecreg, Date fecact, String observacion, Integer estatus) {
+        this.cliente = cliente;
+        this.direccion = direccion;
+        this.total = total;
+        this.fecpedido = fecpedido;
+        this.fecentrega = fecentrega;
+        this.pago = pago;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.observacion = observacion;
+        this.estatus = estatus;
+    } 
 
     public Integer getId() {
         return id;
@@ -169,6 +188,14 @@ public class Pedido {
 
     public void setOrdenesP(List<Orden> ordenesP) {
         this.ordenesP = ordenesP;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 
     @Override

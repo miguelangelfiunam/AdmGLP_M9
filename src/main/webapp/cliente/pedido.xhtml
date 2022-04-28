@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -95,7 +91,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                                 </div>
                                                 <div class="col">
                                                     <h:inputText value="#{orden.subtotal}" class="form-control" disabled="true" required="true" >
-
+                                                        <f:convertNumber pattern="#,###,##0.00"/>
                                                     </h:inputText>
                                                 </div>
                                             </div>
@@ -122,7 +118,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                             <div class="col">
                                                 <label class="form-label">Total: </label>
                                                 <h:inputText value="#{ordenFormBean.total}" class="form-control" disabled="true" required="true" >
-
+                                                    <f:convertNumber pattern="#,###,##0.00"/>
                                                 </h:inputText>
                                             </div>
                                         </div>
@@ -131,12 +127,67 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                     <div class="d-flex justify-content-between">
                                         <h:commandButton value="Limpiar" action="#{ordenFormBean.limpiaCampos}" class="btn btn-secondary"/>
 
-                                        <h:commandButton value="Enviar"
+                                        <h:commandButton value="Guardar"
                                                          action="#{ordenFormBean.insertar}" rendered="#{empty ordenFormBean.idPedido}" class="btn btn-success"/>
-                                        <h:commandButton  value="Actualizar"
+                                        <h:commandButton  value="Guardar"
                                                           action="#{ordenFormBean.actualizar}" rendered="#{not empty ordenFormBean.idPedido}" class="btn btn-primary"/>
                                     </div>
                                 </h:form>
+                                <h:panelGroup rendered="#{ordenFormBean.idPedido ne null}">
+                                    <div class="row">
+                                        <h4 class="text-center">Comentarios</h4>
+                                        <hr></hr>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item">
+                                                            <c:forEach items="#{comentarioModel.cargaComentariosPorIdPedido(ordenFormBean.idPedido, 10)}" var="comentario">
+                                                                <div class="#{comentario.tipo eq 'C' ? 'd-flex justify-content-end' : 'd-flex justify-content-start'}">
+                                                                    <blockquote class="blockquote mb-0 ">
+                                                                        <div>
+                                                                            <p class="#{comentario.tipo eq 'C' ? 'text-end' : 'text-start'}">#{comentario.comentario}</p>
+                                                                            <p class="#{comentario.tipo eq 'C' ? 'blockquote-footer text-end' : 'blockquote-footer text-start'}">
+                                                                                <cite title="Source Title">
+                                                                                    <h:outputLabel value="#{comentario.fecreg}">
+                                                                                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm:ss" timeZone="America/Mexico_City"/>
+                                                                                    </h:outputLabel>
+                                                                                </cite>
+                                                                            </p>
+                                                                        </div>
+                                                                    </blockquote>
+                                                                </div>
+                                                            </c:forEach>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <h:form>
+                                        <div>
+                                            <h:inputHidden value="#{ordenFormBean.idComentario}" class="form-control"/>
+                                            <h:inputHidden value="#{ordenFormBean.idPedido}" class="form-control"/>
+                                            <h:inputHidden value="#{ordenFormBean.numeroComentario}" class="form-control"/>
+                                            <h:inputHidden value="#{ordenFormBean.tipoComentario}" class="form-control"/>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-11">
+                                                <label class="form-label">Comentario: </label>
+                                                <h:inputText title="Comentario: " value="#{ordenFormBean.comentario}" disabled="false" class="form-control"/>
+                                            </div>
+                                            <div class="col-1">
+                                                <label class="form-label"><span>Acción</span></label>
+                                                <h:commandButton value="Guardar"
+                                                                 action="#{ordenFormBean.insertarComentario}" rendered="#{empty ordenFormBean.idComentario}" class="btn btn-success"/>
+                                            </div>
+                                        </div>
+                                    </h:form>
+                                </h:panelGroup>
+                                <br/>
                                 <div class="messagecolor">
                                     <h:messages showSummary="true" showDetail="false" errorStyle="color: red" infoStyle="color: blue" />
                                 </div>

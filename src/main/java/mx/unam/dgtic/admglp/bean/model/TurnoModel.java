@@ -12,8 +12,12 @@ import mx.unam.dgtic.admglp.ejb.TurnoEJBLocal;
 import mx.unam.dgtic.admglp.vo.Turno;
 
 /**
+ * Modelo para metodos de turnos
  *
- * @author unam
+ * @author Miguel Angel Martinez Rivera
+ * @version 1.0.1
+ * @since 26/04/2022 - 26/04/2022
+ *
  */
 @Model
 public class TurnoModel implements Serializable {

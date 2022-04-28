@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package mx.unam.dgtic.admglp.bean.model;
 
 import jakarta.enterprise.inject.Model;
@@ -14,8 +10,12 @@ import mx.unam.dgtic.admglp.ejb.ContraEJBLocal;
 import mx.unam.dgtic.admglp.vo.Contra;
 
 /**
+ * Modelo para metodos de contras
  *
- * @author unam
+ * @author Miguel Angel Martinez Rivera
+ * @version 1.0.1
+ * @since 26/04/2022 - 26/04/2022
+ *
  */
 @Model
 public class ContraModel implements Serializable{

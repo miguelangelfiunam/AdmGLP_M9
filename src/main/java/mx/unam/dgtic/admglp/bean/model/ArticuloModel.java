@@ -10,8 +10,12 @@ import mx.unam.dgtic.admglp.ejb.ArticuloEJBLocal;
 import mx.unam.dgtic.admglp.vo.Articulo;
 
 /**
+ * Modelo para metodos de articulos
  *
- * @author unam
+ * @author Miguel Angel Martinez Rivera
+ * @version 1.0.1
+ * @since 26/04/2022 - 26/04/2022
+ *
  */
 @Model
 public class ArticuloModel implements Serializable {

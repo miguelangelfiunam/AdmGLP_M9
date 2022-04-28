@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -13,7 +9,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <title><h:outputText value="Inicio"/></title>
     </h:head>
     <h:body>
-        <!--<h2><h:outputText value="Decorate Doesn’t Trim the Surrounding Tags" /></h2>-->
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
                 <div class="accordion" id="accordionExample">
@@ -43,9 +38,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                         </h2>
                         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <p><strong><code>Administrador:</code></strong> Encargado del sistema.</p>
-                                <p><strong><code>Empleado: </code></strong> Encargado de la entrega de pedidos.</p>
-                                <p><strong><code>Cliente: </code></strong> Encargado de la solicitud del pedido.</p>
+                                <p>
+                                    <strong><code>Administrador:</code></strong> Encargado del sistema.<br/><br/>
+                                    Será el encargado de administrar los usuarios del sistema, los empleados, clientes y pedidos <br/>
+                                    además podrá generar turnos para los trabajadores, actualizar precios de articulos, asignar roles <br/>
+                                    de sistema, al igual que las direcciones que se vayan asignando
+                                </p>
+                                <p>
+                                    <strong><code>Empleado: </code></strong> Encargado de la entrega de pedidos.<br/><br/>
+                                    Será el encargado de entregar los pedidos que el cliente solicite
+                                </p>
+                                <p>
+                                    <strong><code>Cliente: </code></strong> Encargado de la solicitud del pedido.<br/><br/>
+                                    Podrá realizar pedidos para generar mediante turnos activos
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -57,7 +63,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                         </h2>
                         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
-                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
+                               La universidad me dio la bienvenida al mundo como tal, las oportunidades que me <br/>
+                               ha brindado son incomparables, y antes de todo eso no pensaba que fuera posible <br/>
+                               que algún día si quiera me topara con alguna de ellas. <br/><br/>
+                               
+                               <strong>Quiero mandar un agradecimiento a:</strong> <br/><br/>
+                               <code>Mis padres:</code> Ya que me dieron la oportunidad de salir adelante con estudios y de manera honrada <br/><br/>
+                               <code>Al Ing. Luis Javier Chavéz Helguera:</code> Quien hizo posible la inscripción al diplomado <br/><br/>
+                               <code>A mi lider el Dr. Israel Ortega Cuevas:</code> El cual en todo momento me motiva académicamente <br/>
+                               y estuvo presente a lo largo del diplomado <br/><br/>
+                               <code>A la Ing. Ingrid Noemi Garrido Gonzalez:</code> Gracias a ella me enteré del diplomado y me apoyó en<br/>
+                               el proceso de inscripción y dio seguimiento a mis avances en el proyecto<br/><br/>
+                               <code>A mis compañeros de trabajo / amigos / tutores del diplomado: </code> Que de manera directa o indirectamente <br/>
+                               hacen posible la entrega de este proyecto <br/>
                             </div>
                         </div>
                     </div>

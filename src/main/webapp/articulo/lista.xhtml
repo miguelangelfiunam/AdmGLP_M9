@@ -28,7 +28,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
     <h:body>
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
-                <h:panelGroup rendered="#{usuarioBean.acceso == true && usuarioBean.rol == 'Administrador'}">
+                <h:panelGroup rendered="#{usuarioBean.acceso == true and usuarioBean.rol == 'Administrador'}">
                     <h2 class="text-center">Lista de articulos</h2>
                     <hr></hr>
                     <div class="d-flex justify-content-end">
