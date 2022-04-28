@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import mx.unam.dgtic.admglp.bean.RolModel;
+import mx.unam.dgtic.admglp.bean.model.RolModel;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
 import mx.unam.dgtic.admglp.vo.Cliente;
 import mx.unam.dgtic.admglp.vo.Contra;

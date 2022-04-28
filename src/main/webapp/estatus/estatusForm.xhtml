@@ -18,12 +18,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
     <h:body>
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
-                <h:panelGroup rendered="#{usuarioBean.acceso == true  and usuarioBean.rol == 'Administrador'}">
-                    <h:panelGroup rendered="#{turnoFormBean.idturno eq null}">
-                        <h2 class="text-center">Adición de turno</h2>
+                <h:panelGroup rendered="#{usuarioBean.acceso == true and usuarioBean.rol == 'Administrador'}">
+                    <h:panelGroup rendered="#{estatusFormBean.idestatus eq null}">
+                        <h2 class="text-center">Adición de estatus</h2>
                     </h:panelGroup>
-                    <h:panelGroup rendered="#{turnoFormBean.idturno ne null}">
-                        <h2 class="text-center">Actualización de turno</h2>
+                     <h:panelGroup rendered="#{estatusFormBean.idestatus ne null}">
+                        <h2 class="text-center">Actualización de estatus</h2>
                     </h:panelGroup>
                     <hr></hr>
                     <div class="container">
@@ -33,45 +33,45 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                     <h:form>
                                         <div class="row">
                                             <div class="col">
-                                                <label for="idturno" class="form-label">ID: </label>
-                                                <h:inputText id="idturno" title="ID: "
-                                                             value="#{turnoFormBean.idturno}" disabled="true" class="form-control"/>
+                                                <label for="idestatus" class="form-label">ID: </label>
+                                                <h:inputText id="idestatus" title="ID: "
+                                                             value="#{estatusFormBean.idestatus}" disabled="true" class="form-control"/>
                                             </div>
                                             <div class="col">
-                                                <label for="inicio" class="form-label">Inicio: </label>
-                                                <h:inputText id="inicio" title="Inicio: "
-                                                             value="#{turnoFormBean.inicio}" required="true"
-                                                             requiredMessage="La fecha de inicio es obligatoria." maxlength="16" class="form-control">
-                                                    <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="America/Mexico_City"/>  
+                                                <label for="numero" class="form-label">Numero: </label>
+                                                <h:inputText id="numero" title="Numero: "
+                                                             value="#{estatusFormBean.numero}" required="true"
+                                                             requiredMessage="El número es obligatorio." maxlength="8" class="form-control">
+                                                             <f:validateLongRange minimum="1" maximum="99999999" />   
                                                 </h:inputText>
-
                                             </div>
                                             <div class="col">
-                                                <label for="fin" class="form-label">Fin:</label>
-                                                <h:inputText id="fin" title="Fin: "
-                                                             value="#{turnoFormBean.fin}" required="true"
-                                                             requiredMessage="La fecha de fin es obligatoria." maxlength="16" class="form-control">
-                                                    <f:convertDateTime pattern="dd-MM-yyyy HH:mm" timeZone="America/Mexico_City"/> 
-                                                </h:inputText>
-
+                                                <label for="tabla" class="form-label">Tabla: </label>
+                                                <h:inputText id="tabla" title="Tabla: "
+                                                             value="#{estatusFormBean.tabla}" required="true"
+                                                             requiredMessage="La tabla es obligatoria." maxlength="100" class="form-control"/>
                                             </div>
                                             <div class="col">
-                                                <label for="estatus" class="form-label">Estatus: #{turnoFormBean.estatus}</label>
-                                                <h:selectOneMenu value="#{turnoFormBean.estatus}" disabled="false" required="true" 
-                                                                 class="form-control" title="Estatus: "  requiredMessage="El estatus es obligatorio.">
-                                                    <f:selectItem itemLabel="Selecciona..." />
-                                                    <f:selectItems value="#{estatusModel.cargaEstatusPorTabla('Turnos',1)}" var="estatus" itemLabel="#{estatus.nombre}" itemValue="#{estatus.numero}"/>
-                                                </h:selectOneMenu>
+                                                <label for="nombre" class="form-label">Nombre:</label>
+                                                <h:inputText id="nombre" title="Nombre: "
+                                                             value="#{estatusFormBean.nombre}" required="true"
+                                                             requiredMessage="El nombre es obligatorio." maxlength="100" class="form-control"/>
+                                            </div>
+                                            <div class="col">
+                                                <label for="descripcion" class="form-label">Descripción</label>
+                                                <h:inputText id="descripcion" title="Descripción: "
+                                                             value="#{estatusFormBean.descripcion}" required="true"
+                                                             requiredMessage="La descripcion es obligatoria." maxlength="100" class="form-control"/>
                                             </div>
                                         </div>
                                         <br/>
                                         <div class="d-flex justify-content-between">
-                                            <h:commandButton value="Limpiar" action="#{turnoFormBean.limpiaCampos}" class="btn btn-secondary"/>
+                                            <h:commandButton value="Limpiar" action="#{estatusFormBean.limpiaCampos}" class="btn btn-secondary"/>
 
                                             <h:commandButton value="Enviar"
-                                                             action="#{turnoFormBean.insertar}" rendered="#{empty turnoFormBean.idturno}" class="btn btn-success"/>
+                                                             action="#{estatusFormBean.insertar}" rendered="#{empty estatusFormBean.idestatus}" class="btn btn-success"/>
                                             <h:commandButton  value="Actualizar"
-                                                              action="#{turnoFormBean.actualizar}" rendered="#{not empty turnoFormBean.idturno}" class="btn btn-primary"/>
+                                                              action="#{estatusFormBean.actualizar}" rendered="#{not empty estatusFormBean.idestatus}" class="btn btn-primary"/>
                                         </div>
                                     </h:form>
                                     <div class="messagecolor">
@@ -80,7 +80,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                     <div>
                                         <br/>
                                         <h:form>
-                                            <h:commandLink value="Regresar" action="/turno/lista.xhtml"  class="btn btn-danger"/>
+                                            <h:commandLink value="Regresar" action="/estatus/lista.xhtml"  class="btn btn-danger"/>
                                         </h:form>
                                     </div>
                                 </div>

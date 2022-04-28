@@ -7,6 +7,7 @@ import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
+import mx.unam.dgtic.admglp.bean.UsuarioBean;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
 import mx.unam.dgtic.admglp.vo.Turno;
 
@@ -27,13 +28,35 @@ public class TurnoFormBean implements Serializable {
 
     @Inject
     private TurnoModel turnoModel;
+    @Inject
+    private UsuarioBean usuarioBean;
 
     @Inject
     private MessageBean messageBean;
+    
+    public String formularioTurno() {
+        idturno = null;
+        inicio = null;
+        fin = null;
+        estatus = null;
+        return "/turno/turnoForm?faces-redirect=true";
+    }
+    
+    public String formularioTurnoID(Integer idEst) {
+        Turno turno = turnoModel.cargaTurno(idEst);
+        if (turno != null) {
+            this.idturno = idEst;
+            this.inicio = turno.getFecinicio();
+            this.fin = turno.getFecfin();
+            this.estatus = turno.getEstatus();
+        }
+        return "/turno/turnoForm?faces-redirect=true";
+    }
 
-    public void iniciarTurno() {
+    public String iniciarTurno() {
         Turno turno = null;
         try {
+            Date fecActual = new Date();
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.HOUR_OF_DAY, 7);
             cal.set(Calendar.MINUTE, 0);
@@ -42,22 +65,48 @@ public class TurnoFormBean implements Serializable {
 
             Date fecinicio = new Date();
             fecinicio = cal.getTime();
-            turno = new Turno(fecinicio, null, new Date(), null, 10);
-            turnoModel.insertaTurno(turno);
+            if (fecActual.after(fecinicio) || fecActual.equals(fecinicio)) {
+                //Se puede iniciar un turno
+                turno = new Turno(fecinicio, null, new Date(), null, 10);
+                usuarioBean.setTurnoActual(turnoModel.insertaTurno(turno));
+            } else {
+                //Se requiere que sean las 7:00 o despues
+                int i = 0;
+            }
         } catch (Exception e) {
+            throw new IllegalStateException("Error");
         }
+        return "/turno/lista?faces-redirect=true";
     }
 
-    public void finalizarTurno() {
+    public String finalizarTurno() {
         Turno turno = null;
         try {
             turno = turnoModel.cargaTurnoActual();
             if (turno != null) {
-                turno.setFecfin(new Date());
-                turnoModel.actualizaTurno(turno);
+                Date fecActual = new Date();
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.HOUR_OF_DAY, 15);
+                cal.set(Calendar.MINUTE, 0);
+                cal.set(Calendar.SECOND, 0);
+                cal.set(Calendar.MILLISECOND, 0);
+
+                Date fecfin = new Date();
+                fecfin = cal.getTime();
+
+                if (fecActual.after(fecfin) || fecActual.equals(fecfin)) {
+                    //Se puede finalizar un turno
+                    turno.setFecfin(fecfin);
+//                    turno.setEstatus(20);
+                    usuarioBean.setTurnoActual(turnoModel.actualizaTurno(turno));
+                } else {
+                    //Se requiere que sean las 15:00 o despues
+                }
+
             }
         } catch (Exception e) {
         }
+        return "/turno/lista?faces-redirect=true";
     }
 
     public String actualizarEstatusTurno(Integer id, Integer estatus) {

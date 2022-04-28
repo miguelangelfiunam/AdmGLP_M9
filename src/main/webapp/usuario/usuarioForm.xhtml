@@ -21,7 +21,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
     <h:body>
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
-                <h:panelGroup rendered="#{usuarioBean.acceso == true}">
+                <h:panelGroup rendered="#{usuarioBean.acceso == true and usuarioBean.rol == 'Administrador'}">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
@@ -200,7 +200,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                         });
                     </script>
                 </h:panelGroup>
-                <h:panelGroup rendered="#{usuarioBean.acceso == false}">
+                <h:panelGroup rendered="#{usuarioBean.acceso == false or usuarioBean.rol != 'Administrador'}">
                     <div class="container">
                         <div class="alert alert-danger d-flex align-items-center" role="alert">
                             <svg width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">

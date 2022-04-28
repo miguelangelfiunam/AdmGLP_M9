@@ -20,8 +20,8 @@ public interface PedidoService {
 
     public List<Pedido> getPedidos(Integer estatus);
 
-    public List<Pedido> getPedidosCriteria(Integer estatus, Integer idCliente, 
-            Integer idEmpleado, Integer idDireccion, 
+    public List<Pedido> getPedidosCriteria(Integer estatus, Integer idCliente,
+            Integer idEmpleado, Integer idDireccion,
             Date f_ped_ini, Date f_ped_fin, Double total);
 
     public Pedido getPedido(int idpedido);

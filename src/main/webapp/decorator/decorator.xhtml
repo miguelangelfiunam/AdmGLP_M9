@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:outputStylesheet name="css/decorator.css" />
     <h:outputStylesheet name="css/bootstrap.min.css" />
 
@@ -96,6 +97,12 @@
                                                 <h:commandLink id="decorator_direcciones_lista_link" value="Direcciones" action="/direccion/lista.xhtml?faces-redirect=true" class="dropdown-item" />
                                             </h:form>
                                         </li>
+                                        <li><hr class="dropdown-divider"/></li>
+                                        <li>
+                                            <h:form>
+                                                <h:commandLink id="decorator_estatus_lista_link" value="Estatus" action="/estatus/lista.xhtml?faces-redirect=true" class="dropdown-item" />
+                                            </h:form>
+                                        </li>
                                     </ul>
                                 </li>
                             </li>
@@ -124,6 +131,20 @@
                                         </li>
                                     </ul>
                                 </li>
+                            </li>
+                        </h:panelGroup>
+                        <h:panelGroup id="panelDecoratorTodos_1" rendered="#{(usuarioBean.acceso == true)}">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Precios
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <c:forEach items="#{articuloModel.cargaArticulos(10)}" var="articulo" >
+                                        <li>
+                                            <h6 class="dropdown-header">#{articulo.nombre} - $ #{articulo.precio}</h6> 
+                                        </li>
+                                    </c:forEach>
+                                </ul>
                             </li>
                         </h:panelGroup>
                         <h:panelGroup id="panelDecoratorEmpleado" rendered="#{(usuarioBean.acceso == true) and (usuarioBean.rol == 'Empleado')}">

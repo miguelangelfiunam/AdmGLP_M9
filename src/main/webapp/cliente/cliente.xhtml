@@ -15,9 +15,32 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
                 <h:panelGroup rendered="#{usuarioBean.rol == 'Cliente'}">
-                    <h2 class="text-center">Pedidos</h2>
+                    <h2 class="text-center">Pedidos del cliente</h2>
                     <hr></hr>
-                    
+                    <h:panelGroup rendered="#{ordenFormBean.mensaje ne null}">
+
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{usuarioBean.turnoActual ne null and usuarioBean.turnoActual.fecfin eq null}">
+                        <div class="container">
+                            <div class="d-flex justify-content-end">
+                                <h:form>
+                                    <h:commandButton type="submit" value="Realizar pedido" action="#{ordenFormBean.formularioOrden(usuarioBean.idCliente, null)}" class="btn btn-success"/>
+                                </h:form>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{(usuarioBean.turnoActual ne null and usuarioBean.turnoActual.fecfin ne null) or (usuarioBean.turnoActual eq null)}">
+                        <div class="alert alert-warning d-flex align-items-center" role="alert">
+                            <div>
+                                <strong>
+                                    Para solicitar un pedido se requiere que:<br/>
+                                    El horario de atención de pedidos es de 7:00 AM a 03:00 PM<br/>
+                                    Exista un turno habilitado en la aplicación
+                                </strong>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <br/>
                 </h:panelGroup>
                 <h:panelGroup rendered="#{usuarioBean.acceso == false}">
                     <div class="container">

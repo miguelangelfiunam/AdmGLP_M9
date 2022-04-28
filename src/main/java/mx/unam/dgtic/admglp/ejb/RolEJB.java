@@ -22,9 +22,11 @@ public interface RolEJB {
 
     Rol getRol(Integer idRol);
     
-    Integer insertaRol(Rol rol);
+    Rol insertaRol(Rol rol);
     
-    void actualizaRol(Rol rol);
+    Rol actualizaRol(Rol rol);
+    
+    void actualizaEstatusRol(Integer idRol, Integer estatus);
     
     void eliminaRol(Integer id);
 }

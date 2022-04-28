@@ -1,10 +1,7 @@
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -12,10 +9,6 @@ import mx.unam.dgtic.admglp.modelo.TurnoService;
 import mx.unam.dgtic.admglp.modelo.TurnoServiceImpl;
 import mx.unam.dgtic.admglp.vo.Turno;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 /**
  *
  * @author unam
@@ -37,7 +30,7 @@ public class TurnoMain {
             muestraTurnos(turnoService);
             System.out.println("----------------");
             muestraTurno(turnoService);
-
+            
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.HOUR_OF_DAY, 7);
             cal.set(Calendar.MINUTE, 0);

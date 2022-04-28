@@ -15,6 +15,7 @@
         <class>mx.unam.dgtic.admglp.vo.Empleadopedido</class>
         <class>mx.unam.dgtic.admglp.vo.Empleadoturno</class>
         <class>mx.unam.dgtic.admglp.vo.Estado</class>
+        <class>mx.unam.dgtic.admglp.vo.Estatus</class>
         <class>mx.unam.dgtic.admglp.vo.Global</class>
         <class>mx.unam.dgtic.admglp.vo.Municipio</class>
         <class>mx.unam.dgtic.admglp.vo.Orden</class>
@@ -23,7 +24,7 @@
         <class>mx.unam.dgtic.admglp.vo.Transporte</class>
         <class>mx.unam.dgtic.admglp.vo.Turno</class>
         <class>mx.unam.dgtic.admglp.vo.Usuario</class>
-        <class>mx.unam.dgtic.admglp.vo.Estatus</class>
+        
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/admglp" />

@@ -48,6 +48,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                     <th scope="col">ID</th>
                                     <th scope="col">Inicio</th>
                                     <th scope="col">Fin</th>
+                                    <th scope="col">Registro</th>
+                                    <th scope="col">Modificacion</th>
                                     <th scope="col">Estatus</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
@@ -55,7 +57,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                             <tbody>
                                 <c:forEach items="#{turnoModel.cargaTurnos()}" var="turno">
                                     <tr class="#{turno.estatus eq 10 ? 'table-success': 'table-danger'}">
-                                        <th scope="row"> #{turno.id}</th>
+                                        <th scope="row">#{turno.id}</th>
                                         <td scope="row"> 
                                             <h:outputText value="#{turno.fecinicio}" >
                                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Mexico_City"/>
@@ -66,15 +68,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Mexico_City"/>
                                             </h:outputText>
                                         </td>
+                                        <td scope="row">
+                                            <h:outputText value="#{turno.fecreg}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="America/Mexico_City"/>
+                                            </h:outputText>
+                                        </td>
+                                        <td scope="row">
+                                            <h:outputText value="#{turno.fecact}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="America/Mexico_City"/>
+                                            </h:outputText>
+                                        </td>
                                         <td scope="row"> #{turno.estatus}</td>
                                         <td>
                                             <h:form>
                                                 <h:commandButton type="submit" value="Editar" action="#{turnoFormBean.formularioTurnoID(turno.id)}" class="btn btn-primary"/>
                                                 <span> </span>
                                                 <c:if test="#{turno.estatus eq 10}">
-                                                    <h:commandLink type="button" value="Bloquear" action="#{turnoFormBean.actualizarEstatusTurno(turno.id, 20)}" class="btn btn-danger"/>
+                                                    <h:commandLink type="button" value="Eliminar" action="#{turnoFormBean.actualizarEstatusTurno(turno.id, 30)}" class="btn btn-danger"/>
                                                 </c:if>
-                                                <c:if test="#{turno.estatus eq 20}">
+                                                <span> </span>
+                                                <c:if test="#{turno.estatus eq 30}">
                                                     <h:commandLink type="button" value="Activar" action="#{turnoFormBean.actualizarEstatusTurno(turno.id, 10)}" class="btn btn-success"/>
                                                 </c:if>
                                             </h:form>
@@ -85,7 +98,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                         </table>
                     </div>
                 </h:panelGroup>
-                <h:panelGroup rendered="#{usuarioBean.acceso == false}">
+                <h:panelGroup rendered="#{usuarioBean.acceso == false or usuarioBean.rol != 'Administrador'}">
                     <div class="container">
                         <div class="alert alert-danger d-flex align-items-center" role="alert">
                             <svg width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">

@@ -64,6 +64,9 @@ public class Pedido {
     @OneToMany(mappedBy = "pedido")
     List<Empleadopedido> pedidosEmpleado;
 
+    @OneToMany(mappedBy = "pedido")
+    private List<Orden> ordenesP; // Ordenes relacionadas al articulo
+
     public Integer getId() {
         return id;
     }
@@ -108,6 +111,14 @@ public class Pedido {
         return estatus;
     }
 
+    public List<Empleadopedido> getPedidosEmpleado() {
+        return pedidosEmpleado;
+    }
+
+    public List<Orden> getOrdenesP() {
+        return ordenesP;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -150,6 +161,14 @@ public class Pedido {
 
     public void setEstatus(Integer estatus) {
         this.estatus = estatus;
+    }
+
+    public void setPedidosEmpleado(List<Empleadopedido> pedidosEmpleado) {
+        this.pedidosEmpleado = pedidosEmpleado;
+    }
+
+    public void setOrdenesP(List<Orden> ordenesP) {
+        this.ordenesP = ordenesP;
     }
 
     @Override

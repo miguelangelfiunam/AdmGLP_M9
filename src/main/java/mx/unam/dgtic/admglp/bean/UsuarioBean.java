@@ -26,6 +26,8 @@ public class UsuarioBean implements Serializable {
 
     private static final long serialVersionUID = -4146681491856848089L;
     private Integer id;
+    private Integer idCliente;
+    private Integer idEmpleado;
     private String apodo;
     private String contra;
     private Integer estatus;
@@ -52,12 +54,108 @@ public class UsuarioBean implements Serializable {
         this.estatus = estatus;
     }
 
+    public String login() {
+        Usuario usuario = usuarioModel.cargaUsuario(apodo, contra, 10);
+        if (usuario != null) {
+            if (usuario.getApodo().equals(apodo) && usuario.getContra().getContra().equals(contra)) {
+                if (usuario.getEstatus() == 10) {
+                    //Registro de acceso
+                    Acceso accesoBD = new Acceso(usuario, new Date(), null, "Inicio de sesion", new Date(), null, 10);
+                    accesoBD = accesoBean.insertaAcceso(accesoBD);
+                    if (accesoBD.getId() != null) {
+                        idacceso = accesoBD.getId();
+                    }
+
+                    for (Rol rolBD : usuario.getRoles()) {
+                        switch (rolBD.getNombre()) {
+                            case "Administrador":
+                                this.rol = rolBD.getNombre();
+                                id = usuario.getIdusuario();
+                                acceso = true;
+                                messageBean.setMensajeRespuesta("");
+                                turnoActual = turnoModel.cargaTurnoActual();
+                                return "/usuario/lista";
+                            case "Empleado":
+                                this.rol = rolBD.getNombre();
+                                id = usuario.getIdusuario();
+                                idEmpleado = usuario.getEmpleado().getId();
+                                acceso = true;
+                                messageBean.setMensajeRespuesta("");
+                                turnoActual = turnoModel.cargaTurnoActual();
+                                return "/empleado/empleado";
+                            case "Cliente":
+                                this.rol = rolBD.getNombre();
+                                id = usuario.getIdusuario();
+                                idCliente = usuario.getCliente().getId();
+                                acceso = true;
+                                messageBean.setMensajeRespuesta("");
+                                turnoActual = turnoModel.cargaTurnoActual();
+                                return "/cliente/cliente";
+                            default:
+                                break;
+                        }
+                    }
+                } else {
+                    //Registro de acceso fallido
+                    Acceso accesoBD = new Acceso(usuario, new Date(), null, "Estatus del usuario diferente de 10", new Date(), null, 20);
+                    accesoBean.insertaAcceso(accesoBD);
+
+                    messageBean.setMensajeRespuesta("El usuario no tiene acceso al sistema estatus inactivo");
+                    System.out.println(this);
+                    return "login";
+                }
+            }
+        }
+
+        messageBean.setMensajeRespuesta("Usuario y contraseña incorrectos");
+        System.out.println(this);
+        return "login";
+    }
+
+    public void logout() {
+        try {
+            id = null;
+            idCliente = null;
+            idEmpleado = null;
+            apodo = null;
+            contra = null;
+            acceso = false;
+            if(idacceso != null){
+                accesoBean.finalizaAcceso(idacceso);
+            }
+            idacceso = null;
+            rol = null;
+            turnoActual = null;
+            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+            String url = ec.getRequestContextPath() + "/index.xhtml?faces-redirect=true";
+            
+            ec.redirect(url);
+        } catch (Exception e) {
+        }
+    }
+    
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getIdCliente() {
+        return idCliente;
+    }
+
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
+    }
+
+    public Integer getIdEmpleado() {
+        return idEmpleado;
+    }
+
+    public void setIdEmpleado(Integer idEmpleado) {
+        this.idEmpleado = idEmpleado;
     }
 
     public String getApodo() {
@@ -106,81 +204,6 @@ public class UsuarioBean implements Serializable {
 
     public void setIdacceso(Integer idacceso) {
         this.idacceso = idacceso;
-    }
-
-    public String login() {
-        Usuario usuario = usuarioModel.cargaUsuario(apodo, contra, 10);
-        if (usuario != null) {
-            if (usuario.getApodo().equals(apodo) && usuario.getContra().getContra().equals(contra)) {
-                if (usuario.getEstatus() == 10) {
-                    //Registro de acceso
-                    Acceso accesoBD = new Acceso(usuario, new Date(), null, "Inicio de sesion", new Date(), null, 10);
-                    accesoBD = accesoBean.insertaAcceso(accesoBD);
-                    if (accesoBD.getId() != null) {
-                        idacceso = accesoBD.getId();
-                    }
-
-                    for (Rol rolBD : usuario.getRoles()) {
-                        switch (rolBD.getNombre()) {
-                            case "Administrador":
-                                this.rol = rolBD.getNombre();
-                                id = usuario.getIdusuario();
-                                acceso = true;
-                                messageBean.setMensajeRespuesta("");
-                                turnoActual = turnoModel.cargaTurnoActual();
-                                return "/usuario/lista";
-                            case "Empleado":
-                                this.rol = rolBD.getNombre();
-                                id = usuario.getIdusuario();
-                                acceso = true;
-                                messageBean.setMensajeRespuesta("");
-                                turnoActual = turnoModel.cargaTurnoActual();
-                                return "/empleado/empleado";
-                            case "Cliente":
-                                this.rol = rolBD.getNombre();
-                                id = usuario.getIdusuario();
-                                acceso = true;
-                                messageBean.setMensajeRespuesta("");
-                                turnoActual = turnoModel.cargaTurnoActual();
-                                return "/cliente/cliente";
-                            default:
-                                break;
-                        }
-                    }
-                } else {
-                    //Registro de acceso fallido
-                    Acceso accesoBD = new Acceso(usuario, new Date(), null, "Estatus del trabajador diferente de 10", new Date(), null, 20);
-                    accesoBean.insertaAcceso(accesoBD);
-
-                    messageBean.setMensajeRespuesta("El usuario no tiene acceso al sistema estatus inactivo");
-                    System.out.println(this);
-                    return "login";
-                }
-            }
-        }
-
-        messageBean.setMensajeRespuesta("Usuario y contraseña incorrectos");
-        System.out.println(this);
-        return "login";
-    }
-
-    public void logout() {
-        try {
-            id = null;
-            apodo = null;
-            contra = null;
-            acceso = false;
-            if(idacceso != null){
-                accesoBean.finalizaAcceso(idacceso);
-            }
-            idacceso = null;
-            rol = null;
-            ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
-            String url = ec.getRequestContextPath() + "/index.xhtml?faces-redirect=true";
-            
-            ec.redirect(url);
-        } catch (Exception e) {
-        }
     }
 
     public Turno getTurnoActual() {

@@ -5,8 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Entidad Articulo donde se agregan los articulos a vender
@@ -39,6 +41,9 @@ public class Articulo {
 
     @Column(name = "articulo_si_estatus")
     private Integer estatus; // Estatus del registro en la base
+
+    @OneToMany(mappedBy = "articulo")
+    private List<Orden> ordenesA; // Ordenes relacionadas al articulo
 
     public Articulo() {
     }
@@ -75,6 +80,10 @@ public class Articulo {
         return estatus;
     }
 
+    public List<Orden> getOrdenes() {
+        return ordenesA;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -97,6 +106,10 @@ public class Articulo {
 
     public void setEstatus(Integer estatus) {
         this.estatus = estatus;
+    }
+
+    public void setOrdenes(List<Orden> ordenesA) {
+        this.ordenesA = ordenesA;
     }
 
     @Override

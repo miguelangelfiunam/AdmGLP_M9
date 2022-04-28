@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
 
@@ -27,11 +27,11 @@ public class Orden {
     @Column(name = "id_ped_art")
     private Integer id; // Identificador de orden
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_pedido", referencedColumnName = "id_pedido")
     private Pedido pedido; // Pedido relacionado a esa orden
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "id_articulo", referencedColumnName = "id_articulo")
     private Articulo articulo; // Articulo relacionado a la orden
 
@@ -49,6 +49,24 @@ public class Orden {
 
     @Column(name = "ped_art_si_estatus")
     private Integer estatus; // Estado de la orden
+
+    public Orden() {
+    }
+
+    public Orden(Articulo articulo, Integer cantidad, Double subtotal) {
+        this.articulo = articulo;
+        this.cantidad = cantidad;
+        this.subtotal = subtotal;
+    }
+
+    public Orden(Articulo articulo, Integer cantidad, Double subtotal, Date fecreg, Date fecact, Integer estatus) {
+        this.articulo = articulo;
+        this.cantidad = cantidad;
+        this.subtotal = subtotal;
+        this.fecreg = fecreg;
+        this.fecact = fecact;
+        this.estatus = estatus;
+    }
 
     public Integer getId() {
         return id;

@@ -18,12 +18,14 @@ public interface DireccionEJB {
 
     List<Direccion> getDireccionesPorIdAsentamiento(Integer idAsentamiento, Integer estatus_direccion);
 
+//    List<Direccion> getDireccionesPorCliente(Integer idCliente, Integer estatus_direccion);
+
     Direccion getDireccion(Integer idDireccion);
 
     Direccion insertaDireccion(Direccion direccion);
 
     Direccion actualizaDireccion(Direccion direccion);
-    
+
     void actualizaEstatusDireccion(Integer idDireccion, Integer status);
 
     void eliminaDireccion(Integer id);
