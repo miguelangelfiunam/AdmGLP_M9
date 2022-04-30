@@ -2,9 +2,17 @@ package mx.unam.dgtic.admglp.modelo;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.ParameterExpression;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import mx.unam.dgtic.admglp.vo.Cliente;
 import mx.unam.dgtic.admglp.vo.Direccion;
 
 /**
@@ -151,5 +159,53 @@ public class DireccionServiceImpl implements DireccionService {
             throw new RuntimeException("Error al obtener direcciones por id de asentamiento y estatus");
         }
         return direccions;
+    }
+
+    @Override
+    public List<Direccion> getDireccionesPorIdCliente(Integer idCliente, Integer estatus_direccion) {
+        List<Direccion> direcciones = new ArrayList<>();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Direccion> c = cb.createQuery(Direccion.class);
+            Root<Direccion> direccionRoot = c.from(Direccion.class);
+            c.select(direccionRoot);
+            c.distinct(true);
+            Join<Direccion, Cliente> cliente = direccionRoot.join("clientes", JoinType.LEFT);
+
+            List<Predicate> criteria = new ArrayList<>();
+
+            if (idCliente != null) {
+                ParameterExpression<Integer> p = cb.parameter(Integer.class, "idCliente");
+                criteria.add(cb.equal(cliente.get("id"), p));
+            }
+
+            if (estatus_direccion != null) {
+                ParameterExpression<Integer> p = cb.parameter(Integer.class, "est");
+                criteria.add(cb.equal(direccionRoot.get("estatus"), p));
+            }
+
+            if (criteria.isEmpty()) {
+                throw new RuntimeException("no criteria");
+            } else if (criteria.size() == 1) {
+                c.where(criteria.get(0));
+            } else {
+                c.where(cb.and(criteria.toArray(new Predicate[0])));
+            }
+
+            TypedQuery<Direccion> q = em.createQuery(c);
+            if (idCliente != null) {
+                q.setParameter("idCliente", idCliente);
+            }
+
+            if (estatus_direccion != null) {
+                q.setParameter("est", estatus_direccion);
+            }
+
+            direcciones = q.getResultList();
+        } catch (Exception e) {
+            this.error = e;
+            throw new RuntimeException("Error al obtener direcciones por id de asentamiento y estatus");
+        }
+        return direcciones;
     }
 }

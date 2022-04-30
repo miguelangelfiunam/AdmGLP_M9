@@ -194,4 +194,25 @@ public class DireccionEJBLocal implements DireccionEJB {
         }
     }
 
+    @Override
+    public List<Direccion> getDireccionesPorCliente(Integer idCliente, Integer estatus_direccion) {
+        List<Direccion> direcciones = new ArrayList<>();
+        try {
+            EntityManager em = Conexion.createEntityManager();
+            ds = new DireccionServiceImpl(em);
+            direcciones = ds.getDireccionesPorIdCliente(idCliente, estatus_direccion);
+        } catch (Exception e) {
+            String mensaje = "";
+            mensaje += "<p>Error en DireccionService: " + e.getMessage() + "</p>";
+            if (ds.getError() != null) {
+                mensaje += "<p>" + "Error en DireccionEJBLocal -> getDireccionesPorIdCliente() -> DireccionService -> getDireccionesPorIdCliente() " + ds.getError().getMessage() + "</p>";
+            }
+            try {
+                Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");
+            } catch (Exception eCorreo) {
+            }
+        }
+        return direcciones;
+    }
+
 }

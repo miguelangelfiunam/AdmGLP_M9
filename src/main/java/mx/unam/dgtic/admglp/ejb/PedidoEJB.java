@@ -22,7 +22,7 @@ public interface PedidoEJB {
 
     List<Pedido> cargaPedidosCriteria(Integer estatus, Integer idCliente, 
             Integer idEmpleado, Integer idDireccion, 
-            Date f_ped_ini, Date f_ped_fin, Double total);
+            Date f_ped_ini, Date f_ped_fin, Double total, List<Integer> listaEstatus);
 
     Pedido cargaPedido(Integer idPedido);
 

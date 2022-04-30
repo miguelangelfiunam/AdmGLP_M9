@@ -11,35 +11,42 @@
     <h:body rendered="#{usuarioBean.acceso == true}">
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
-                <h:panelGroup rendered="#{usuarioBean.rol == 'Cliente'}">
-                    <h2 class="text-center">Realiza tu pedido</h2>
+                <h:panelGroup rendered="#{usuarioBean.rol == 'Empleado'}">
+                    <h2 class="text-center">Detalle del pedido</h2>
                     <hr></hr>
                     <div class="row">
                         <div class="col-md-12">
                             <div>
                                 <h:form>
                                     <div class="row">
-                                        <h4 class="text-center">Datos del cliente: #{ordenFormBean.cliente.usuario.nombre} #{ordenFormBean.cliente.usuario.apellido1} #{ordenFormBean.cliente.usuario.apellido2}</h4>
+                                        <h4 class="text-center">Datos del empleado: #{pedidoFormBean.empleado.usuario.nombre} #{pedidoFormBean.empleado.usuario.apellido1} #{pedidoFormBean.empleado.usuario.apellido2}</h4>
                                         <hr></hr>
                                     </div>
+                                    <br/>
                                     <div class="row">
                                         <div class="col">
                                             <label class="form-label">Pedido: </label>
                                             <h:inputText title="Pedido: "
-                                                         value="#{ordenFormBean.idPedido}" disabled="true" class="form-control"/>
+                                                         value="#{pedidoFormBean.idPedido}" disabled="true" class="form-control"/>
                                         </div>
                                         <div class="col">
                                             <label class="form-label">Cliente: </label>
                                             <h:inputText title="Cliente: "
-                                                         value="#{ordenFormBean.idCliente}" required="true" disabled="true"
+                                                         value="#{pedidoFormBean.idCliente}" required="true" disabled="true"
+                                                         requiredMessage="El identificador de usuario es obligatorio" maxlength="40" class="form-control"/>
+                                        </div>
+                                        <div class="col">
+                                            <label class="form-label">Empleado: </label>
+                                            <h:inputText title="Empleado: "
+                                                         value="#{pedidoFormBean.idEmpleado}" required="true" disabled="true"
                                                          requiredMessage="El identificador de usuario es obligatorio" maxlength="40" class="form-control"/>
                                         </div>
                                         <div class="col">
                                             <label class="form-label">Direccion: </label>
-                                            <h:selectOneMenu value="#{ordenFormBean.idDireccion}" disabled="false" required="true" 
+                                            <h:selectOneMenu value="#{pedidoFormBean.idDireccion}" required="true" disabled="true"
                                                              class="form-control" requiredMessage="La direccion es obligatoria.">
                                                 <f:selectItem itemLabel="Selecciona..." />
-                                                <f:selectItems value="#{ordenFormBean.cliente.direcciones}" var="direccion" itemLabel="#{direccion.nombre}" itemValue="#{direccion.iddireccion}"/>
+                                                <f:selectItems value="#{direccionModel.cargaDireccionesPorIdCliente(pedidoFormBean.idCliente, 10)}" var="direccion" itemLabel="#{direccion.nombre}" itemValue="#{direccion.iddireccion}"/>
                                             </h:selectOneMenu>
                                         </div>
                                     </div>
@@ -68,7 +75,7 @@
                                         </div>
                                     </div>
                                     <h:panelGroup id="articuloGrupo" >
-                                        <c:forEach items="#{ordenFormBean.ordenes}" var="orden" >
+                                        <c:forEach items="#{pedidoFormBean.ordenes}" var="orden" >
                                             <div class="row">
                                                 <div class="col">
                                                     <h:inputText value="#{orden.id}" class="form-control" disabled="true" required="false" />
@@ -84,8 +91,8 @@
                                                     </h:selectOneMenu>
                                                 </div>
                                                 <div class="col">
-                                                    <h:inputText value="#{orden.cantidad}" class="form-control" disabled="false" required="true" requiredMessage="Valores solo entre 1 y 25" >
-                                                        <f:ajax event="change" listener="#{ordenFormBean.actualizaOrden}" render="articuloGrupo"/>
+                                                    <h:inputText value="#{orden.cantidad}" class="form-control" disabled="true" required="true" requiredMessage="Valores solo entre 1 y 25" >
+                                                        <f:ajax event="change" listener="#{pedidoFormBean.actualizaOrden}" render="articuloGrupo"/>
                                                         <f:validateLongRange minimum="0" maximum="25" />  
                                                     </h:inputText>
                                                 </div>
@@ -99,7 +106,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <label class="form-label">Tipo de pago: </label>
-                                                <h:selectOneMenu value="#{ordenFormBean.tipoPago}" disabled="false" required="true" 
+                                                <h:selectOneMenu value="#{pedidoFormBean.tipoPago}" disabled="true" required="true" 
                                                                  class="form-control" requiredMessage="El tipo de pago es obligatorio.">
                                                     <f:selectItem itemLabel="Selecciona..." />
                                                     <f:selectItem itemLabel="Tarjeta Débito" itemValue="1"/>
@@ -109,7 +116,7 @@
                                             </div>
                                             <div class="col">
                                                 <label class="form-label">Observación </label>
-                                                <h:inputText value="#{ordenFormBean.observacion}" class="form-control" disabled="false" required="false" maxlength="250">
+                                                <h:inputText value="#{pedidoFormBean.observacion}" class="form-control" disabled="true" required="false" maxlength="250">
 
                                                 </h:inputText>
                                             </div>
@@ -117,26 +124,15 @@
                                             <div class="col"></div>
                                             <div class="col">
                                                 <label class="form-label">Total: </label>
-                                                <h:inputText value="#{ordenFormBean.total}" class="form-control" disabled="true" required="true" >
+                                                <h:inputText value="#{pedidoFormBean.total}" class="form-control" disabled="true" required="true" >
                                                     <f:convertNumber pattern="#,###,##0.00"/>
                                                 </h:inputText>
                                             </div>
                                         </div>
                                     </h:panelGroup>
                                     <br/>
-                                    <div class="d-flex justify-content-between">
-                                        <h:commandButton value="Limpiar" action="#{ordenFormBean.limpiaCampos}" class="btn btn-secondary"/>
-
-                                        <h:commandButton value="Guardar"
-                                                         action="#{ordenFormBean.insertar}" rendered="#{empty ordenFormBean.idPedido}" class="btn btn-success"/>
-                                        <h:commandButton  value="Guardar"
-                                                          action="#{ordenFormBean.actualizar}" 
-                                                          rendered="#{not empty ordenFormBean.idPedido 
-                                                                      or ordenFormBean.estatusPedido eq 10 
-                                                                      or ordenFormBean.estatusPedido eq 20}" class="btn btn-primary"/>
-                                    </div>
                                 </h:form>
-                                <h:panelGroup rendered="#{ordenFormBean.idPedido ne null}">
+                                <h:panelGroup rendered="#{pedidoFormBean.idPedido ne null}">
                                     <div class="row">
                                         <h4 class="text-center">Comentarios</h4>
                                         <hr></hr>
@@ -147,12 +143,12 @@
                                                 <div class="card-body">
                                                     <ul class="list-group list-group-flush">
                                                         <li class="list-group-item">
-                                                            <c:forEach items="#{comentarioModel.cargaComentariosPorIdPedido(ordenFormBean.idPedido, 10)}" var="comentario">
-                                                                <div class="#{comentario.tipo eq 'C' ? 'd-flex justify-content-end' : 'd-flex justify-content-start'}">
+                                                            <c:forEach items="#{comentarioModel.cargaComentariosPorIdPedido(pedidoFormBean.idPedido, 10)}" var="comentario">
+                                                                <div class="#{comentario.tipo eq 'E' ? 'd-flex justify-content-end' : 'd-flex justify-content-start'}">
                                                                     <blockquote class="blockquote mb-0 ">
                                                                         <div>
-                                                                            <p class="#{comentario.tipo eq 'C' ? 'text-end' : 'text-start'}">#{comentario.comentario}</p>
-                                                                            <p class="#{comentario.tipo eq 'C' ? 'blockquote-footer text-end' : 'blockquote-footer text-start'}">
+                                                                            <p class="#{comentario.tipo eq 'E' ? 'text-end' : 'text-start'}">#{comentario.comentario}</p>
+                                                                            <p class="#{comentario.tipo eq 'E' ? 'blockquote-footer text-end' : 'blockquote-footer text-start'}">
                                                                                 <cite title="Source Title">
                                                                                     <h:outputLabel value="#{comentario.fecreg}">
                                                                                         <f:convertDateTime pattern="dd-MM-yyyy HH:mm:ss" timeZone="America/Mexico_City"/>
@@ -172,22 +168,20 @@
                                     <hr/>
                                     <h:form>
                                         <div>
-                                            <h:inputHidden value="#{ordenFormBean.idComentario}" class="form-control"/>
-                                            <h:inputHidden value="#{ordenFormBean.idPedido}" class="form-control"/>
-                                            <h:inputHidden value="#{ordenFormBean.numeroComentario}" class="form-control"/>
-                                            <h:inputHidden value="#{ordenFormBean.tipoComentario}" class="form-control"/>
+                                            <h:inputHidden value="#{pedidoFormBean.idComentario}" class="form-control"/>
+                                            <h:inputHidden value="#{pedidoFormBean.idPedido}" class="form-control"/>
+                                            <h:inputHidden value="#{pedidoFormBean.numeroComentario}" class="form-control"/>
+                                            <h:inputHidden value="#{pedidoFormBean.tipoComentario}" class="form-control"/>
                                         </div>
                                         <div class="row">
                                             <div class="col-11">
                                                 <label class="form-label">Comentario: </label>
-                                                <h:inputText title="Comentario: " value="#{ordenFormBean.comentario}" disabled="false" class="form-control"/>
+                                                <h:inputText title="Comentario: " value="#{pedidoFormBean.comentario}" disabled="false" class="form-control"/>
                                             </div>
                                             <div class="col-1">
                                                 <label class="form-label"><span>Acción</span></label>
                                                 <h:commandButton value="Guardar"
-                                                                 action="#{ordenFormBean.insertarComentario}" rendered="#{empty ordenFormBean.idComentario 
-                                                                           or ordenFormBean.estatusPedido eq 10 
-                                                                           or ordenFormBean.estatusPedido eq 20}" class="btn btn-success"/>
+                                                                 action="#{pedidoFormBean.insertarComentario}" rendered="#{empty pedidoFormBean.idComentario}" class="btn btn-success"/>
                                             </div>
                                         </div>
                                     </h:form>
@@ -199,14 +193,14 @@
                                 <div>
                                     <br/>
                                     <h:form>
-                                        <h:commandLink value="Regresar" action="/cliente/cliente.xhtml"  class="btn btn-danger"/>
+                                        <h:commandLink value="Regresar" action="/empleado/empleado.xhtml"  class="btn btn-danger"/>
                                     </h:form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </h:panelGroup>
-                <h:panelGroup rendered="#{usuarioBean.acceso == false or usuarioBean.rol != 'Cliente'}">
+                <h:panelGroup rendered="#{usuarioBean.acceso == false or usuarioBean.rol != 'Empleado'}">
                     <div class="container">
                         <div class="alert alert-danger d-flex align-items-center" role="alert">
                             <svg width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">

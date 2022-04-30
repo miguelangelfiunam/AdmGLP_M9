@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -61,8 +63,13 @@ public class Pedido {
     @Column(name = "pedido_si_estatus")
     private Integer estatus; // Estado del pedido
 
-    @OneToMany(mappedBy = "pedido")
-    List<Empleadopedido> pedidosEmpleado; // Empleados relacionados al pedido
+    @JoinTable(
+        name = "tr_empleado_pedido",
+        joinColumns = @JoinColumn(name = "id_pedido", nullable = false),
+        inverseJoinColumns = @JoinColumn(name="id_empleado", nullable = false)
+    )
+    @ManyToMany
+    private List<Empleado> empleados; // Empleados relacionados al pedido
 
     @OneToMany(mappedBy = "pedido")
     private List<Orden> ordenesP; // Ordenes relacionadas al pedido
@@ -130,8 +137,8 @@ public class Pedido {
         return estatus;
     }
 
-    public List<Empleadopedido> getPedidosEmpleado() {
-        return pedidosEmpleado;
+    public List<Empleado> getEmpleados() {
+        return empleados;
     }
 
     public List<Orden> getOrdenesP() {
@@ -182,8 +189,8 @@ public class Pedido {
         this.estatus = estatus;
     }
 
-    public void setPedidosEmpleado(List<Empleadopedido> pedidosEmpleado) {
-        this.pedidosEmpleado = pedidosEmpleado;
+    public void setEmpleados(List<Empleado> empleados) {
+        this.empleados = empleados;
     }
 
     public void setOrdenesP(List<Orden> ordenesP) {
@@ -200,7 +207,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "id=" + id + ", cliente=" + cliente + ", direccion=" + direccion + ", total=" + total + ", fecpedido=" + fecpedido + ", fecentrega=" + fecentrega + ", pago=" + pago + ", fecreg=" + fecreg + ", fecact=" + fecact + ", observacion=" + observacion + ", estatus=" + estatus + '}';
+        return "Pedido{" + "id=" + id + ", total=" + total + ", fecpedido=" + fecpedido + ", fecentrega=" + fecentrega + ", pago=" + pago + ", fecreg=" + fecreg + ", fecact=" + fecact + ", observacion=" + observacion + ", estatus=" + estatus + '}';
     }
 
 }

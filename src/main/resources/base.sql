@@ -1,10 +1,8 @@
 -- Volcando estructura de base de datos para admglp
 
-/*
 DROP DATABASE IF EXISTS `admglp`;
 CREATE DATABASE IF NOT EXISTS `admglp`;
 USE `admglp`;
- */
 
 CREATE TABLE c_global (
 id_global  int(11) NOT NULL AUTO_INCREMENT ,
@@ -208,10 +206,7 @@ PRIMARY KEY (id_cliente_direccion)
 CREATE TABLE tr_empleado_pedido (
 id_empleado_pedido INT(11) NOT NULL AUTO_INCREMENT, 
 id_empleado INT(11) NOT NULL, 
-id_pedido INT(11) NOT NULL, 
-emp_ped_dt_fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP(), 
-emp_ped_dt_fecha_actualizacion DATETIME NULL, 
-emp_ped_si_estatus SMALLINT(6) NOT NULL, 
+id_pedido INT(11) NOT NULL,
 PRIMARY KEY (id_empleado_pedido)
 )ENGINE=INNODB;
 

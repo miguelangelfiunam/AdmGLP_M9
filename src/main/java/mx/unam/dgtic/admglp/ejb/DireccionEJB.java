@@ -18,7 +18,7 @@ public interface DireccionEJB {
 
     List<Direccion> getDireccionesPorIdAsentamiento(Integer idAsentamiento, Integer estatus_direccion);
 
-//    List<Direccion> getDireccionesPorCliente(Integer idCliente, Integer estatus_direccion);
+    List<Direccion> getDireccionesPorCliente(Integer idCliente, Integer estatus_direccion);
 
     Direccion getDireccion(Integer idDireccion);
 

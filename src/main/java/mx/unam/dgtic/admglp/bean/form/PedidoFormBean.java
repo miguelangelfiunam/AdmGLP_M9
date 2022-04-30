@@ -5,7 +5,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import mx.unam.dgtic.admglp.bean.model.ArticuloModel;
@@ -25,39 +24,39 @@ import mx.unam.dgtic.admglp.vo.Orden;
 import mx.unam.dgtic.admglp.vo.Pedido;
 
 /**
- * Bean con la informacion del orden a mostrar en la vista
+ * Bean con la informacion del pedido de lado del cliente a mostrar en la vista
  *
  * @author unam
  */
 @Named
 @SessionScoped
-public class OrdenFormBean implements Serializable {
+public class PedidoFormBean implements Serializable {
 
     private static final long serialVersionUID = -4146681491856848089L;
     //Parte del cliente
     private Integer idCliente;
+    private Integer idEmpleado;
     private Integer idDireccion;
     private Cliente cliente;
+    private Empleado empleado;
     //Parte de la orden
     private List<Orden> ordenes;
     //Parte del pedido
     private Integer idPedido;
     private Double total;
     private Integer tipoPago;
-    private Integer estatusPedido;
     private String observacion;
     //Para el comentario
     private Integer idComentario;
     private Integer numeroComentario;
-    private String tipoComentario = "C";
+    private String tipoComentario = "E";
     private String comentario;
     private String mensaje;
-    private List<Integer> estatusListaCliente = Arrays.asList(10, 20, 30, 40, 90);
 
     @Inject
-    private ClienteModel clienteModel;
-    @Inject
     private EmpleadoModel empleadoModel;
+    @Inject
+    private ClienteModel clienteModel;
     @Inject
     private DireccionModel direccionModel;
     @Inject
@@ -72,27 +71,21 @@ public class OrdenFormBean implements Serializable {
     @Inject
     private MessageBean messageBean;
 
-    public String formularioOrden(Integer idCliente, Integer idPedido) {
+    public String formularioPedido(Integer idEmpleado, Integer idPedido) {
         if (idPedido == null) {
             limpiaCampos();
         }
 
-        cliente = clienteModel.cargaCliente(idCliente);
-        if (cliente != null) {
-            this.idCliente = idCliente;
+        empleado = empleadoModel.cargaEmpleado(idEmpleado);
+        if (empleado != null) {
             if (idPedido == null) {
-                ordenes = new ArrayList<>();
-                List<Articulo> articulos = articuloModel.cargaArticulos(10);
-                for (Articulo articulo : articulos) {
-                    Orden orden = new Orden(articulo, 0, 0d, new Date(), null, 10);
-                    ordenes.add(orden);
-                    total = 0d;
-                }
+                
             } else {
                 Pedido pedidoBD = pedidoModel.cargaPedido(idPedido);
-                //Se obtienen datos
+                //Actualizacion
                 if (pedidoBD != null) {
                     this.idPedido = pedidoBD.getId();
+                    this.idEmpleado = empleado.getId();
                     this.idCliente = pedidoBD.getCliente().getId();
                     this.idDireccion = pedidoBD.getDireccion().getIddireccion();
 
@@ -102,17 +95,33 @@ public class OrdenFormBean implements Serializable {
 
                     this.ordenes = new ArrayList<>();
                     this.ordenes = pedidoBD.getOrdenesP();
-                    this.estatusPedido = pedidoBD.getEstatus();
                 }
             }
         } else {
             this.mensaje = "No existe un cliente como tal, si lo requiere inicie sesión nuevamente";
         }
 
-        return "/cliente/pedido?faces-redirect=true";
+        return "/empleado/pedido?faces-redirect=true";
     }
 
-    public void actualizaOrden() {
+    public void asignarEmpleadoPedido(Integer idEmpleado, Integer idPedido) {
+        if (idEmpleado != null && idPedido != null) {
+            Empleado empleado = empleadoModel.cargaEmpleado(idEmpleado);
+            Pedido pedido = pedidoModel.cargaPedido(idPedido);
+            List<Empleado> empleadosPedido = pedido.getEmpleados();
+            if (empleadosPedido == null) {
+                empleadosPedido = new ArrayList<>();
+                empleadosPedido.add(empleado);
+                pedido.setEmpleados(empleadosPedido);
+            } else {
+                pedido.getEmpleados().add(empleado);
+            }
+            pedido.setEstatus(20);
+            pedido = pedidoModel.actualizaPedido(pedido);
+        }
+    }
+
+    public void actualizaPedido() {
         total = 0d;
         for (Orden orden : ordenes) {
             Double precio = orden.getArticulo().getPrecio();
@@ -123,7 +132,7 @@ public class OrdenFormBean implements Serializable {
         }
     }
 
-    public String actualizarEstatusOrden(Integer idPedido, Integer estatus) {
+    public String actualizarEstatusPedido(Integer idPedido, Integer estatus) {
         try {
             pedidoModel.actualizaEstatusPedido(idPedido, estatus);
         } catch (Exception ex) {
@@ -188,28 +197,27 @@ public class OrdenFormBean implements Serializable {
         tipoPago = null;
         observacion = null;
         total = 0d;
-        estatusPedido = null;
     }
 
     public void limpiaCamposComentario() {
         mensaje = null;
         idComentario = null;
         numeroComentario = null;
-        tipoComentario = "C";
+        tipoComentario = "E";
         comentario = null;
     }
-    
-    public String insertarComentario(){
-        if(this.idPedido != null){
+
+    public String insertarComentario() {
+        if (this.idPedido != null) {
             Pedido pedidoBD = pedidoModel.cargaPedido(idPedido);
             numeroComentario = comentarioModel.cargaSiguienteNumeroComentario(idPedido);
             Comentario comentario = new Comentario(pedidoBD, this.numeroComentario, this.comentario, this.tipoComentario, new Date(), null, 10);
             comentario = comentarioModel.insertaComentario(comentario);
         }
         comentario = null;
-        
+
         limpiaCamposComentario();
-        return "/cliente/pedido?faces-redirect=true";
+        return "/empleado/pedido?faces-redirect=true";
     }
 
     public Integer getIdCliente() {
@@ -316,20 +324,20 @@ public class OrdenFormBean implements Serializable {
         this.comentario = comentario;
     }
 
-    public List<Integer> getEstatusListaCliente() {
-        return estatusListaCliente;
+    public Integer getIdEmpleado() {
+        return idEmpleado;
     }
 
-    public void setEstatusListaCliente(List<Integer> estatusListaCliente) {
-        this.estatusListaCliente = estatusListaCliente;
+    public void setIdEmpleado(Integer idEmpleado) {
+        this.idEmpleado = idEmpleado;
     }
 
-    public Integer getEstatusPedido() {
-        return estatusPedido;
+    public Empleado getEmpleado() {
+        return empleado;
     }
 
-    public void setEstatusPedido(Integer estatusPedido) {
-        this.estatusPedido = estatusPedido;
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 
 }

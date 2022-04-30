@@ -59,7 +59,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                                         <td scope="row"> #{empleado.rfc}</td>
                                         <td>
                                             <h:form>
-                                                <h:commandButton type="submit" value="Editar" action="#{empleadoFormBean.formularioEmpleadoID(empleado.usuario.idusuario, empleado.id)}" class="btn btn-primary"/>
                                                 <c:if test="#{empleado.estatus eq 10}">
                                                     <h:commandLink type="button" value="Bloquear" action="#{empleadoFormBean.actualizarEstatusEmpleado(empleado.id, 20)}" class="btn btn-danger"/>
                                                 </c:if>

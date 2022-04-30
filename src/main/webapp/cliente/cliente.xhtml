@@ -21,11 +21,11 @@
                     <h:panelGroup rendered="#{usuarioBean.turnoActual ne null and usuarioBean.turnoActual.fecfin eq null}">
                         <div class="container">
                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                <button type="button" class="btn btn-success">Pendiente</button>
-                                <button type="button" class="btn btn-warning">En curso</button>
+                                <button type="button" class="btn btn-success">Nuevo</button>
+                                <button type="button" class="btn btn-info">Asignado a un empleado</button>
+                                <button type="button" class="btn btn-dark">Entregado</button>
+                                <button type="button" class="btn btn-warning">Sin entregar</button>
                                 <button type="button" class="btn btn-danger">Cancelado</button>
-                                
-                                
                             </div>
                             <div class="d-flex justify-content-end">
                                 <h:form>
@@ -46,8 +46,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="#{pedidoModel.cargaPedidosCriteria(null,usuarioBean.idCliente,null,null,null,null,null)}" var="pedido">
-                                        <tr class="#{pedido.estatus eq 10 ? 'table-success': pedido.estatus eq 90 ? 'table-warning' : 'table-danger'}">
+                                    <c:forEach items="#{pedidoModel.cargaPedidosCriteria(null, usuarioBean.idCliente, null, null, null, null, null, ordenFormBean.estatusListaCliente)}" var="pedido">
+                                        <tr class="#{pedido.estatus eq 10 ? 'table-success': 
+                                                     pedido.estatus eq 20 ? 'table-info' : 
+                                                     pedido.estatus eq 30 ? 'table-dark' : 
+                                                     pedido.estatus eq 40 ? 'table-warning' : 'table-danger'}">
                                             <th scope="row"> #{pedido.id}</th>
                                             <td> #{pedido.direccion.nombre}</td>
                                             <td>$ #{pedido.total}</td>
@@ -65,11 +68,13 @@
                                             <td>#{pedido.observacion}</td>
                                             <td>
                                                 <h:form>
-                                                    <h:commandButton type="submit" value="Editar" action="#{ordenFormBean.formularioOrden(usuarioBean.idCliente, pedido.id)}" class="btn btn-primary"/>
+                                                    <c:if test="#{pedido.estatus eq 10 or pedido.estatus eq 20}">
+                                                        <h:commandButton type="submit" value="Editar" action="#{ordenFormBean.formularioOrden(usuarioBean.idCliente, pedido.id)}" class="btn btn-primary"/>
+                                                    </c:if>
                                                     <c:if test="#{pedido.estatus eq 10}">
                                                         <h:commandLink type="button" value="Cancelar" action="#{ordenFormBean.actualizarEstatusOrden(pedido.id, 90)}" class="btn btn-danger"/>
                                                     </c:if>
-                                                    <c:if test="#{pedido.estatus ne 10}">
+                                                    <c:if test="#{pedido.estatus ne 90}">
                                                         <h:commandLink type="button" value="Activar" action="#{ordenFormBean.actualizarEstatusOrden(pedido.id, 10)}" class="btn btn-success"/>
                                                     </c:if>
                                                 </h:form>

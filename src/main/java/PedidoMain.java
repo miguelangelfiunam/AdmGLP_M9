@@ -2,6 +2,7 @@
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import mx.unam.dgtic.admglp.modelo.PedidoService;
@@ -36,16 +37,16 @@ public class PedidoMain {
             System.out.println("----------------");
 //            Integer status = 10;
             Integer status = null;
-            
+
             Integer idCliente = 1;
 //            Integer idCliente = null;
 
 //            Integer idEmpleado = 1;
             Integer idEmpleado = null;
-            
+
 //            Integer idDireccion = 1;
             Integer idDireccion = null;
-            
+
 //            Double total = 500.0;
             Double total = null;
 
@@ -56,8 +57,11 @@ public class PedidoMain {
 //            String sfecIni_2 = "30/01/2022 07:00:00";
 //            Date fecIni_2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(sfecIni_2);
             Date fecIni_2 = null;
-
-            muestraPedidosCriteria(accesoService, status, idCliente, idEmpleado, idDireccion, fecIni_1, fecIni_2, total);
+            
+//            List<Integer> estatusListaCliente = Arrays.asList(10, 20, 30, 40, 90 );
+            List<Integer> estatusListaCliente = Arrays.asList(10,20);
+//            List<Integer> estatusListaCliente = null;
+            muestraPedidosCriteria(accesoService, status, idCliente, idEmpleado, idDireccion, fecIni_1, fecIni_2, total, estatusListaCliente);
 //            System.out.println("----------------");
 //            actualizaPedido(accesoService);
 //            System.out.println("----------------");
@@ -68,8 +72,8 @@ public class PedidoMain {
         }
     }
 
-    public static void muestraPedidosCriteria(PedidoService accesoService, Integer estatus, Integer idCliente, Integer idEmpleado, Integer idDireccion, Date fecReg_1, Date fecReg_2, Double total) {
-        List<Pedido> result = accesoService.getPedidosCriteria(estatus, idCliente, idEmpleado, idDireccion, fecReg_1, fecReg_2, total);
+    public static void muestraPedidosCriteria(PedidoService accesoService, Integer estatus, Integer idCliente, Integer idEmpleado, Integer idDireccion, Date fecReg_1, Date fecReg_2, Double total, List<Integer> listaEstatus) {
+        List<Pedido> result = accesoService.getPedidosCriteria(estatus, idCliente, idEmpleado, idDireccion, fecReg_1, fecReg_2, total, listaEstatus);
         for (Pedido acceso : result) {
             System.out.println(acceso);
         }

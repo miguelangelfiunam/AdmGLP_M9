@@ -12,7 +12,6 @@
         <class>mx.unam.dgtic.admglp.vo.Contra</class>
         <class>mx.unam.dgtic.admglp.vo.Direccion</class>
         <class>mx.unam.dgtic.admglp.vo.Empleado</class>
-        <class>mx.unam.dgtic.admglp.vo.Empleadopedido</class>
         <class>mx.unam.dgtic.admglp.vo.Empleadoturno</class>
         <class>mx.unam.dgtic.admglp.vo.Estado</class>
         <class>mx.unam.dgtic.admglp.vo.Estatus</class>

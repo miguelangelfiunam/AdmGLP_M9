@@ -59,14 +59,14 @@ public class PedidoModel implements Serializable {
 
     public List<Pedido> cargaPedidosCriteria(Integer estatus, Integer idCliente,
             Integer idEmpleado, Integer idDireccion,
-            Date f_ped_ini, Date f_ped_fin, Double total) {
+            Date f_ped_ini, Date f_ped_fin, Double total, List<Integer> listaEstatus) {
         List<Pedido> pedidos = null;
         PedidoEJBLocal service = null;
         try {
             InitialContext ctx = Conexion.createInitialContext();
             service = (PedidoEJBLocal) ctx.lookup("java:global/admglp/PedidoEJBLocal!mx.unam.dgtic.admglp.ejb.PedidoEJB");
             if (service != null) {
-                pedidos = service.cargaPedidosCriteria(estatus, idCliente, idEmpleado, idDireccion, f_ped_ini, f_ped_fin, total);
+                pedidos = service.cargaPedidosCriteria(estatus, idCliente, idEmpleado, idDireccion, f_ped_ini, f_ped_fin, total, listaEstatus);
             } else {
                 pedidos = new ArrayList<Pedido>();
             }

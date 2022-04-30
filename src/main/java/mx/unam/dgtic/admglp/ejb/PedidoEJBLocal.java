@@ -62,12 +62,12 @@ public class PedidoEJBLocal implements PedidoEJB {
     }
 
     @Override
-    public List<Pedido> cargaPedidosCriteria(Integer estatus, Integer idCliente, Integer idEmpleado, Integer idDireccion, Date f_ped_ini, Date f_ped_fin, Double total) {
+    public List<Pedido> cargaPedidosCriteria(Integer estatus, Integer idCliente, Integer idEmpleado, Integer idDireccion, Date f_ped_ini, Date f_ped_fin, Double total, List<Integer> listaEstatus) {
         List<Pedido> pedidos = new ArrayList<>();
         try {
             EntityManager em = Conexion.createEntityManager();
             ps = new PedidoServiceImpl(em);
-            pedidos = ps.getPedidosCriteria(estatus, idCliente, idEmpleado, idDireccion, f_ped_ini, f_ped_fin, total);
+            pedidos = ps.getPedidosCriteria(estatus, idCliente, idEmpleado, idDireccion, f_ped_ini, f_ped_fin, total, listaEstatus);
         } catch (Exception e) {
             String mensaje = "";
             mensaje += "<p>Error en PedidoService: " + e.getMessage() + "</p>";

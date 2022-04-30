@@ -7,7 +7,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
     <h:head>
         <title><h:outputText value="Empleado"/></title>
     </h:head>
@@ -15,11 +16,113 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
         <ui:decorate template="/decorator/decorator.xhtml">
             <ui:define name="contenido">
                 <h:panelGroup rendered="#{usuarioBean.rol == 'Empleado'}">
-                    <h2 class="text-center">Pedidos que se pueden tomar</h2>
-                    <hr></hr>
-                    
-                    <h2 class="text-center">Pedidos tomados</h2>
-                    <hr></hr>
+                    <div class="container">
+                        <h2 class="text-center">Pedidos por entregar</h2>
+                        <hr></hr>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" class="btn btn-success">Nuevo</button>
+                            <button type="button" class="btn btn-info">Asignado a un empleado</button>
+                            <button type="button" class="btn btn-dark">Entregado</button>
+                            <button type="button" class="btn btn-warning">Sin entregar</button>
+                            <button type="button" class="btn btn-danger">Cancelado</button>
+                            <br/>
+                        </div>
+                        
+                        <table border="3" class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="table-secondary">
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Direccion</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Fecha pedido</th>
+                                    <th scope="col">Fecha entrega</th>
+                                    <th scope="col">Tipo pago</th>
+                                    <th scope="col">Observacion</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="#{pedidoModel.cargaPedidosCriteria(10, null, null, null, null, null, null, null)}" var="pedido">
+                                    <tr class="#{pedido.estatus eq 10 ? 'table-success': 'table-danger'}">
+                                        <th scope="row"> #{pedido.id}</th>
+                                        <td> #{pedido.direccion.nombre}</td>
+                                        <td>$ #{pedido.total}</td>
+                                        <td scope="row"> 
+                                            <h:outputText value="#{pedido.fecpedido}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Mexico_City"/>
+                                            </h:outputText>
+                                        </td>
+                                        <td scope="row"> 
+                                            <h:outputText value="#{pedido.fecentrega}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Mexico_City"/>
+                                            </h:outputText>
+                                        </td>
+                                        <td>#{pedido.pago}</td>
+                                        <td>#{pedido.observacion}</td>
+                                        <td>
+                                            <h:form>
+                                                <c:if test="#{pedido.estatus eq 10}">
+                                                    <h:commandLink type="button" value="Asignar" action="#{pedidoFormBean.asignarEmpleadoPedido(usuarioBean.idEmpleado, pedido.id)}" class="btn btn-danger"/>
+                                                </c:if>
+                                            </h:form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+
+                        <h2 class="text-center">Pedidos en curso</h2>
+                        <hr></hr>
+                        <table border="3" class="table table-bordered table-hover">
+                            <thead>
+                                <tr class="table-secondary">
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Direccion</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Fecha pedido</th>
+                                    <th scope="col">Fecha entrega</th>
+                                    <th scope="col">Tipo pago</th>
+                                    <th scope="col">Observacion</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="#{pedidoModel.cargaPedidosCriteria(null, null, usuarioBean.idEmpleado, null, null, null, null, null)}" var="pedido">
+                                    <tr class="#{pedido.estatus eq 20 ? 'table-info' : pedido.estatus eq 30 ? 'table-dark' : 'table-danger'}">
+                                        <th scope="row"> #{pedido.id}</th>
+                                        <td> #{pedido.direccion.nombre}</td>
+                                        <td>$ #{pedido.total}</td>
+                                        <td scope="row"> 
+                                            <h:outputText value="#{pedido.fecpedido}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Mexico_City"/>
+                                            </h:outputText>
+                                        </td>
+                                        <td scope="row"> 
+                                            <h:outputText value="#{pedido.fecentrega}" >
+                                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Mexico_City"/>
+                                            </h:outputText>
+                                        </td>
+                                        <td>#{pedido.pago}</td>
+                                        <td>#{pedido.observacion}</td>
+                                        <td>
+                                            <h:form>
+                                                <h:commandButton type="submit" value="Detalle" action="#{pedidoFormBean.formularioPedido(usuarioBean.idEmpleado, pedido.id)}" class="btn btn-primary"/>
+                                                <span> </span>
+                                                <c:if test="#{pedido.estatus eq 10}">
+                                                    <h:commandLink type="button" value="Sin entrega" action="#{pedidoFormBean.actualizarEstatusPedido(pedido.id, 90)}" class="btn btn-danger"/>
+                                                </c:if>
+                                                <span> </span>
+                                                <c:if test="#{pedido.estatus eq 20}">
+                                                    <h:commandLink type="button" value="Entregado" action="#{pedidoFormBean.actualizarEstatusPedido(pedido.id, 30)}" class="btn btn-success"/>
+                                                </c:if>
+                                            </h:form>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </h:panelGroup>
                 <h:panelGroup rendered="#{usuarioBean.acceso == false}">
                     <div class="container">

@@ -19,9 +19,9 @@ import mx.unam.dgtic.admglp.vo.Empleado;
  */
 @Model
 public class EmpleadoModel implements Serializable {
-
+    
     private static final long serialVersionUID = -1000003;
-
+    
     public List<Empleado> cargaEmpleados() {
         List<Empleado> empleados = null;
         EmpleadoEJBLocal service = null;
@@ -38,7 +38,7 @@ public class EmpleadoModel implements Serializable {
         }
         return empleados;
     }
-
+    
     public Empleado cargaEmpleado(Integer idempleado) {
         Empleado empleado = null;
         EmpleadoEJBLocal service = null;
@@ -53,7 +53,7 @@ public class EmpleadoModel implements Serializable {
         }
         return empleado;
     }
-
+    
     public Empleado actualizaEmpleado(Empleado empleado) {
         EmpleadoEJBLocal service = null;
         try {
@@ -67,7 +67,7 @@ public class EmpleadoModel implements Serializable {
         }
         return empleado;
     }
-
+    
     public void actualizaEstatusEmpleado(Integer idEmp, Integer estatus) {
         EmpleadoEJBLocal service = null;
         try {
@@ -80,7 +80,7 @@ public class EmpleadoModel implements Serializable {
             ex.printStackTrace();
         }
     }
-
+    
     public Empleado insertaEmpleado(Empleado empleado) {
         EmpleadoEJBLocal service = null;
         try {
@@ -108,5 +108,22 @@ public class EmpleadoModel implements Serializable {
             ex.printStackTrace();
         }
         return empleado;
+    }
+    
+    public List<Empleado> cargaEmpleadosPorEstatus(Integer idempleado) {
+        List<Empleado> empleados = null;
+        EmpleadoEJBLocal service = null;
+        try {
+            InitialContext ctx = Conexion.createInitialContext();
+            service = (EmpleadoEJBLocal) ctx.lookup("java:global/admglp/EmpleadoEJBLocal!mx.unam.dgtic.admglp.ejb.EmpleadoEJB");
+            if (service != null) {
+                empleados = service.getEmpleadosPorEstatus(idempleado);
+            } else {
+                empleados = new ArrayList<Empleado>();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return empleados;
     }
 }

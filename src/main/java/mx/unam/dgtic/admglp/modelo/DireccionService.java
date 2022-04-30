@@ -20,6 +20,8 @@ public interface DireccionService {
     public List<Direccion> getDirecciones(Integer estatus);
     
     public List<Direccion> getDireccionesPorIdAsentamiento(Integer idAsentamiento, Integer estatus_direccion);
+    
+    public List<Direccion> getDireccionesPorIdCliente(Integer idCliente, Integer estatus_direccion);
 
     public Direccion getDireccion(int idDireccion);
     

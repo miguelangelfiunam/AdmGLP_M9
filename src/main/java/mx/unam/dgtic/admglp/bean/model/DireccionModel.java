@@ -23,20 +23,20 @@ public class DireccionModel implements Serializable {
     private static final long serialVersionUID = -1000003;
 
     public List<Direccion> cargaDirecciones() {
-        List<Direccion> direccions = null;
+        List<Direccion> direcciones = null;
         DireccionEJBLocal service = null;
         try {
             InitialContext ctx = Conexion.createInitialContext();
             service = (DireccionEJBLocal) ctx.lookup("java:global/admglp/DireccionEJBLocal!mx.unam.dgtic.admglp.ejb.DireccionEJB");
             if (service != null) {
-                direccions = service.getDirecciones();
+                direcciones = service.getDirecciones();
             } else {
-                direccions = new ArrayList<Direccion>();
+                direcciones = new ArrayList<Direccion>();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return direccions;
+        return direcciones;
     }
 
     public Direccion cargaDireccion(Integer iddireccion) {
@@ -52,6 +52,21 @@ public class DireccionModel implements Serializable {
             ex.printStackTrace();
         }
         return direccion;
+    }
+
+    public List<Direccion> cargaDireccionesPorIdCliente(Integer idcliente, Integer estatus_direccion) {
+        List<Direccion> direcciones = null;
+        DireccionEJBLocal service = null;
+        try {
+            InitialContext ctx = Conexion.createInitialContext();
+            service = (DireccionEJBLocal) ctx.lookup("java:global/admglp/DireccionEJBLocal!mx.unam.dgtic.admglp.ejb.DireccionEJB");
+            if (service != null) {
+                direcciones = service.getDireccionesPorCliente(idcliente, estatus_direccion);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return direcciones;
     }
 
     public Direccion actualizaDireccion(Direccion direccion) {
@@ -96,17 +111,17 @@ public class DireccionModel implements Serializable {
     }
 
     public List<Direccion> cargaDireccionPorIdEstado(Integer idAsentamiento, Integer estatus_direccion) {
-        List<Direccion> direccions = null;
+        List<Direccion> direcciones = null;
         DireccionEJBLocal service = null;
         try {
             InitialContext ctx = Conexion.createInitialContext();
             service = (DireccionEJBLocal) ctx.lookup("java:global/admglp/DireccionEJBLocal!mx.unam.dgtic.admglp.ejb.DireccionEJB");
             if (service != null) {
-                direccions = service.getDireccionesPorIdAsentamiento(idAsentamiento, estatus_direccion);
+                direcciones = service.getDireccionesPorIdAsentamiento(idAsentamiento, estatus_direccion);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return direccions;
+        return direcciones;
     }
 }

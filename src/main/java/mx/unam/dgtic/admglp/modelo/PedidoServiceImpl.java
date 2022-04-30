@@ -3,13 +3,18 @@ package mx.unam.dgtic.admglp.modelo;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.ParameterExpression;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import mx.unam.dgtic.admglp.vo.Empleado;
 import mx.unam.dgtic.admglp.vo.Pedido;
 
 /**
@@ -145,10 +150,11 @@ public class PedidoServiceImpl implements PedidoService {
      * @param f_reg_ini Intervalo inicial de fecha de registro
      * @param f_reg_fin Intervalo final de fecha de registro
      * @param total Total del pedido
+     * @param estatusLista Lista de estatus del pedido
      * @return Lista de pedidos encontrados
      */
     @Override
-    public List<Pedido> getPedidosCriteria(Integer estatus, Integer idCliente, Integer idEmpleado, Integer idDireccion, Date f_reg_ini, Date f_reg_fin, Double total) {
+    public List<Pedido> getPedidosCriteria(Integer estatus, Integer idCliente, Integer idEmpleado, Integer idDireccion, Date f_reg_ini, Date f_reg_fin, Double total, List<Integer> estatusLista) {
         List<Pedido> pedidos = new ArrayList<>();
         try {
             CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -156,15 +162,27 @@ public class PedidoServiceImpl implements PedidoService {
             Root<Pedido> pedidoRoot = c.from(Pedido.class);
             c.select(pedidoRoot);
             c.distinct(true);
+            Join<Pedido, Empleado> empleado = pedidoRoot.join("empleados", JoinType.LEFT);
 
             List<Predicate> criteria = new ArrayList<>();
             if (estatus != null) {
                 ParameterExpression<Integer> p = cb.parameter(Integer.class, "est");
                 criteria.add(cb.equal(pedidoRoot.get("estatus"), p));
             }
+
             if (idCliente != null) {
                 ParameterExpression<Integer> p = cb.parameter(Integer.class, "idCliente");
                 criteria.add(cb.equal(pedidoRoot.get("cliente").get("id"), p));
+            }
+
+            if (idEmpleado != null) {
+                ParameterExpression<Integer> p = cb.parameter(Integer.class, "idEmpleado");
+                criteria.add(cb.equal(empleado.get("id"), p));
+            }
+
+            if (idDireccion != null) {
+                ParameterExpression<Integer> p = cb.parameter(Integer.class, "idDireccion");
+                criteria.add(cb.equal(pedidoRoot.get("direccion").get("iddireccion"), p));
             }
 
             if (f_reg_ini != null && f_reg_fin != null) {
@@ -175,23 +193,35 @@ public class PedidoServiceImpl implements PedidoService {
             } else if (f_reg_ini != null) {
                 //greather than
                 ParameterExpression<Date> p = cb.parameter(Date.class, "fini_1");
-                criteria.add(cb.greaterThan(pedidoRoot.get("fecpedido"), p));
+                criteria.add(cb.greaterThanOrEqualTo(pedidoRoot.get("fecpedido"), p));
             } else if (f_reg_fin != null) {
                 //less than
                 ParameterExpression<Date> p = cb.parameter(Date.class, "fini_2");
-                criteria.add(cb.lessThan(pedidoRoot.get("fecpedido"), p));
+                criteria.add(cb.lessThanOrEqualTo(pedidoRoot.get("fecpedido"), p));
             }
             if (total != null) {
                 ParameterExpression<Double> p = cb.parameter(Double.class, "tot");
-                criteria.add(cb.greaterThan(pedidoRoot.get("total"), p));
+                criteria.add(cb.greaterThanOrEqualTo(pedidoRoot.get("total"), p));
+            }
+            ParameterExpression<Collection> pLista = null;
+            if (estatusLista != null) {
+                pLista = cb.parameter(Collection.class);
             }
 
             if (criteria.isEmpty()) {
                 throw new RuntimeException("no criteria");
             } else if (criteria.size() == 1) {
-                c.where(criteria.get(0));
+                if (pLista != null) {
+                    c.where(criteria.get(0), pedidoRoot.get("estatus").in(pLista));
+                } else {
+                    c.where(criteria.get(0));
+                }
             } else {
-                c.where(cb.and(criteria.toArray(new Predicate[0])));
+                if (pLista != null) {
+                    c.where(cb.and(criteria.toArray(new Predicate[0])), pedidoRoot.get("estatus").in(pLista));
+                } else {
+                    c.where(cb.and(criteria.toArray(new Predicate[0])));
+                }
             }
 
             TypedQuery<Pedido> q = em.createQuery(c);
@@ -200,6 +230,12 @@ public class PedidoServiceImpl implements PedidoService {
             }
             if (idCliente != null) {
                 q.setParameter("idCliente", idCliente);
+            }
+            if (idEmpleado != null) {
+                q.setParameter("idEmpleado", idEmpleado);
+            }
+            if (idDireccion != null) {
+                q.setParameter("idDireccion", idDireccion);
             }
             if (f_reg_ini != null && f_reg_fin != null) {
                 q.setParameter("fini_1", f_reg_ini);
@@ -211,6 +247,9 @@ public class PedidoServiceImpl implements PedidoService {
             }
             if (total != null) {
                 q.setParameter("tot", total);
+            }
+            if (estatusLista != null) {
+                q.setParameter(pLista, estatusLista);
             }
 
             pedidos = q.getResultList();

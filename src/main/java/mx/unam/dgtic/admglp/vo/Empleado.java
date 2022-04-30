@@ -6,7 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.util.Date;
@@ -51,8 +52,8 @@ public class Empleado {
     @Column(name = "empleado_si_estatus")
     private Integer estatus; // Estado del empleado
 
-    @OneToMany(mappedBy = "empleado")
-    List<Empleadopedido> pedidosEmpleado;
+    @ManyToMany(mappedBy = "empleados")
+    private List<Pedido> pedidos; // Roles relacionados al usuario
 
     public Empleado() {
     }
@@ -99,6 +100,10 @@ public class Empleado {
         return estatus;
     }
 
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -129,6 +134,10 @@ public class Empleado {
 
     public void setEstatus(Integer estatus) {
         this.estatus = estatus;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     @Override
