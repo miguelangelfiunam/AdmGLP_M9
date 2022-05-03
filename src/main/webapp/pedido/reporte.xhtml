@@ -33,19 +33,19 @@
                                     <h:form>
                                         <div class="row">
                                             <div class="col">
-                                                <label class="form-label">Empleado #{reporteFormBean.idempleado}</label>
+                                                <label class="form-label">Empleado</label>
                                                 <h:selectOneMenu value="#{reporteFormBean.idempleado}" disabled="false" required="false" class="form-control">
                                                     <f:selectItem itemLabel="Selecciona..." />
                                                     <f:selectItems value="#{empleadoModel.cargaEmpleadosPorEstatus(10)}" var="empleado" 
-                                                                   itemLabel="#{empleado.id} #{empleado.usuario.nombre} #{empleado.usuario.apellido1} #{empleado.usuario.nombre}" itemValue="#{empleado.id}"/>
+                                                                   itemLabel="#{empleado.usuario.nombre} #{empleado.usuario.apellido1} #{empleado.usuario.nombre}" itemValue="#{empleado.id}"/>
                                                 </h:selectOneMenu>
                                             </div>
                                             <div class="col">
-                                                <label class="form-label">Cliente #{reporteFormBean.idcliente}</label>
+                                                <label class="form-label">Cliente</label>
                                                 <h:selectOneMenu value="#{reporteFormBean.idcliente}" disabled="false" required="false" class="form-control">
                                                     <f:selectItem itemLabel="Selecciona..." />
                                                     <f:selectItems value="#{clienteModel.cargaClientesPorEstatus(10)}" var="cliente" 
-                                                                   itemLabel="#{cliente.id} #{cliente.usuario.nombre} #{cliente.usuario.apellido1} #{cliente.usuario.nombre}" itemValue="#{cliente.id}"/>
+                                                                   itemLabel="#{cliente.usuario.nombre} #{cliente.usuario.apellido1} #{cliente.usuario.nombre}" itemValue="#{cliente.id}"/>
                                                 </h:selectOneMenu>
                                             </div>
                                             <div class="col">
@@ -53,7 +53,7 @@
                                                 <h:selectOneMenu value="#{reporteFormBean.iddireccion}" disabled="false" required="false" class="form-control">
                                                     <f:selectItem itemLabel="Selecciona..." />
                                                     <f:selectItems value="#{direccionModel.cargaDirecciones(10)}" var="direccion" 
-                                                                   itemLabel="#{direccion.iddireccion} #{direccion.nombre}" itemValue="#{direccion.iddireccion}"/>
+                                                                   itemLabel="#{direccion.nombre}" itemValue="#{direccion.iddireccion}"/>
                                                 </h:selectOneMenu>
                                             </div>
                                         </div>
@@ -72,7 +72,6 @@
                                 <table border="3" class="table table-bordered table-hover">
                                     <thead>
                                         <tr class="table-secondary">
-                                            <th scope="col">ID</th>
                                             <th scope="col">Direccion</th>
                                             <th scope="col">Total</th>
                                             <th scope="col">Fecha pedido</th>
@@ -87,7 +86,6 @@
                                                          pedido.estatus eq 20 ? 'table-info' : 
                                                          pedido.estatus eq 30 ? 'table-dark' : 
                                                          pedido.estatus eq 40 ? 'table-warning' : 'table-danger'}">
-                                                <th scope="row"> #{pedido.id}</th>
                                                 <td> #{pedido.direccion.nombre}</td>
                                                 <td>$ #{pedido.total}</td>
                                                 <td scope="row"> 
