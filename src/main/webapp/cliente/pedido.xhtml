@@ -102,9 +102,7 @@
                                                 <h:selectOneMenu value="#{ordenFormBean.tipoPago}" disabled="false" required="true" 
                                                                  class="form-control" requiredMessage="El tipo de pago es obligatorio.">
                                                     <f:selectItem itemLabel="Selecciona..." />
-                                                    <f:selectItem itemLabel="Tarjeta Débito" itemValue="1"/>
-                                                    <f:selectItem itemLabel="Tarjeta Crédito" itemValue="2"/>
-                                                    <f:selectItem itemLabel="Efectivo" itemValue="3"/>
+                                                    <f:selectItems value="#{pedidoModel.cargaTiposPago(10)}" var="tipo" itemLabel="#{tipo.nombre}" itemValue="#{tipo.id}"/>
                                                 </h:selectOneMenu>
                                             </div>
                                             <div class="col">

@@ -11,11 +11,13 @@ import jakarta.persistence.criteria.ParameterExpression;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import mx.unam.dgtic.admglp.vo.Empleado;
 import mx.unam.dgtic.admglp.vo.Pedido;
+import mx.unam.dgtic.admglp.vo.TipoPago;
 
 /**
  * Servicio para consulta de pedidos
@@ -258,6 +260,18 @@ public class PedidoServiceImpl implements PedidoService {
             throw new RuntimeException("Error al obtener pedidos por criteria");
         }
         return pedidos;
+    }
+
+    @Override
+    public List<TipoPago> getTiposPago(Integer estatus) {
+        List<TipoPago> tipos = new ArrayList<>();
+        try {
+            tipos = TipoPago.getTipoPagoPorEstatus(estatus);
+        } catch (Exception e) {
+            this.error = e;
+            throw new RuntimeException("Error al obtener tipos de pago");
+        }
+        return tipos;
     }
 
 }

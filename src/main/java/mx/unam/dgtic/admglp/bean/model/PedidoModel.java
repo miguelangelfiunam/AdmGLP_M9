@@ -9,6 +9,7 @@ import javax.naming.InitialContext;
 import mx.unam.dgtic.admglp.DB.Conexion;
 import mx.unam.dgtic.admglp.ejb.PedidoEJBLocal;
 import mx.unam.dgtic.admglp.vo.Pedido;
+import mx.unam.dgtic.admglp.vo.TipoPago;
 
 /**
  * Modelo para metodos de pedidos
@@ -130,5 +131,22 @@ public class PedidoModel implements Serializable {
             ex.printStackTrace();
         }
         return pedido;
+    }
+    
+     public List<TipoPago> cargaTiposPago(Integer estatus) {
+        List<TipoPago> tipos = null;
+        PedidoEJBLocal service = null;
+        try {
+            InitialContext ctx = Conexion.createInitialContext();
+            service = (PedidoEJBLocal) ctx.lookup("java:global/admglp/PedidoEJBLocal!mx.unam.dgtic.admglp.ejb.PedidoEJB");
+            if (service != null) {
+                tipos = service.cargaTiposPago(estatus);
+            } else {
+                tipos = new ArrayList<TipoPago>();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return tipos;
     }
 }

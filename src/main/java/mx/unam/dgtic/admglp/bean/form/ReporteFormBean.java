@@ -33,10 +33,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import mx.unam.dgtic.admglp.bean.model.EstatusModel;
 import mx.unam.dgtic.admglp.mensajes.MessageBean;
 import mx.unam.dgtic.admglp.vo.Empleado;
+import mx.unam.dgtic.admglp.vo.Estatus;
 import mx.unam.dgtic.admglp.vo.Orden;
 import mx.unam.dgtic.admglp.vo.Pedido;
+import mx.unam.dgtic.admglp.vo.TipoPago;
 
 /**
  * Bean con la informacion del articulo a mostrar en la vista
@@ -57,9 +61,13 @@ public class ReporteFormBean implements Serializable {
     private Double total;
     private List<Integer> listaEstatus;
     private List<Pedido> pedidos = new ArrayList<>();
+    //Incluir en reporte
+    private Boolean articulos;
 
     @Inject
     private PedidoModel pedidoModel;
+    @Inject
+    private EstatusModel estatusModel;
 
     @Inject
     private MessageBean messageBean;
@@ -168,12 +176,22 @@ public class ReporteFormBean implements Serializable {
 
     public void tablaPedidos(Document document) {
         try {
+            DecimalFormat df = new DecimalFormat("0.00");
             List<Pedido> pedidos = pedidoModel.cargaPedidosCriteria(estatus, idcliente, idempleado, iddireccion, f_ped_ini, f_ped_fin, total, listaEstatus);
 
+            PdfPTable tableTotalPedidos = new PdfPTable(8);
+            tableTotalPedidos.addCell(agregaCelda("Resumen de cantidades", Element.ALIGN_CENTER, 1, 8, 8, Arrays.asList(true, true, false, false)));
+            tableTotalPedidos.addCell(agregaCelda(" ", Element.ALIGN_CENTER, 1, 6, 8, Arrays.asList(false, false, false, false)));
+            tableTotalPedidos.addCell(agregaCelda("#Pedido", Element.ALIGN_CENTER, 1, 1, 8, Arrays.asList(false, false, false, false)));
+            tableTotalPedidos.addCell(agregaCelda("Subtotal", Element.ALIGN_CENTER, 1, 1, 8, Arrays.asList(false, false, false, false)));
+            Double totalPedidos = 0.0;
+            int i = 1;
             for (Pedido pedido : pedidos) {
+
                 PdfPTable table = new PdfPTable(8);
                 table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
 
+                table.addCell(agregaCelda("Pedido #" + i, Element.ALIGN_CENTER, 1, 8, 8, Arrays.asList(true, false, false, false)));
                 table.addCell(agregaCelda("Cliente:", Element.ALIGN_CENTER, 1, 1, 8, Arrays.asList(false, false, false, false)));
                 if (pedido.getCliente() != null) {
                     String nombreCliente = pedido.getCliente().getUsuario().getNombreCompleto();
@@ -224,36 +242,53 @@ public class ReporteFormBean implements Serializable {
                 if (pedido.getFecentrega() != null) {
                     fecEntrega += sdf.format(pedido.getFecentrega());
                 }
-
+                String tipoPago = "";
+                if (pedido.getPago() != null) {
+                    TipoPago tipo = TipoPago.getTipoPago(pedido.getPago());
+                    tipoPago = tipo.getNombre();
+                }
+                String estado_nombre = "";
+                Estatus estatusActual = estatusModel.cargaEstatus("t_pedido", pedido.getEstatus(), 1);
+                if (estatusActual != null) {
+                    estado_nombre = estatusActual.getNombre();
+                }
                 table.addCell(agregaCelda(fecPedido, Element.ALIGN_CENTER, 1, 2, 8, Arrays.asList(false, false, false, false)));
                 table.addCell(agregaCelda(fecEntrega, Element.ALIGN_CENTER, 1, 2, 8, Arrays.asList(false, false, false, false)));
-                table.addCell(agregaCelda("Pago ", Element.ALIGN_CENTER, 1, 2, 8, Arrays.asList(false, false, false, false)));
-                table.addCell(agregaCelda("Estado ", Element.ALIGN_CENTER, 1, 2, 8, Arrays.asList(false, false, false, false)));
+
+                table.addCell(agregaCelda(tipoPago, Element.ALIGN_CENTER, 1, 2, 8, Arrays.asList(false, false, false, false)));
+                table.addCell(agregaCelda(estado_nombre, Element.ALIGN_CENTER, 1, 2, 8, Arrays.asList(false, false, false, false)));
 
                 //******************************************** ARTICULOS *********************************************
-                table.addCell(agregaCelda(" ", Element.ALIGN_CENTER, 1, 8, 7, Arrays.asList(false, false, false, false)));
-                table.addCell(agregaCelda("", Element.ALIGN_CENTER, 1, 4, 7, Arrays.asList(false, false, false, false)));
-                table.addCell(agregaCelda("Articulo ", Element.ALIGN_CENTER, 1, 2, 7, Arrays.asList(false, true, false, false)));
-                table.addCell(agregaCelda("Unidad", Element.ALIGN_CENTER, 1, 1, 7, Arrays.asList(false, true, false, false)));
-                table.addCell(agregaCelda("Precio ", Element.ALIGN_RIGHT, 1, 1, 7, Arrays.asList(false, true, false, false)));
+                if (articulos != null && articulos) {
+                    table.addCell(agregaCelda(" ", Element.ALIGN_CENTER, 1, 8, 7, Arrays.asList(false, false, false, false)));
+                    table.addCell(agregaCelda("", Element.ALIGN_CENTER, 1, 4, 7, Arrays.asList(false, false, false, false)));
+                    table.addCell(agregaCelda("Articulo ", Element.ALIGN_CENTER, 1, 2, 7, Arrays.asList(false, true, false, false)));
+                    table.addCell(agregaCelda("Unidad", Element.ALIGN_CENTER, 1, 1, 7, Arrays.asList(false, true, false, false)));
+                    table.addCell(agregaCelda("Subtotal ", Element.ALIGN_RIGHT, 1, 1, 7, Arrays.asList(false, true, false, false)));
 
-                DecimalFormat df = new DecimalFormat("0.00");
-                for (Orden orden : pedido.getOrdenesP()) {
-                    if (orden.getCantidad() > 0) {
-                        table.addCell(agregaCelda("", Element.ALIGN_CENTER, 1, 4, 7, Arrays.asList(false, false, false, false)));
-                        table.addCell(agregaCelda(orden.getArticulo().getNombre(), Element.ALIGN_CENTER, 1, 2, 7, Arrays.asList(false, false, false, false)));
-                        table.addCell(agregaCelda("" + orden.getCantidad(), Element.ALIGN_CENTER, 1, 1, 7, Arrays.asList(false, false, false, false)));
-                        table.addCell(agregaCelda("$ " + df.format(orden.getSubtotal()), Element.ALIGN_RIGHT, 1, 1, 7, Arrays.asList(false, false, false, false)));
+                    for (Orden orden : pedido.getOrdenesP()) {
+                        if (orden.getCantidad() > 0) {
+                            table.addCell(agregaCelda("", Element.ALIGN_CENTER, 1, 4, 7, Arrays.asList(false, false, false, false)));
+                            table.addCell(agregaCelda(orden.getArticulo().getNombre(), Element.ALIGN_CENTER, 1, 2, 7, Arrays.asList(false, false, false, false)));
+                            table.addCell(agregaCelda("" + orden.getCantidad(), Element.ALIGN_CENTER, 1, 1, 7, Arrays.asList(false, false, false, false)));
+                            table.addCell(agregaCelda("$ " + df.format(orden.getSubtotal()), Element.ALIGN_RIGHT, 1, 1, 7, Arrays.asList(false, false, false, false)));
+                        }
                     }
                 }
                 table.addCell(agregaCelda("", Element.ALIGN_CENTER, 1, 6, 7, Arrays.asList(false, false, false, false)));
-                table.addCell(agregaCelda("Total", Element.ALIGN_CENTER, 1, 1, 7, Arrays.asList(false, false, false, false)));
+                table.addCell(agregaCelda("Total", Element.ALIGN_CENTER, 1, 1, 7, Arrays.asList(true, false, false, false)));
+                table.addCell(agregaCelda("$ " + df.format(pedido.getTotal()), Element.ALIGN_RIGHT, 1, 1, 7, Arrays.asList(true, false, false, false)));
 
-                table.addCell(agregaCelda("$ " + df.format(pedido.getTotal()), Element.ALIGN_RIGHT, 1, 1, 7, Arrays.asList(false, false, false, false)));
-
-                table.addCell(agregaCelda(" ", Element.ALIGN_CENTER, 1, 8, 8, Arrays.asList(true, false, false, false)));
+                tableTotalPedidos.addCell(agregaCelda(" ", Element.ALIGN_RIGHT, 1, 6, 7, Arrays.asList(false, false, false, false)));
+                tableTotalPedidos.addCell(agregaCelda("" + i++, Element.ALIGN_CENTER, 1, 1, 7, Arrays.asList(false, false, false, false)));
+                tableTotalPedidos.addCell(agregaCelda("$ " + df.format(pedido.getTotal()), Element.ALIGN_RIGHT, 1, 1, 7, Arrays.asList(false, false, false, false)));
+                totalPedidos += pedido.getTotal();
                 document.add(table);
             }
+            tableTotalPedidos.addCell(agregaCelda(" ", Element.ALIGN_RIGHT, 1, 6, 7, Arrays.asList(false, false, false, false)));
+            tableTotalPedidos.addCell(agregaCelda("Total ", Element.ALIGN_CENTER, 1, 1, 7, Arrays.asList(true, false, false, false)));
+            tableTotalPedidos.addCell(agregaCelda("$ " + df.format(totalPedidos), Element.ALIGN_RIGHT, 1, 1, 7, Arrays.asList(true, false, false, false)));
+            document.add(tableTotalPedidos);
 
         } catch (Exception e) {
         }
@@ -332,5 +367,12 @@ public class ReporteFormBean implements Serializable {
         this.pedidos = pedidos;
     }
 
-    
+    public Boolean getArticulos() {
+        return articulos;
+    }
+
+    public void setArticulos(Boolean articulos) {
+        this.articulos = articulos;
+    }
+
 }

@@ -152,4 +152,20 @@ public class EstatusServiceImpl implements EstatusService {
         return estatus;
     }
 
+    @Override
+    public Estatus getEstatusObjeto(String tabla, Integer numEstatus, Integer activo) {
+         Estatus estatus = null;
+        try {
+            TypedQuery<Estatus> query = em.createQuery("SELECT e FROM Estatus e WHERE e.numero = :num AND e.tabla = :tab AND e.activo = :act ", Estatus.class);
+            query.setParameter("num", numEstatus);
+            query.setParameter("tab", tabla);
+            query.setParameter("act", activo);
+            estatus = query.getSingleResult();
+        } catch (Exception e) {
+            this.error = e;
+            throw new RuntimeException("Error al obtener estatuss");
+        }
+        return estatus;
+    }
+
 }

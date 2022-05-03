@@ -22,6 +22,8 @@ public interface EstatusService {
     public List<Estatus> getEstatusLista(String tabla, Integer estatus);
 
     public Estatus getEstatusObjeto(int idEstatus);
+    
+    public Estatus getEstatusObjeto(String tabla, Integer numEstatus, Integer activo);
 
     public Estatus deleteEstatusObjeto(int idEstatus);
 

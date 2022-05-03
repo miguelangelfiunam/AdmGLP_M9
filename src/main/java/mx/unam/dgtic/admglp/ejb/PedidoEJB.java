@@ -4,6 +4,7 @@ import jakarta.ejb.Local;
 import java.util.Date;
 import java.util.List;
 import mx.unam.dgtic.admglp.vo.Pedido;
+import mx.unam.dgtic.admglp.vo.TipoPago;
 
 /**
  * Interfaz EJB para consulta de pedidos
@@ -33,5 +34,7 @@ public interface PedidoEJB {
     Pedido actualizaEstatusPedido(Integer idPedido, Integer estatus);
 
     Pedido insertaPedido(Pedido pedido);
+    
+    List<TipoPago> cargaTiposPago(Integer estatus);
 
 }

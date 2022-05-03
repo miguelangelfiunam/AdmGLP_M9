@@ -9,6 +9,7 @@ import mx.unam.dgtic.admglp.DB.Conexion;
 import mx.unam.dgtic.admglp.Funciones.Funciones;
 import mx.unam.dgtic.admglp.modelo.PedidoServiceImpl;
 import mx.unam.dgtic.admglp.vo.Pedido;
+import mx.unam.dgtic.admglp.vo.TipoPago;
 
 /**
  *
@@ -175,6 +176,27 @@ public class PedidoEJBLocal implements PedidoEJB {
     @Override
     public Pedido eliminaPedido(Integer idPedido) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<TipoPago> cargaTiposPago(Integer estatus) {
+        List<TipoPago> tipos = new ArrayList<>();
+        try {
+            EntityManager em = Conexion.createEntityManager();
+            ps = new PedidoServiceImpl(em);
+            tipos = ps.getTiposPago(estatus);
+        } catch (Exception e) {
+            String mensaje = "";
+            mensaje += "<p>Error en PedidoService: " + e.getMessage() + "</p>";
+            if (ps.getError() != null) {
+                mensaje += "<p>" + "Error en PedidoEJBLocal -> getMarcasPedidos() -> PedidoService -> getMarcasPedidos() " + ps.getError().getMessage() + "</p>";
+            }
+            try {
+                Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");
+            } catch (Exception eCorreo) {
+            }
+        }
+        return tipos;
     }
 
 }

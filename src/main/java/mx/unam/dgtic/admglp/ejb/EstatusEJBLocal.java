@@ -185,4 +185,25 @@ public class EstatusEJBLocal implements EstatusEJB {
         }
     }
 
+    @Override
+    public Estatus getEstatusObjeto(String tabla, Integer numEstatus, Integer activo) {
+        Estatus estatus = null;
+        try {
+            EntityManager em = Conexion.createEntityManager();
+            es = new EstatusServiceImpl(em);
+            estatus = es.getEstatusObjeto(tabla, numEstatus, activo);
+        } catch (Exception e) {
+            String mensaje = "";
+            mensaje += "<p>Error en EstatusService: " + e.getMessage() + "</p>";
+            if (es.getError() != null) {
+                mensaje += "<p>" + "Error en EstatusEJBLocal -> getEstatusObjeto() -> EstatusService -> getEstatusObjeto() " + es.getError().getMessage() + "</p>";
+            }
+            try {
+                Funciones.mandaCorreo("Error", mensaje, "dgpe.curso.04@gmail.com");
+            } catch (Exception eCorreo) {
+            }
+        }
+        return estatus;
+    }
+
 }

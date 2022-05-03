@@ -19,6 +19,8 @@ public interface EstatusEJB {
     List<Estatus> getEstatusListaPorActivo(Integer activo);
 
     Estatus getEstatusObjeto(Integer idEstatus);
+    
+    Estatus getEstatusObjeto(String tabla, Integer numEstatus, Integer activo);
 
     Boolean existeEstatusObjeto(Integer idEstatus);
 

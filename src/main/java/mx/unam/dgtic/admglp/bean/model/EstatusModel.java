@@ -38,6 +38,21 @@ public class EstatusModel implements Serializable {
         }
         return estatus;
     }
+    
+     public Estatus cargaEstatus(String tabla, Integer numEstatus, Integer activo) {
+        Estatus estatus = null;
+        EstatusEJBLocal service = null;
+        try {
+            InitialContext ctx = Conexion.createInitialContext();
+            service = (EstatusEJBLocal) ctx.lookup("java:global/admglp/EstatusEJBLocal!mx.unam.dgtic.admglp.ejb.EstatusEJB");
+            if (service != null) {
+                estatus = service.getEstatusObjeto(tabla, numEstatus, activo);
+            } 
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return estatus;
+    }
 
     public List<Estatus> cargaEstatusPorTabla(String tabla, Integer activo) {
         List<Estatus> estatus = null;

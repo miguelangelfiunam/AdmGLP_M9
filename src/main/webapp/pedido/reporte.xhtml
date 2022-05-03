@@ -21,7 +21,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div>
-                                    <h:panelGroup id="panelPDF" rendered="#{fn:length(reporteFormBean.pedidos) gt 0}">
+                                    <h:panelGroup rendered="#{fn:length(reporteFormBean.pedidos) gt 0}">
                                         <h:form target="_blank">
                                             <div class="d-flex justify-content-end">
                                                 <h:commandLink action="#{reporteFormBean.reporte}">
@@ -57,6 +57,21 @@
                                                 </h:selectOneMenu>
                                             </div>
                                         </div>
+                                        <h:panelGroup rendered="#{fn:length(reporteFormBean.pedidos) gt 0}">
+                                            <div class="row">
+                                                <h4 class="text-center">Incluir en reporte</h4>
+                                                <hr></hr>
+                                                <div class="col">
+
+                                                    <div class="form-check">
+                                                        <h:selectBooleanCheckbox value="#{reporteFormBean.articulos}" class="form-check-input" id="bArticulos"/> 
+                                                        <label class="form-check-label" for="bArticulos">
+                                                            Incluir articulos
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </h:panelGroup>
                                         <br/>
                                         <div class="d-flex justify-content-end">
                                             <h:commandButton value="Buscar" action="#{reporteFormBean.buscaReportePedido}" class="btn btn-success">
@@ -69,41 +84,43 @@
                         <br/>
                         <div class="row">
                             <div class="col">
-                                <table border="3" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr class="table-secondary">
-                                            <th scope="col">Direccion</th>
-                                            <th scope="col">Total</th>
-                                            <th scope="col">Fecha pedido</th>
-                                            <th scope="col">Fecha entrega</th>
-                                            <th scope="col">Tipo pago</th>
-                                            <th scope="col">Observacion</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="#{reporteFormBean.pedidos}" var="pedido">
-                                            <tr class="#{pedido.estatus eq 10 ? 'table-success': 
-                                                         pedido.estatus eq 20 ? 'table-info' : 
-                                                         pedido.estatus eq 30 ? 'table-dark' : 
-                                                         pedido.estatus eq 40 ? 'table-warning' : 'table-danger'}">
-                                                <td> #{pedido.direccion.nombre}</td>
-                                                <td>$ #{pedido.total}</td>
-                                                <td scope="row"> 
-                                                    <h:outputText value="#{pedido.fecpedido}" >
-                                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Mexico_City"/>
-                                                    </h:outputText>
-                                                </td>
-                                                <td scope="row"> 
-                                                    <h:outputText value="#{pedido.fecentrega}" >
-                                                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Mexico_City"/>
-                                                    </h:outputText>
-                                                </td>
-                                                <td>#{pedido.pago}</td>
-                                                <td>#{pedido.observacion}</td>
+                                <h:panelGroup rendered="#{fn:length(reporteFormBean.pedidos) gt 0}">
+                                    <table border="3" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr class="table-secondary">
+                                                <th scope="col">Direccion</th>
+                                                <th scope="col">Total</th>
+                                                <th scope="col">Fecha pedido</th>
+                                                <th scope="col">Fecha entrega</th>
+                                                <th scope="col">Tipo pago</th>
+                                                <th scope="col">Observacion</th>
                                             </tr>
-                                        </c:forEach>
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="#{reporteFormBean.pedidos}" var="pedido">
+                                                <tr class="#{pedido.estatus eq 10 ? 'table-success': 
+                                                             pedido.estatus eq 20 ? 'table-info' : 
+                                                             pedido.estatus eq 30 ? 'table-dark' : 
+                                                             pedido.estatus eq 40 ? 'table-warning' : 'table-danger'}">
+                                                    <td> #{pedido.direccion.nombre}</td>
+                                                    <td>$ #{pedido.total}</td>
+                                                    <td scope="row"> 
+                                                        <h:outputText value="#{pedido.fecpedido}" >
+                                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Mexico_City"/>
+                                                        </h:outputText>
+                                                    </td>
+                                                    <td scope="row"> 
+                                                        <h:outputText value="#{pedido.fecentrega}" >
+                                                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Mexico_City"/>
+                                                        </h:outputText>
+                                                    </td>
+                                                    <td>#{pedido.pago}</td>
+                                                    <td>#{pedido.observacion}</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
+                                </h:panelGroup>
                             </div>
                         </div>
                     </div>

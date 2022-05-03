@@ -3,6 +3,7 @@ package mx.unam.dgtic.admglp.modelo;
 import java.util.Date;
 import java.util.List;
 import mx.unam.dgtic.admglp.vo.Pedido;
+import mx.unam.dgtic.admglp.vo.TipoPago;
 
 /**
  * Interfaz de servicio para consulta de pedidos
@@ -31,5 +32,7 @@ public interface PedidoService {
     public Pedido updatePedido(Pedido pedido);
 
     public Pedido insertPedido(Pedido pedido);
+    
+    public List<TipoPago> getTiposPago(Integer estatus);
 
 }
