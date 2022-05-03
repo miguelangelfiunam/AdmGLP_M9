@@ -20,7 +20,6 @@ import mx.unam.dgtic.admglp.vo.Articulo;
 import mx.unam.dgtic.admglp.vo.Cliente;
 import mx.unam.dgtic.admglp.vo.Comentario;
 import mx.unam.dgtic.admglp.vo.Direccion;
-import mx.unam.dgtic.admglp.vo.Empleado;
 import mx.unam.dgtic.admglp.vo.Orden;
 import mx.unam.dgtic.admglp.vo.Pedido;
 
@@ -158,13 +157,18 @@ public class OrdenFormBean implements Serializable {
             Cliente clienteBD = clienteModel.cargaCliente(idCliente);
             Direccion direccionBD = direccionModel.cargaDireccion(idDireccion);
             Pedido pedido = new Pedido(cliente, direccionBD, total, new Date(), null, tipoPago, new Date(), null, observacion, 10);
+            for (Orden orden : ordenes) {
+                orden.setPedido(pedido);
+//                orden = ordenModel.insertaOrden(orden);
+            }
+            pedido.setOrdenesP(ordenes);
             pedido = pedidoModel.insertaPedido(pedido);
             idPedido = pedido.getId();
 
-            for (Orden orden : ordenes) {
-                orden.setPedido(pedido);
-                orden = ordenModel.actualizaOrden(orden);
-            }
+//            for (Orden orden : ordenes) {
+//                orden.setPedido(pedido);
+////                orden = ordenModel.insertaOrden(orden);
+//            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }

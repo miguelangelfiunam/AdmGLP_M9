@@ -1,5 +1,6 @@
 package mx.unam.dgtic.admglp.vo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -71,7 +72,7 @@ public class Pedido {
     @ManyToMany
     private List<Empleado> empleados; // Empleados relacionados al pedido
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.PERSIST)
     private List<Orden> ordenesP; // Ordenes relacionadas al pedido
     
     @OneToMany(mappedBy = "pedido")

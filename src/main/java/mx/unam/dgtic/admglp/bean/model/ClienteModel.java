@@ -38,6 +38,23 @@ public class ClienteModel implements Serializable {
         }
         return clientes;
     }
+    
+    public List<Cliente> cargaClientesPorEstatus(Integer estatus) {
+        List<Cliente> clientes = null;
+        ClienteEJBLocal service = null;
+        try {
+            InitialContext ctx = Conexion.createInitialContext();
+            service = (ClienteEJBLocal) ctx.lookup("java:global/admglp/ClienteEJBLocal!mx.unam.dgtic.admglp.ejb.ClienteEJB");
+            if (service != null) {
+                clientes = service.getClientesPorEstatus(estatus);
+            } else {
+                clientes = new ArrayList<Cliente>();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return clientes;
+    }
 
     public Cliente cargaCliente(Integer idcliente) {
         Cliente cliente = null;

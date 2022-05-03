@@ -38,6 +38,23 @@ public class DireccionModel implements Serializable {
         }
         return direcciones;
     }
+    
+    public List<Direccion> cargaDirecciones(Integer estatus) {
+        List<Direccion> direcciones = null;
+        DireccionEJBLocal service = null;
+        try {
+            InitialContext ctx = Conexion.createInitialContext();
+            service = (DireccionEJBLocal) ctx.lookup("java:global/admglp/DireccionEJBLocal!mx.unam.dgtic.admglp.ejb.DireccionEJB");
+            if (service != null) {
+                direcciones = service.getDireccionesPorEstatus(estatus);
+            } else {
+                direcciones = new ArrayList<Direccion>();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return direcciones;
+    }
 
     public Direccion cargaDireccion(Integer iddireccion) {
         Direccion direccion = null;

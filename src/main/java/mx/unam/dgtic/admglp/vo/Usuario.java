@@ -12,6 +12,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class Usuario {
     private Integer idusuario; // Identificador de usuario
 
     @OneToOne
-    @JoinColumn(name="id_contra", referencedColumnName="id_contra")
+    @JoinColumn(name = "id_contra", referencedColumnName = "id_contra")
     private Contra contra; // Contra relacionada al usuario
 
     @Column(name = "usuario_vc_apodo")
@@ -74,23 +75,26 @@ public class Usuario {
 
     @Column(name = "usuario_si_estatus")
     private Integer estatus; // Estado del usuario
-    
+
     @JoinTable(
-        name = "tr_usuario_rol",
-        joinColumns = @JoinColumn(name = "id_usuario", nullable = false),
-        inverseJoinColumns = @JoinColumn(name="id_rol", nullable = false)
+            name = "tr_usuario_rol",
+            joinColumns = @JoinColumn(name = "id_usuario", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "id_rol", nullable = false)
     )
     @ManyToMany
     private List<Rol> roles; // Roles relacionados al usuario
-    
-    @OneToOne(mappedBy="usuario", cascade = CascadeType.ALL)
+
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Empleado empleado; //Empleado relacionado al usuario
-    
-    @OneToOne(mappedBy="usuario", cascade = CascadeType.ALL)
+
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Cliente cliente; // Cliente relacionado al usuario
-    
+
     @OneToMany(mappedBy = "usuario")
     private List<Acceso> accesos; // Accesos relacionados al usuario
+
+    @Transient
+    private String nombreCompleto;
 
     public Usuario() {
     }
@@ -214,7 +218,7 @@ public class Usuario {
     public List<Acceso> getAccesos() {
         return accesos;
     }
-    
+
     public Empleado getEmpleado() {
         return empleado;
     }
@@ -297,6 +301,24 @@ public class Usuario {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public String getNombreCompleto() {
+        nombreCompleto = "";
+        if (nombre != null) {
+            nombreCompleto += nombre;
+        }
+        if (apellido1 != null) {
+            nombreCompleto += " " + apellido1;
+        }
+        if (apellido2 != null) {
+            nombreCompleto += " " + apellido2;
+        }
+        return nombreCompleto;
+    }
+
+    public void setNombreCompleto(String nombreCompleto) {
+        this.nombreCompleto = nombreCompleto;
     }
 
     @Override
